@@ -1,7 +1,11 @@
+import { cn } from "@/utils";
+
 export default function Home() {
   return (
     <div>
-      <p className="font-bold tracking-[-0.06em] text-bg">메인페이지입니다</p>
+      <p className={cn("font-bold tracking-[-0.06em] text-bg", "mx-20")}>
+        메인페이지입니다
+      </p>
       <p className="font-bold tracking-[-0.04em] text-bgSub">
         메인페이지입니다
       </p>
