@@ -1,11 +1,11 @@
 import MainAnimation from "@/components/main/MainAnimation";
-import LOGO from "@/icon/LOGO";
+import SecondSection from "@/components/main/SecondSection";
 
 export default function Home() {
   return (
-    <div className="w-full h-screen px-[200px] py-[10px] bg-bg flex flex-col">
-      <LOGO />
+    <div className="w-full min-h-screen px-[200px] py-[10px] bg-bg flex flex-col">
       <MainAnimation />
+      <SecondSection />
     </div>
   );
 }
