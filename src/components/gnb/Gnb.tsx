@@ -10,7 +10,7 @@ const Gnb = () => {
       </Link>
       <div className="flex gap-10">
         <Link href={"/"}>LOGO</Link>
-        <Link href={"/"}>LOGO</Link>
+        <Link href={"/login"}>LOGIN</Link>
       </div>
     </div>
   );

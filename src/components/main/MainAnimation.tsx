@@ -10,7 +10,7 @@ const MainAnimation = () => {
           alt="BlackPhoto"
           width={350}
           height={450}
-          className="rounded-[5px] shadow-sm"
+          className="shadow-sm"
         />
         <div className="w-full flex items-start justify-end text-white">
           <div className="w-1/2 flex flex-col gap-[10px] items-start justify-center">
