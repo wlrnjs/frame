@@ -4,7 +4,7 @@ import React from "react";
 
 const Gnb = () => {
   return (
-    <div className="w-full h-[100px] px-[200px] flex items-center justify-between bg-black text-main text-[40px] leading-10 tracking-[-0.04em] fixed">
+    <div className="w-full h-[100px] px-[200px] flex items-center justify-between bg-black text-main text-[40px] leading-10 tracking-[-0.04em] fixed z-10">
       <Link href={"/"} className="cursor-pointer">
         <LOGO className="text-white bg-white" />
       </Link>

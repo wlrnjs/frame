@@ -9,10 +9,14 @@ const DetailPhotoContainer = () => {
           src={"/BlackPhoto.JPG"}
           alt="info-img"
           fill
-          className="object-contain"
+          className="object-contain p-5"
         />
       </div>
-      <div className="w-full h-[92px] bg-black rounded-md"></div>
+      <div className="w-full h-[92px] bg-black rounded-[5px] p-3 flex items-center justify-start">
+        <div className="w-[75px] h-[75px] rounded-md border border-white border-dotted flex items-center justify-center text-[20px] text-white font-light">
+          <p>+</p>
+        </div>
+      </div>
     </div>
   );
 };

@@ -2,7 +2,7 @@ import React from "react";
 
 const DetailContainer = () => {
   return (
-    <div className="w-[350px] h-[690px] bg-black text-white p-10 rounded-xl shadow-lg flex flex-col gap-5 sticky top-0">
+    <div className="w-[350px] h-[690px] bg-black text-white p-10 rounded-[5px] shadow-lg flex flex-col gap-5 sticky top-[110px]">
       {/* 이미지 및 액션 */}
       <div className="flex flex-col gap-3 justify-between items-start">
         <div className="flex space-x-4">
