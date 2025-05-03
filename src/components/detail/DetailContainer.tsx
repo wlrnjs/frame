@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const DetailContainer = () => {
@@ -30,7 +31,12 @@ const DetailContainer = () => {
       {/* 작성자 정보 */}
       <div className="flex flex-col gap-2 items-start justify-between border-t border-gray-700 pt-4 text-sm">
         <p>
-          작성자: <span className="text-gray-300">닉네임 입니다.</span>
+          작성자:
+          <Link href={"/user-profile"}>
+            <span className="text-gray-300 hover:underline decoration-offset-4 pointer">
+              닉네임 입니다.
+            </span>
+          </Link>
         </p>
         <p>
           업로드: <span className="text-gray-300">2025.05.03</span>
