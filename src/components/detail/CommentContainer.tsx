@@ -34,7 +34,7 @@ const CommentContainer = () => {
       </div>
 
       {/* 페이지네이션 */}
-      <div className="mt-4 flex justify-center items-center gap-2">
+      <div className="mt-4 flex-center gap-2">
         <button className="px-3 py-1 text-sm text-gray-500 hover:text-white">
           이전
         </button>

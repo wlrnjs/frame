@@ -5,11 +5,12 @@ import React from "react";
 const Gnb = () => {
   return (
     <div className="w-full h-[100px] px-[200px] flex items-center justify-between bg-black text-main text-[40px] leading-10 tracking-[-0.04em] fixed z-10">
-      <Link href={"/"} className="cursor-pointer">
+      <Link href={"/"} className="pointer">
         <LOGO className="text-white bg-white" />
       </Link>
-      <div className="flex gap-10">
-        <Link href={"/"}>LOGO</Link>
+      <div className="flex gap-10 text-white">
+        <Link href={"/write"}>WRITE</Link>
+        <Link href={"/photo-list"}>LIST</Link>
         <Link href={"/login"}>LOGIN</Link>
       </div>
     </div>
