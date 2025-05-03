@@ -9,6 +9,10 @@ const Gnb = () => {
         <LOGO className="text-white bg-white" />
       </Link>
       <div className="flex gap-10 text-white">
+        {/* 테스트용임시 */}
+        <Link href={"/user-profile"}>유저프로필</Link>
+        <Link href={"/category/detail"}>상세페이지</Link>
+        {/* 테스트용임시 */}
         <Link href={"/write"}>WRITE</Link>
         <Link href={"/photo-list"}>LIST</Link>
         <Link href={"/login"}>LOGIN</Link>

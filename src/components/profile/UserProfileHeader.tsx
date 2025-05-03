@@ -2,34 +2,31 @@ import React from "react";
 import Image from "next/image";
 
 const UserProfileHeader = () => {
+  const categoryStyle =
+    "inline-block bg-neutral-800 text-white text-xs px-2 py-1 rounded-full";
+
   return (
-    <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
+    <div className="flex-center gap-6">
       <Image
-        src={"/BlackPhoto.JPG"}
+        src={"/avatar.png"}
         alt="Profile"
-        width={32}
-        height={32}
-        className="w-32 h-32 rounded-full object-cover border-4 border-neutral-700"
+        width={128}
+        height={128}
+        className="w-[128px] h-[128px] rounded-full object-cover border-2 border-neutral-700"
       />
-      <div className="flex-1 text-center md:text-left">
-        <h1 className="text-2xl font-bold text-white">nickname</h1>
+      <div className="flex-1 text-left">
+        <h1 className="text-[24px] font-bold text-white">wlrnjs</h1>
         <p className="text-neutral-400">tjwlrnjs7336@naver.com</p>
-        <p className="text-sm text-neutral-500">Joined: 2025.05.04</p>
+        <p className="text-sm text-neutral-500">가입일: 2025.05.04</p>
         <div className="mt-2 flex flex-wrap gap-2 justify-center md:justify-start">
-          <span className="inline-block bg-neutral-800 text-white text-xs px-2 py-1 rounded-full">
-            Landscape
-          </span>
-          <span className="inline-block bg-neutral-800 text-white text-xs px-2 py-1 rounded-full">
-            Portrait
-          </span>
-          <span className="inline-block bg-neutral-800 text-white text-xs px-2 py-1 rounded-full">
-            Street
-          </span>
+          <span className={categoryStyle}>도시</span>
+          <span className={categoryStyle}>풍경</span>
+          <span className={categoryStyle}>흑백</span>
         </div>
       </div>
-      <div className="text-center md:text-right">
-        <p className="text-lg font-semibold text-white">Activity Score</p>
-        <p className="text-2xl text-white">1200</p>
+      <div className="text-right">
+        <p className="text-[18px] font-semibold text-white">Activity Score</p>
+        <p className="text-[24px] leading-[20px] text-white">1200</p>
       </div>
     </div>
   );

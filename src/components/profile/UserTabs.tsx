@@ -18,7 +18,7 @@ const UserTabs = ({ activeTab, setActiveTab }: UserTabsProps) => {
         }`}
         onClick={() => setActiveTab("posts")}
       >
-        Posts
+        게시글
       </button>
       <button
         className={`flex-1 py-3 text-center font-semibold ${
@@ -28,7 +28,7 @@ const UserTabs = ({ activeTab, setActiveTab }: UserTabsProps) => {
         }`}
         onClick={() => setActiveTab("liked")}
       >
-        Liked Images
+        관심 이미지
       </button>
     </div>
   );
