@@ -15,7 +15,7 @@ const Footer = () => {
     "text-[14px] text-white/80 hover:text-white hover:underline transition-all duration-200";
 
   return (
-    <footer className="w-full min-h-[200px] bg-black text-white border-t border-[#4B4B4B] mt-10 px-4 md:px-[200px] pt-5 pb-2 flex flex-col justify-between">
+    <footer className="w-full min-h-[200px] bg-black text-white border-t border-[#4B4B4B] px-[200px] pt-5 pb-2 flex flex-col justify-between">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* 서비스 정보 */}
         <div className="flex flex-col gap-4">

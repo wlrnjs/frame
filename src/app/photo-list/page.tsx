@@ -4,7 +4,7 @@ import React from "react";
 
 const page = () => {
   return (
-    <div className="w-full min-h-screen pt-[100px]">
+    <div className="w-full min-h-screen custom-margin">
       <div className="flex items-start justify-center mt-[10px] gap-10">
         <div className="w-[1020px] h-[1500px] bg-black rounded-[5px] flex gap-2 p-5">
           <ListItem />

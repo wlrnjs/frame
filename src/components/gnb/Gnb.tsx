@@ -3,7 +3,7 @@ import LOGO from "@/icon/LOGO";
 import Link from "next/link";
 import React from "react";
 
-const navLinkStyle = "hover:text-gray-300 transition-colors duration-200";
+const LinkStyle = "hover:text-gray-300 transition-colors duration-200 pointer";
 
 const Gnb = () => {
   return (
@@ -14,7 +14,7 @@ const Gnb = () => {
         </Link>
         <nav className="flex gap-8 text-lg font-medium tracking-tight">
           {NAV_LINKS.map(({ title, href }) => (
-            <Link key={href} href={href} className={navLinkStyle}>
+            <Link key={href} href={href} className={LinkStyle}>
               {title}
             </Link>
           ))}

@@ -10,8 +10,8 @@ const UserProfilePage = () => {
   const [activeTab, setActiveTab] = useState("posts");
 
   return (
-    <div className="w-full min-h-screen pt-[120px]">
-      <div className="max-w-full px-4 mx-[180px]">
+    <div className="w-full min-h-screen custom-margin">
+      <div className="max-w-full mx-[200px]">
         <div className="bg-black rounded-lg shadow-lg p-6 mb-6">
           <UserProfileHeader />
           <UserCameraAndLinks />

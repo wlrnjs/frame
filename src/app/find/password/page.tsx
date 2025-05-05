@@ -5,7 +5,7 @@ import React from "react";
 
 const page = () => {
   return (
-    <div className="w-full h-[calc(100vh-100px)] pt-[130px] flex-col-center gap-[20px]">
+    <div className="w-full h-[calc(100vh-100px)] custom-login flex-col-center gap-[20px]">
       <LOGO className="ml-12" />
       <div className="w-[400px] px-5 flex flex-col gap-2">
         <form action="submit" className="flex flex-col gap-[10px]">
