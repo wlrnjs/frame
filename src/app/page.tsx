@@ -6,6 +6,8 @@ export default function Home() {
     <div className="w-full min-h-screen px-[200px] py-[10px] bg-bg flex flex-col">
       <MainAnimation />
       <SecondSection />
+      <SecondSection />
+      <SecondSection />
     </div>
   );
 }

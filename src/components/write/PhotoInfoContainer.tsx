@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import InputField from "./InputField";
 import AutoCompleteInput from "./AutoCompleteInput";
+import { cn } from "@/utils";
 
 interface FormSectionProps {
   title: string;
@@ -16,9 +17,10 @@ const FormSection = ({
   showDivider = false,
 }: FormSectionProps) => (
   <div
-    className={`flex flex-col gap-4 ${
+    className={cn(
+      "flex flex-col gap-4",
       showDivider ? "border-t border-[#4B4B4B] pt-6" : ""
-    }`}
+    )}
   >
     <h2 className="text-[16px] font-semibold text-white">{title}</h2>
     {children}

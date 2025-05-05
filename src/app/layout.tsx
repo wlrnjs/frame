@@ -2,6 +2,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import "./globals.css";
 import QueryProvider from "@/components/QueryProvider";
 import Gnb from "@/components/gnb/Gnb";
+import Footer from "@/components/footer/Footer";
 
 export default function RootLayout({
   children,
@@ -14,6 +15,7 @@ export default function RootLayout({
         <QueryProvider>
           <Gnb />
           {children}
+          <Footer />
           <ReactQueryDevtools />
         </QueryProvider>
       </body>

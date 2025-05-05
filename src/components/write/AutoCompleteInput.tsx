@@ -25,7 +25,7 @@ const AutoCompleteInput: React.FC<AutoCompleteInputProps> = ({
       className="w-full h-12 rounded-md px-4 bg-[#1F1F1F] text-[14px] text-white border border-[#4B4B4B] focus:border-white focus:ring-2 focus:ring-white/20 transition-colors placeholder:text-[14px] placeholder:text-white/50"
     />
     {suggestions.length > 0 && (
-      <ul className="absolute top-[4.5rem] left-0 w-full bg-[#1F1F1F] rounded-md shadow-lg mt-2 z-10 border border-[#4B4B4B]">
+      <ul className="absolute top-[4rem] left-0 w-full bg-[#1F1F1F] rounded-md shadow-lg mt-2 z-10 border border-[#4B4B4B]">
         {suggestions.map((tag) => (
           <li
             key={tag}
