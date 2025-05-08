@@ -17,7 +17,7 @@ const Page = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const { error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
@@ -25,6 +25,19 @@ const Page = () => {
     if (error) {
       setError("아이디 또는 비밀번호를 확인해주세요");
     } else {
+      // 쿠키 저장
+      const accessToken = data?.session?.access_token;
+      const refreshToken = data?.session?.refresh_token;
+
+      if (accessToken && refreshToken) {
+        document.cookie = `sb-access-token=${accessToken}; path=/; max-age=3600;`;
+        document.cookie = `sb-refresh-token=${refreshToken}; path=/; max-age=604800;`;
+
+        // 배포후 변경 (secure 옵션)
+        // document.cookie = `sb-access-token=${accessToken}; path=/; max-age=3600; secure`;
+        // document.cookie = `sb-refresh-token=${refreshToken}; path=/; max-age=604800; secure`;
+      }
+
       alert("로그인 성공!");
       router.push("/");
     }
