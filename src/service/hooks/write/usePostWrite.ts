@@ -1,5 +1,5 @@
+import { postWrite, PostWritePayload } from "@/service/lib/write/postWrite"
 import { useMutation } from "@tanstack/react-query"
-import { postWrite, PostWritePayload } from "../lib/write/postWrite"
 
 export const usePostWrite = () => {
   return useMutation({
