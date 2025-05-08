@@ -1,6 +1,5 @@
 export const NAV_LINKS = [
     // 테스트
-    { title: "마이페이지", href: "/my-page" },
     { title: "유저프로필", href: "/user-profile" },
     { title: "상세페이지", href: "/category/detail" },
     // 테스트
