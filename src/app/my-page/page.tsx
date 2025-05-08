@@ -5,9 +5,22 @@ import UserProfileHeader from "@/components/profile/UserProfileHeader";
 import UserCameraAndLinks from "@/components/profile/UserCameraAndLinks";
 import UserTabs from "@/components/profile/UserTabs";
 import PostGrid from "@/components/profile/PostGrid";
+import { useRouter } from "next/navigation";
+import { supabase } from "@/service/lib/supabaseClient";
 
 const MyPage = () => {
   const [activeTab, setActiveTab] = useState("posts");
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      await supabase.auth.signOut();
+      router.push("/");
+    } catch (error) {
+      console.error("로그아웃 중 오류 발생:", error);
+      router.push("/");
+    }
+  };
 
   const btnStyle =
     "h-[40px] bg-[#1F1F1F] border border-[#4B4B4B] rounded-[5px] px-4 py-2 text-[14px] text-white hover:bg-black transition-all duration-300 ease-out";
@@ -24,7 +37,9 @@ const MyPage = () => {
             </div>
             <div className="flex gap-4">
               <button className={btnStyle}>프로필 편집</button>
-              <button className={btnStyle}>로그아웃</button>
+              <button onClick={handleLogout} className={btnStyle}>
+                로그아웃
+              </button>
             </div>
           </div>
         </div>

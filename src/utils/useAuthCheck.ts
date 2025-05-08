@@ -10,14 +10,8 @@ export function useAuthCheck() {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const { data } = await supabase.auth.getSession();
-
-      if (data?.session?.user) {
-        setUser(data.session.user);
-      } else {
-        setUser(null);
-      }
-
+      const { data: { session } } = await supabase.auth.getSession();
+      setUser(session?.user ?? null);
       setLoading(false);
     };
 

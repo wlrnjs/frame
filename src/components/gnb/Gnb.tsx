@@ -4,7 +4,7 @@ import { NAV_LINKS } from "@/constants/NAV";
 import LOGO from "@/icon/LOGO";
 import Link from "next/link";
 import React from "react";
-import { useAuthCheck } from "@/service/hooks/auth/useAuthCheck";
+import { useAuthCheck } from "@/utils/useAuthCheck";
 
 const LinkStyle = "hover:text-gray-300 transition-colors duration-200 pointer";
 

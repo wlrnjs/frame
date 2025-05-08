@@ -26,3 +26,5 @@ export function middleware(req: NextRequest) {
 export const config = {
   matcher: ['/my-page/:path*', '/write/:path*', '/login', '/signup', '/find/:path*'],
 };
+
+// 미들웨어 파일 위치 이동 필요 (테스트단에서 불편)
