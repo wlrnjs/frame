@@ -23,7 +23,7 @@ const Page = () => {
     });
 
     if (error) {
-      setError(error.message);
+      setError("아이디 또는 비밀번호를 확인해주세요");
     } else {
       alert("로그인 성공!");
       router.push("/");
@@ -50,8 +50,10 @@ const Page = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <SubmitBtn title="로그인" />
-          {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+          <div className="flex flex-col gap-1">
+            <SubmitBtn title="로그인" />
+            {error && <p className="text-red-500 text-[12px]">{error}</p>}
+          </div>
         </form>
         <div className="w-full flex items-center justify-between text-[14px]">
           <Link href={"/find/id"}>아이디찾기</Link>

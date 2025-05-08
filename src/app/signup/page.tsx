@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import Input from "@/components/login/Input";
 import SubmitBtn from "@/components/login/SubmitBtn";
 import AgreementCheckbox from "@/components/signup/AgreementCheckbox";
-import EmailCurrent from "@/components/signup/EmailCurrent";
 import LOGO from "@/icon/LOGO";
 import { supabase } from "@/service/lib/supabaseClient";
 import { useRouter } from "next/navigation";
@@ -16,11 +15,18 @@ const Page = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [agreed, setAgreed] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+
+    if (!agreed) {
+      setError("약관에 동의해야 회원가입이 가능합니다.");
+      setIsLoading(false);
+      return;
+    }
 
     if (password !== confirmPassword) {
       setError("비밀번호가 일치하지 않습니다.");
@@ -48,9 +54,13 @@ const Page = () => {
       <LOGO className="ml-12" />
       <div className="w-[400px] px-5 flex flex-col gap-2">
         <form onSubmit={handleSubmit} className="flex flex-col gap-[10px]">
-          <EmailCurrent
-            email={email}
+          <Input
+            label="이메일"
+            placeholder="이메일을 입력해주세요."
+            id="email"
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
+            description="이메일은 아이디, 비밀번호 찾기에 사용됩니다."
           />
           <Input
             label="아이디"
@@ -58,6 +68,7 @@ const Page = () => {
             id="userId"
             value={userId}
             onChange={(e) => setUserId(e.target.value)}
+            description="아이디는 로그인에 사용됩니다."
           />
           <Input
             label="비밀번호"
@@ -75,7 +86,10 @@ const Page = () => {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
-          <AgreementCheckbox />
+          <AgreementCheckbox
+            checked={agreed}
+            onChange={() => setAgreed(!agreed)}
+          />
           {error && <p className="text-red-500 text-sm">{error}</p>}
           <SubmitBtn title="회원가입" disabled={isLoading} />
         </form>

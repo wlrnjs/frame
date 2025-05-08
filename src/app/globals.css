@@ -28,3 +28,11 @@
   border-width: 1px;
   border-color: white;
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #efeff0;
+  -webkit-box-shadow: none;
+  transition: background-color 5000s ease-in-out 0s;
+}

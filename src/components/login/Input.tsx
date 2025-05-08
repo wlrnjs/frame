@@ -7,6 +7,7 @@ interface InputProps {
   type?: "text" | "password" | "email";
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  description?: string;
 }
 
 const Input = ({
@@ -16,6 +17,7 @@ const Input = ({
   type = "text",
   value,
   onChange,
+  description,
 }: InputProps) => {
   return (
     <div className="flex flex-col">
@@ -28,6 +30,11 @@ const Input = ({
         value={value}
         onChange={onChange}
       />
+      {description && (
+        <p className="text-[14px] text-black/80 tracking-[-0.06em] pl-0.5">
+          {description}
+        </p>
+      )}
     </div>
   );
 };

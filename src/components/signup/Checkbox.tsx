@@ -1,15 +1,35 @@
-import React from "react";
+import Check from "@/icon/Check";
+import React, { useState } from "react";
 
 interface CheckboxProps {
   title: string;
+  id: string;
 }
 
-const Checkbox = ({ title }: CheckboxProps) => {
+const Checkbox = ({ title, id }: CheckboxProps) => {
+  const [checked, setChecked] = useState(false);
+
+  const handleChange = () => {
+    setChecked(!checked);
+  };
+
   return (
     <div className="flex gap-2 items-center justify-start">
-      <input type="checkbox" id="terms" className="w-4 h-4" />
+      <div
+        onClick={handleChange}
+        className="w-4 h-4 border border-white rounded-[2px] flex items-center justify-center cursor-pointer"
+      >
+        {checked && <Check />}
+      </div>
+      <input
+        type="checkbox"
+        id={id}
+        className="sr-only"
+        checked={checked}
+        onChange={handleChange}
+      />
       <label
-        htmlFor="terms"
+        htmlFor={id}
         className="text-[14px] leading-[20px] tracking-[-0.04em] pointer select-none"
       >
         {title}
