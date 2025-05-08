@@ -11,43 +11,37 @@ const ThirdSection = () => {
 
   useEffect(() => {
     const container = containerRef.current;
+    const sections = gsap.utils.toArray(".panel");
     if (!container) return;
 
-    const panels = gsap.utils.toArray<HTMLElement>(".panel");
-
-    panels.forEach((panel, i) => {
-      gsap.fromTo(
-        panel,
-        { xPercent: i * 100 },
-        {
-          xPercent: (i - 1) * 100,
-          ease: "none",
-          scrollTrigger: {
-            trigger: panel,
-            start: "top top",
-            scrub: true,
-            pin: true,
-            pinSpacing: true,
-            markers: true,
-          },
-        }
-      );
+    gsap.to(sections, {
+      xPercent: -100 * (sections.length - 1),
+      ease: "none",
+      scrollTrigger: {
+        trigger: container,
+        start: "top 30%",
+        scrub: true,
+        pin: true,
+        snap: 1 / (sections.length - 1),
+        markers: true,
+        end: () => "+=" + container.offsetWidth,
+      },
     });
   }, []);
 
   return (
-    <div className="w-full overflow-hidden h-[500px]" ref={containerRef}>
-      <div className="flex w-max h-full">
-        <div className="panel w-screen h-full flex-shrink-0 bg-slate-950">
+    <div className="w-full overflow-hidden h-screen" ref={containerRef}>
+      <div className="flex w-[400vw] h-full">
+        <div className="panel w-screen h-full flex-shrink-0 bg-slate-950 text-white">
           첫번째
         </div>
-        <div className="panel w-screen h-full flex-shrink-0 bg-slate-600">
+        <div className="panel w-screen h-full flex-shrink-0 bg-slate-600 text-white">
           두번째
         </div>
-        <div className="panel w-screen h-full flex-shrink-0 bg-black">
+        <div className="panel w-screen h-full flex-shrink-0 bg-black text-white">
           세번째
         </div>
-        <div className="panel w-screen h-full flex-shrink-0 bg-slate-900">
+        <div className="panel w-screen h-full flex-shrink-0 bg-slate-900 text-white">
           네번째
         </div>
       </div>
