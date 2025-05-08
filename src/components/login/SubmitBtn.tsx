@@ -2,13 +2,19 @@ import React from "react";
 
 interface SubmitBtnProps {
   title: string;
+  disabled?: boolean;
 }
 
-const SubmitBtn = ({ title }: SubmitBtnProps) => {
+const SubmitBtn = ({ title, disabled = false }: SubmitBtnProps) => {
   return (
     <button
       type="submit"
-      className="w-full h-[45px] bg-black text-white rounded-[5px] mt-2"
+      disabled={disabled}
+      className={`w-full h-[45px] rounded-[5px] mt-2 transition-all ${
+        disabled
+          ? "bg-gray-400 text-white cursor-not-allowed"
+          : "bg-black text-white hover:bg-neutral-900"
+      }`}
     >
       {title}
     </button>

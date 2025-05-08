@@ -5,9 +5,18 @@ interface InputProps {
   placeholder: string;
   id: string;
   type?: "text" | "password" | "email";
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Input = ({ label, placeholder, id, type = "text" }: InputProps) => {
+const Input = ({
+  label,
+  placeholder,
+  id,
+  type = "text",
+  value,
+  onChange,
+}: InputProps) => {
   return (
     <div className="flex flex-col">
       <label htmlFor={id}>{label}</label>
@@ -16,6 +25,8 @@ const Input = ({ label, placeholder, id, type = "text" }: InputProps) => {
         type={type}
         className="w-full h-[45px] rounded-[5px] px-5 bg-black text-white"
         placeholder={placeholder}
+        value={value}
+        onChange={onChange}
       />
     </div>
   );
