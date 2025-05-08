@@ -39,7 +39,7 @@ const Page = () => {
       setError(error.message);
     } else {
       alert("회원가입 성공! 이메일을 확인해주세요.");
-      router.push("/");
+      router.push("/login");
     }
   };
 
