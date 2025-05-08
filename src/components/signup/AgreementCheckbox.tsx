@@ -7,21 +7,12 @@ const TermCheckBox = [
   { title: "서비스 이용 약관 동의", id: "terms-agree" },
 ];
 
-interface AgreementCheckboxProps {
-  checked: boolean;
-  onChange: () => void;
-}
-
-const AgreementCheckbox = ({ checked, onChange }: AgreementCheckboxProps) => {
+const AgreementCheckbox = () => {
   return (
     <div className="w-full h-auto flex flex-col gap-2 bg-black text-white p-4 rounded-[5px] mt-2">
       {TermCheckBox.map((item, index) => (
         <div key={index} id={`term-${index}`}>
-          <Checkbox
-            title={item.title}
-            id={item.id}
-            {...(item.id === "terms-agree" ? { checked, onChange } : {})}
-          />
+          <Checkbox title={item.title} id={item.id} />
         </div>
       ))}
     </div>

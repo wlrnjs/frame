@@ -15,18 +15,11 @@ const Page = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [agreed, setAgreed] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-
-    if (!agreed) {
-      setError("약관에 동의해야 회원가입이 가능합니다.");
-      setIsLoading(false);
-      return;
-    }
 
     if (password !== confirmPassword) {
       setError("비밀번호가 일치하지 않습니다.");
@@ -86,10 +79,7 @@ const Page = () => {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
-          <AgreementCheckbox
-            checked={agreed}
-            onChange={() => setAgreed(!agreed)}
-          />
+          <AgreementCheckbox />
           {error && <p className="text-red-500 text-sm">{error}</p>}
           <SubmitBtn title="회원가입" disabled={isLoading} />
         </form>
