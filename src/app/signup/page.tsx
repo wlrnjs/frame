@@ -7,6 +7,7 @@ import AgreementCheckbox from "@/components/signup/AgreementCheckbox";
 import LOGO from "@/icon/LOGO";
 import { supabase } from "@/service/lib/supabaseClient";
 import { useRouter } from "next/navigation";
+import { generateRandomNickname } from "@/utils/generateRandomNickname";
 
 const Page = () => {
   const [email, setEmail] = useState("");
@@ -21,24 +22,49 @@ const Page = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    if (password !== confirmPassword) {
-      setError("비밀번호가 일치하지 않습니다.");
-      setIsLoading(false);
-      return;
-    }
+    try {
+      if (password !== confirmPassword) {
+        throw new Error("비밀번호가 일치하지 않습니다.");
+      }
 
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-    });
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+      });
 
-    setIsLoading(false);
+      if (error) {
+        throw error;
+      }
 
-    if (error) {
-      setError(error.message);
-    } else {
-      alert("회원가입 성공! 이메일을 확인해주세요.");
+      const user = data.user;
+      if (!user) {
+        throw new Error("유저 정보를 가져오지 못했습니다.");
+      }
+
+      const nickname = generateRandomNickname();
+
+      // 사용자 정보 저장
+      const { error: insertError } = await supabase.from("users").insert([
+        {
+          user_id: user.id,
+          nickname,
+        },
+      ]);
+
+      if (insertError) {
+        throw new Error("닉네임 저장 중 오류가 발생했습니다.");
+      }
+
+      alert(`회원가입 성공! 닉네임: ${nickname}`);
       router.push("/login");
+    } catch (error) {
+      setError(
+        error instanceof Error
+          ? error.message
+          : "회원가입 중 오류가 발생했습니다."
+      );
+    } finally {
+      setIsLoading(false);
     }
   };
 
