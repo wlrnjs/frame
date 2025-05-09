@@ -1,60 +1,62 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import Image from "next/image";
-import { supabase } from "@/service/lib/supabaseClient";
+import { useGetMainImg } from "@/service/hooks/main/useGetMainImg";
+import { gsap } from "gsap";
 
 const MainAnimation = () => {
-  const [imageUrls, setImageUrls] = useState<string[]>([]);
+  const { data: imageUrls } = useGetMainImg();
+
+  const imageContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const fetchImages = async () => {
-      try {
-        const { data } = await supabase.storage
-          .from("main-img")
-          .list("animation", { limit: 100 });
+    if (!imageUrls?.length || !imageContainerRef.current) return;
 
-        const publicUrls = data
-          ?.filter((item) => item.name !== ".emptyFolderPlaceholder")
-          .map((item) => {
-            try {
-              return supabase.storage
-                .from("main-img")
-                .getPublicUrl(`animation/${item.name}`).data.publicUrl;
-            } catch (error) {
-              console.error(
-                `이미지 URL 생성 중 오류가 발생했습니다: ${item.name}`,
-                error
-              );
-              return null;
-            }
-          })
-          .filter((url) => url !== null);
+    const tl = gsap.timeline({ repeat: -1 });
 
-        setImageUrls(publicUrls || []);
-      } catch (error) {
-        console.error(
-          "이미지 불러오는 중 예기치 않은 오류가 발생했습니다:",
-          error
-        );
-      }
+    imageUrls.forEach((_, index) => {
+      const image = imageContainerRef.current?.children[
+        index
+      ] as HTMLImageElement;
+
+      tl.to(image, {
+        duration: 0.5,
+        opacity: 1,
+        x: 0,
+        ease: "sine.out",
+      }).to(
+        image,
+        {
+          duration: 0.5,
+          opacity: 1,
+          x: "-100%",
+          ease: "sine.in",
+        },
+        "+=2"
+      );
+    });
+
+    return () => {
+      tl.kill();
     };
-
-    fetchImages();
-  }, []);
+  }, [imageUrls]);
 
   return (
     <div className="w-full h-[calc(100vh-20px)]">
       <div className="w-full h-full flex flex-col gap-20 items-center justify-end">
-        <div className="w-[400px] h-[550px] relative overflow-hidden">
-          {imageUrls.map((url, index) => (
+        <div
+          ref={imageContainerRef}
+          className="w-[400px] h-[550px] relative overflow-hidden"
+        >
+          {imageUrls?.map((url, index) => (
             <Image
               key={index}
               src={url}
               alt={`main-img-${index}`}
               fill
               sizes="(max-width: 768px) 100vw, 400px"
-              className="object-contain"
+              className="object-contain opacity-0 translate-x-full"
             />
           ))}
         </div>
