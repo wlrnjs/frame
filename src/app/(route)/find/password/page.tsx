@@ -4,6 +4,7 @@ import Input from "@/components/login/Input";
 import SubmitBtn from "@/components/login/SubmitBtn";
 import LOGO from "@/icon/LOGO";
 import { supabase } from "@/service/lib/supabaseClient";
+import Link from "next/link";
 import React, { useState } from "react";
 
 const Page = () => {
@@ -38,6 +39,14 @@ const Page = () => {
           />
           <SubmitBtn title="비밀번호 초기화" />
         </form>
+        <div className="flex items-center justify-between">
+          <Link href="/login" className="text-[14px]">
+            로그인
+          </Link>
+          <Link href="/find/id" className="text-[14px]">
+            아이디 찾기
+          </Link>
+        </div>
         {message && <p className="text-sm text-white mt-2">{message}</p>}
       </div>
     </div>

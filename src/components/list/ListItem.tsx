@@ -6,7 +6,7 @@ const ListItem = () => {
   return (
     <Link
       href={"/category/detail"}
-      className="w-[250px] h-[300px] relative group overflow-hidden rounded-md pointer"
+      className="w-[215px] h-[300px] relative group overflow-hidden rounded-md pointer"
     >
       <div className="w-full h-full relative">
         <Image

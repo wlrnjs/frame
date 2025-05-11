@@ -2,7 +2,7 @@ import React from "react";
 
 const SearchContainer = () => {
   return (
-    <div className="w-[300px] h-[500px] bg-black text-white p-4 rounded-md sticky top-[110px] space-y-6">
+    <div className="min-w-[300px] h-[500px] bg-black text-white p-4 rounded-md sticky top-[110px] space-y-6">
       {/* 검색 인풋 */}
       <div>
         <label className="text-sm font-semibold">검색</label>

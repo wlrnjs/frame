@@ -11,7 +11,6 @@ import { generateRandomNickname } from "@/utils/generateRandomNickname";
 
 const Page = () => {
   const [email, setEmail] = useState("");
-  const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
@@ -79,15 +78,7 @@ const Page = () => {
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            description="이메일은 아이디, 비밀번호 찾기에 사용됩니다."
-          />
-          <Input
-            label="아이디"
-            placeholder="아이디를 입력해주세요."
-            id="userId"
-            value={userId}
-            onChange={(e) => setUserId(e.target.value)}
-            description="아이디는 로그인에 사용됩니다."
+            description="이메일은 로그인, 비밀번호 찾기에 사용됩니다."
           />
           <Input
             label="비밀번호"

@@ -1,6 +1,7 @@
 import Input from "@/components/login/Input";
 import SubmitBtn from "@/components/login/SubmitBtn";
 import LOGO from "@/icon/LOGO";
+import Link from "next/link";
 import React from "react";
 
 const page = () => {
@@ -16,6 +17,14 @@ const page = () => {
           />
           <SubmitBtn title="아이디 찾기" />
         </form>
+        <div className="flex items-center justify-between">
+          <Link href="/login" className="text-[14px]">
+            로그인
+          </Link>
+          <Link href="/find/password" className="text-[14px]">
+            비밀번호 찾기
+          </Link>
+        </div>
       </div>
     </div>
   );
