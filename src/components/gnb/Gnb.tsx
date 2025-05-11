@@ -38,7 +38,7 @@ const Gnb = () => {
         showGnb ? "opacity-100" : "opacity-0 -translate-y-full"
       }`}
     >
-      <div className="max-w-[1500px] mx-auto h-[80px] flex items-center justify-between">
+      <div className="h-[80px] flex items-center justify-between layout-container">
         <Link
           href="/"
           className="flex items-center overflow-hidden"

@@ -48,7 +48,7 @@ const Footer = () => {
       </div>
 
       <div className="text-center text-[12px] text-white/60">
-        © 2025 PhotoHub. All rights reserved.
+        © 2025 Frame. All rights reserved.
       </div>
     </footer>
   );
