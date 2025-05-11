@@ -2,7 +2,7 @@ import React from "react";
 
 const CommentContainer = () => {
   return (
-    <div className="w-[1080px] h-[650px] bg-black rounded-lg shadow-md p-6 flex flex-col justify-between">
+    <div className="w-full h-[650px] bg-black rounded-lg shadow-md p-6 flex flex-col justify-between">
       {/* 댓글 리스트 */}
       <div className="overflow-y-auto flex-1 space-y-4 pr-2">
         {/* 댓글 아이템들 */}
