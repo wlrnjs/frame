@@ -50,7 +50,7 @@ const PhotoInfoContainer = () => {
   };
 
   return (
-    <div className="max-w-full min-w-[350px] min-h-[720px] bg-black text-white p-8 rounded-lg shadow-xl flex flex-col gap-8 sticky top-[120px]">
+    <div className="max-w-full min-w-[380px] min-h-[720px] bg-black text-white p-8 rounded-[5px] shadow-lg flex flex-col gap-8 sticky top-[120px]">
       <FormSection title="기본 정보">
         <InputField label="제목" placeholder="제목을 입력해주세요." />
         <InputField

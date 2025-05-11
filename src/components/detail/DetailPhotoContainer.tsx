@@ -10,7 +10,7 @@ const DetailPhotoContainer = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className="flex flex-col items-center gap-2 w-[920px]">
+    <div className="w-full h-[720px] flex flex-col items-center gap-2">
       <div
         className="relative w-full aspect-[4/3] bg-black overflow-hidden rounded-md"
         onMouseEnter={() => setIsHovered(true)}

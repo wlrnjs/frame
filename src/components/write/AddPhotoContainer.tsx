@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const AddPhotoContainer = () => {
   return (
-    <div className="w-full flex flex-col items-center gap-2 min-w-[920px]">
+    <div className="w-full h-[720px] flex flex-col items-center gap-2">
       <div className="relative w-full aspect-[4/3] bg-black overflow-hidden rounded-md">
         <Image
           src={"/BlackPhoto.JPG"}

@@ -38,7 +38,7 @@ const DetailImageModal = ({ onOpen, onClose }: DetailImageModalProps) => {
 
   return createPortal(
     <div
-      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50"
+      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-sm z-50"
       onClick={handleBackgroundClick}
     >
       <div
@@ -60,7 +60,7 @@ const DetailImageModal = ({ onOpen, onClose }: DetailImageModalProps) => {
             src="/IMG_7115.JPG"
             alt="modal-image"
             fill
-            className="object-contain rounded-md"
+            className="object-contain"
           />
         </div>
       </div>

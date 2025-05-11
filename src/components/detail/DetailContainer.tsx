@@ -15,7 +15,7 @@ const ActionButton = [
 
 const DetailContainer = () => {
   return (
-    <div className="w-[350px] h-[690px] bg-black text-white p-10 rounded-[5px] shadow-lg flex flex-col gap-5 sticky top-[110px]">
+    <div className="max-w-full min-w-[380px] h-[720px] bg-black text-white p-8 rounded-[5px] shadow-lg flex flex-col gap-8 sticky top-[110px]">
       {/* 이미지 및 액션 */}
       <div className="flex flex-col gap-3 justify-between items-start">
         <div className="flex space-x-4">
