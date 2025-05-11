@@ -1,21 +1,31 @@
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/service/lib/supabaseClient";
 
-const getMainImg = async (): Promise<string[]> => {
-  const { data } = await supabase.storage
-    .from("main-img")
-    .list("animation", { limit: 100 });
+const getMainImg = async (): Promise<{ 
+  title: string; 
+  category: string; 
+  image_url: string;
+  content: string;
+}[]> => {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-  const publicUrls = data
-    ?.filter((item) => item.name !== ".emptyFolderPlaceholder")
-    .map((item) => {
-      return supabase.storage
-        .from("main-img")
-        .getPublicUrl(`animation/${item.name}`).data.publicUrl;
-    })
-    .filter((url): url is string => url !== null);
+  const apiUrl = `${supabaseUrl}/rest/v1/main-img?select=*`;
 
-  return publicUrls || [];
+  const response = await fetch(apiUrl, {
+    method: "GET",
+    headers: {
+      apikey: supabaseKey || "",
+      Authorization: `Bearer ${supabaseKey}`,
+    },
+  });
+
+  if (!response.ok) {
+    console.error("테이블에서 데이터를 불러오는데 실패했습니다.", response.statusText);
+    return [];
+  }
+
+  const data = await response.json();
+  return data || [];
 };
 
 export const useGetMainImg = () => {
