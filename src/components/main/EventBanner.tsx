@@ -3,13 +3,13 @@ import React from "react";
 
 const EventBanner = () => {
   return (
-    <div className="w-full h-[162px] flex items-center justify-between border-2 border-[#4B4B4B] rounded-[5px] px-10 bg-black text-white">
+    <div className="w-full h-[162px] flex items-center justify-between border-2 border-[#4B4B4B] px-10 bg-black text-white mt-10">
       <div className="flex flex-col gap-4">
         <p className="font-bold text-[24px] tracking-[-0.04em]">
-          가장 조회수가 많은 사진
+          현재 진행중인 이벤트
         </p>
         <p className="text-[18px] tracking-[-0.02em] text-white/80">
-          지금 인기 사진을 확인하세요
+          지금 이벤트를 확인하세요
         </p>
       </div>
       <Link href={"/"}>

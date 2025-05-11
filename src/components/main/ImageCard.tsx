@@ -4,23 +4,20 @@ import Link from "next/link";
 
 const ImageCard = () => {
   return (
-    <Link href={"/category/detail"}>
-      <div className="w-[240px] h-[371px] flex flex-col gap-2 items-center justify-around pointer">
-        <div className="w-full h-full bg-[#D9D9D9] rounded-[5px] overflow-hidden relative group">
+    <Link href={"/category/detail"} className="w-full group">
+      <div className="w-full flex flex-col gap-1">
+        <div className="w-full aspect-[3/4] bg-[#D9D9D9] rounded-[5px] overflow-hidden relative">
           <Image
             src={"/BlackPhoto.JPG"}
-            alt="img"
+            alt="image"
             fill
             className="object-cover transition-transform duration-300 group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 text-white">
-            <h3 className="text-lg font-semibold">사진 제목</h3>
-            <p className="text-sm mt-1">간단한 설명 텍스트입니다.</p>
-            <div className="text-xs mt-2 opacity-80 flex justify-between">
-              <span>카테고리: 자연</span>
-              <span>닉네임: 사용자</span>
-            </div>
-          </div>
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300" />
+        </div>
+        <p className="text-sm text-gray-600 leading-5">카테고리</p>
+        <div className="w-full">
+          <p className="text-[16px] font-bold truncate leading-5">사진 제목</p>
         </div>
       </div>
     </Link>

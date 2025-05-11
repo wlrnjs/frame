@@ -49,7 +49,7 @@ const MainAnimation = () => {
   }, [mainImages]);
 
   return (
-    <div className="w-full h-[calc(100vh-40px)]">
+    <div className="w-full h-[calc(100vh-40px)] layout-container">
       <div className="w-full h-full flex flex-col gap-20 items-center justify-end">
         <div
           ref={imageContainerRef}

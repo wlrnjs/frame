@@ -23,6 +23,10 @@
   margin-top: 80px
 }
 
+.layout-container {
+  padding: 10px 105px;
+}
+
 .border-custom-dotted {
   border-style: dotted;
   border-width: 1px;
