@@ -1,6 +1,7 @@
 "use client";
 
 import Close from "@/icon/Close";
+import Dropdown from "@/icon/Dropdown";
 import React, { useEffect, useState, useRef } from "react";
 import { createPortal } from "react-dom";
 
@@ -99,19 +100,7 @@ const ReportModal = ({ isOpen, onClose, onSubmit }: ReportModalProps) => {
                 <option value="other">기타</option>
               </select>
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-white">
-                <svg
-                  className="h-5 w-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
+                <Dropdown />
               </div>
             </div>
             <textarea
