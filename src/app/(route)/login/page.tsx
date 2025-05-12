@@ -44,7 +44,7 @@ const Page = () => {
   };
 
   return (
-    <div className="w-full h-[calc(100vh-100px)] custom-login flex-col-center gap-[20px]">
+    <div className="w-full h-[calc(100vh-100px)] custom-login flex-col-center gap-5">
       <LOGO className="ml-12" />
       <div className="w-[400px] px-5 flex flex-col gap-2">
         <form onSubmit={handleSubmit} className="flex flex-col gap-[10px]">
@@ -65,10 +65,10 @@ const Page = () => {
           />
           <div className="flex flex-col gap-1">
             <SubmitBtn title="로그인" />
-            {error && <p className="text-red-500 text-[12px]">{error}</p>}
+            {error && <p className="text-red-500 text-">{error}</p>}
           </div>
         </form>
-        <div className="w-full flex items-center justify-between text-[14px]">
+        <div className="w-full flex items-center justify-between text-sm">
           <Link href={"/find/id"}>아이디찾기</Link>
           <Link href={"/find/password"}>비밀번호찾기</Link>
           <Link href={"/signup"}>회원가입</Link>

@@ -8,7 +8,7 @@ const UserCameraAndLinks = () => {
   return (
     <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
       <div>
-        <h3 className="text-[18px] font-semibold text-white">Camera Gear</h3>
+        <h3 className="text-lg font-semibold text-white">Camera Gear</h3>
         <p className="text-neutral-400">Camera: FUJIFILM X100V</p>
         <p className="text-neutral-400">Lens: 23mm f/2</p>
       </div>

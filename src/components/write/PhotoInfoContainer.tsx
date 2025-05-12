@@ -19,10 +19,10 @@ const FormSection = ({
   <div
     className={cn(
       "flex flex-col gap-4",
-      showDivider ? "border-t border-[#4B4B4B] pt-6" : ""
+      showDivider ? "border-t border-gray-870 pt-6" : ""
     )}
   >
-    <h2 className="text-[16px] font-semibold text-white">{title}</h2>
+    <h2 className="text-base font-semibold text-white">{title}</h2>
     {children}
   </div>
 );
@@ -78,7 +78,7 @@ const PhotoInfoContainer = () => {
       </FormSection>
       <button
         type="submit"
-        className="w-full h-[40px] bg-[#1F1F1F] border border-[#4B4B4B] rounded-[5px] hover:bg-black transition-all duration-300 ease-out"
+        className="w-full h-[40px] bg-gray-920 border border-gray-870 rounded-[5px] hover:bg-black transition-all duration-300 ease-out"
       >
         올리기
       </button>

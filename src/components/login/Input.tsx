@@ -31,7 +31,7 @@ const Input = ({
         onChange={onChange}
       />
       {description && (
-        <p className="text-[14px] text-black/80 tracking-[-0.06em] pl-0.5">
+        <p className="text-sm text-black/80 tracking-[-0.06em] pl-0.5">
           {description}
         </p>
       )}

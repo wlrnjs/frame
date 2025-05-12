@@ -22,7 +22,7 @@ const Page = () => {
   };
 
   return (
-    <div className="w-full h-[calc(100vh-100px)] custom-login flex-col-center gap-[20px]">
+    <div className="w-full h-[calc(100vh-100px)] custom-login flex-col-center gap-5">
       <h1 className="text-white text-2xl font-semibold">비밀번호 재설정</h1>
       <div className="w-[400px] px-5 flex flex-col gap-2">
         <form onSubmit={handleReset} className="flex flex-col gap-[10px]">

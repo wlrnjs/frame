@@ -68,18 +68,18 @@ const MainAnimation = () => {
         </div>
         <div className="w-full flex items-start justify-end text-white">
           <div className="fade-in w-1/2 flex flex-col gap-[10px] items-start justify-center">
-            <p className="text-[25px] leading-[20px] tracking-[-0.02em] text-main font-bold">
+            <p className="text-[25px] leading-5 tracking-[-0.02em] text-black font-bold">
               {mainImages[currentIndex]?.title || "Loading..."}
             </p>
-            <p className="text-[18px] leading-[20px] tracking-[-0.02em] text-sub">
+            <p className="text-lg leading-5 tracking-[-0.02em] text-black">
               {mainImages[currentIndex]?.content || "Loading..."}
             </p>
           </div>
           <div className="fade-in w-1/2 flex flex-col text-end">
-            <p className="text-sub">CATEGORY CATEGORY CATEGORY</p>
-            <p className="text-main">CATEGORY CATEGORY CATEGORY</p>
-            <p className="text-sub">CATEGORY CATEGORY CATEGORY</p>
-            <p className="text-sub">CATEGORY CATEGORY CATEGORY</p>
+            <p className="text-black">CATEGORY CATEGORY CATEGORY</p>
+            <p className="text-black">CATEGORY CATEGORY CATEGORY</p>
+            <p className="text-black">CATEGORY CATEGORY CATEGORY</p>
+            <p className="text-black">CATEGORY CATEGORY CATEGORY</p>
           </div>
         </div>
       </div>

@@ -10,7 +10,7 @@ const MyPage = () => {
   const [activeTab, setActiveTab] = useState("posts");
 
   const btnStyle =
-    "h-[40px] bg-[#1F1F1F] border border-[#4B4B4B] rounded-[5px] px-4 py-2 text-[14px] text-white hover:bg-black transition-all duration-300 ease-out";
+    "h-[40px] bg-gray-920 border border-gray-870 rounded-[5px] px-4 py-2 text-sm text-white hover:bg-black transition-all duration-300 ease-out";
 
   return (
     <div className="w-full min-h-screen custom-margin layout-container">

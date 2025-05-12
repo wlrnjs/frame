@@ -6,7 +6,7 @@ const ImageCard = () => {
   return (
     <Link href={"/category/detail"} className="w-full group">
       <div className="w-full flex flex-col gap-1">
-        <div className="w-full aspect-[3/4] bg-[#D9D9D9] rounded-[5px] overflow-hidden relative">
+        <div className="w-full aspect-[3/4] bg-gray-350 rounded-[5px] overflow-hidden relative">
           <Image
             src={"/BlackPhoto.JPG"}
             alt="image"
@@ -17,7 +17,7 @@ const ImageCard = () => {
         </div>
         <p className="text-sm text-gray-600 leading-5">카테고리</p>
         <div className="w-full">
-          <p className="text-[16px] font-bold truncate leading-5">사진 제목</p>
+          <p className="text-base font-bold truncate leading-5">사진 제목</p>
         </div>
       </div>
     </Link>

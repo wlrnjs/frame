@@ -25,7 +25,7 @@ const Page = () => {
   };
 
   return (
-    <div className="w-full h-[calc(100vh-100px)] custom-login flex-col-center gap-[20px]">
+    <div className="w-full h-[calc(100vh-100px)] custom-login flex-col-center gap-5">
       <LOGO className="ml-12" />
       <div className="w-[400px] px-5 flex flex-col gap-2">
         <form onSubmit={handleSubmit} className="flex flex-col gap-[10px]">
@@ -40,10 +40,10 @@ const Page = () => {
           <SubmitBtn title="비밀번호 초기화" />
         </form>
         <div className="flex items-center justify-between">
-          <Link href="/login" className="text-[14px]">
+          <Link href="/login" className="text-sm">
             로그인
           </Link>
-          <Link href="/find/id" className="text-[14px]">
+          <Link href="/find/id" className="text-sm">
             아이디 찾기
           </Link>
         </div>

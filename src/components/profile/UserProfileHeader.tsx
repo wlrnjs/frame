@@ -15,7 +15,7 @@ const UserProfileHeader = () => {
         className="w-[128px] h-[128px] rounded-full object-cover border-2 border-neutral-700"
       />
       <div className="flex-1 text-left">
-        <h1 className="text-[24px] font-bold text-white">wlrnjs</h1>
+        <h1 className="text-2xl font-bold text-white">wlrnjs</h1>
         <p className="text-neutral-400">tjwlrnjs7336@naver.com</p>
         <p className="text-sm text-neutral-500">가입일: 2025.05.04</p>
         <div className="mt-2 flex flex-wrap gap-2 justify-center md:justify-start">
@@ -25,8 +25,8 @@ const UserProfileHeader = () => {
         </div>
       </div>
       <div className="text-right">
-        <p className="text-[18px] font-semibold text-white">Activity Score</p>
-        <p className="text-[24px] leading-[20px] text-white">1200</p>
+        <p className="text-lg font-semibold text-white">Activity Score</p>
+        <p className="text-2xl leading-5 text-white">1200</p>
       </div>
     </div>
   );

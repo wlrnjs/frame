@@ -18,10 +18,10 @@ const page = () => {
           <SubmitBtn title="아이디 찾기" />
         </form>
         <div className="flex items-center justify-between">
-          <Link href="/login" className="text-[14px]">
+          <Link href="/login" className="text-sm">
             로그인
           </Link>
-          <Link href="/find/password" className="text-[14px]">
+          <Link href="/find/password" className="text-sm">
             비밀번호 찾기
           </Link>
         </div>

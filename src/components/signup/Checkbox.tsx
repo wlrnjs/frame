@@ -17,7 +17,7 @@ const Checkbox = ({ title, id }: CheckboxProps) => {
     <div className="flex gap-2 items-center justify-start">
       <div
         onClick={handleChange}
-        className="w-4 h-4 border border-white rounded-[2px] flex items-center justify-center pointer"
+        className="w-4 h-4 border border-gray-870 rounded-[2px] flex items-center justify-center pointer"
       >
         {checked && <Check />}
       </div>
@@ -30,7 +30,7 @@ const Checkbox = ({ title, id }: CheckboxProps) => {
       />
       <label
         htmlFor={id}
-        className="text-[14px] leading-[20px] tracking-[-0.04em] pointer select-none"
+        className="text-sm leading-5 tracking-[-0.04em] pointer select-none"
       >
         {title}
         <span className="ml-1">(필수)</span>
