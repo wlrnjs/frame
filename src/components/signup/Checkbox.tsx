@@ -17,7 +17,7 @@ const Checkbox = ({ title, id }: CheckboxProps) => {
     <div className="flex gap-2 items-center justify-start">
       <div
         onClick={handleChange}
-        className="w-4 h-4 border border-white rounded-[2px] flex items-center justify-center cursor-pointer"
+        className="w-4 h-4 border border-white rounded-[2px] flex items-center justify-center pointer"
       >
         {checked && <Check />}
       </div>

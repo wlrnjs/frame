@@ -5,7 +5,7 @@ import TERMS from "@/constants/TERMS";
 import PRIVACY from "@/constants/PRIVACY";
 
 interface TermsModalProps {
-  activeModal: "terms" | "privacy" | "inquiry";
+  activeModal: "terms" | "privacy";
   setActiveModal: (value: null) => void;
 }
 
@@ -45,7 +45,6 @@ const TermsModal = ({ activeModal, setActiveModal }: TermsModalProps) => {
           <h2 className="text-xl font-semibold">
             {activeModal === "terms" && "이용약관"}
             {activeModal === "privacy" && "개인정보처리방침"}
-            {activeModal === "inquiry" && "1:1 문의하기"}
           </h2>
           <button
             onClick={() => setActiveModal(null)}

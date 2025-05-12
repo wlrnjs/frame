@@ -4,11 +4,28 @@ import Email from "@/icon/Email";
 import Github from "@/icon/Github";
 import Instagram from "@/icon/Instagram";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import TermsModal from "@/components/modal/TermsModal";
+import InquiryModal from "@/components/modal/InquiryModal";
+
+type TermsModalType = "terms" | "privacy";
+type FooterModalType = TermsModalType | "inquiry";
 
 const Footer = () => {
+  const [activeModal, setActiveModal] = useState<FooterModalType | null>(null);
+  const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);
+
   const subTextStyle =
-    "text-[14px] text-white/80 hover:text-white hover:underline transition-all duration-200";
+    "text-[14px] text-white/80 hover:text-white hover:underline hover:underline-offset-2 transition-all duration-200 pointer";
+
+  const handleLinkClick = (e: React.MouseEvent, type: FooterModalType) => {
+    e.preventDefault();
+    if (type === "inquiry") {
+      setIsInquiryModalOpen(true);
+    } else {
+      setActiveModal(type as TermsModalType);
+    }
+  };
 
   return (
     <footer className="w-full min-h-[200px] flex-col-center text-center gap-3 bg-black text-white border-t border-[#4B4B4B] px-[200px] pt-5 pb-2 flex flex-col justify-between">
@@ -37,11 +54,18 @@ const Footer = () => {
 
       <div className="flex flex-col gap-2">
         <ul className="flex gap-2">
-          {["이용약관", "개인정보처리방침", "문의하기"].map((link) => (
-            <li key={link}>
-              <Link href="#" className={subTextStyle}>
-                {link}
-              </Link>
+          {[
+            { text: "이용약관", type: "terms" as const },
+            { text: "개인정보처리방침", type: "privacy" as const },
+            { text: "문의하기", type: "inquiry" as const },
+          ].map((item) => (
+            <li key={item.text}>
+              <div
+                className={subTextStyle}
+                onClick={(e) => handleLinkClick(e, item.type)}
+              >
+                {item.text}
+              </div>
             </li>
           ))}
         </ul>
@@ -50,6 +74,22 @@ const Footer = () => {
       <div className="text-center text-[12px] text-white/60">
         © 2025 Frame. All rights reserved.
       </div>
+
+      {activeModal && activeModal !== "inquiry" && (
+        <TermsModal
+          activeModal={activeModal as TermsModalType}
+          setActiveModal={() => setActiveModal(null)}
+        />
+      )}
+
+      <InquiryModal
+        onOpen={isInquiryModalOpen}
+        onClose={() => setIsInquiryModalOpen(false)}
+        onSubmit={(title: string, content: string) => {
+          console.log("Inquiry submitted:", { title, content });
+          // 제출 로직 추가
+        }}
+      />
     </footer>
   );
 };

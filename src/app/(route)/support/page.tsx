@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import TermsModal from "@/components/modal/TermsModal";
+import InquiryModal from "@/components/modal/InquiryModal";
 
 const supportItems = [
   { title: "공지사항", href: "/support/notices" },
@@ -13,9 +14,10 @@ const supportItems = [
 ];
 
 const CustomerSupportPage = () => {
-  const [activeModal, setActiveModal] = useState<
-    null | "terms" | "privacy" | "inquiry"
-  >(null);
+  const [activeModal, setActiveModal] = useState<null | "terms" | "privacy">(
+    null
+  );
+  const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);
 
   return (
     <div className="w-full min-h-screen bg-white text-black layout-container custom-margin">
@@ -34,14 +36,18 @@ const CustomerSupportPage = () => {
                 ? "terms"
                 : item.title === "개인정보처리방침"
                 ? "privacy"
-                : item.title === "1:1 문의하기"
-                ? "inquiry"
                 : null;
 
             return isModal ? (
               <button
                 key={item.title}
-                onClick={() => setActiveModal(modalKey)}
+                onClick={() => {
+                  if (item.title === "1:1 문의하기") {
+                    setIsInquiryModalOpen(true);
+                  } else {
+                    setActiveModal(modalKey);
+                  }
+                }}
                 className="w-full text-left border rounded-xl px-5 py-6 hover:bg-gray-50 transition"
               >
                 <p className="text-lg font-semibold">{item.title}</p>
@@ -60,6 +66,15 @@ const CustomerSupportPage = () => {
       {activeModal && (
         <TermsModal activeModal={activeModal} setActiveModal={setActiveModal} />
       )}
+
+      <InquiryModal
+        onOpen={isInquiryModalOpen}
+        onClose={() => setIsInquiryModalOpen(false)}
+        onSubmit={(title: string, content: string) => {
+          console.log("Inquiry submitted:", { title, content });
+          //제출 로직 추가
+        }}
+      />
     </div>
   );
 };

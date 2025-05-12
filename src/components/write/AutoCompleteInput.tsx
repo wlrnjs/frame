@@ -29,7 +29,7 @@ const AutoCompleteInput: React.FC<AutoCompleteInputProps> = ({
         {suggestions.map((tag) => (
           <li
             key={tag}
-            className="px-4 py-2 text-[14px] text-white hover:bg-[#2A2A2A] cursor-pointer transition-colors"
+            className="px-4 py-2 text-[14px] text-white hover:bg-[#2A2A2A] pointer transition-colors"
             onClick={() => onSelect(tag)}
           >
             {tag}

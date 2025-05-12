@@ -1,6 +1,7 @@
 "use client";
 
 import Close from "@/icon/Close";
+import { cn } from "@/utils";
 import React, { useEffect, useState, useRef } from "react";
 import { createPortal } from "react-dom";
 
@@ -36,8 +37,8 @@ const InquiryModal = ({ onOpen, onClose, onSubmit }: InquiryModalProps) => {
   useEffect(() => {
     const textarea = textareaRef.current;
     if (textarea) {
-      textarea.style.height = "auto"; // 높이 초기화
-      textarea.style.height = `${textarea.scrollHeight}px`; // 내용에 맞게 높이 조정
+      textarea.style.height = "auto";
+      textarea.style.height = `${textarea.scrollHeight}px`;
     }
   }, [content]);
 
@@ -60,30 +61,42 @@ const InquiryModal = ({ onOpen, onClose, onSubmit }: InquiryModalProps) => {
 
   if (!onOpen) return null;
 
+  const buttons = [
+    {
+      label: "취소",
+      onClick: onClose,
+      className: "text-gray-700 hover:bg-gray-100",
+    },
+    {
+      label: "제출",
+      onClick: handleSubmit,
+      className: "text-white bg-black hover:bg-gray-800",
+    },
+  ];
+
+  const buttonStyle =
+    "px-4 py-2 text-sm font-medium rounded-md transition-colors";
+
   return createPortal(
     <div
       className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 backdrop-blur-sm z-50 transition-opacity duration-300"
       onClick={handleBackgroundClick}
     >
       <div
-        className="relative bg-black text-white rounded-xl p-6 max-w-md w-full mx-4 max-h-[90vh] h-auto overflow-y-auto border border-white/20 shadow-2xl transform transition-transform duration-300 scale-100"
         onClick={(e) => e.stopPropagation()}
+        className="bg-white p-6 rounded-lg max-w-[800px] w-full"
       >
-        {/* 닫기 버튼 (오른쪽 상단) */}
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
-          aria-label="모달 닫기"
-        >
-          <Close />
-        </button>
-
-        {/* 모달 콘텐츠 */}
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-xl font-semibold">1:1 문의하기</h2>
+          <button
+            onClick={onClose}
+            className="text-gray-500 hover:text-black"
+            aria-label="모달 닫기"
+          >
+            <Close />
+          </button>
+        </div>
         <div className="flex flex-col gap-4">
-          <h2 className="text-xl font-bold text-white text-center">
-            1:1 문의하기
-          </h2>
-
           {/* 폼 */}
           <div className="flex flex-col gap-4">
             <input
@@ -92,7 +105,7 @@ const InquiryModal = ({ onOpen, onClose, onSubmit }: InquiryModalProps) => {
               maxLength={20}
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full p-2 bg-black border border-white/30 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-white/50 transition-colors"
+              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
             />
             <textarea
               ref={textareaRef}
@@ -101,24 +114,21 @@ const InquiryModal = ({ onOpen, onClose, onSubmit }: InquiryModalProps) => {
               onChange={(e) => setContent(e.target.value)}
               rows={4}
               maxLength={200}
-              className="w-full p-2 bg-black border border-white/30 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-white/50 transition-colors resize-none"
+              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent resize-none"
             />
           </div>
 
           {/* 버튼 그룹 */}
-          <div className="flex justify-center gap-4 mt-4">
-            <button
-              onClick={handleSubmit}
-              className="w-1/2 py-2.5 bg-white text-black rounded-lg hover:bg-gray-200 transition-colors"
-            >
-              제출
-            </button>
-            <button
-              onClick={onClose}
-              className="w-1/2 py-2.5 bg-black border border-white/30 text-white rounded-lg hover:bg-white/10 transition-colors"
-            >
-              취소
-            </button>
+          <div className="flex justify-end gap-3">
+            {buttons.map((btn) => (
+              <button
+                key={btn.label}
+                onClick={btn.onClick}
+                className={cn(btn.className, buttonStyle)}
+              >
+                {btn.label}
+              </button>
+            ))}
           </div>
         </div>
       </div>
