@@ -16,7 +16,7 @@ const Footer = () => {
   const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);
 
   const subTextStyle =
-    "text-[14px] text-white/80 hover:text-white hover:underline hover:underline-offset-2 transition-all duration-200 pointer";
+    "text-[14px] text-white-80 hover:text-white hover:underline hover:underline-offset-2 transition-all duration-200 cursor-pointer";
 
   const handleLinkClick = (e: React.MouseEvent, type: FooterModalType) => {
     e.preventDefault();
@@ -28,7 +28,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="w-full min-h-[200px] flex-col-center text-center gap-3 bg-black text-white border-t border-[#4B4B4B] px-[200px] pt-5 pb-2 flex flex-col justify-between">
+    <footer className="w-full min-h-[200px] flex-col-center text-center gap-3 bg-black text-white border-t border-gray-870 px-[200px] pt-5 pb-2 flex flex-col justify-between">
       <div className="flex flex-col gap-5">
         <div className="flex flex-col gap-2">
           <h2 className="text-[16px] font-semibold text-white">Frame</h2>
@@ -71,7 +71,7 @@ const Footer = () => {
         </ul>
       </div>
 
-      <div className="text-center text-[12px] text-white/60">
+      <div className="text-center text-[12px] text-white-60">
         © 2025 Frame. All rights reserved.
       </div>
 

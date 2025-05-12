@@ -8,12 +8,16 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        bg: '#FAFAFA',
-        bgSub: '#F2F0EB',
-        main: '#333333',
-        sub: '#777777',
-        point: '#3A506B',
-        action: '#FFD166'
+        white: {
+          DEFAULT: "#ffffff",
+          80: "rgba(255, 255, 255, 0.8)",
+          60: "rgba(255, 255, 255, 0.6)",
+        },
+        black: "#000000",
+        gray: {
+          850: "#2A2A2A", // hover 상태용
+          870: "#4B4B4B", // border 색상
+        },
       },
     },
   },
