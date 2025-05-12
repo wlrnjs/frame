@@ -2,8 +2,8 @@ import React from "react";
 
 export const HeartOutline = () => (
   <svg
-    width="24"
-    height="24"
+    width="20"
+    height="20"
     viewBox="0 0 24 24"
     fill="white"
     strokeWidth="2"
@@ -21,8 +21,8 @@ export const HeartOutline = () => (
 
 export const HeartFilled = () => (
   <svg
-    width="24"
-    height="24"
+    width="20"
+    height="20"
     viewBox="0 0 24 24"
     fill="black"
     stroke="white"

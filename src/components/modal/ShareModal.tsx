@@ -1,32 +1,15 @@
 "use client";
 
-import React, { useEffect } from "react";
+import Close from "@/icon/Close";
+import React from "react";
 import { createPortal } from "react-dom";
 
 interface ShareModalProps {
-  onOpen: boolean;
+  isOpen: boolean;
   onClose: () => void;
 }
 
-const ShareModal = ({ onOpen, onClose }: ShareModalProps) => {
-  useEffect(() => {
-    if (onOpen) {
-      document.body.style.overflow = "hidden";
-
-      const handleEscape = (event: KeyboardEvent) => {
-        if (event.key === "Escape") {
-          onClose();
-        }
-      };
-      window.addEventListener("keydown", handleEscape);
-
-      return () => {
-        document.body.style.overflow = "unset";
-        window.removeEventListener("keydown", handleEscape);
-      };
-    }
-  }, [onOpen, onClose]);
-
+const ShareModal = ({ isOpen, onClose }: ShareModalProps) => {
   const handleBackgroundClick = (event: React.MouseEvent<HTMLDivElement>) => {
     if (event.target === event.currentTarget) {
       onClose();
@@ -38,7 +21,7 @@ const ShareModal = ({ onOpen, onClose }: ShareModalProps) => {
     alert("링크가 복사되었습니다!");
   };
 
-  if (!onOpen) return null;
+  if (!isOpen) return null;
 
   return createPortal(
     <div
@@ -55,20 +38,7 @@ const ShareModal = ({ onOpen, onClose }: ShareModalProps) => {
           className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
           aria-label="모달 닫기"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
+          <Close />
         </button>
 
         {/* 모달 콘텐츠 */}

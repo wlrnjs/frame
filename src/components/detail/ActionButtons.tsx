@@ -1,0 +1,73 @@
+"use client";
+
+import { HeartOutline } from "@/icon/Heart";
+import Download from "@/icon/Download";
+import Share from "@/icon/Share";
+import Edit from "@/icon/Edit";
+import Report from "@/icon/Report";
+import Delete from "@/icon/Delete";
+import React from "react";
+
+interface ActionButtonProps {
+  icon: React.ReactNode;
+  label: string;
+  aria: string;
+  onClick?: () => void;
+}
+
+interface ActionButtonsProps {
+  onShareClick: () => void;
+  onDeleteClick: () => void;
+  onReportClick: () => void;
+}
+
+const ActionButtons = ({
+  onShareClick,
+  onDeleteClick,
+  onReportClick,
+}: ActionButtonsProps) => {
+  const actionButtons: ActionButtonProps[] = [
+    { icon: <HeartOutline />, label: "좋아요", aria: "좋아요" },
+    { icon: <Download />, label: "다운로드", aria: "다운로드" },
+    { icon: <Share />, label: "공유하기", aria: "공유", onClick: onShareClick },
+    { icon: <Edit />, label: "수정하기", aria: "수정" },
+    {
+      icon: <Report />,
+      label: "신고하기",
+      aria: "신고",
+      onClick: onReportClick,
+    },
+  ];
+
+  const labelStyle =
+    "absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-xs text-white bg-black rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap pointer";
+
+  return (
+    <div className="flex space-x-4">
+      {actionButtons.map((action, index) => (
+        <div key={index} className="relative group">
+          <button
+            aria-label={action.aria}
+            onClick={action.onClick}
+            className="focus:outline-none"
+          >
+            {action.icon}
+          </button>
+          <div className={labelStyle}>{action.label}</div>
+        </div>
+      ))}
+      <div className="relative group">
+        <button
+          aria-label="삭제"
+          onClick={onDeleteClick}
+          className="focus:outline-none"
+        >
+          <Delete />
+        </button>
+        <div className={labelStyle}>삭제하기</div>
+      </div>
+    </div>
+  );
+};
+
+export default ActionButtons;

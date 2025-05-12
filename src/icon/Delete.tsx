@@ -1,9 +1,9 @@
 import React from "react";
 
-const DeleteIcon = () => (
+const Delete = () => (
   <svg
-    width="24"
-    height="24"
+    width="20"
+    height="20"
     viewBox="0 0 24 24"
     fill="none"
     stroke="white"
@@ -20,4 +20,4 @@ const DeleteIcon = () => (
   </svg>
 );
 
-export default DeleteIcon;
+export default Delete;

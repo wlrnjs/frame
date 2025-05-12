@@ -1,41 +1,23 @@
 "use client";
 
 import Close from "@/icon/Close";
-import React, { useEffect } from "react";
+import React from "react";
 import { createPortal } from "react-dom";
 
 interface DeleteModalProps {
-  onOpen: boolean;
+  isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
 }
 
-const DeleteModal = ({ onOpen, onClose, onConfirm }: DeleteModalProps) => {
-  useEffect(() => {
-    if (onOpen) {
-      document.body.style.overflow = "hidden";
-
-      const handleEscape = (event: KeyboardEvent) => {
-        if (event.key === "Escape") {
-          onClose();
-        }
-      };
-      window.addEventListener("keydown", handleEscape);
-
-      return () => {
-        document.body.style.overflow = "unset";
-        window.removeEventListener("keydown", handleEscape);
-      };
-    }
-  }, [onOpen, onClose]);
-
+const DeleteModal = ({ isOpen, onClose, onConfirm }: DeleteModalProps) => {
   const handleBackgroundClick = (event: React.MouseEvent<HTMLDivElement>) => {
     if (event.target === event.currentTarget) {
       onClose();
     }
   };
 
-  if (!onOpen) return null;
+  if (!isOpen) return null;
 
   return createPortal(
     <div

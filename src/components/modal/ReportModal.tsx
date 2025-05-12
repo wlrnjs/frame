@@ -5,18 +5,18 @@ import React, { useEffect, useState, useRef } from "react";
 import { createPortal } from "react-dom";
 
 interface ReportModalProps {
-  onOpen: boolean;
+  isOpen: boolean;
   onClose: () => void;
   onSubmit: (reason: string, description: string) => void;
 }
 
-const ReportModal = ({ onOpen, onClose, onSubmit }: ReportModalProps) => {
+const ReportModal = ({ isOpen, onClose, onSubmit }: ReportModalProps) => {
   const [reason, setReason] = useState("");
   const [description, setDescription] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
-    if (onOpen) {
+    if (isOpen) {
       document.body.style.overflow = "hidden";
 
       const handleEscape = (event: KeyboardEvent) => {
@@ -31,7 +31,7 @@ const ReportModal = ({ onOpen, onClose, onSubmit }: ReportModalProps) => {
         window.removeEventListener("keydown", handleEscape);
       };
     }
-  }, [onOpen, onClose]);
+  }, [isOpen, onClose]);
 
   useEffect(() => {
     const textarea = textareaRef.current;
@@ -58,7 +58,7 @@ const ReportModal = ({ onOpen, onClose, onSubmit }: ReportModalProps) => {
     }
   };
 
-  if (!onOpen) return null;
+  if (!isOpen) return null;
 
   return createPortal(
     <div
