@@ -4,6 +4,8 @@ import DetailPhotoContainer from "@/components/detail/DetailPhotoContainer";
 import CommentContainer from "@/components/detail/CommentContainer";
 import RecommendContainer from "@/components/detail/RecommendContainer";
 
+// TODO: 모달 연결 필요
+
 const page = () => {
   return (
     <div className="w-full min-h-screen flex-col-center gap-20 custom-margin layout-container">

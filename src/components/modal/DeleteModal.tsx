@@ -1,5 +1,6 @@
 "use client";
 
+import Close from "@/icon/Close";
 import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
 
@@ -51,20 +52,7 @@ const DeleteModal = ({ onOpen, onClose, onConfirm }: DeleteModalProps) => {
           className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
           aria-label="모달 닫기"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
+          <Close />
         </button>
 
         {/* 모달 콘텐츠 */}

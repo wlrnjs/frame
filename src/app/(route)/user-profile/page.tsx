@@ -22,7 +22,7 @@ const UserProfilePage = () => {
           <UserTabs activeTab={activeTab} setActiveTab={setActiveTab} />
 
           {/* Tab Content */}
-          <div className="p-6 mb-20">
+          <div className="p-6">
             {activeTab === "posts" && (
               <div className="flex flex-col gap-[20px]">
                 <PostGrid />

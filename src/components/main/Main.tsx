@@ -3,6 +3,7 @@ import MainAnimation from "./MainAnimation";
 import SecondSection from "./SecondSection";
 import EventBanner from "./EventBanner";
 import ThirdSection from "./ThirdSection";
+import FinalSection from "./FinalSection";
 
 const Main = () => {
   return (
@@ -11,7 +12,7 @@ const Main = () => {
       <ThirdSection />
       <SecondSection />
       <EventBanner />
-      <SecondSection />
+      <FinalSection />
     </div>
   );
 };

@@ -3,6 +3,7 @@
 import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
+import Close from "@/icon/Close";
 
 interface DetailImageModalProps {
   onOpen: boolean;
@@ -51,7 +52,7 @@ const DetailImageModal = ({ onOpen, onClose }: DetailImageModalProps) => {
           onClick={onClose}
           aria-label="Close modal"
         >
-          ×
+          <Close />
         </button>
 
         {/* 이미지 */}

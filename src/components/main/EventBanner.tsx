@@ -12,7 +12,7 @@ const EventBanner = () => {
           지금 이벤트를 확인하세요
         </p>
       </div>
-      <Link href={"/"}>
+      <Link href={"/event"}>
         <button className="w-[200px] h-[50px] rounded-[5px] text-[18px] border-2 border-[#4B4B4B] text-white hover:bg-[#1F1F1F] transition-all duration-300">
           보러가기
         </button>
