@@ -10,7 +10,7 @@ const page = () => {
       <div className="w-full h-full flex gap-10 justify-center items-start">
         <div className="w-full flex flex-col gap-10">
           <DetailPhotoContainer />
-          <CommentContainer />
+          <CommentContainer isEvent={false} />
         </div>
 
         <DetailContainer />

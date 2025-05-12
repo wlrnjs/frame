@@ -1,8 +1,18 @@
+import { cn } from "@/utils";
 import React from "react";
 
-const CommentContainer = () => {
+interface CommentContainerProps {
+  isEvent?: boolean;
+}
+
+const CommentContainer = ({ isEvent }: CommentContainerProps) => {
   return (
-    <div className="w-full h-[650px] bg-black rounded-lg shadow-md p-6 flex flex-col justify-between">
+    <div
+      className={cn(
+        "w-full h-[650px] bg-black rounded-lg shadow-md p-6 flex flex-col justify-between",
+        isEvent ? "p-0" : "p-6"
+      )}
+    >
       {/* 댓글 리스트 */}
       <div className="overflow-y-auto flex-1 space-y-4 pr-2">
         {/* 댓글 아이템들 */}
