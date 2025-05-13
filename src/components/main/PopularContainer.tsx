@@ -1,11 +1,13 @@
 import React from "react";
 import ImageCard from "./ImageCard";
 
-const SecondSection = () => {
+const PopularContainer = () => {
   return (
     <div className="w-full h-auto layout-container my-44 text-start flex flex-col gap-24">
       <div className="flex items-center pb-5 justify-between border-b-[2px] border-black font-semibold">
-        <h1 className="flex items-start text-[25px]">가장 인기있는 사진 6장</h1>
+        <h1 className="flex items-start text-[25px]">
+          가장 인기있는 사진 30장
+        </h1>
         <p className="text-sm pointer">전체보기</p>
       </div>
 
@@ -21,4 +23,4 @@ const SecondSection = () => {
   );
 };
 
-export default SecondSection;
+export default PopularContainer;

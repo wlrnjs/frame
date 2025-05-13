@@ -3,7 +3,7 @@ import React from "react";
 
 const EventBanner = () => {
   return (
-    <div className="w-full h-[162px] flex items-center justify-between bg-black text-white mt-10 layout-container">
+    <div className="w-full h-[162px] flex items-center justify-between bg-black text-white layout-container">
       <div className="flex flex-col gap-4">
         <p className="font-bold text-2xl tracking-[-0.04em]">
           현재 진행중인 이벤트

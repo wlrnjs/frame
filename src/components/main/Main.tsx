@@ -1,18 +1,18 @@
 import React from "react";
 import MainAnimation from "./MainAnimation";
-import SecondSection from "./SecondSection";
+import PopularContainer from "./PopularContainer";
 import EventBanner from "./EventBanner";
-import ThirdSection from "./ThirdSection";
-import FinalSection from "./FinalSection";
+import BestContainer from "./BestContainer";
+import LinkContainer from "./LinkContainer";
 
 const Main = () => {
   return (
     <div className="w-full min-h-screen bg-bg flex flex-col">
       <MainAnimation />
-      <ThirdSection />
-      <SecondSection />
+      <BestContainer />
+      <PopularContainer />
       <EventBanner />
-      <FinalSection />
+      <LinkContainer />
     </div>
   );
 };

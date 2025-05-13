@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 
-const ThirdSection = () => {
+const BestContainer = () => {
   return (
     <div className="w-full h-screen bg-black flex-col-center gap-5">
       <h1 className="text-white text-3xl tracking-[-0.04em]">
@@ -19,4 +19,4 @@ const ThirdSection = () => {
   );
 };
 
-export default ThirdSection;
+export default BestContainer;

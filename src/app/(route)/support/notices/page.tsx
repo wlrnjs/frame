@@ -29,7 +29,7 @@ const notices: Notice[] = [
   },
   {
     id: 3,
-    title: "PlayHive 오픈 공지",
+    title: "Frame 오픈 공지",
     date: "2025.04.03",
     content: `사진 커뮤니티 Frame이 정식 오픈되었습니다.  
 많은 관심 부탁드립니다.`,
