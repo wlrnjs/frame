@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import Question from "@/icon/Question";
 import Image from "next/image";
 import { createPortal } from "react-dom";
+import { ProfileData } from "@/types/ProfileData";
 
 const styles = {
   inputBaseClass:
@@ -24,7 +25,7 @@ interface ProfileEditModalProps {
     lens: string;
     urls: { name: string; url: string }[];
   }) => void;
-  currentData: any; // 타입 구체화 필요
+  currentData: ProfileData;
 }
 
 const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
