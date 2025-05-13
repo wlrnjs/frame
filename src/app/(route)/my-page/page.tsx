@@ -7,6 +7,7 @@ import UserTabs from "@/components/profile/UserTabs";
 import PostGrid from "@/components/profile/PostGrid";
 import ProfileEditModal from "@/components/modal/ProfileEditModal";
 import Edit from "@/icon/Edit";
+import { useToast } from "@/hooks/useToast";
 
 const MyPage = () => {
   const initialProfileData = {
@@ -19,6 +20,7 @@ const MyPage = () => {
   };
   const [activeTab, setActiveTab] = useState("posts");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const toast = useToast();
 
   const btnStyle =
     "absolute right-6 top-4 h-[40px] bg-gray-920 border border-gray-870 rounded-[5px] px-4 py-2 text-sm text-white hover:bg-black transition-all duration-300 ease-out flex items-center gap-2";
@@ -36,6 +38,7 @@ const MyPage = () => {
     urls: { name: string; url: string }[];
   }) => {
     console.log("저장된 데이터:", data);
+    toast.success("프로필이 저장되었습니다.");
     setIsModalOpen(false);
   };
 

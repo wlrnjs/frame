@@ -5,7 +5,7 @@ interface CommentContainerProps {
   isEvent?: boolean;
 }
 
-const CommentContainer = ({ isEvent }: CommentContainerProps) => {
+const CommentContainer = ({ isEvent = false }: CommentContainerProps) => {
   return (
     <div
       className={cn(

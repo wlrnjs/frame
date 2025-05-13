@@ -44,7 +44,7 @@ const page = () => {
         <h1 className="text-2xl mb-4 flex gap-2 items-center">
           댓글<span className="text-gray-500 text-lg">총 3개</span>
         </h1>
-        <CommentContainer isEvent={true} />
+        <CommentContainer isEvent />
       </div>
     </div>
   );

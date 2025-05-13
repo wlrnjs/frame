@@ -6,6 +6,8 @@ import Image from "next/image";
 import { createPortal } from "react-dom";
 import { ProfileData } from "@/types/ProfileData";
 
+// TODO: Input 컴포넌트화 및 에러 처리 추가
+
 const styles = {
   inputBaseClass:
     "w-full bg-neutral-700 rounded px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500",
