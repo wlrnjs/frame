@@ -1,5 +1,6 @@
 "use client";
 
+import { useToast } from "@/hooks/useToast";
 import Close from "@/icon/Close";
 import Dropdown from "@/icon/Dropdown";
 import React, { useEffect, useState, useRef } from "react";
@@ -15,6 +16,7 @@ const ReportModal = ({ isOpen, onClose, onSubmit }: ReportModalProps) => {
   const [reason, setReason] = useState("");
   const [description, setDescription] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const toast = useToast();
 
   useEffect(() => {
     if (isOpen) {
@@ -53,9 +55,10 @@ const ReportModal = ({ isOpen, onClose, onSubmit }: ReportModalProps) => {
       onSubmit(reason, description);
       setReason("");
       setDescription("");
+      toast.success("신고가 접수되었습니다.");
       onClose();
     } else {
-      alert("신고 사유와 설명을 입력해주세요.");
+      toast.error("신고 사유와 설명을 입력해주세요.");
     }
   };
 

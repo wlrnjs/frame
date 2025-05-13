@@ -5,17 +5,15 @@ import UserProfileHeader from "@/components/profile/UserProfileHeader";
 import UserCameraAndLinks from "@/components/profile/UserCameraAndLinks";
 import UserTabs from "@/components/profile/UserTabs";
 import PostGrid from "@/components/profile/PostGrid";
-import Toast from "@/components/toast/Toast";
 
 const MyPage = () => {
   const [activeTab, setActiveTab] = useState("posts");
-  const [showToast, setShowToast] = useState(false);
 
   const btnStyle =
     "h-[40px] bg-gray-920 border border-gray-870 rounded-[5px] px-4 py-2 text-sm text-white hover:bg-black transition-all duration-300 ease-out";
 
   const handleProfileEdit = () => {
-    setShowToast(true);
+    console.log("프로필 편집");
   };
 
   return (
@@ -35,13 +33,6 @@ const MyPage = () => {
             </div>
           </div>
         </div>
-        {showToast && (
-          <Toast
-            type="success"
-            message="준비 중입니다."
-            onClose={() => setShowToast(false)}
-          />
-        )}
 
         {/* 탭 섹션 */}
         <div className="bg-black rounded-lg shadow-lg">

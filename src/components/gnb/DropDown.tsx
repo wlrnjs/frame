@@ -3,6 +3,7 @@
 import { supabase } from "@/service/lib/supabaseClient";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/hooks/useToast";
 
 interface DropDownItem {
   type: "link" | "button";
@@ -17,15 +18,17 @@ const DROPDOWN_ITEMS: DropDownItem[] = [
 ];
 
 const DropDown = () => {
+  const toast = useToast();
   const router = useRouter();
 
   const handleLogout = async () => {
     try {
       await supabase.auth.signOut();
+      toast.success("로그아웃이 완료되었습니다.");
       router.push("/");
     } catch (error) {
-      console.error("로그아웃 중 오류 발생:", error);
-      router.push("/");
+      toast.error("로그아웃 중 오류가 발생했습니다.");
+      console.error("error code:", error);
     }
   };
 

@@ -7,12 +7,14 @@ import LOGO from "@/icon/LOGO";
 import Link from "next/link";
 import { supabase } from "@/service/lib/supabaseClient";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/hooks/useToast";
 
 const Page = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
+  const toast = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,6 +26,7 @@ const Page = () => {
 
     if (error) {
       setError("아이디 또는 비밀번호를 확인해주세요");
+      toast.error("아이디 또는 비밀번호를 확인해주세요");
     } else {
       // 쿠키 저장
       const accessToken = data?.session?.access_token;
@@ -38,7 +41,7 @@ const Page = () => {
         // document.cookie = `sb-refresh-token=${refreshToken}; path=/; max-age=604800; secure`;
       }
 
-      alert("로그인 성공!");
+      toast.success("로그인 성공!");
       router.push("/");
     }
   };

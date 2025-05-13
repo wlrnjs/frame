@@ -8,6 +8,7 @@ import LOGO from "@/icon/LOGO";
 import { supabase } from "@/service/lib/supabaseClient";
 import { useRouter } from "next/navigation";
 import { generateRandomNickname } from "@/utils/generateRandomNickname";
+import { useToast } from "@/hooks/useToast";
 
 const Page = () => {
   const [email, setEmail] = useState("");
@@ -16,6 +17,7 @@ const Page = () => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const toast = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -53,11 +55,15 @@ const Page = () => {
       if (insertError) {
         throw new Error("닉네임 저장 중 오류가 발생했습니다.");
       }
-
-      alert(`회원가입 성공! 닉네임: ${nickname}`);
+      toast.success("회원가입 성공!");
       router.push("/login");
     } catch (error) {
       setError(
+        error instanceof Error
+          ? error.message
+          : "회원가입 중 오류가 발생했습니다."
+      );
+      toast.error(
         error instanceof Error
           ? error.message
           : "회원가입 중 오류가 발생했습니다."

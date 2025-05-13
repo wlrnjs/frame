@@ -4,6 +4,7 @@ import Close from "@/icon/Close";
 import { cn } from "@/utils";
 import React, { useEffect, useState, useRef } from "react";
 import { createPortal } from "react-dom";
+import { useToast } from "@/hooks/useToast";
 
 interface InquiryModalProps {
   onOpen: boolean;
@@ -15,6 +16,7 @@ const InquiryModal = ({ onOpen, onClose, onSubmit }: InquiryModalProps) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const toast = useToast();
 
   useEffect(() => {
     if (onOpen) {
@@ -53,9 +55,10 @@ const InquiryModal = ({ onOpen, onClose, onSubmit }: InquiryModalProps) => {
       onSubmit(title, content);
       setTitle("");
       setContent("");
+      toast.success("문의가 접수되었습니다.");
       onClose();
     } else {
-      alert("제목과 내용을 입력해주세요.");
+      toast.error("제목과 내용을 입력해주세요.");
     }
   };
 

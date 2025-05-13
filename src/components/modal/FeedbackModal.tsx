@@ -4,6 +4,7 @@ import Close from "@/icon/Close";
 import { cn } from "@/utils";
 import React, { useEffect, useState, useRef } from "react";
 import { createPortal } from "react-dom";
+import { useToast } from "@/hooks/useToast";
 
 interface FeedbackModalProps {
   onOpen: boolean;
@@ -15,6 +16,7 @@ const FeedbackModal = ({ onOpen, onClose, onSubmit }: FeedbackModalProps) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const toast = useToast();
 
   useEffect(() => {
     if (onOpen) {
@@ -53,9 +55,10 @@ const FeedbackModal = ({ onOpen, onClose, onSubmit }: FeedbackModalProps) => {
       onSubmit(title, content);
       setTitle("");
       setContent("");
+      toast.success("개선요청이 접수되었습니다.");
       onClose();
     } else {
-      alert("제목과 내용을 입력해주세요.");
+      toast.error("제목과 내용을 입력해주세요.");
     }
   };
 

@@ -3,6 +3,7 @@
 import Close from "@/icon/Close";
 import React from "react";
 import { createPortal } from "react-dom";
+import { useToast } from "@/hooks/useToast";
 
 interface ShareModalProps {
   isOpen: boolean;
@@ -10,6 +11,8 @@ interface ShareModalProps {
 }
 
 const ShareModal = ({ isOpen, onClose }: ShareModalProps) => {
+  const toast = useToast();
+
   const handleBackgroundClick = (event: React.MouseEvent<HTMLDivElement>) => {
     if (event.target === event.currentTarget) {
       onClose();
@@ -18,7 +21,7 @@ const ShareModal = ({ isOpen, onClose }: ShareModalProps) => {
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(window.location.href);
-    alert("링크가 복사되었습니다!");
+    toast.success("링크가 복사되었습니다!");
   };
 
   if (!isOpen) return null;

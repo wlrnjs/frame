@@ -1,6 +1,7 @@
 import Check from "@/icon/Check";
 import { cn } from "@/utils";
 import React, { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 interface ToastProps {
   type: "success" | "error";
@@ -26,7 +27,7 @@ const Toast = ({ type, message, onClose }: ToastProps) => {
     }
   }, [show, onClose]);
 
-  return (
+  return createPortal(
     <div
       className={cn(
         "w-[300px] h-[50px] bg-white text-black p-4 rounded-[5px] fixed top-5 right-5 z-50 flex items-center justify-between transition-all duration-500 select-none",
@@ -45,7 +46,8 @@ const Toast = ({ type, message, onClose }: ToastProps) => {
         )}
         <p className="text-sm font-medium tracking-[-0.04em]">{message}</p>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

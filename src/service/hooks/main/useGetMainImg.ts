@@ -20,7 +20,7 @@ const getMainImg = async (): Promise<{
   });
 
   if (!response.ok) {
-    console.error("테이블에서 데이터를 불러오는데 실패했습니다.", response.statusText);
+    console.error("table fetch error", response.statusText);
     return [];
   }
 

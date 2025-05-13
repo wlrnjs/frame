@@ -12,21 +12,20 @@ const LinkStyle = "hover:text-gray-300 transition-colors duration-200 pointer";
 
 const Gnb = () => {
   const { isLoggedIn } = useAuthCheck();
-  const [showGnb, setShowGnb] = useState(false);
   const pathname = usePathname();
+  const [showGnb, setShowGnb] = useState(pathname !== "/");
 
   useEffect(() => {
+    if (pathname !== "/") {
+      setShowGnb(true);
+      return;
+    }
+
     const handleScroll = () => {
-      if (pathname === "/") {
-        if (window.scrollY > 10) {
-          setShowGnb(true);
-        } else {
-          setShowGnb(false);
-        }
-      } else {
-        setShowGnb(true);
-      }
+      setShowGnb(window.scrollY > 10);
     };
+
+    handleScroll();
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
