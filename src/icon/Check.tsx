@@ -1,10 +1,14 @@
 import React from "react";
 
-const Check = () => {
+interface CheckProps {
+  size?: string;
+}
+
+const Check = ({ size = "16" }: CheckProps) => {
   return (
     <svg
-      width="16"
-      height="16"
+      width={size}
+      height={size}
       viewBox="0 0 16 16"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

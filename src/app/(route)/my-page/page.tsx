@@ -5,12 +5,18 @@ import UserProfileHeader from "@/components/profile/UserProfileHeader";
 import UserCameraAndLinks from "@/components/profile/UserCameraAndLinks";
 import UserTabs from "@/components/profile/UserTabs";
 import PostGrid from "@/components/profile/PostGrid";
+import Toast from "@/components/toast/Toast";
 
 const MyPage = () => {
   const [activeTab, setActiveTab] = useState("posts");
+  const [showToast, setShowToast] = useState(false);
 
   const btnStyle =
     "h-[40px] bg-gray-920 border border-gray-870 rounded-[5px] px-4 py-2 text-sm text-white hover:bg-black transition-all duration-300 ease-out";
+
+  const handleProfileEdit = () => {
+    setShowToast(true);
+  };
 
   return (
     <div className="w-full min-h-screen custom-margin layout-container">
@@ -23,10 +29,19 @@ const MyPage = () => {
               <UserCameraAndLinks />
             </div>
             <div className="flex gap-4">
-              <button className={btnStyle}>프로필 편집</button>
+              <button className={btnStyle} onClick={handleProfileEdit}>
+                프로필 편집
+              </button>
             </div>
           </div>
         </div>
+        {showToast && (
+          <Toast
+            type="success"
+            message="준비 중입니다."
+            onClose={() => setShowToast(false)}
+          />
+        )}
 
         {/* 탭 섹션 */}
         <div className="bg-black rounded-lg shadow-lg">

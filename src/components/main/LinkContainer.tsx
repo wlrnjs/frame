@@ -4,7 +4,7 @@ import LinkItem from "./LinkItem";
 const LinkContainer = () => {
   const items = [
     {
-      href: "/list",
+      href: "/photo-list",
       imgSrc: "/BlackPhoto.JPG",
       title: "List",
       description: "See More",
