@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import FeedbackModal from "@/components/modal/FeedbackModal";
 
 type Feedback = {
   id: number;
@@ -35,6 +36,7 @@ const feedback: Feedback[] = [
 
 const FeedbackListPage = () => {
   const [openId, setOpenId] = useState<number | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleOpen = (id: number) => {
     setOpenId((prevId) => (prevId === id ? null : id));
@@ -45,10 +47,24 @@ const FeedbackListPage = () => {
       <div className="max-w-4xl mx-auto">
         <div className="flex justify-between items-center mb-8 border-b pb-4">
           <h1 className="text-3xl font-bold">개선 요청</h1>
-          <button className="text-black px-4 py-2 rounded border-black border">
+          <button
+            className="text-black px-4 py-2 rounded border-black border hover:bg-black hover:text-white hover:border-transparent transition-colors"
+            onClick={() => setIsModalOpen(true)}
+          >
             새로운 요청하기
           </button>
         </div>
+
+      {isModalOpen && (
+        <FeedbackModal
+  onOpen={isModalOpen}
+  onClose={() => setIsModalOpen(false)}
+  onSubmit={(title, content) => {
+    // TODO: 실제 저장 로직 구현 필요
+    console.log("피드백 제출:", title, content);
+  }}
+/>
+      )}
 
         <ul className="space-y-4">
           {feedback.map((feedback) => (
@@ -73,6 +89,16 @@ const FeedbackListPage = () => {
           ))}
         </ul>
       </div>
+      {isModalOpen && (
+        <FeedbackModal
+  onOpen={isModalOpen}
+  onClose={() => setIsModalOpen(false)}
+  onSubmit={(title, content) => {
+    // TODO: 실제 저장 로직 구현 필요
+    console.log("피드백 제출:", title, content);
+  }}
+/>
+      )}
     </div>
   );
 };
