@@ -3,7 +3,8 @@ import Link from "next/link";
 import React from "react";
 
 const UserCameraAndLinks = () => {
-  const LinkStyle = "text-neutral-400 hover:text-white hover:underline";
+  const LinkStyle =
+    "text-neutral-400 hover:text-white hover:underline hover:decoration-offset-2 transition-all duration-300 ease-out";
 
   return (
     <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -19,6 +20,7 @@ const UserCameraAndLinks = () => {
           target="_blank"
           rel="noopener noreferrer"
           className={LinkStyle}
+          aria-label="Instagram"
         >
           Instagram
         </Link>
@@ -27,6 +29,7 @@ const UserCameraAndLinks = () => {
           target="_blank"
           rel="noopener noreferrer"
           className={cn("block", LinkStyle)}
+          aria-label="Github"
         >
           Github
         </Link>

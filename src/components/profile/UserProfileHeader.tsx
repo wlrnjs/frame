@@ -2,6 +2,14 @@ import React from "react";
 import Image from "next/image";
 import Question from "@/icon/Question";
 
+const ACTIVITY_SCORE_TOOLTIP = [
+  { label: "글쓰기", value: "+30" },
+  { label: "댓글", value: "+10" },
+  { label: "개선요청 채택", value: "+50" },
+  { label: "이벤트 참여", value: "+20" },
+  { label: "하루 최대", value: "50점", isBold: true },
+];
+
 interface UserProfileHeaderProps {
   isMyPage?: boolean;
 }
@@ -36,18 +44,17 @@ const UserProfileHeader = ({ isMyPage = false }: UserProfileHeaderProps) => {
             {isMyPage && (
               <div className="relative group">
                 <Question />
-                <div className="absolute bottom-full mb-2 right-3 hidden group-hover:block w-max bg-white text-black rounded px-2 py-1 whitespace-nowrap z-10">
-                  <p className="text-sm leading-normal py-0.5">글쓰기 +30</p>
-                  <p className="text-sm leading-normal py-0.5">댓글 +10</p>
-                  <p className="text-sm leading-normal py-0.5">
-                    개선요청 채택 +50
-                  </p>
-                  <p className="text-sm leading-normal py-0.5">
-                    이벤트 참여 +20
-                  </p>
-                  <p className="text-sm leading-normal py-0.5 font-semibold">
-                    하루 최대 50점
-                  </p>
+                <div className="absolute bottom-full mb-2 right-1 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity duration-300 ease-in-out w-max bg-white text-black rounded px-2 py-1 whitespace-nowrap z-10">
+                  {ACTIVITY_SCORE_TOOLTIP.map(({ label, value, isBold }) => (
+                    <p
+                      key={label}
+                      className={`text-sm leading-normal py-0.5 ${
+                        isBold ? "font-semibold" : ""
+                      }`}
+                    >
+                      {label} {value}
+                    </p>
+                  ))}
                 </div>
               </div>
             )}
