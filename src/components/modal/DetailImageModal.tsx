@@ -39,7 +39,7 @@ const DetailImageModal = ({ onOpen, onClose }: DetailImageModalProps) => {
 
   return createPortal(
     <div
-      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-sm z-50"
+      className="fixed inset-0 flex items-center justify-center modal-overlay"
       onClick={handleBackgroundClick}
     >
       <div

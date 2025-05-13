@@ -79,7 +79,7 @@ const InquiryModal = ({ onOpen, onClose, onSubmit }: InquiryModalProps) => {
 
   return createPortal(
     <div
-      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 backdrop-blur-sm z-50 transition-opacity duration-300"
+      className="fixed inset-0 flex items-center justify-center modal-overlay"
       onClick={handleBackgroundClick}
     >
       <div

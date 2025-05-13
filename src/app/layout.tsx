@@ -3,6 +3,7 @@ import "./globals.css";
 import QueryProvider from "@/components/QueryProvider";
 import Gnb from "@/components/gnb/Gnb";
 import Footer from "@/components/footer/Footer";
+import ScrollToTop from "@/utils/ScrollToTop";
 
 export default function RootLayout({
   children,
@@ -13,6 +14,7 @@ export default function RootLayout({
     <html lang="ko">
       <body>
         <QueryProvider>
+          <ScrollToTop />
           <Gnb />
           {children}
           <Footer />
