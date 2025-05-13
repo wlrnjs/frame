@@ -1,7 +1,12 @@
 import React from "react";
 import Image from "next/image";
+import Question from "@/icon/Question";
 
-const UserProfileHeader = () => {
+interface UserProfileHeaderProps {
+  isMyPage?: boolean;
+}
+
+const UserProfileHeader = ({ isMyPage = false }: UserProfileHeaderProps) => {
   const categoryStyle =
     "inline-block bg-neutral-800 text-white text-xs px-2 py-1 rounded-full";
 
@@ -25,8 +30,30 @@ const UserProfileHeader = () => {
         </div>
       </div>
       <div className="text-right">
-        <p className="text-lg font-semibold text-white">Activity Score</p>
-        <p className="text-2xl leading-5 text-white">1200</p>
+        <div className="flex gap-1 items-center">
+          <div className="text-lg font-semibold text-white text-nowrap flex items-center gap-2">
+            <p>활동 점수</p>
+            {isMyPage && (
+              <div className="relative group">
+                <Question />
+                <div className="absolute bottom-full mb-2 right-3 hidden group-hover:block w-max bg-white text-black rounded px-2 py-1 whitespace-nowrap z-10">
+                  <p className="text-sm leading-normal py-0.5">글쓰기 +30</p>
+                  <p className="text-sm leading-normal py-0.5">댓글 +10</p>
+                  <p className="text-sm leading-normal py-0.5">
+                    개선요청 채택 +50
+                  </p>
+                  <p className="text-sm leading-normal py-0.5">
+                    이벤트 참여 +20
+                  </p>
+                  <p className="text-sm leading-normal py-0.5 font-semibold">
+                    하루 최대 50점
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+        <p className="text-2xl leading-5 text-white">800</p>
       </div>
     </div>
   );

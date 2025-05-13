@@ -23,7 +23,7 @@ const MyPage = () => {
         <div className="bg-black rounded-lg shadow-lg p-6 mb-6">
           <div className="flex justify-between items-start">
             <div className="flex-1">
-              <UserProfileHeader />
+              <UserProfileHeader isMyPage />
               <UserCameraAndLinks />
             </div>
             <div className="flex gap-4">
