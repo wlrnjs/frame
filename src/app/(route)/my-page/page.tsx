@@ -5,32 +5,59 @@ import UserProfileHeader from "@/components/profile/UserProfileHeader";
 import UserCameraAndLinks from "@/components/profile/UserCameraAndLinks";
 import UserTabs from "@/components/profile/UserTabs";
 import PostGrid from "@/components/profile/PostGrid";
+import ProfileEditModal from "@/components/modal/ProfileEditModal";
+import Edit from "@/icon/Edit";
 
 const MyPage = () => {
+  const initialProfileData = {
+    profileImage: "",
+    nickname: "",
+    favoriteCategory: "",
+    camera: "",
+    lens: "",
+    urls: [],
+  };
   const [activeTab, setActiveTab] = useState("posts");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const btnStyle =
-    "h-[40px] bg-gray-920 border border-gray-870 rounded-[5px] px-4 py-2 text-sm text-white hover:bg-black transition-all duration-300 ease-out";
+    "absolute right-6 top-4 h-[40px] bg-gray-920 border border-gray-870 rounded-[5px] px-4 py-2 text-sm text-white hover:bg-black transition-all duration-300 ease-out flex items-center gap-2";
 
   const handleProfileEdit = () => {
-    console.log("프로필 편집");
+    setIsModalOpen(true);
+  };
+
+  const handleSave = (data: {
+    profileImage: string;
+    nickname: string;
+    favoriteCategory: string;
+    camera: string;
+    lens: string;
+    urls: { name: string; url: string }[];
+  }) => {
+    console.log("저장된 데이터:", data);
+    setIsModalOpen(false);
+  };
+
+  const handleClose = () => {
+    setIsModalOpen(false);
   };
 
   return (
     <div className="w-full min-h-screen custom-margin layout-container">
       <div className="w-full">
         {/* 프로필 섹션 */}
-        <div className="bg-black rounded-lg shadow-lg p-6 mb-6">
+        <div className="relative bg-black rounded-lg shadow-lg p-6 mb-6">
           <div className="flex justify-between items-start">
             <div className="flex-1">
               <UserProfileHeader isMyPage />
               <UserCameraAndLinks />
             </div>
-            <div className="flex gap-4">
-              <button className={btnStyle} onClick={handleProfileEdit}>
-                프로필 편집
-              </button>
-            </div>
+
+            <button className={btnStyle} onClick={handleProfileEdit}>
+              <Edit />
+              프로필 편집
+            </button>
           </div>
         </div>
 
@@ -55,6 +82,12 @@ const MyPage = () => {
           </div>
         </div>
       </div>
+      <ProfileEditModal
+        isOpen={isModalOpen}
+        onClose={handleClose}
+        onSave={handleSave}
+        currentData={initialProfileData}
+      />
     </div>
   );
 };
