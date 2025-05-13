@@ -55,7 +55,7 @@ const MyPage = () => {
             </div>
 
             <button className={btnStyle} onClick={handleProfileEdit}>
-              <Edit />
+              <Edit size="16" />
               프로필 편집
             </button>
           </div>

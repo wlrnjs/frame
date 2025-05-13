@@ -1,8 +1,12 @@
 import React from "react";
 
-const Edit = () => (
+interface EditProps {
+  size?: string;
+}
+
+const Edit = ({ size = "20" }: EditProps) => (
   <svg
-    width="20"
+    width={size}
     height="20"
     viewBox="0 0 24 24"
     fill="none"
