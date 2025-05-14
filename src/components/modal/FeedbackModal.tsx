@@ -82,7 +82,7 @@ const FeedbackModal = ({ onOpen, onClose, onSubmit }: FeedbackModalProps) => {
 
   return createPortal(
     <div
-      className="fixed inset-0 flex items-center justify-center modal-overlay bg-opacity-45"
+      className="modal-overlay bg-opacity-45"
       onClick={handleBackgroundClick}
     >
       <div

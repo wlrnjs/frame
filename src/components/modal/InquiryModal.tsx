@@ -81,10 +81,7 @@ const InquiryModal = ({ onOpen, onClose, onSubmit }: InquiryModalProps) => {
     "px-4 py-2 text-sm font-medium rounded-md transition-colors";
 
   return createPortal(
-    <div
-      className="fixed inset-0 flex items-center justify-center modal-overlay"
-      onClick={handleBackgroundClick}
-    >
+    <div className="modal-overlay" onClick={handleBackgroundClick}>
       <div
         onClick={(e) => e.stopPropagation()}
         className="bg-white p-6 rounded-lg max-w-[800px] w-full"

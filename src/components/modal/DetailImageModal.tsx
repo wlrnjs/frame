@@ -38,10 +38,7 @@ const DetailImageModal = ({ onOpen, onClose }: DetailImageModalProps) => {
   };
 
   return createPortal(
-    <div
-      className="fixed inset-0 flex items-center justify-center modal-overlay"
-      onClick={handleBackgroundClick}
-    >
+    <div className="modal-overlay" onClick={handleBackgroundClick}>
       <div
         className="relative bg-white rounded-lg p-6 max-w-3xl w-full max-h-[90vh] overflow-auto"
         onClick={(e) => e.stopPropagation()}

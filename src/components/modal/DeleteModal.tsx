@@ -20,10 +20,7 @@ const DeleteModal = ({ isOpen, onClose, onConfirm }: DeleteModalProps) => {
   if (!isOpen) return null;
 
   return createPortal(
-    <div
-      className="fixed inset-0 flex items-center justify-center modal-overlay"
-      onClick={handleBackgroundClick}
-    >
+    <div className="modal-overlay" onClick={handleBackgroundClick}>
       <div
         className="relative bg-black text-white rounded-xl p-6 max-w-md w-full mx-4 max-h-[90vh] overflow-y-auto border border-white/20 shadow-2xl transform transition-transform duration-300 scale-100"
         onClick={(e) => e.stopPropagation()}

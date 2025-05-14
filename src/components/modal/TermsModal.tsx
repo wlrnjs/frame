@@ -33,10 +33,7 @@ const TermsModal = ({ activeModal, setActiveModal }: TermsModalProps) => {
     }
   };
   return createPortal(
-    <div
-      className="fixed inset-0 flex items-center justify-center modal-overlay"
-      onClick={handleBackgroundClick}
-    >
+    <div className="modal-overlay" onClick={handleBackgroundClick}>
       <div
         onClick={(e) => e.stopPropagation()}
         className="bg-white p-6 rounded-lg max-w-[800px] w-full"

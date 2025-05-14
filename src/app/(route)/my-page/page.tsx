@@ -23,7 +23,7 @@ const MyPage = () => {
   const toast = useToast();
 
   const btnStyle =
-    "absolute right-6 top-4 h-[40px] bg-gray-920 border border-gray-870 rounded-[5px] px-4 py-2 text-sm text-white hover:bg-black transition-all duration-300 ease-out flex items-center gap-2";
+    "absolute right-6 top-3 h-[40px] bg-gray-920 border border-gray-870 rounded-[5px] px-4 py-2 text-sm text-white hover:bg-black transition-all duration-300 ease-out flex items-center gap-2";
 
   const handleProfileEdit = () => {
     setIsModalOpen(true);
