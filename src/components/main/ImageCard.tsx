@@ -1,10 +1,15 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { cn } from "@/utils";
 
-const ImageCard = () => {
+interface ImageCardProps {
+  className?: string;
+}
+
+const ImageCard = ({ className = "" }: ImageCardProps) => {
   return (
-    <Link href={"/category/detail"} className="w-full group">
+    <Link href={"/category/detail"} className={cn("w-full group", className)}>
       <div className="w-full flex flex-col gap-1">
         <div className="w-full aspect-[3/4] bg-gray-350 rounded-[5px] overflow-hidden relative">
           <Image
