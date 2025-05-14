@@ -5,6 +5,7 @@ import Gnb from "@/components/gnb/Gnb";
 import Footer from "@/components/footer/Footer";
 import ScrollToTop from "@/utils/ScrollToTop";
 import { ToastContainer } from "@/components/toastContainer/ToastContainer";
+import SmoothScrollWrapper from "@/utils/SmoothScrollWrapper";
 
 export default function RootLayout({
   children,
@@ -17,8 +18,10 @@ export default function RootLayout({
         <QueryProvider>
           <Gnb />
           <ScrollToTop />
-          {children}
-          <Footer />
+          <SmoothScrollWrapper>
+            {children}
+            <Footer />
+          </SmoothScrollWrapper>
           <ToastContainer />
           <ReactQueryDevtools />
         </QueryProvider>
