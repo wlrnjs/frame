@@ -19,7 +19,10 @@ const LinkItem = ({
   className,
 }: FinalSectionProps) => {
   return (
-    <Link href={href} className={cn("w-full h-full fade-up", className)}>
+    <Link
+      href={href}
+      className={cn("w-full h-full fade-up group block", className)}
+    >
       <div className="relative w-full h-full overflow-hidden hover-slide">
         {/* 오버레이 텍스트 */}
         <div className="absolute bottom-0 left-0 w-full flex-col-center gap-1 justify-end pb-6 z-10 text-white pointer-events-none drop-shadow-md">

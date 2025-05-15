@@ -53,10 +53,13 @@ const CustomerSupportPage = () => {
                 <p className="text-lg font-semibold">{item.title}</p>
               </button>
             ) : (
-              <Link key={item.title} href={item.href}>
-                <div className="border rounded-xl px-5 py-6 hover:bg-gray-50 transition pointer">
-                  <p className="text-lg font-semibold">{item.title}</p>
-                </div>
+              <Link
+                key={item.title}
+                href={item.href}
+                aria-label={item.title}
+                className="border rounded-xl px-5 py-6 hover:bg-gray-50 duration-300 ease-out transition pointer"
+              >
+                <p className="text-lg font-semibold">{item.title}</p>
               </Link>
             );
           })}

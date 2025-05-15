@@ -28,6 +28,7 @@ const LinkContainer = () => {
 
   const animationClass = useFadeUpAnimation({
     targetClass: "fade-up-link",
+    start: "top 90%",
     duration: 0.8,
   });
 
