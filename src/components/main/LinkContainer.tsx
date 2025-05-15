@@ -1,5 +1,8 @@
+"use client";
+
 import React from "react";
 import LinkItem from "./LinkItem";
+import useFadeUpAnimation from "@/hooks/useFadeUpAnimation";
 
 const LinkContainer = () => {
   const items = [
@@ -23,6 +26,11 @@ const LinkContainer = () => {
     },
   ];
 
+  const animationClass = useFadeUpAnimation({
+    targetClass: "fade-up-link",
+    duration: 0.8,
+  });
+
   return (
     <div className="w-full h-[700px] flex-center gap-10 custom-margin layout-container">
       {items.map((item) => (
@@ -32,6 +40,7 @@ const LinkContainer = () => {
           imgSrc={item.imgSrc}
           title={item.title}
           description={item.description}
+          className={animationClass}
         />
       ))}
     </div>

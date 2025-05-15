@@ -9,8 +9,11 @@ interface ImageCardProps {
 
 const ImageCard = ({ className = "" }: ImageCardProps) => {
   return (
-    <Link href={"/category/detail"} className={cn("w-full group", className)}>
-      <div className="w-full flex flex-col gap-1">
+    <Link
+      href={"/category/detail"}
+      className={cn("w-full group fade-up", className)}
+    >
+      <div className="w-full flex flex-col gap-1 hover-slide">
         <div className="w-full aspect-[3/4] bg-gray-350 rounded-[5px] overflow-hidden relative">
           <Image
             src={"/BlackPhoto.JPG"}
