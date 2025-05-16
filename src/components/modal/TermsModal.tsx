@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import Close from "@/icon/Close";
 import TERMS from "@/constants/TERMS";
 import PRIVACY from "@/constants/PRIVACY";
+import Terms from "../support/Terms";
 
 interface TermsModalProps {
   activeModal: "terms" | "privacy";
@@ -51,8 +52,8 @@ const TermsModal = ({ activeModal, setActiveModal }: TermsModalProps) => {
           </button>
         </div>
         <div className="text-sm text-gray-700">
-          {activeModal === "terms" && TERMS}
-          {activeModal === "privacy" && PRIVACY}
+          {activeModal === "terms" && <Terms data={TERMS} />}
+          {activeModal === "privacy" && <Terms data={PRIVACY} />}
         </div>
       </div>
     </div>,
