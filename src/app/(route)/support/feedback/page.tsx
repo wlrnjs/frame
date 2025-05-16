@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import FeedbackModal from "@/components/modal/FeedbackModal";
 import useGetFeedbackList from "@/service/hooks/support/feedback/useGetFeedbackList";
+import { formatDate } from "@/utils/formatDate";
 
 type Feedback = {
   id: number;
@@ -55,7 +56,7 @@ const FeedbackListPage = () => {
                 <div className="flex justify-between items-center">
                   <span className="font-medium">{feedback.title}</span>
                   <span className="text-sm text-gray-500">
-                    {feedback.created_at}
+                    {formatDate(feedback.created_at)}
                   </span>
                 </div>
 
