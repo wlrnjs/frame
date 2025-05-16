@@ -73,10 +73,6 @@ const CustomerSupportPage = () => {
       <InquiryModal
         onOpen={isInquiryModalOpen}
         onClose={() => setIsInquiryModalOpen(false)}
-        onSubmit={(title: string, content: string) => {
-          console.log("Inquiry submitted:", { title, content });
-          //제출 로직 추가
-        }}
       />
     </div>
   );

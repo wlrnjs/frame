@@ -5,18 +5,19 @@ import { cn } from "@/utils";
 import React, { useEffect, useState, useRef } from "react";
 import { createPortal } from "react-dom";
 import { useToast } from "@/hooks/useToast";
+import usePostInquiry from "@/service/hooks/support/inquiry/usePostInquiry";
 
 interface InquiryModalProps {
   onOpen: boolean;
   onClose: () => void;
-  onSubmit: (title: string, content: string) => void;
 }
 
-const InquiryModal = ({ onOpen, onClose, onSubmit }: InquiryModalProps) => {
+const InquiryModal = ({ onOpen, onClose }: InquiryModalProps) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const toast = useToast();
+  const { mutate } = usePostInquiry();
 
   useEffect(() => {
     if (onOpen) {
@@ -52,10 +53,9 @@ const InquiryModal = ({ onOpen, onClose, onSubmit }: InquiryModalProps) => {
 
   const handleSubmit = () => {
     if (title.trim() && content.trim()) {
-      onSubmit(title, content);
+      mutate({ title, content });
       setTitle("");
       setContent("");
-      toast.success("문의가 접수되었습니다.");
       onClose();
     } else {
       toast.error("제목과 내용을 입력해주세요.");
