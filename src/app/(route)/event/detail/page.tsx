@@ -1,40 +1,42 @@
+"use client";
+
 import CommentContainer from "@/components/detail/CommentContainer";
 import Image from "next/image";
 import React from "react";
+import useGetEventDetail from "@/service/hooks/event/useGetEventDetail";
+import { useSearchParams } from "next/navigation";
+import { formatTime } from "@/utils/formatTime";
+import { formatDate } from "@/utils/formatDate";
 
-const page = () => {
+const Page = () => {
+  const params = useSearchParams();
+  const id = params.get("id");
+
+  const { data: event } = useGetEventDetail(id!);
+
   return (
     <div className="w-full min-h-screen custom-margin layout-container">
-      <div className="relative w-full h-[500px]">
-        <Image src="/IMG_7115.JPG" alt="Event Detail" fill />
-      </div>
+      {event && (
+        <div className="relative w-full h-[500px]">
+          <Image src={event?.image_url} alt="Event Detail" fill priority />
+        </div>
+      )}
       <div className="flex flex-col gap-4 bg-black text-white p-20">
-        <h2 className="text-3xl">이벤트 이름</h2>
+        <h2 className="text-3xl">{event?.title}</h2>
         <div className="flex gap-2">
           <p>진행중</p>
-          <p>10분 전</p>
+          <p>{formatTime(event?.created_at)}</p>
           <p>조회수 4</p>
           <p>댓글 0</p>
-          <p>추천 0</p>
-          <p>작성자 김철수</p>
+          <p>참여인원 0</p>
+          <p>관리자</p>
+          <p>{`이벤트 기한: ${formatDate(event?.created_at)} ~ ${formatDate(
+            event?.expires_at
+          )}`}</p>
         </div>
         <hr />
         <section className="text-lg tracking-[-0.02em]">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Perspiciatis voluptas distinctio necessitatibus alias ab iste
-            quisquam debitis voluptate consectetur. Nisi quaerat necessitatibus,
-            minus reiciendis corrupti animi sunt corporis consequuntur expedita
-            ducimus officia ipsam doloribus debitis, assumenda eaque. Nam
-            aliquid eligendi fugiat nulla corporis, modi magni. Ad ipsam culpa
-            harum expedita ipsum ipsa doloremque totam soluta? Tempora
-            praesentium illo ducimus sunt, saepe a accusantium ea sint labore.
-            Mollitia natus cumque facilis ex aliquid sint consequuntur,
-            temporibus nulla rem culpa id velit. Ullam similique accusantium
-            obcaecati distinctio assumenda sint perspiciatis odit exercitationem
-            a dignissimos vitae, soluta molestias quibusdam nobis officia natus!
-            Atque?
-          </p>
+          <p>{event?.description}</p>
         </section>
         <button className="w-full h-[50px] bg-white text-black rounded-[5px] my-4">
           이벤트 참여하기
@@ -50,4 +52,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
