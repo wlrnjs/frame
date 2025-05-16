@@ -1,3 +1,5 @@
+// 날짜 변환 로직 (KST 기준)
+
 export const formatDate = (isoString: string): string => {
   if (!isoString) return "";
 

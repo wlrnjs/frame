@@ -5,18 +5,22 @@ import { cn } from "@/utils";
 import React, { useEffect, useState, useRef } from "react";
 import { createPortal } from "react-dom";
 import { useToast } from "@/hooks/useToast";
+import usePostFeedback from "@/service/hooks/support/feedback/usePostFeedback";
 
 interface FeedbackModalProps {
   onOpen: boolean;
   onClose: () => void;
-  onSubmit: (title: string, content: string) => void;
 }
 
-const FeedbackModal = ({ onOpen, onClose, onSubmit }: FeedbackModalProps) => {
+const buttonStyle =
+  "px-4 py-2 text-sm font-medium rounded-md transition-colors";
+
+const FeedbackModal = ({ onOpen, onClose }: FeedbackModalProps) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const toast = useToast();
+  const { mutate } = usePostFeedback();
 
   useEffect(() => {
     if (onOpen) {
@@ -52,10 +56,9 @@ const FeedbackModal = ({ onOpen, onClose, onSubmit }: FeedbackModalProps) => {
 
   const handleSubmit = () => {
     if (title.trim() && content.trim()) {
-      onSubmit(title, content);
+      mutate({ title, content });
       setTitle("");
       setContent("");
-      toast.success("개선요청이 접수되었습니다.");
       onClose();
     } else {
       toast.error("제목과 내용을 입력해주세요.");
@@ -76,9 +79,6 @@ const FeedbackModal = ({ onOpen, onClose, onSubmit }: FeedbackModalProps) => {
       className: "text-white bg-black hover:bg-gray-800",
     },
   ];
-
-  const buttonStyle =
-    "px-4 py-2 text-sm font-medium rounded-md transition-colors";
 
   return createPortal(
     <div
@@ -105,6 +105,7 @@ const FeedbackModal = ({ onOpen, onClose, onSubmit }: FeedbackModalProps) => {
           <div className="flex flex-col gap-4">
             <input
               type="text"
+              autoFocus
               placeholder="제목 (최대 30자)"
               maxLength={30}
               value={title}

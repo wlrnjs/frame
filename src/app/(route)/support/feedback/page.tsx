@@ -35,17 +35,6 @@ const FeedbackListPage = () => {
           </button>
         </div>
 
-        {isModalOpen && (
-          <FeedbackModal
-            onOpen={isModalOpen}
-            onClose={() => setIsModalOpen(false)}
-            onSubmit={(title, content) => {
-              // TODO: 실제 저장 로직 구현 필요
-              console.log("피드백 제출:", title, content);
-            }}
-          />
-        )}
-
         <ul className="space-y-4">
           {feedbackList?.map((feedback: Feedback) => (
             <li key={feedback.id}>
@@ -75,10 +64,6 @@ const FeedbackListPage = () => {
         <FeedbackModal
           onOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
-          onSubmit={(title, content) => {
-            // TODO: 실제 저장 로직 구현 필요
-            console.log("피드백 제출:", title, content);
-          }}
         />
       )}
     </div>
