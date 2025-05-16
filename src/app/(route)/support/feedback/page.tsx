@@ -2,41 +2,20 @@
 
 import React, { useState } from "react";
 import FeedbackModal from "@/components/modal/FeedbackModal";
+import useGetFeedbackList from "@/service/hooks/support/feedback/useGetFeedbackList";
 
 type Feedback = {
   id: number;
   title: string;
-  date: string;
   content: string;
+  created_at: string;
 };
-
-const feedback: Feedback[] = [
-  {
-    id: 1,
-    title: "다크 모드 지원 요청",
-    date: "2025.05.10",
-    content: `앱을 야간에 사용할 때 눈이 피로합니다.  
-다크 모드 기능을 추가해 주시면 좋겠습니다.`,
-  },
-  {
-    id: 2,
-    title: "이미지 정렬 기능 개선 요청",
-    date: "2025.05.08",
-    content: `현재 이미지를 업로드한 순서대로만 정렬할 수 있는데,  
-좋아요 순, 조회수 순으로도 정렬할 수 있으면 좋겠습니다.`,
-  },
-  {
-    id: 3,
-    title: "댓글 알림 기능 추가 요청",
-    date: "2025.05.05",
-    content: `내가 작성한 게시글에 댓글이 달렸을 때 알림이 오면  
-상호작용이 더 쉬울 것 같습니다.`,
-  },
-];
 
 const FeedbackListPage = () => {
   const [openId, setOpenId] = useState<number | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const { data: feedbackList } = useGetFeedbackList();
 
   const toggleOpen = (id: number) => {
     setOpenId((prevId) => (prevId === id ? null : id));
@@ -55,19 +34,19 @@ const FeedbackListPage = () => {
           </button>
         </div>
 
-      {isModalOpen && (
-        <FeedbackModal
-  onOpen={isModalOpen}
-  onClose={() => setIsModalOpen(false)}
-  onSubmit={(title, content) => {
-    // TODO: 실제 저장 로직 구현 필요
-    console.log("피드백 제출:", title, content);
-  }}
-/>
-      )}
+        {isModalOpen && (
+          <FeedbackModal
+            onOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            onSubmit={(title, content) => {
+              // TODO: 실제 저장 로직 구현 필요
+              console.log("피드백 제출:", title, content);
+            }}
+          />
+        )}
 
         <ul className="space-y-4">
-          {feedback.map((feedback) => (
+          {feedbackList?.map((feedback: Feedback) => (
             <li key={feedback.id}>
               <button
                 onClick={() => toggleOpen(feedback.id)}
@@ -75,7 +54,9 @@ const FeedbackListPage = () => {
               >
                 <div className="flex justify-between items-center">
                   <span className="font-medium">{feedback.title}</span>
-                  <span className="text-sm text-gray-500">{feedback.date}</span>
+                  <span className="text-sm text-gray-500">
+                    {feedback.created_at}
+                  </span>
                 </div>
 
                 {/* 본문 드롭다운 */}
@@ -91,13 +72,13 @@ const FeedbackListPage = () => {
       </div>
       {isModalOpen && (
         <FeedbackModal
-  onOpen={isModalOpen}
-  onClose={() => setIsModalOpen(false)}
-  onSubmit={(title, content) => {
-    // TODO: 실제 저장 로직 구현 필요
-    console.log("피드백 제출:", title, content);
-  }}
-/>
+          onOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSubmit={(title, content) => {
+            // TODO: 실제 저장 로직 구현 필요
+            console.log("피드백 제출:", title, content);
+          }}
+        />
       )}
     </div>
   );
