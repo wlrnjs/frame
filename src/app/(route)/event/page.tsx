@@ -14,6 +14,7 @@ interface Event {
   image_url: string;
   title: string;
   updated_at: string;
+  join_count: string;
 }
 
 const EventPage = () => {
