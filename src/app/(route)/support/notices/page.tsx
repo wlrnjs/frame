@@ -1,7 +1,7 @@
 "use client";
 
 import useGetNoticeList from "@/service/hooks/support/notice/useGetNoticeList";
-import { formatDate } from "@/utils/formatDate";
+import { formatDate } from "@/utils/dateUtils";
 import React, { useState } from "react";
 
 type Notice = {

@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import FeedbackModal from "@/components/modal/FeedbackModal";
 import useGetFeedbackList from "@/service/hooks/support/feedback/useGetFeedbackList";
-import { formatDate } from "@/utils/formatDate";
+import { formatDate } from "@/utils/dateUtils";
 
 type Feedback = {
   id: number;

@@ -11,8 +11,17 @@ import useGetEventJoin from "@/service/hooks/event/useGetEventJoin";
 import useUserId from "@/utils/useUserId";
 import { cn } from "@/utils";
 import { formatDate, formatTime, getEventStatus } from "@/utils/dateUtils";
+import { Suspense } from "react";
 
 const Page = () => {
+  return (
+    <Suspense fallback={""}>
+      <EventDetailPage />
+    </Suspense>
+  );
+};
+
+const EventDetailPage = () => {
   const params = useSearchParams();
   const id = params.get("id");
   const userId = useUserId();
