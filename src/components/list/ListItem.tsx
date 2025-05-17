@@ -8,8 +8,6 @@ interface ListItemProps {
 }
 
 const ListItem = ({ data }: ListItemProps) => {
-  console.log(data);
-
   return (
     <Link
       href={`/photo-list/detail?id=${data?.post_id}`}
@@ -17,7 +15,7 @@ const ListItem = ({ data }: ListItemProps) => {
     >
       <div className="w-full h-full relative">
         <Image
-          src={data?.img_url}
+          src={data?.img_url || "/BlackPhoto.JPG"}
           alt="test_img"
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-105"

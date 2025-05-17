@@ -5,8 +5,13 @@ import Image from "next/image";
 import Close from "@/icon/Close";
 import { useToast } from "@/hooks/useToast";
 
-const AddPhotoContainer = () => {
-  const [images, setImages] = useState<File[]>([]);
+const AddPhotoContainer = ({
+  images,
+  setImages,
+}: {
+  images: File[];
+  setImages: React.Dispatch<React.SetStateAction<File[]>>;
+}) => {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const toast = useToast();
 

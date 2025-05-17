@@ -5,9 +5,11 @@ import InputField from "./InputField";
 import AutoCompleteInput from "./AutoCompleteInput";
 import { cn } from "@/utils";
 import usePostWrite from "@/service/hooks/write/usePostWrite";
+import usePostImg from "@/service/hooks/write/usePostImg";
 import { postPostsProps } from "@/service/write/postWrite";
 import useUserId from "@/utils/useUserId";
 import { useToast } from "@/hooks/useToast";
+import { supabase } from "@/service/lib/supabaseClient";
 
 interface FormSectionProps {
   title: string;
@@ -31,9 +33,14 @@ const FormSection = ({
   </div>
 );
 
-const PhotoInfoContainer = () => {
+interface PhotoInfoContainerProps {
+  images?: File[];
+}
+
+const PhotoInfoContainer = ({ images }: PhotoInfoContainerProps = {}) => {
   const TAGS = ["#풍경", "#인물", "#감성", "#여행", "#도시", "#자연"];
   const postWriteMutation = usePostWrite();
+  const postImgMutation = usePostImg();
   const userId = useUserId();
   const toast = useToast();
 
@@ -80,16 +87,61 @@ const PhotoInfoContainer = () => {
       toast.error("로그인 후 사용 가능합니다.");
       return;
     }
-    postWriteMutation.mutate({
-      ...formData,
-      category: selectedTags[0] || "",
-      user_id: userId,
-    });
+
+    // 이미지가 업로드되지 않은 경우 경고 메시지 표시
+    if (!images || images.length === 0) {
+      toast.error("이미지를 업로드해주세요.");
+      return;
+    }
+
+    postWriteMutation.mutate(
+      {
+        ...formData,
+        category: selectedTags[0] || "",
+        user_id: userId,
+      },
+      {
+        onSuccess: async (postId) => {
+          // 게시글 작성 성공 후 이미지 업로드
+          if (images && images.length > 0) {
+            for (const image of images) {
+              const { data, error } = await supabase.storage
+                .from("users-upload-photos")
+                .upload(`images/${Date.now()}_${image.name}`, image);
+
+              if (error) {
+                toast.error("이미지 업로드에 실패했습니다.");
+                continue;
+              }
+
+              const { data: publicUrlData } = supabase.storage
+                .from("users-upload-photos")
+                .getPublicUrl(data.path);
+
+              postImgMutation.mutate({
+                posts_id: postId,
+                image_url: publicUrlData.publicUrl,
+              });
+            }
+            toast.success("게시글과 이미지가 성공적으로 업로드되었습니다.");
+          }
+        },
+        onError: () => {
+          toast.error("게시글 업로드에 실패했습니다.");
+        },
+      }
+    );
   };
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-8">
       <div className="max-w-full min-w-[380px] min-h-[720px] bg-black text-white p-8 rounded-[5px] shadow-lg flex flex-col gap-8 sticky top-[120px]">
+        {/* 업로드된 이미지 수 표시 */}
+        <div className="text-sm text-gray-400">
+          {images && images.length > 0
+            ? `${images.length}개의 이미지가 업로드됨`
+            : "이미지를 업로드해주세요"}
+        </div>
         <FormSection title="기본 정보">
           <InputField
             label="제목"

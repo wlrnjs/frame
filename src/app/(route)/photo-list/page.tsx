@@ -30,10 +30,12 @@ const Page = () => {
   return (
     <div className="w-full min-h-screen custom-margin layout-container">
       <div className="flex items-start justify-center mt-[10px] gap-10">
-        <div className="w-full h-[1500px] bg-black rounded-[5px] flex gap-2 p-5">
-          {imgList?.map((item: ListItemType) => (
-            <ListItem key={item.id} data={item} />
-          ))}
+        <div className="w-full bg-black rounded-[5px] p-5">
+          <div className="grid grid-cols-5 gap-4">
+            {imgList?.map((item: ListItemType) => (
+              <ListItem key={item.id} data={item} />
+            ))}
+          </div>
         </div>
         <SearchContainer />
       </div>
