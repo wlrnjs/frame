@@ -1,5 +1,7 @@
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import "./globals.css";
+import "swiper/css";
+import "swiper/css/navigation";
 import QueryProvider from "@/components/QueryProvider";
 import Gnb from "@/components/gnb/Gnb";
 import Footer from "@/components/footer/Footer";

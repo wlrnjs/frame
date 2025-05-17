@@ -1,10 +1,14 @@
 import React from "react";
 
-const Close = () => {
+interface CloseProps {
+  size?: string;
+}
+
+const Close = ({ size = "5" }: CloseProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="h-5 w-5"
+      className={`w-${size} h-${size}`}
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
