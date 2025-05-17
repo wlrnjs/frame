@@ -8,9 +8,14 @@ import Close from "@/icon/Close";
 interface DetailImageModalProps {
   onOpen: boolean;
   onClose: () => void;
+  img_url: string;
 }
 
-const DetailImageModal = ({ onOpen, onClose }: DetailImageModalProps) => {
+const DetailImageModal = ({
+  onOpen,
+  onClose,
+  img_url,
+}: DetailImageModalProps) => {
   useEffect(() => {
     if (onOpen) {
       document.body.style.overflow = "hidden";
@@ -55,7 +60,7 @@ const DetailImageModal = ({ onOpen, onClose }: DetailImageModalProps) => {
         {/* 이미지 */}
         <div className="relative w-full aspect-[4/3] mb-4">
           <Image
-            src="/IMG_7115.JPG"
+            src={img_url}
             alt="modal-image"
             fill
             className="object-contain"

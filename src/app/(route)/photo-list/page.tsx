@@ -4,7 +4,7 @@ import ListItem from "@/components/list/ListItem";
 import SearchContainer from "@/components/list/SearchContainer";
 import React from "react";
 import useGetImgList from "@/service/hooks/list/useGetImgList";
-// import useUserId from "@/utils/useUserId";
+import useUserId from "@/utils/useUserId";
 
 export interface ListItemType {
   camera_info: string;
@@ -22,10 +22,10 @@ export interface ListItemType {
 
 const Page = () => {
   const { data: imgList } = useGetImgList();
-  // const userId = useUserId();
+  const userId = useUserId();
 
-  // console.log(userId);
-  // console.log(imgList);
+  console.log(userId);
+  console.log(imgList);
 
   return (
     <div className="w-full min-h-screen custom-margin layout-container">

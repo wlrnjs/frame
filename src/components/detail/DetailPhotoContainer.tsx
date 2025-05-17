@@ -5,7 +5,11 @@ import Image from "next/image";
 import Square from "@/icon/Square";
 import DetailImageModal from "../modal/DetailImageModal";
 
-const DetailPhotoContainer = () => {
+interface DetailPhotoContainerProps {
+  img_url: string;
+}
+
+const DetailPhotoContainer = ({ img_url }: DetailPhotoContainerProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -16,12 +20,14 @@ const DetailPhotoContainer = () => {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <Image
-          src="/BlackPhoto.JPG"
-          alt="info-img"
-          fill
-          className="object-contain p-5"
-        />
+        {img_url && (
+          <Image
+            src={img_url}
+            alt="info-img"
+            fill
+            className="object-contain p-5"
+          />
+        )}
         <div
           className={`absolute top-5 right-5 transition-all duration-300 ease-in-out ${
             isHovered
@@ -37,6 +43,7 @@ const DetailPhotoContainer = () => {
       <DetailImageModal
         onOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+        img_url={img_url}
       />
     </div>
   );

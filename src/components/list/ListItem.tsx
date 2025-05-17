@@ -12,7 +12,7 @@ const ListItem = ({ data }: ListItemProps) => {
 
   return (
     <Link
-      href={`/category/detail?id=${data?.post_id}`}
+      href={`/photo-list/detail?id=${data?.post_id}`}
       className="w-[215px] h-[300px] relative group overflow-hidden rounded-md pointer"
     >
       <div className="w-full h-full relative">

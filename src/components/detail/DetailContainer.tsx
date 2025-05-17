@@ -7,8 +7,24 @@ import ActionButtons from "./ActionButtons";
 import { useModal } from "@/hooks/useModal";
 import Link from "next/link";
 import React from "react";
+import { formatDate } from "@/utils/dateUtils";
 
-const DetailContainer = () => {
+interface DetailData {
+  title: string;
+  description: string;
+  nickname: string;
+  created_at: string;
+  location: string;
+  category: string;
+  view_count: number;
+  camera_info: string;
+}
+
+interface DetailContainerProps {
+  data: DetailData;
+}
+
+const DetailContainer = ({ data }: DetailContainerProps) => {
   const {
     isOpen: isShareModalOpen,
     openModal: openShareModal,
@@ -26,6 +42,25 @@ const DetailContainer = () => {
     openModal: openReportModal,
     closeModal: closeReportModal,
   } = useModal();
+
+  if (!data) {
+    return (
+      <div className="max-w-full min-w-[380px] h-[720px] bg-black text-white p-8 rounded-[5px] shadow-lg flex flex-col gap-8 sticky top-[110px]">
+        Loading... (임시)
+      </div>
+    );
+  }
+
+  const {
+    title,
+    description,
+    nickname,
+    created_at,
+    location,
+    category,
+    view_count,
+    camera_info,
+  } = data;
 
   const handleShareClick = openShareModal;
   const handleDeleteClick = openDeleteModal;
@@ -46,40 +81,42 @@ const DetailContainer = () => {
         />
 
         <div className="flex flex-col gap-2">
-          <h1 className="text-3xl font-bold">타이틀입니다.</h1>
-          <p className="text-sm text-gray-400">간단한 설명입니다.</p>
+          <h1 className="text-3xl font-bold">{title}</h1>
+          <p className="text-sm text-gray-400">{description}</p>
         </div>
       </div>
 
       {/* 작성자 정보 */}
       <div className="flex flex-col gap-2 items-start justify-between border-t border-gray-700 pt-4 text-sm">
-        <p>
+        <p className="flex items-center gap-1">
           작성자:
           <Link href={"/user-profile"}>
             <span className="text-gray-300 hover:underline decoration-offset-4 pointer">
-              wlrnjs
+              {nickname}
             </span>
           </Link>
         </p>
-        <p>
-          업로드: <span className="text-gray-300">2025.05.03</span>
+        <p className="flex items-center gap-1">
+          업로드:
+          <span className="text-gray-300">{formatDate(created_at)}</span>
         </p>
-        <p>
-          장소: <span className="text-gray-300">서울, 한국</span>
+        <p className="flex items-center gap-1">
+          장소:<span className="text-gray-300">{location}</span>
         </p>
       </div>
 
       {/* 추가 정보 */}
       <div className="flex flex-col gap-4 text-sm text-gray-300">
-        <p>
-          <span className="font-semibold text-white">카테고리:</span> 풍경
+        <p className="flex items-center gap-1">
+          <span className="font-semibold text-white">카테고리:</span> {category}
         </p>
-        <p>
-          <span className="font-semibold text-white">조회수:</span> 123회
+        <p className="flex items-center gap-1">
+          <span className="font-semibold text-white">조회수:</span>{" "}
+          {view_count > 0 ? view_count : "0"}
         </p>
-        <p>
-          <span className="font-semibold text-white">카메라 정보:</span> Canon
-          EOS R6, 50mm
+        <p className="flex items-center gap-1">
+          <span className="font-semibold text-white">카메라 정보:</span>
+          {camera_info}
         </p>
       </div>
 
@@ -95,7 +132,7 @@ const DetailContainer = () => {
         isOpen={isReportModalOpen}
         onClose={closeReportModal}
         onSubmit={(reason, description) => {
-          console.log('Report submitted:', { reason, description });
+          console.log("Report submitted:", { reason, description });
           closeReportModal();
         }}
       />
