@@ -92,7 +92,7 @@ const DetailContainer = ({ data }: DetailContainerProps) => {
           작성자:
           <Link href={"/user-profile"}>
             <span className="text-gray-300 hover:underline decoration-offset-4 pointer">
-              {nickname}
+              wlrnjs
             </span>
           </Link>
         </p>
