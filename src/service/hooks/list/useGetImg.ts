@@ -1,10 +1,10 @@
-import getImgDetail from "@/service/list/getImgDetail";
+import getImg from "@/service/list/getImg";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
-const useGetImgDetail = (id: string) => {
+const useGetImg = (id: string) => {
   return useQuery({
-    queryKey: ["postDetail", id],
-    queryFn: () => getImgDetail(id),
+    queryKey: ["getImg", id],
+    queryFn: () => getImg(id),
     placeholderData: keepPreviousData,
     staleTime: 30 * 60 * 1000,
     gcTime: 60 * 60 * 1000,
@@ -12,4 +12,4 @@ const useGetImgDetail = (id: string) => {
   });
 };
 
-export default useGetImgDetail;
+export default useGetImg;

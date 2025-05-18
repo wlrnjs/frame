@@ -7,6 +7,9 @@ import CommentContainer from "@/components/detail/CommentContainer";
 import RecommendContainer from "@/components/detail/RecommendContainer";
 import useGetImgDetail from "@/service/hooks/list/useGetImgDetail";
 import { useSearchParams } from "next/navigation";
+import useGetImg from "@/service/hooks/list/useGetImg";
+import { useRouter } from "next/navigation";
+import { useToast } from "@/hooks/useToast";
 
 // interface ImageDetailType {
 //   camera_info: string;
@@ -30,14 +33,25 @@ const Page = () => {
 const ImageDetailPage = () => {
   const params = useSearchParams();
   const id = params.get("id");
-  const { data } = useGetImgDetail(id!);
+  const router = useRouter();
+  const toast = useToast();
+
+  const { data, isError } = useGetImgDetail(id!);
+  const { data: imgDetail, isError: imgDetailError } = useGetImg(id!);
   console.log(data);
+
+  if (isError || imgDetailError) {
+    toast.error("게시글을 찾을 수 없습니다.");
+    router.push("/404");
+  }
+
+  console.log(imgDetail?.data);
 
   return (
     <div className="w-full min-h-screen flex-col-center gap-20 custom-margin layout-container">
       <div className="w-full h-full flex gap-10 justify-center items-start">
         <div className="w-full flex flex-col gap-10">
-          <DetailPhotoContainer img_url={data?.img_url} />
+          <DetailPhotoContainer img_url={imgDetail?.data[0].image_url} />
           <CommentContainer />
         </div>
 

@@ -13,6 +13,8 @@ const DetailPhotoContainer = ({ img_url }: DetailPhotoContainerProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  console.log(img_url);
+
   return (
     <div className="w-full h-[720px] flex flex-col items-center gap-2">
       <div
