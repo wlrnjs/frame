@@ -2,12 +2,14 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ListItemType } from "@/app/(route)/photo-list/page";
+import { ImgListType } from "@/app/(route)/photo-list/page";
 
 interface ListItemProps {
   data: ListItemType;
+  images: ImgListType[];
 }
 
-const ListItem = ({ data }: ListItemProps) => {
+const ListItem = ({ data, images }: ListItemProps) => {
   return (
     <Link
       href={`/photo-list/detail?id=${data?.post_id}`}
@@ -15,7 +17,7 @@ const ListItem = ({ data }: ListItemProps) => {
     >
       <div className="w-full h-full relative">
         <Image
-          src={data?.img_url || "/BlackPhoto.JPG"}
+          src={images?.[0]?.image_url || "/BlackPhoto.JPG"}
           alt="test_img"
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-105"

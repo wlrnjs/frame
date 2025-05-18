@@ -22,14 +22,12 @@ const DetailPhotoContainer = ({ img_url }: DetailPhotoContainerProps) => {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        {img_url && (
-          <Image
-            src={img_url}
-            alt="info-img"
-            fill
-            className="object-contain p-5"
-          />
-        )}
+        <Image
+          src={img_url || "/BlackPhoto.JPG"}
+          alt="info-img"
+          fill
+          className="object-contain p-5"
+        />
         <div
           className={`absolute top-5 right-5 transition-all duration-300 ease-in-out ${
             isHovered

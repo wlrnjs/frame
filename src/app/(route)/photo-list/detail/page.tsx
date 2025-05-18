@@ -51,7 +51,11 @@ const ImageDetailPage = () => {
     <div className="w-full min-h-screen flex-col-center gap-20 custom-margin layout-container">
       <div className="w-full h-full flex gap-10 justify-center items-start">
         <div className="w-full flex flex-col gap-10">
-          <DetailPhotoContainer img_url={imgDetail?.data[0].image_url} />
+          <DetailPhotoContainer
+            img_url={
+              imgDetail?.data[0]?.image_url || imgDetail?.data?.image_url
+            }
+          />
           <CommentContainer />
         </div>
 

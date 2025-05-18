@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const getImgList = async () => {
+const getPostsList = async () => {
   const response = await axios.get(
     `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/posts`,
     {
@@ -14,4 +14,4 @@ const getImgList = async () => {
   return response.data;
 };
 
-export default getImgList;
+export default getPostsList;
