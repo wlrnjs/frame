@@ -25,10 +25,10 @@ const DetailPhotoContainer = ({ img_url }: DetailPhotoContainerProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentImageUrl, setCurrentImageUrl] = useState<string>(
-    Array.isArray(img_url) ? img_url[0].image_url : img_url || "/BlackPhoto.JPG"
+    Array.isArray(img_url)
+      ? img_url[0]?.image_url
+      : img_url || "/BlackPhoto.JPG"
   );
-
-  console.log("img_url: ", img_url);
 
   // detail page에 사진이 여러장 있는지 확인 (Swiper 사용)
   const hasMultiplePhotos = Array.isArray(img_url) && img_url.length > 0;
@@ -74,12 +74,14 @@ const DetailPhotoContainer = ({ img_url }: DetailPhotoContainerProps) => {
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
                   >
-                    <Image
-                      src={photo.image_url}
-                      alt="carousel-img"
-                      fill
-                      className="object-contain p-5"
-                    />
+                    {photo.image_url && (
+                      <Image
+                        src={photo.image_url}
+                        alt="carousel-img"
+                        fill
+                        className="object-contain p-5"
+                      />
+                    )}
                     <div
                       className={`absolute top-5 right-5 transition-all duration-300 ease-in-out pointer ${
                         isHovered
@@ -103,12 +105,14 @@ const DetailPhotoContainer = ({ img_url }: DetailPhotoContainerProps) => {
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          <Image
-            src={Array.isArray(img_url) ? img_url[0].image_url : img_url}
-            alt="info-img"
-            fill
-            className="object-contain p-5"
-          />
+          {Array.isArray(img_url) && (
+            <Image
+              src={img_url[0]?.image_url}
+              alt="info-img"
+              fill
+              className="object-contain p-5"
+            />
+          )}
           <div
             className={`absolute top-5 right-5 transition-all duration-300 ease-in-out pointer ${
               isHovered

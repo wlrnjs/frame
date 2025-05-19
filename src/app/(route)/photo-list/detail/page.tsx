@@ -38,14 +38,11 @@ const ImageDetailPage = () => {
 
   const { data, isError } = useGetImgDetail(id!);
   const { data: imgDetail, isError: imgDetailError } = useGetImg(id!);
-  console.log(data);
 
   if (isError || imgDetailError) {
     toast.error("게시글을 찾을 수 없습니다.");
     router.push("/404");
   }
-
-  // console.log(imgDetail?.data);
 
   return (
     <div className="w-full min-h-screen flex-col-center gap-20 custom-margin layout-container">
