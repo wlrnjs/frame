@@ -1,12 +1,12 @@
 "use client"
 
-import getPostsList from "@/service/list/getPostsList";
+import getImgList from "@/service/photo-list/getPostsImgList";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
-const useGetPostsList = () => {
+const useGetImgList = () => {
   return useQuery({
-    queryKey: ["postsList"],
-    queryFn: () => getPostsList(),
+    queryKey: ["imgList"],
+    queryFn: () => getImgList(),
     placeholderData: keepPreviousData,
     staleTime: 30 * 60 * 1000,
     gcTime: 60 * 60 * 1000,
@@ -14,4 +14,4 @@ const useGetPostsList = () => {
   });
 };
 
-export default useGetPostsList;
+export default useGetImgList;

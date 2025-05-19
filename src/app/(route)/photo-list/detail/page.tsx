@@ -6,10 +6,10 @@ import DetailPhotoContainer from "@/components/features/photo-list/detail/Detail
 import CommentContainer from "@/components/features/photo-list/detail/CommentContainer";
 import RecommendContainer from "@/components/features/photo-list/detail/RecommendContainer";
 import { useSearchParams } from "next/navigation";
-import useGetImg from "@/hooks/api/list/useGetImg";
+import useGetImg from "@/hooks/api/photo-list/detail/useGetImg";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/useToast";
-import useGetImgDetail from "@/hooks/api/list/useGetImgDetail";
+import useGetImgDetail from "@/hooks/api/photo-list/detail/useGetImgDetail";
 
 // interface ImageDetailType {
 //   camera_info: string;

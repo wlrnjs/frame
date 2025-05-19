@@ -18,6 +18,7 @@ interface DetailData {
   category: string;
   view_count: number;
   camera_info: string;
+  post_id: number;
 }
 
 interface DetailContainerProps {
@@ -60,6 +61,7 @@ const DetailContainer = ({ data }: DetailContainerProps) => {
     category,
     view_count,
     camera_info,
+    post_id,
   } = data;
 
   const handleShareClick = openShareModal;
@@ -78,6 +80,7 @@ const DetailContainer = ({ data }: DetailContainerProps) => {
           onShareClick={handleShareClick}
           onDeleteClick={handleDeleteClick}
           onReportClick={handleReportClick}
+          post_id={post_id}
         />
 
         <div className="flex flex-col gap-2">

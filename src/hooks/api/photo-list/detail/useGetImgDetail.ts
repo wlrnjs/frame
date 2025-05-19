@@ -1,4 +1,4 @@
-import getImgDetail from "@/service/list/getImgDetail";
+import getImgDetail from "@/service/photo-list/detail/getImgDetail";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 const useGetImgDetail = (id: string) => {

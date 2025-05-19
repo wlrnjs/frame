@@ -7,6 +7,12 @@ import Edit from "@/icon/Edit";
 import Report from "@/icon/Report";
 import Delete from "@/icon/Delete";
 import React from "react";
+import usePostLikeToggle from "@/hooks/api/photo-list/detail/usePostLikeToggle";
+import useUserId from "@/hooks/useUserId";
+import { useToast } from "@/hooks/useToast";
+
+const labelStyle =
+  "absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-xs text-white bg-black rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap pointer";
 
 interface ActionButtonProps {
   icon: React.ReactNode;
@@ -19,15 +25,35 @@ interface ActionButtonsProps {
   onShareClick: () => void;
   onDeleteClick: () => void;
   onReportClick: () => void;
+  post_id: number;
 }
 
 const ActionButtons = ({
   onShareClick,
   onDeleteClick,
   onReportClick,
+  post_id,
 }: ActionButtonsProps) => {
+  const toast = useToast();
+  const { mutate: postLikeToggle } = usePostLikeToggle();
+  const userId = useUserId();
+
+  const handleLikeClick = () => {
+    if (!userId) {
+      toast.error("로그인 후 사용 가능합니다.");
+      return;
+    }
+
+    postLikeToggle({ post_id, user_id: userId! });
+  };
+
   const actionButtons: ActionButtonProps[] = [
-    { icon: <HeartOutline />, label: "좋아요", aria: "좋아요" },
+    {
+      icon: <HeartOutline />,
+      label: "좋아요",
+      aria: "좋아요",
+      onClick: handleLikeClick,
+    },
     { icon: <Download />, label: "다운로드", aria: "다운로드" },
     { icon: <Share />, label: "공유하기", aria: "공유", onClick: onShareClick },
     { icon: <Edit />, label: "수정하기", aria: "수정" },
@@ -38,9 +64,6 @@ const ActionButtons = ({
       onClick: onReportClick,
     },
   ];
-
-  const labelStyle =
-    "absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-xs text-white bg-black rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap pointer";
 
   return (
     <div className="flex space-x-4">
