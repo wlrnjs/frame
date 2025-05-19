@@ -19,9 +19,13 @@ interface PhotoItem {
 
 interface DetailPhotoContainerProps {
   img_url: string | PhotoItem[];
+  isLoading?: boolean;
 }
 
-const DetailPhotoContainer = ({ img_url }: DetailPhotoContainerProps) => {
+const DetailPhotoContainer = ({
+  img_url,
+  isLoading,
+}: DetailPhotoContainerProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentImageUrl, setCurrentImageUrl] = useState<string>(
@@ -47,6 +51,14 @@ const DetailPhotoContainer = ({ img_url }: DetailPhotoContainerProps) => {
     ...swiperContainerStyle,
     overflow: "hidden" as const,
   };
+  console.log(img_url);
+
+  // 로딩 (변경 필요)
+  if (isLoading) {
+    return (
+      <div className="w-full h-[720px] bg-black text-white">Loading...</div>
+    );
+  }
 
   return (
     <div className="w-full h-[720px] flex flex-col items-center gap-2">
@@ -74,9 +86,9 @@ const DetailPhotoContainer = ({ img_url }: DetailPhotoContainerProps) => {
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
                   >
-                    {photo.image_url && (
+                    {photo?.image_url && (
                       <Image
-                        src={photo.image_url}
+                        src={photo?.image_url}
                         alt="carousel-img"
                         fill
                         className="object-contain p-5"
@@ -105,9 +117,9 @@ const DetailPhotoContainer = ({ img_url }: DetailPhotoContainerProps) => {
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          {Array.isArray(img_url) && (
+          {!Array.isArray(img_url) && (
             <Image
-              src={img_url[0]?.image_url}
+              src={img_url}
               alt="info-img"
               fill
               className="object-contain p-5"

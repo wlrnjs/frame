@@ -37,7 +37,11 @@ const ImageDetailPage = () => {
   const toast = useToast();
 
   const { data, isError } = useGetImgDetail(id!);
-  const { data: imgDetail, isError: imgDetailError } = useGetImg(id!);
+  const {
+    data: imgDetail,
+    isError: imgDetailError,
+    isLoading: imgDetailLoading,
+  } = useGetImg(id!);
 
   if (isError || imgDetailError) {
     toast.error("게시글을 찾을 수 없습니다.");
@@ -54,6 +58,7 @@ const ImageDetailPage = () => {
                 ? imgDetail?.data
                 : imgDetail?.data?.image_url
             }
+            isLoading={imgDetailLoading}
           />
           <CommentContainer />
         </div>
