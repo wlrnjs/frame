@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import FeedbackModal from "@/components/modal/FeedbackModal";
 import { formatDate } from "@/utils/date/dateUtils";
 import useGetFeedbackList from "@/hooks/api/support/useGetFeedbackList";
+import FeedbackModal from "@/components/ui/modal/FeedbackModal";
 
 type Feedback = {
   id: number;

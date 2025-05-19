@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import Close from "@/icon/Close";
 import TERMS from "@/constants/TERMS";
 import PRIVACY from "@/constants/PRIVACY";
-import Terms from "../support/Terms";
+import Terms from "@/components/features/support/Terms";
 
 interface TermsModalProps {
   activeModal: "terms" | "privacy";

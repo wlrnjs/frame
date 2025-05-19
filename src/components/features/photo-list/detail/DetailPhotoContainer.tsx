@@ -3,9 +3,9 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Square from "@/icon/Square";
-import DetailImageModal from "../modal/DetailImageModal";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
+import DetailImageModal from "@/components/ui/modal/DetailImageModal";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";

@@ -4,10 +4,10 @@ import React, { useEffect, useState } from "react";
 import Question from "@/icon/Question";
 import { createPortal } from "react-dom";
 import { ProfileData } from "@/types/ProfileData";
-import EditInput from "../my-page/EditInput";
 import { cn } from "@/utils";
-import UrlInput from "../my-page/UrlInput";
-import ProfileImageInput from "../my-page/ProfileImageInput";
+import EditInput from "@/components/features/my-page/EditInput";
+import UrlInput from "@/components/features/my-page/UrlInput";
+import ProfileImageInput from "@/components/features/my-page/ProfileImageInput";
 
 const buttonStyles = {
   base: "rounded text-white px-4 py-2 font-semibold transition-colors",

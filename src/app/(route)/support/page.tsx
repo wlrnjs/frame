@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import TermsModal from "@/components/modal/TermsModal";
-import InquiryModal from "@/components/modal/InquiryModal";
+import TermsModal from "@/components/ui/modal/TermsModal";
+import InquiryModal from "@/components/ui/modal/InquiryModal";
 
 const supportItems = [
   { title: "공지사항", href: "/support/notices" },

@@ -1,12 +1,12 @@
 "use client";
 
 import React from "react";
-import ListItem from "@/components/list/ListItem";
-import SearchContainer from "@/components/list/SearchContainer";
+import ListItem from "@/components/features/photo-list/ListItem";
+import SearchContainer from "@/components/features/photo-list/SearchContainer";
 import Masonry from "react-masonry-css";
-import EmptyBox from "@/components/statusBox/EmptyBox";
-import ErrorBox from "@/components/statusBox/ErrorBox";
-import LoadingBox from "@/components/statusBox/LoadingBox";
+import EmptyBox from "@/components/ui/statusBox/EmptyBox";
+import ErrorBox from "@/components/ui/statusBox/ErrorBox";
+import LoadingBox from "@/components/ui/statusBox/LoadingBox";
 import { ImgListType, ListItemType } from "@/types/ListType";
 
 interface PhotoListClientProps {

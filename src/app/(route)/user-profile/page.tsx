@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import UserProfileHeader from "@/components/profile/UserProfileHeader";
-import UserCameraAndLinks from "@/components/profile/UserCameraAndLinks";
-import PostGrid from "@/components/profile/PostGrid";
-import UserTabs from "@/components/profile/UserTabs";
+import UserProfileHeader from "@/components/features/profile/UserProfileHeader";
+import UserCameraAndLinks from "@/components/features/profile/UserCameraAndLinks";
+import PostGrid from "@/components/features/profile/PostGrid";
+import UserTabs from "@/components/features/profile/UserTabs";
 
 const UserProfilePage = () => {
   const [activeTab, setActiveTab] = useState("posts");

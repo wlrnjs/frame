@@ -1,6 +1,6 @@
 "use client";
 
-import CommentContainer from "@/components/detail/CommentContainer";
+import CommentContainer from "@/components/features/photo-list/detail/CommentContainer";
 import Image from "next/image";
 import React from "react";
 import useGetEventDetail from "@/hooks/api/event/useGetEventDetail";

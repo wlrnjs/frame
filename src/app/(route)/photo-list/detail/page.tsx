@@ -1,10 +1,10 @@
 "use client";
 
 import React, { Suspense } from "react";
-import DetailContainer from "@/components/detail/DetailContainer";
-import DetailPhotoContainer from "@/components/detail/DetailPhotoContainer";
-import CommentContainer from "@/components/detail/CommentContainer";
-import RecommendContainer from "@/components/detail/RecommendContainer";
+import DetailContainer from "@/components/features/photo-list/detail/DetailContainer";
+import DetailPhotoContainer from "@/components/features/photo-list/detail/DetailPhotoContainer";
+import CommentContainer from "@/components/features/photo-list/detail/CommentContainer";
+import RecommendContainer from "@/components/features/photo-list/detail/RecommendContainer";
 import { useSearchParams } from "next/navigation";
 import useGetImg from "@/hooks/api/list/useGetImg";
 import { useRouter } from "next/navigation";

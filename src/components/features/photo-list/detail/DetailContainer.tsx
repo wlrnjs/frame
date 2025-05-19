@@ -1,8 +1,8 @@
 "use client";
 
-import ShareModal from "@/components/modal/ShareModal";
-import DeleteModal from "@/components/modal/DeleteModal";
-import ReportModal from "@/components/modal/ReportModal";
+import ShareModal from "@/components/ui/modal/ShareModal";
+import DeleteModal from "@/components/ui/modal/DeleteModal";
+import ReportModal from "@/components/ui/modal/ReportModal";
 import ActionButtons from "./ActionButtons";
 import { useModal } from "@/hooks/useModal";
 import Link from "next/link";

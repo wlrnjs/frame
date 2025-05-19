@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import Input from "@/components/login/Input";
-import SubmitBtn from "@/components/login/SubmitBtn";
-import AgreementCheckbox from "@/components/signup/AgreementCheckbox";
+import Input from "@/components/features/login/Input";
+import SubmitBtn from "@/components/features/login/SubmitBtn";
+import AgreementCheckbox from "@/components/features/signup/AgreementCheckbox";
 import LOGO from "@/icon/LOGO";
 import { supabase } from "@/service/lib/supabaseClient";
 import { useRouter } from "next/navigation";

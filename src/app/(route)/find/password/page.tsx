@@ -1,7 +1,7 @@
 "use client";
 
-import Input from "@/components/login/Input";
-import SubmitBtn from "@/components/login/SubmitBtn";
+import Input from "@/components/features/login/Input";
+import SubmitBtn from "@/components/features/login/SubmitBtn";
 import LOGO from "@/icon/LOGO";
 import { supabase } from "@/service/lib/supabaseClient";
 import Link from "next/link";

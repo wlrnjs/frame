@@ -5,8 +5,8 @@ import Github from "@/icon/Github";
 import Instagram from "@/icon/Instagram";
 import Link from "next/link";
 import React, { useState } from "react";
-import TermsModal from "@/components/modal/TermsModal";
-import InquiryModal from "@/components/modal/InquiryModal";
+import TermsModal from "@/components/ui/modal/TermsModal";
+import InquiryModal from "@/components/ui/modal/InquiryModal";
 
 type TermsModalType = "terms" | "privacy";
 type FooterModalType = TermsModalType | "inquiry";

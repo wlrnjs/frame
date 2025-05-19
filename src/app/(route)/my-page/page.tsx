@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import UserProfileHeader from "@/components/profile/UserProfileHeader";
-import UserCameraAndLinks from "@/components/profile/UserCameraAndLinks";
-import UserTabs from "@/components/profile/UserTabs";
-import PostGrid from "@/components/profile/PostGrid";
-import ProfileEditModal from "@/components/modal/ProfileEditModal";
+import UserProfileHeader from "@/components/features/profile/UserProfileHeader";
+import UserCameraAndLinks from "@/components/features/profile/UserCameraAndLinks";
+import UserTabs from "@/components/features/profile/UserTabs";
+import PostGrid from "@/components/features/profile/PostGrid";
+import ProfileEditModal from "@/components/ui/modal/ProfileEditModal";
 import Edit from "@/icon/Edit";
 import { useToast } from "@/hooks/useToast";
 

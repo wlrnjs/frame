@@ -1,13 +1,13 @@
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import QueryProvider from "@/components/QueryProvider";
+import Gnb from "@/components/layout/gnb/Gnb";
+import Footer from "@/components/layout/footer/Footer";
+import ScrollToTop from "@/utils/dom/ScrollToTop";
+import SmoothScrollWrapper from "@/utils/dom/SmoothScrollWrapper";
+import { ToastContainer } from "@/components/ui/toastContainer/ToastContainer";
 import "./globals.css";
 import "swiper/css";
 import "swiper/css/navigation";
-import QueryProvider from "@/components/QueryProvider";
-import Gnb from "@/components/gnb/Gnb";
-import Footer from "@/components/footer/Footer";
-import ScrollToTop from "@/utils/dom/ScrollToTop";
-import { ToastContainer } from "@/components/toastContainer/ToastContainer";
-import SmoothScrollWrapper from "@/utils/dom/SmoothScrollWrapper";
 
 export default function RootLayout({
   children,

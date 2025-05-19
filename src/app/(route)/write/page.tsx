@@ -1,7 +1,7 @@
 "use client";
 
-import AddPhotoContainer from "@/components/write/AddPhotoContainer";
-import PhotoInfoContainer from "@/components/write/PhotoInfoContainer";
+import AddPhotoContainer from "@/components/features/write/AddPhotoContainer";
+import PhotoInfoContainer from "@/components/features/write/PhotoInfoContainer";
 import React, { useState } from "react";
 
 const Page = () => {
