@@ -1,0 +1,59 @@
+/* Swiper 커스텀 스타일 */
+.swiper {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+.swiper-wrapper {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.swiper-slide {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+/* 네비게이션 버튼 스타일 조정 */
+.swiper-button-next,
+.swiper-button-prev {
+  color: white !important;
+  background-color: rgba(0, 0, 0, 0.3) !important;
+  width: 35px !important;
+  height: 35px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  opacity: 0 !important;
+  transition: opacity 0.3s ease !important;
+}
+
+/* hover 시 네비게이션 버튼 표시 */
+.swiper:hover .swiper-button-next,
+.swiper:hover .swiper-button-prev {
+  opacity: 1 !important;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  font-size: 18px !important;
+}
+
+/* 페이지네이션 스타일 조정 */
+.swiper-pagination-bullet {
+  background-color: white !important;
+  opacity: 0.7 !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: white !important;
+  opacity: 1 !important;
+}
