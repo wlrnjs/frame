@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Square from "@/icon/Square";
 import DetailImageModal from "../modal/DetailImageModal";
@@ -28,14 +28,22 @@ const DetailPhotoContainer = ({
 }: DetailPhotoContainerProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentImageUrl, setCurrentImageUrl] = useState<string>(
-    Array.isArray(img_url)
-      ? img_url[0]?.image_url
-      : img_url || "/BlackPhoto.JPG"
+  const [currentImageUrl, setCurrentImageUrl] = useState<string | undefined>(
+    undefined
   );
 
+  useEffect(() => {
+    if (Array.isArray(img_url)) {
+      if (img_url.length > 0) {
+        setCurrentImageUrl(img_url[0]?.image_url);
+      }
+    } else if (typeof img_url === "string") {
+      setCurrentImageUrl(img_url);
+    }
+  }, [img_url]);
+
   // detail page에 사진이 여러장 있는지 확인 (Swiper 사용)
-  const hasMultiplePhotos = Array.isArray(img_url) && img_url.length > 0;
+  const hasMultiplePhotos = Array.isArray(img_url) && img_url.length >= 2;
 
   // Swiper 추가 CSS 스타일 정의
   const swiperContainerStyle = {
@@ -51,7 +59,6 @@ const DetailPhotoContainer = ({
     ...swiperContainerStyle,
     overflow: "hidden" as const,
   };
-  console.log(img_url);
 
   // 로딩 (변경 필요)
   if (isLoading) {
@@ -117,14 +124,21 @@ const DetailPhotoContainer = ({
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          {!Array.isArray(img_url) && (
+          {!Array.isArray(img_url) ? (
             <Image
               src={img_url}
               alt="info-img"
               fill
               className="object-contain p-5"
             />
-          )}
+          ) : img_url.length === 1 ? (
+            <Image
+              src={img_url[0].image_url}
+              alt="info-img"
+              fill
+              className="object-contain p-5"
+            />
+          ) : null}
           <div
             className={`absolute top-5 right-5 transition-all duration-300 ease-in-out pointer ${
               isHovered
@@ -140,10 +154,10 @@ const DetailPhotoContainer = ({
       <DetailImageModal
         onOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        img_url={currentImageUrl}
+        img_url={currentImageUrl!}
       />
     </div>
   );
 };
 
-export default DetailPhotoContainer;
+export default React.memo(DetailPhotoContainer);

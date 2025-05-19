@@ -36,20 +36,14 @@ const SearchContainer = () => {
       <div>
         <label className="text-sm font-semibold">카테고리</label>
         <div className="mt-2 space-y-1 text-sm">
-          {["자연", "인물", "예술", "동물", "흑백"].map((label) => (
-            <label key={label} className="flex items-center gap-2">
-              <input type="checkbox" className="accent-white" />
-              {label}
-            </label>
-          ))}
-        </div>
-      </div>
-
-      {/* 페이지네이션 */}
-      <div className="pt-4 border-t border-zinc-700">
-        <div className="flex justify-between text-sm text-gray-400">
-          <button className="hover:text-white">◀ 이전</button>
-          <button className="hover:text-white">다음 ▶</button>
+          {["풍경", "감성", "여행", "도시", "자연", "인물", "예술", "흑백"].map(
+            (label) => (
+              <label key={label} className="flex items-center gap-2">
+                <input type="checkbox" className="accent-white" />
+                {label}
+              </label>
+            )
+          )}
         </div>
       </div>
     </div>
