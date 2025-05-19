@@ -4,7 +4,7 @@ import { NAV_LINKS } from "@/constants/NAV";
 import LOGO from "@/icon/LOGO";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { useAuthCheck } from "@/utils/useAuthCheck";
+import { useAuthCheck } from "@/hooks/useAuthCheck";
 import DropDown from "./DropDown";
 import { usePathname } from "next/navigation";
 

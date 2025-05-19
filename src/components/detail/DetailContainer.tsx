@@ -7,7 +7,7 @@ import ActionButtons from "./ActionButtons";
 import { useModal } from "@/hooks/useModal";
 import Link from "next/link";
 import React from "react";
-import { formatDate } from "@/utils/dateUtils";
+import { formatDate } from "@/utils/date/dateUtils";
 
 interface DetailData {
   title: string;

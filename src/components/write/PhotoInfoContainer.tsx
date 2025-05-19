@@ -7,7 +7,7 @@ import { cn } from "@/utils";
 import usePostWrite from "@/hooks/api/write/usePostWrite";
 import usePostImg from "@/hooks/api/write/usePostImg";
 import { postPostsProps } from "@/service/write/postWrite";
-import useUserId from "@/utils/useUserId";
+import useUserId from "@/hooks/useUserId";
 import { useToast } from "@/hooks/useToast";
 import { supabase } from "@/service/lib/supabaseClient";
 

@@ -5,9 +5,9 @@ import "swiper/css/navigation";
 import QueryProvider from "@/components/QueryProvider";
 import Gnb from "@/components/gnb/Gnb";
 import Footer from "@/components/footer/Footer";
-import ScrollToTop from "@/utils/ScrollToTop";
+import ScrollToTop from "@/utils/dom/ScrollToTop";
 import { ToastContainer } from "@/components/toastContainer/ToastContainer";
-import SmoothScrollWrapper from "@/utils/SmoothScrollWrapper";
+import SmoothScrollWrapper from "@/utils/dom/SmoothScrollWrapper";
 
 export default function RootLayout({
   children,
