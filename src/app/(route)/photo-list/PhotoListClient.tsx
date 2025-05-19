@@ -7,7 +7,7 @@ import Masonry from "react-masonry-css";
 import EmptyBox from "@/components/statusBox/EmptyBox";
 import ErrorBox from "@/components/statusBox/ErrorBox";
 import LoadingBox from "@/components/statusBox/LoadingBox";
-import { ImgListType, ListItemType } from "./page";
+import { ImgListType, ListItemType } from "@/types/ListType";
 
 interface PhotoListClientProps {
   initialPosts: ListItemType[] | null;

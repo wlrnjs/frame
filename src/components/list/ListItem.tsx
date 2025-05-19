@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ListItemType } from "@/app/(route)/photo-list/page";
-import { ImgListType } from "@/app/(route)/photo-list/page";
+import { ImgListType, ListItemType } from "@/types/ListType";
 
 interface ListItemProps {
   data: ListItemType;
