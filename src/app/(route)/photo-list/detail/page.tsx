@@ -5,11 +5,11 @@ import DetailContainer from "@/components/detail/DetailContainer";
 import DetailPhotoContainer from "@/components/detail/DetailPhotoContainer";
 import CommentContainer from "@/components/detail/CommentContainer";
 import RecommendContainer from "@/components/detail/RecommendContainer";
-import useGetImgDetail from "@/service/hooks/list/useGetImgDetail";
 import { useSearchParams } from "next/navigation";
-import useGetImg from "@/service/hooks/list/useGetImg";
+import useGetImg from "@/hooks/api/list/useGetImg";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/useToast";
+import useGetImgDetail from "@/hooks/api/list/useGetImgDetail";
 
 // interface ImageDetailType {
 //   camera_info: string;

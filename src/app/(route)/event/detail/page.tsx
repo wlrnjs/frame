@@ -3,15 +3,15 @@
 import CommentContainer from "@/components/detail/CommentContainer";
 import Image from "next/image";
 import React from "react";
-import useGetEventDetail from "@/service/hooks/event/useGetEventDetail";
+import useGetEventDetail from "@/hooks/api/event/useGetEventDetail";
 import { useSearchParams } from "next/navigation";
-import usePostEventJoin from "@/service/hooks/event/usePostEventJoin";
-import useDeleteEventJoin from "@/service/hooks/event/useDeleteEventJoin";
-import useGetEventJoin from "@/service/hooks/event/useGetEventJoin";
+import useGetEventJoin from "@/hooks/api/event/useGetEventJoin";
 import useUserId from "@/utils/useUserId";
 import { cn } from "@/utils";
 import { formatDate, formatTime, getEventStatus } from "@/utils/dateUtils";
 import { Suspense } from "react";
+import usePostEventJoin from "@/hooks/api/event/usePostEventJoin";
+import useDeleteEventJoin from "@/hooks/api/event/useDeleteEventJoin";
 
 const Page = () => {
   return (

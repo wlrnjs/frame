@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { useGetMainImg } from "@/service/hooks/main/useGetMainImg";
+import { useGetMainImg } from "@/hooks/api/main/useGetMainImg";
 import { gsap } from "gsap";
 
 const MainAnimation = () => {

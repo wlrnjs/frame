@@ -5,7 +5,7 @@ import { cn } from "@/utils";
 import React, { useEffect, useState, useRef } from "react";
 import { createPortal } from "react-dom";
 import { useToast } from "@/hooks/useToast";
-import usePostInquiry from "@/service/hooks/support/inquiry/usePostInquiry";
+import usePostInquiry from "@/hooks/api/support/usePostInquiry";
 
 interface InquiryModalProps {
   onOpen: boolean;

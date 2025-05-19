@@ -5,7 +5,7 @@ import { cn } from "@/utils";
 import React, { useEffect, useState, useRef } from "react";
 import { createPortal } from "react-dom";
 import { useToast } from "@/hooks/useToast";
-import usePostFeedback from "@/service/hooks/support/feedback/usePostFeedback";
+import usePostFeedback from "@/hooks/api/support/usePostFeedback";
 
 interface FeedbackModalProps {
   onOpen: boolean;
