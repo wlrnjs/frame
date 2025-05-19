@@ -8,7 +8,7 @@ const SearchContainer = () => {
         <label className="text-sm font-semibold">검색</label>
         <input
           type="text"
-          placeholder="사진 제목 또는 태그"
+          placeholder="사진 제목 또는 #태그"
           className="mt-2 w-full px-3 py-2 rounded bg-zinc-900 text-sm text-white placeholder-gray-400 border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-white"
         />
       </div>
