@@ -10,6 +10,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "./swiper-custom.css";
+import { cn } from "@/utils";
 
 interface PhotoItem {
   id: string;
@@ -68,7 +69,12 @@ const DetailPhotoContainer = ({
   }
 
   return (
-    <div className="w-full h-[720px] flex flex-col items-center gap-2">
+    <div
+      className={cn(
+        "w-full h-[720px] flex flex-col items-center gap-2",
+        "mobile:max-h-[500px] mobile:h-auto"
+      )}
+    >
       {hasMultiplePhotos ? (
         <div className="relative w-full aspect-[4/3] bg-black overflow-hidden rounded-md">
           <Swiper

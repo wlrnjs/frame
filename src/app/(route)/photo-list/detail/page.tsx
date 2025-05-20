@@ -10,6 +10,7 @@ import useGetImg from "@/hooks/api/photo-list/detail/useGetImg";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/useToast";
 import useGetImgDetail from "@/hooks/api/photo-list/detail/useGetImgDetail";
+import { cn } from "@/utils";
 
 // interface ImageDetailType {
 //   camera_info: string;
@@ -49,9 +50,19 @@ const ImageDetailPage = () => {
   }
 
   return (
-    <div className="w-full min-h-screen flex-col-center gap-20 custom-margin layout-container">
-      <div className="w-full h-full flex gap-10 justify-center items-start">
-        <div className="w-full flex flex-col gap-10">
+    <div
+      className={cn(
+        "w-full min-h-screen flex-col-center gap-20 custom-margin layout-container",
+        "mobile:gap-10"
+      )}
+    >
+      <div
+        className={cn(
+          "w-full h-full flex gap-10 justify-center items-start",
+          "mobile:flex-col"
+        )}
+      >
+        <div className={cn("w-full flex flex-col gap-10", "mobile:gap-3")}>
           <DetailPhotoContainer
             img_url={
               Array.isArray(imgDetail?.data)
@@ -60,10 +71,15 @@ const ImageDetailPage = () => {
             }
             isLoading={imgDetailLoading}
           />
+          <div className={cn("hidden", "mobile:block")}>
+            <DetailContainer data={data} imgData={imgDetail?.data} />
+          </div>
           <CommentContainer />
         </div>
 
-        <DetailContainer data={data} imgData={imgDetail?.data} />
+        <div className={cn("block", "mobile:hidden")}>
+          <DetailContainer data={data} imgData={imgDetail?.data} />
+        </div>
       </div>
       <RecommendContainer />
     </div>

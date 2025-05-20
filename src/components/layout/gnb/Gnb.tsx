@@ -8,14 +8,12 @@ import { useAuthCheck } from "@/hooks/useAuthCheck";
 import DropDown from "./DropDown";
 import { usePathname } from "next/navigation";
 import { cn } from "@/utils";
-import useIsMobile from "@/utils/dom/isMobile";
 import GnbIcon from "@/icon/Gnb";
 import MobileGnb from "./MobileGnb";
 
 const LinkStyle = "hover:text-gray-300 transition-colors duration-200 pointer";
 
 const Gnb = () => {
-  const isMobile = useIsMobile();
   const pathname = usePathname();
   const [showMobileGnb, setShowMobileGnb] = useState(false);
   const [showGnb, setShowGnb] = useState(pathname !== "/");
@@ -61,36 +59,36 @@ const Gnb = () => {
             )}
           />
         </Link>
-        <nav className="flex gap-8 text-lg font-medium tracking-tight">
-          {isMobile ? (
-            <div
-              className="mobile-menu pointer select-none"
-              onClick={() => setShowMobileGnb(true)}
-            >
-              <GnbIcon />
+        <nav
+          className="mobile-menu pointer select-none block pc:hidden"
+          onClick={() => setShowMobileGnb(true)}
+        >
+          <GnbIcon />
+        </nav>
+        <nav
+          className={cn(
+            "flex gap-8 text-lg font-medium tracking-tight",
+            "mobile:hidden"
+          )}
+        >
+          {NAV_LINKS.filter(({ title }) => title !== "LOGIN").map(
+            ({ title, href }) => (
+              <Link key={href} href={href} className={LinkStyle}>
+                {title}
+              </Link>
+            )
+          )}
+          {isLoggedIn ? (
+            <div className="relative group">
+              <Link href="/my-page" className={LinkStyle}>
+                마이페이지
+              </Link>
+              <DropDown />
             </div>
           ) : (
-            <>
-              {NAV_LINKS.filter(({ title }) => title !== "LOGIN").map(
-                ({ title, href }) => (
-                  <Link key={href} href={href} className={LinkStyle}>
-                    {title}
-                  </Link>
-                )
-              )}
-              {isLoggedIn ? (
-                <div className="relative group">
-                  <Link href="/my-page" className={LinkStyle}>
-                    마이페이지
-                  </Link>
-                  <DropDown />
-                </div>
-              ) : (
-                <Link href="/login" className={LinkStyle}>
-                  LOGIN
-                </Link>
-              )}
-            </>
+            <Link href="/login" className={LinkStyle}>
+              LOGIN
+            </Link>
           )}
         </nav>
       </div>
