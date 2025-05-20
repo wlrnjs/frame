@@ -45,27 +45,40 @@ const EventDetailPage = () => {
   return (
     <div className="w-full min-h-screen custom-margin layout-container">
       {event?.image_url && (
-        <div className="relative w-full h-[500px]">
-          {/* 이미지 블러 효과 추가 필요 */}
+        <div className={cn("relative w-full h-[500px]", "mobile:h-[280px]")}>
           <Image src={event?.image_url} alt="Event Detail" fill priority />
         </div>
       )}
-      <div className="flex flex-col gap-4 bg-black text-white p-20">
-        <h2 className="text-3xl">{event?.title}</h2>
-        <div className="flex gap-2">
-          <p>{getEventStatus(event?.expires_at)}</p>
-          <p>{formatTime(event?.created_at)}</p>
-          <p>조회수 4</p>
-          <p>댓글 0</p>
-          <p className="flex gap-1">
-            참여자<span>{event?.join_count}</span>
-          </p>
-          <p>{`이벤트 기한: ${formatDate(event?.created_at)} ~ ${formatDate(
-            event?.expires_at
-          )}`}</p>
+      <div
+        className={cn(
+          "flex flex-col gap-4 bg-black text-white p-20",
+          "mobile:p-10 mobile:gap-3"
+        )}
+      >
+        <h2 className={cn("text-3xl", "mobile:text-xl")}>{event?.title}</h2>
+        <div
+          className={cn(
+            "flex gap-2",
+            "mobile:text-xs mobile:text-nowrap mobile:flex-col mobile:gap-1"
+          )}
+        >
+          <div className="flex gap-2">
+            <p>{getEventStatus(event?.expires_at)}</p>
+            <p>{formatTime(event?.created_at)}</p>
+            <p>조회수 4</p>
+            <p>댓글 0</p>
+            <p className="flex gap-1">
+              참여자<span>{event?.join_count}</span>
+            </p>
+          </div>
+          <div>
+            <p>{`이벤트 기한: ${formatDate(event?.created_at)} ~ ${formatDate(
+              event?.expires_at
+            )}`}</p>
+          </div>
         </div>
         <hr />
-        <section className="text-lg tracking-[-0.02em]">
+        <section className={cn("text-lg tracking-[-0.02em]", "mobile:text-sm")}>
           <p>{event?.description}</p>
         </section>
         <button
@@ -73,6 +86,7 @@ const EventDetailPage = () => {
           disabled={postEventJoinLoading || deleteEventJoinLoading}
           className={cn(
             "w-full h-[50px] rounded-[5px] my-4",
+            "mobile:h-[40px]",
             eventJoin?.length
               ? "bg-black text-white border border-white"
               : "bg-white text-black"
@@ -81,9 +95,22 @@ const EventDetailPage = () => {
           {eventJoin?.length ? "이벤트 참여 취소" : "이벤트 참여하기"}
         </button>
       </div>
-      <div className="bg-black text-white px-20 pb-20 flex flex-col gap-4">
-        <h1 className="text-2xl mb-4 flex gap-2 items-center">
-          댓글<span className="text-gray-500 text-lg">총 3개</span>
+      <div
+        className={cn(
+          "bg-black text-white px-20 pb-20 flex flex-col gap-4",
+          "mobile:px-10"
+        )}
+      >
+        <h1
+          className={cn(
+            "text-2xl mb-4 flex gap-2 items-center",
+            "mobile:text-xl"
+          )}
+        >
+          댓글
+          <span className={cn("text-gray-500 text-lg", "mobile:text-sm")}>
+            총 3개
+          </span>
         </h1>
         <CommentContainer isEvent />
       </div>
