@@ -10,6 +10,9 @@ import React from "react";
 import usePostLikeToggle from "@/hooks/api/photo-list/detail/usePostLikeToggle";
 import useUserId from "@/hooks/useUserId";
 import { useToast } from "@/hooks/useToast";
+import { DetailImgData } from "./DetailContainer";
+import useGetLikeToggle from "@/hooks/api/photo-list/detail/useGetLikeToggle";
+import useDeleteLikeToggle from "@/hooks/api/photo-list/detail/useDeleteLikeToggle";
 
 const labelStyle =
   "absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-xs text-white bg-black rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap pointer";
@@ -26,6 +29,7 @@ interface ActionButtonsProps {
   onDeleteClick: () => void;
   onReportClick: () => void;
   post_id: number;
+  imgData: DetailImgData[];
 }
 
 const ActionButtons = ({
@@ -33,18 +37,57 @@ const ActionButtons = ({
   onDeleteClick,
   onReportClick,
   post_id,
+  imgData,
 }: ActionButtonsProps) => {
-  const toast = useToast();
-  const { mutate: postLikeToggle } = usePostLikeToggle();
   const userId = useUserId();
+  const { error: toastError } = useToast();
+
+  const { data: likeToggle } = useGetLikeToggle(post_id.toString());
+  const { mutate: postLikeToggle, isPending } = usePostLikeToggle();
+  const { mutate: deleteLikeToggle, isPending: deleteLikeTogglePending } =
+    useDeleteLikeToggle();
 
   const handleLikeClick = () => {
     if (!userId) {
-      toast.error("로그인 후 사용 가능합니다.");
+      toastError("로그인 후 사용 가능합니다.");
       return;
     }
+    if (likeToggle.length > 0) {
+      handleDeleteLikeClick();
+    } else {
+      postLikeToggle({ post_id, user_id: userId! });
+    }
+  };
 
-    postLikeToggle({ post_id, user_id: userId! });
+  const handleDeleteLikeClick = () => {
+    if (!userId) {
+      toastError("로그인 후 사용 가능합니다.");
+      return;
+    }
+    deleteLikeToggle({ id: likeToggle[0].id, userId });
+  };
+
+  // 다운로드 로직
+  const handleDownloadClick = async () => {
+    try {
+      for (let i = 0; i < imgData.length; i++) {
+        const imageUrl = imgData[i].image_url;
+        const response = await fetch(imageUrl, { mode: "cors" });
+        const blob = await response.blob();
+        const blobUrl = window.URL.createObjectURL(blob);
+
+        const link = document.createElement("a");
+        link.href = blobUrl;
+        link.download = `image_${i + 1}.jpg`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        window.URL.revokeObjectURL(blobUrl);
+      }
+    } catch (error) {
+      console.error("이미지 다운로드 실패:", error);
+    }
   };
 
   const actionButtons: ActionButtonProps[] = [
@@ -54,7 +97,12 @@ const ActionButtons = ({
       aria: "좋아요",
       onClick: handleLikeClick,
     },
-    { icon: <Download />, label: "다운로드", aria: "다운로드" },
+    {
+      icon: <Download />,
+      label: "다운로드",
+      aria: "다운로드",
+      onClick: handleDownloadClick,
+    },
     { icon: <Share />, label: "공유하기", aria: "공유", onClick: onShareClick },
     { icon: <Edit />, label: "수정하기", aria: "수정" },
     {
@@ -72,6 +120,7 @@ const ActionButtons = ({
           <button
             aria-label={action.aria}
             onClick={action.onClick}
+            disabled={isPending || deleteLikeTogglePending}
             className="focus:outline-none"
           >
             {action.icon}

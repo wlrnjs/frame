@@ -1,25 +1,22 @@
-import { revalidatePhotoList } from "@/app/actions";
 import { useToast } from "@/hooks/useToast";
 import postLikeToggle from "@/service/photo-list/detail/postLikeToggle";
 import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
 
 const usePostLikeToggle = () => {
   const { success, error: toastError } = useToast();
-  const router = useRouter();
 
-  return useMutation({
+  const mutation = useMutation({
     mutationFn: ({post_id, user_id}: {post_id: number, user_id: string}) => postLikeToggle({post_id, user_id}),
     retry: 1,
-    onSuccess: async (post_id) => {
+    onSuccess: () => {
       success("추천 성공");
-      await revalidatePhotoList();
-      router.push(`/photo-list/detail?id=${post_id}`);
     },
     onError: () => {
-      toastError("추천 실패");
+      toastError("추천 실패. 잠시후 다시 시도해주세요");
     },
   });
+
+  return { ...mutation };
 };
 
 export default usePostLikeToggle;

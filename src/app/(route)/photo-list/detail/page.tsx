@@ -63,7 +63,7 @@ const ImageDetailPage = () => {
           <CommentContainer />
         </div>
 
-        <DetailContainer data={data} />
+        <DetailContainer data={data} imgData={imgDetail?.data} />
       </div>
       <RecommendContainer />
     </div>

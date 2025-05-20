@@ -21,11 +21,18 @@ interface DetailData {
   post_id: number;
 }
 
-interface DetailContainerProps {
-  data: DetailData;
+export interface DetailImgData {
+  id: string;
+  image_url: string;
+  posts_id: number;
 }
 
-const DetailContainer = ({ data }: DetailContainerProps) => {
+interface DetailContainerProps {
+  data: DetailData;
+  imgData: DetailImgData[];
+}
+
+const DetailContainer = ({ data, imgData }: DetailContainerProps) => {
   const {
     isOpen: isShareModalOpen,
     openModal: openShareModal,
@@ -81,6 +88,7 @@ const DetailContainer = ({ data }: DetailContainerProps) => {
           onDeleteClick={handleDeleteClick}
           onReportClick={handleReportClick}
           post_id={post_id}
+          imgData={imgData}
         />
 
         <div className="flex flex-col gap-2">
