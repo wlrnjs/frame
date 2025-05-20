@@ -135,13 +135,12 @@ const PhotoInfoContainer = ({ images }: PhotoInfoContainerProps = {}) => {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-8">
-      <div className="max-w-full min-w-[380px] min-h-[720px] bg-black text-white p-8 rounded-[5px] shadow-lg flex flex-col gap-8 sticky top-[120px]">
-        {/* 업로드된 이미지 수 표시 */}
-        <div className="text-sm text-gray-400">
-          {images && images.length > 0
-            ? `${images.length}개의 이미지가 업로드됨`
-            : "이미지를 업로드해주세요"}
-        </div>
+      <div
+        className={cn(
+          "max-w-full min-w-[380px] min-h-[720px] bg-black text-white p-8 rounded-[5px] shadow-lg flex flex-col gap-8 sticky top-[120px]",
+          "mobile:max-w-[768px] mobile:w-full mobile:top-0"
+        )}
+      >
         <FormSection title="기본 정보">
           <InputField
             label="제목"

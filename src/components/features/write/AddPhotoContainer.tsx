@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Close from "@/icon/Close";
 import { useToast } from "@/hooks/useToast";
+import { cn } from "@/utils";
 
 const AddPhotoContainer = ({
   images,
@@ -63,7 +64,12 @@ const AddPhotoContainer = ({
   };
 
   return (
-    <div className="w-full h-[720px] flex flex-col items-center gap-2">
+    <div
+      className={cn(
+        "w-full h-[720px] flex flex-col items-center gap-2",
+        "mobile:h-[500px]"
+      )}
+    >
       <div className="relative w-full aspect-[4/3] bg-black overflow-hidden rounded-md">
         <Image
           src={
