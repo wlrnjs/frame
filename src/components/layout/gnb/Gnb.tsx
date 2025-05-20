@@ -10,14 +10,16 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/utils";
 import useIsMobile from "@/utils/dom/isMobile";
 import GnbIcon from "@/icon/Gnb";
+import MobileGnb from "./MobileGnb";
 
 const LinkStyle = "hover:text-gray-300 transition-colors duration-200 pointer";
 
 const Gnb = () => {
-  const { isLoggedIn } = useAuthCheck();
+  const isMobile = useIsMobile();
   const pathname = usePathname();
+  const [showMobileGnb, setShowMobileGnb] = useState(false);
   const [showGnb, setShowGnb] = useState(pathname !== "/");
-  const isMobile = useIsMobile() || false; // Ensure boolean value
+  const { isLoggedIn } = useAuthCheck();
 
   useEffect(() => {
     if (pathname !== "/") {
@@ -52,15 +54,22 @@ const Gnb = () => {
           className="flex items-center overflow-hidden"
           aria-label="홈으로 이동"
         >
-          <LOGO className="w-[120px] h-auto text-white bg-white" />
+          <LOGO
+            className={cn(
+              "w-[120px] h-auto text-white bg-white",
+              "mobile:w-[100px] mobile:h-[40px]"
+            )}
+          />
         </Link>
-        <nav
-          className={cn(
-            "flex gap-8 text-lg font-medium tracking-tight",
-            "mobile:gap-4"
-          )}
-        >
-          {!isMobile && (
+        <nav className="flex gap-8 text-lg font-medium tracking-tight">
+          {isMobile ? (
+            <div
+              className="mobile-menu pointer select-none"
+              onClick={() => setShowMobileGnb(true)}
+            >
+              <GnbIcon />
+            </div>
+          ) : (
             <>
               {NAV_LINKS.filter(({ title }) => title !== "LOGIN").map(
                 ({ title, href }) => (
@@ -83,13 +92,14 @@ const Gnb = () => {
               )}
             </>
           )}
-          {isMobile && (
-            <div className="mobile-menu">
-              <GnbIcon />
-            </div>
-          )}
         </nav>
       </div>
+      {showMobileGnb && (
+        <MobileGnb
+          onClose={() => setShowMobileGnb(false)}
+          isOpen={showMobileGnb}
+        />
+      )}
     </header>
   );
 };

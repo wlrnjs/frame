@@ -55,40 +55,24 @@ const TermsModal = ({ activeModal, setActiveModal }: TermsModalProps) => {
           </button>
         </div>
         <div className="text-sm text-gray-700 overflow-y-auto max-h-[70vh] p-4">
-          {activeModal === "terms" && (
-            <div>
-              {TERMS.map((item, index) => (
-                <div key={index} className="mb-6">
-                  <h3 className="font-bold text-base mb-2">{item.title}</h3>
-                  {item.content && <p className="mb-3 whitespace-pre-line">{item.content}</p>}
-                  {item.list && (
-                    <ul className="list-disc pl-5 space-y-1">
-                      {item.list.map((listItem, i) => (
-                        <li key={i} className="text-gray-700">{listItem}</li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              ))}
-            </div>
-          )}
-          {activeModal === "privacy" && (
-            <div>
-              {PRIVACY.map((item, index) => (
-                <div key={index} className="mb-6">
-                  <h3 className="font-bold text-base mb-2">{item.title}</h3>
-                  {item.content && <p className="mb-3 whitespace-pre-line">{item.content}</p>}
-                  {item.list && (
-                    <ul className="list-disc pl-5 space-y-1">
-                      {item.list.map((listItem, i) => (
-                        <li key={i} className="text-gray-700">{listItem}</li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              ))}
-            </div>
-          )}
+          {["terms", "privacy"].includes(activeModal) &&
+            (activeModal === "terms" ? TERMS : PRIVACY).map((item, index) => (
+              <div key={index} className="mb-6">
+                <h3 className="font-bold text-base mb-2">{item.title}</h3>
+                {item.content && (
+                  <p className="mb-3 whitespace-pre-line">{item.content}</p>
+                )}
+                {item.list && (
+                  <ul className="list-disc pl-5 space-y-1">
+                    {item.list.map((listItem, i) => (
+                      <li key={i} className="text-gray-700">
+                        {listItem}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            ))}
         </div>
       </div>
     </div>,
