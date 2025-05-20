@@ -52,7 +52,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 text-nowrap">
         <ul className="flex gap-2">
           {[
             { text: "이용약관", type: "terms" as const },
@@ -71,7 +71,7 @@ const Footer = () => {
         </ul>
       </div>
 
-      <div className="text-center text-xs text-white-60">
+      <div className="text-center text-xs text-white-60 text-nowrap">
         © 2025 Frame. All rights reserved.
       </div>
 

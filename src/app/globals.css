@@ -41,6 +41,7 @@
 
 .layout-container {
   padding: 10px 105px;
+  @apply mobile:px-5
 }
 
 input:-webkit-autofill,

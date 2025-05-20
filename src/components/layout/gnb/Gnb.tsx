@@ -7,6 +7,9 @@ import React, { useEffect, useState } from "react";
 import { useAuthCheck } from "@/hooks/useAuthCheck";
 import DropDown from "./DropDown";
 import { usePathname } from "next/navigation";
+import { cn } from "@/utils";
+import useIsMobile from "@/utils/dom/isMobile";
+import GnbIcon from "@/icon/Gnb";
 
 const LinkStyle = "hover:text-gray-300 transition-colors duration-200 pointer";
 
@@ -14,6 +17,7 @@ const Gnb = () => {
   const { isLoggedIn } = useAuthCheck();
   const pathname = usePathname();
   const [showGnb, setShowGnb] = useState(pathname !== "/");
+  const isMobile = useIsMobile() || false; // Ensure boolean value
 
   useEffect(() => {
     if (pathname !== "/") {
@@ -37,7 +41,12 @@ const Gnb = () => {
         showGnb ? "opacity-100" : "opacity-0 -translate-y-full"
       }`}
     >
-      <div className="h-[80px] flex items-center justify-between layout-container">
+      <div
+        className={cn(
+          "h-[80px] flex items-center justify-between layout-container",
+          "mobile:h-[60px]"
+        )}
+      >
         <Link
           href="/"
           className="flex items-center overflow-hidden"
@@ -45,25 +54,39 @@ const Gnb = () => {
         >
           <LOGO className="w-[120px] h-auto text-white bg-white" />
         </Link>
-        <nav className="flex gap-8 text-lg font-medium tracking-tight">
-          {NAV_LINKS.filter(({ title }) => title !== "LOGIN").map(
-            ({ title, href }) => (
-              <Link key={href} href={href} className={LinkStyle}>
-                {title}
-              </Link>
-            )
+        <nav
+          className={cn(
+            "flex gap-8 text-lg font-medium tracking-tight",
+            "mobile:gap-4"
           )}
-          {isLoggedIn ? (
-            <div className="relative group">
-              <Link href="/my-page" className={LinkStyle}>
-                마이페이지
-              </Link>
-              <DropDown />
+        >
+          {!isMobile && (
+            <>
+              {NAV_LINKS.filter(({ title }) => title !== "LOGIN").map(
+                ({ title, href }) => (
+                  <Link key={href} href={href} className={LinkStyle}>
+                    {title}
+                  </Link>
+                )
+              )}
+              {isLoggedIn ? (
+                <div className="relative group">
+                  <Link href="/my-page" className={LinkStyle}>
+                    마이페이지
+                  </Link>
+                  <DropDown />
+                </div>
+              ) : (
+                <Link href="/login" className={LinkStyle}>
+                  LOGIN
+                </Link>
+              )}
+            </>
+          )}
+          {isMobile && (
+            <div className="mobile-menu">
+              <GnbIcon />
             </div>
-          ) : (
-            <Link href="/login" className={LinkStyle}>
-              LOGIN
-            </Link>
           )}
         </nav>
       </div>

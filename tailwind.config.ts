@@ -16,6 +16,11 @@ module.exports = {
       animation: {
         'slide-in': 'slide-in 0.3s ease-out',
       },
+      screens: {
+        mobile: { max: "768px" },
+        tablet: { min: "769px", max: "1279px" },
+        pc: { min: "1280px" },
+      },
       colors: {
         white: {
           DEFAULT: "#ffffff",

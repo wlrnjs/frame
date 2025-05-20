@@ -3,6 +3,7 @@
 import React from "react";
 import LinkItem from "./LinkItem";
 import useFadeUpAnimation from "@/hooks/useFadeUpAnimation";
+import { cn } from "@/utils";
 
 const LinkContainer = () => {
   const items = [
@@ -33,7 +34,12 @@ const LinkContainer = () => {
   });
 
   return (
-    <div className="w-full h-[700px] flex-center gap-10 custom-margin layout-container">
+    <div
+      className={cn(
+        "w-full h-[700px] flex-center gap-10 custom-margin layout-container",
+        "mobile:gap-1"
+      )}
+    >
       {items.map((item) => (
         <LinkItem
           key={item.href}

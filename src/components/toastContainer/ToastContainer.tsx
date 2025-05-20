@@ -1,6 +1,6 @@
 "use client";
 
-import { useToastStore } from "@/utils/Store";
+import { useToastStore } from "@/utils/store/Store";
 import Toast from "../toast/Toast";
 
 export const ToastContainer = () => {

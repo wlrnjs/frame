@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useGetMainImg } from "@/hooks/api/main/useGetMainImg";
 import { gsap } from "gsap";
+import { cn } from "@/utils";
 
 const MainAnimation = () => {
   const { data: mainImages = [] } = useGetMainImg();
@@ -50,7 +51,12 @@ const MainAnimation = () => {
 
   return (
     <div className="w-full h-[calc(100vh-40px)] layout-container">
-      <div className="w-full h-full flex flex-col gap-20 items-center justify-end">
+      <div
+        className={cn(
+          "w-full h-full flex flex-col gap-20 items-center justify-end",
+          "mobile:gap-10"
+        )}
+      >
         <div
           ref={imageContainerRef}
           className="w-[400px] h-[550px] relative overflow-hidden"
@@ -66,7 +72,7 @@ const MainAnimation = () => {
             />
           ))}
         </div>
-        <div className="w-full flex items-start justify-end text-white">
+        <div className={cn("w-full flex items-start justify-end text-white")}>
           <div className="fade-in w-1/2 flex flex-col gap-[10px] items-start justify-center">
             <p className="text-[25px] leading-5 tracking-[-0.02em] text-black font-bold">
               {mainImages[currentIndex]?.title || "Loading..."}
@@ -75,7 +81,12 @@ const MainAnimation = () => {
               {mainImages[currentIndex]?.content || "Loading..."}
             </p>
           </div>
-          <div className="fade-in w-1/2 flex flex-col text-end">
+          <div
+            className={cn(
+              "fade-in w-1/2 flex flex-col text-end",
+              "mobile:text-[15px]"
+            )}
+          >
             <p className="text-black">CATEGORY CATEGORY CATEGORY</p>
             <p className="text-black">CATEGORY CATEGORY CATEGORY</p>
             <p className="text-black">CATEGORY CATEGORY CATEGORY</p>
