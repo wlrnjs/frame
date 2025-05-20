@@ -33,6 +33,7 @@
 .custom-margin {
   margin-top: 120px;
   margin-bottom: 80px;
+  @apply mobile:mt-[80px] mobile:mb-[40px]
 }
 
 .custom-login {

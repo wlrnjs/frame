@@ -84,7 +84,10 @@ const InquiryModal = ({ onOpen, onClose }: InquiryModalProps) => {
     <div className="modal-overlay" onClick={handleBackgroundClick}>
       <div
         onClick={(e) => e.stopPropagation()}
-        className="bg-white p-6 rounded-lg max-w-[800px] w-full"
+        className={cn(
+          "bg-white p-6 rounded-lg max-w-[800px] w-full",
+          "mobile:max-w-full mobile:h-full"
+        )}
       >
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-semibold">1:1 문의하기</h2>

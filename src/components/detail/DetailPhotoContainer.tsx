@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Square from "@/icon/Square";
-import DetailImageModal from "../modal/DetailImageModal";
+import DetailImageModal from "@/components/ui/modal/DetailImageModal";
 
 const DetailPhotoContainer = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -37,6 +37,7 @@ const DetailPhotoContainer = () => {
       <DetailImageModal
         onOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+        img_url="/BlackPhoto.JPG"
       />
     </div>
   );
