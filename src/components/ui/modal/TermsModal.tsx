@@ -4,6 +4,7 @@ import Close from "@/icon/Close";
 import TERMS from "@/constants/TERMS";
 import PRIVACY from "@/constants/PRIVACY";
 import Terms from "@/components/features/support/Terms";
+import { cn } from "@/utils";
 
 interface TermsModalProps {
   activeModal: "terms" | "privacy";
@@ -33,11 +34,15 @@ const TermsModal = ({ activeModal, setActiveModal }: TermsModalProps) => {
       setActiveModal(null);
     }
   };
+
   return createPortal(
     <div className="modal-overlay" onClick={handleBackgroundClick}>
       <div
         onClick={(e) => e.stopPropagation()}
-        className="bg-white p-6 rounded-lg max-w-[800px] w-full"
+        className={cn(
+          "bg-white p-6 rounded-lg max-w-[800px] w-full",
+          "mobile:max-w-full mobile:h-full mobile:rounded-none"
+        )}
       >
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-semibold">

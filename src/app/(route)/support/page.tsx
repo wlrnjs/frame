@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import TermsModal from "@/components/ui/modal/TermsModal";
 import InquiryModal from "@/components/ui/modal/InquiryModal";
+import { cn } from "@/utils";
 
 const supportItems = [
   { title: "공지사항", href: "/support/notices" },
@@ -22,7 +23,14 @@ const CustomerSupportPage = () => {
   return (
     <div className="w-full min-h-screen bg-white text-black layout-container custom-margin">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8 border-b pb-4">고객센터</h1>
+        <h1
+          className={cn(
+            "text-3xl font-bold mb-8 border-b pb-4",
+            "mobile:text-2xl"
+          )}
+        >
+          고객센터
+        </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {supportItems.map((item) => {

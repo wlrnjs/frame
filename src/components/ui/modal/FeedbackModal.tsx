@@ -12,8 +12,10 @@ interface FeedbackModalProps {
   onClose: () => void;
 }
 
-const buttonStyle =
-  "px-4 py-2 text-sm font-medium rounded-md transition-colors";
+const buttonStyle = cn(
+  "px-4 py-2 text-sm font-medium rounded-md transition-colors",
+  "mobile:w-1/2 mobile:h-[48px]"
+);
 
 const FeedbackModal = ({ onOpen, onClose }: FeedbackModalProps) => {
   const [title, setTitle] = useState("");
@@ -71,7 +73,7 @@ const FeedbackModal = ({ onOpen, onClose }: FeedbackModalProps) => {
     {
       label: "취소",
       onClick: onClose,
-      className: "text-gray-700 hover:bg-gray-100",
+      className: "text-gray-700 hover:bg-gray-100 mobile:border",
     },
     {
       label: "제출",
@@ -87,7 +89,10 @@ const FeedbackModal = ({ onOpen, onClose }: FeedbackModalProps) => {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="bg-white p-6 rounded-lg max-w-[800px] w-full"
+        className={cn(
+          "bg-white p-6 rounded-lg max-w-[800px] w-full",
+          "mobile:max-w-full mobile:h-full mobile:rounded-none"
+        )}
       >
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-semibold">개선 요청 작성</h2>
@@ -100,7 +105,12 @@ const FeedbackModal = ({ onOpen, onClose }: FeedbackModalProps) => {
           </button>
         </div>
 
-        <div className="flex flex-col gap-4">
+        <div
+          className={cn(
+            "flex flex-col gap-4",
+            "mobile:h-full mobile:justify-between mobile:pb-10"
+          )}
+        >
           {/* 폼 */}
           <div className="flex flex-col gap-4">
             <input
@@ -124,7 +134,9 @@ const FeedbackModal = ({ onOpen, onClose }: FeedbackModalProps) => {
           </div>
 
           {/* 버튼 그룹 */}
-          <div className="flex justify-end gap-3">
+          <div
+            className={cn("flex justify-end gap-3", "mobile:justify-center")}
+          >
             {buttons.map((btn) => (
               <button
                 key={btn.label}

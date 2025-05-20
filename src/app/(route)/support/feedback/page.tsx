@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { formatDate } from "@/utils/date/dateUtils";
 import useGetFeedbackList from "@/hooks/api/support/useGetFeedbackList";
 import FeedbackModal from "@/components/ui/modal/FeedbackModal";
+import { cn } from "@/utils";
 
 type Feedback = {
   id: number;
@@ -26,7 +27,9 @@ const FeedbackListPage = () => {
     <div className="w-full min-h-screen bg-white text-black layout-container custom-margin py-12">
       <div className="max-w-4xl mx-auto">
         <div className="flex justify-between items-center mb-8 border-b pb-4">
-          <h1 className="text-3xl font-bold">개선 요청</h1>
+          <h1 className={cn("text-3xl font-bold", "mobile:text-2xl")}>
+            개선 요청
+          </h1>
           <button
             className="text-black px-4 py-2 rounded border-black border hover:bg-black hover:text-white hover:border-transparent transition-colors"
             onClick={() => setIsModalOpen(true)}

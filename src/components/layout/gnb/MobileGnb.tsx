@@ -100,7 +100,7 @@ const MobileGnb = ({ isOpen, onClose }: MobileGnbProps) => {
     >
       <div
         ref={menuRef}
-        className="fixed top-0 right-0 h-full w-64 bg-black text-white shadow-lg transform translate-x-full pointer-events-auto"
+        className="fixed top-0 right-0 h-full w-1/2 bg-black text-white shadow-lg transform translate-x-full pointer-events-auto"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-end justify-end p-4 mr-2">

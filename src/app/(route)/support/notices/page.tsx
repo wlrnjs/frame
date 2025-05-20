@@ -1,6 +1,7 @@
 "use client";
 
 import useGetNoticeList from "@/hooks/api/support/useGetNoticeList";
+import { cn } from "@/utils";
 import { formatDate } from "@/utils/date/dateUtils";
 import React, { useState } from "react";
 
@@ -24,7 +25,14 @@ const NoticeListPage = () => {
   return (
     <div className="w-full min-h-screen bg-white text-black layout-container custom-margin py-12">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8 border-b pb-4">공지사항</h1>
+        <h1
+          className={cn(
+            "text-3xl font-bold mb-8 border-b pb-4",
+            "mobile:text-2xl"
+          )}
+        >
+          공지사항
+        </h1>
 
         <ul className="space-y-4">
           {noticeList?.map((notice: Notice) => (
