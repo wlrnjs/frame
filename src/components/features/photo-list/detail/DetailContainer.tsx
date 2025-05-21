@@ -84,7 +84,7 @@ const DetailContainer = ({ data, imgData }: DetailContainerProps) => {
     <div
       className={cn(
         "max-w-full min-w-[380px] h-[720px] bg-black text-white p-8 rounded-[5px] shadow-lg flex flex-col gap-8 sticky top-[110px]",
-        "mobile:max-w-[768px] mobile:w-full mobile:top-0 mobile:h-auto mobile:sticky mobile:gap-2"
+        "mobile:w-full mobile:top-0 mobile:h-auto mobile:sticky mobile:gap-2"
       )}
     >
       {/* 이미지 및 액션 */}

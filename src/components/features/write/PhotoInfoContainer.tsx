@@ -141,7 +141,7 @@ const PhotoInfoContainer = ({ images }: PhotoInfoContainerProps = {}) => {
       <div
         className={cn(
           "max-w-full min-w-[380px] min-h-[720px] bg-black text-white p-8 rounded-[5px] shadow-lg flex flex-col gap-8 sticky top-[120px]",
-          "mobile:top-0"
+          "mobile:max-w-full mobile:top-0"
         )}
       >
         <FormSection title="기본 정보">

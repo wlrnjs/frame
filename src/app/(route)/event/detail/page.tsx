@@ -45,14 +45,14 @@ const EventDetailPage = () => {
   return (
     <div className="w-full min-h-screen custom-margin layout-container">
       {event?.image_url && (
-        <div className={cn("relative w-full h-[500px]", "mobile:h-[280px]")}>
+        <div className={cn("relative w-full h-[500px]", "mobile:h-[240px]")}>
           <Image src={event?.image_url} alt="Event Detail" fill priority />
         </div>
       )}
       <div
         className={cn(
           "flex flex-col gap-4 bg-black text-white p-20",
-          "mobile:p-10 mobile:gap-3"
+          "mobile:p-4 mobile:gap-2"
         )}
       >
         <h2 className={cn("text-3xl", "mobile:text-xl")}>{event?.title}</h2>
@@ -98,7 +98,7 @@ const EventDetailPage = () => {
       <div
         className={cn(
           "bg-black text-white px-20 pb-20 flex flex-col gap-4",
-          "mobile:px-10"
+          "mobile:px-4"
         )}
       >
         <h1
