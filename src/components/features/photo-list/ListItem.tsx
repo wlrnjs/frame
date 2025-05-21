@@ -41,7 +41,7 @@ const ListItem = ({ data, imgData }: ListItemProps) => {
     >
       <div
         className="w-full relative"
-        style={{ paddingTop: `${imageRatio * 100}%` }} // 동적 비율 적용
+        style={{ paddingTop: `${imageRatio * 100}%` }}
       >
         <Image
           src={imgData?.[0]?.image_url || "/BlackPhoto.JPG"}

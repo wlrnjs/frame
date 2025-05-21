@@ -8,6 +8,7 @@ import EmptyBox from "@/components/ui/statusBox/EmptyBox";
 import ErrorBox from "@/components/ui/statusBox/ErrorBox";
 import LoadingBox from "@/components/ui/statusBox/LoadingBox";
 import { ImgListType, ListItemType } from "@/types/ListType";
+import { cn } from "@/utils";
 
 interface PhotoListClientProps {
   initialPosts: ListItemType[] | null;
@@ -58,11 +59,21 @@ const PhotoListClient = ({
 
   return (
     <div className="w-full min-h-screen custom-margin layout-container">
-      <div className="flex items-start justify-center mt-[10px] gap-10">
+      <div
+        className={cn(
+          "flex items-start justify-center mt-[10px] gap-10",
+          "mobile:flex-col mobile:gap-2"
+        )}
+      >
+        <div className="w-full hidden mobile:block">
+          <SearchContainer />
+        </div>
         <div className="w-full bg-black rounded-[5px] p-5">
           {renderContent()}
         </div>
-        <SearchContainer />
+        <div className="mobile:hidden">
+          <SearchContainer />
+        </div>
       </div>
     </div>
   );

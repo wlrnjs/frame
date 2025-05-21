@@ -31,7 +31,7 @@ const UserProfileHeader = ({ isMyPage = false }: UserProfileHeaderProps) => {
         <h1 className="text-2xl font-bold text-white">wlrnjs</h1>
         <p className="text-neutral-400">tjwlrnjs7336@naver.com</p>
         <p className="text-sm text-neutral-500">가입일: 2025.05.04</p>
-        <div className="mt-2 flex flex-wrap gap-2 justify-center md:justify-start">
+        <div className="mt-2 flex flex-wrap gap-2 justify-start">
           <span className={categoryStyle}>도시</span>
           <span className={categoryStyle}>풍경</span>
           <span className={categoryStyle}>흑백</span>

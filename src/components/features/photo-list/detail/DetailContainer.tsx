@@ -97,8 +97,11 @@ const DetailContainer = ({ data, imgData }: DetailContainerProps) => {
           imgData={imgData}
         />
 
-        <div className="flex flex-col gap-2">
-          <h1 className="text-3xl font-bold">{title}</h1>
+        {/* 제목 및 설명 */}
+        <div className={cn("flex flex-col gap-2", "mobile:gap-1")}>
+          <h1 className={cn("text-3xl font-bold", "mobile:text-2xl")}>
+            {title}
+          </h1>
           <p className="text-sm text-gray-400">{description}</p>
         </div>
       </div>
