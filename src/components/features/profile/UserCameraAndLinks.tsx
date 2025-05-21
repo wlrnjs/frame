@@ -7,19 +7,31 @@ const UserCameraAndLinks = () => {
     "text-neutral-400 hover:text-white hover:underline hover:decoration-offset-2 transition-all duration-300 ease-out";
 
   return (
-    <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div className={cn("mt-6 grid grid-cols-2 gap-4", "mobile:mt-4")}>
       <div>
-        <h3 className="text-lg font-semibold text-white">Camera Gear</h3>
-        <p className="text-neutral-400">Camera: FUJIFILM X100V</p>
-        <p className="text-neutral-400">Lens: 23mm f/2</p>
+        <h3
+          className={cn("text-lg font-semibold text-white", "mobile:text-base")}
+        >
+          Camera Gear
+        </h3>
+        <p className={cn("text-neutral-400", "mobile:text-sm")}>
+          Camera: FUJIFILM X100V
+        </p>
+        <p className={cn("text-neutral-400", "mobile:text-sm")}>
+          Lens: 23mm f/2
+        </p>
       </div>
       <div>
-        <h3 className="text-lg font-semibold text-white">Connect</h3>
+        <h3
+          className={cn("text-lg font-semibold text-white", "mobile:text-base")}
+        >
+          Connect
+        </h3>
         <Link
           href="https://www.instagram.com/_zuqil/"
           target="_blank"
           rel="noopener noreferrer"
-          className={LinkStyle}
+          className={cn(LinkStyle, "mobile:text-sm")}
           aria-label="Instagram"
         >
           Instagram
@@ -28,7 +40,7 @@ const UserCameraAndLinks = () => {
           href="https://github.com/wlrnjs"
           target="_blank"
           rel="noopener noreferrer"
-          className={cn("block", LinkStyle)}
+          className={cn("block", LinkStyle, "mobile:text-sm")}
           aria-label="Github"
         >
           Github

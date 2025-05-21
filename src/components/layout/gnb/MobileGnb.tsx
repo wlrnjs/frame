@@ -95,7 +95,7 @@ const MobileGnb = ({ isOpen, onClose }: MobileGnbProps) => {
   return createPortal(
     <div
       ref={overlayRef}
-      className="fixed top-0 left-0 z-50 w-full h-screen bg-black bg-opacity-0 backdrop-blur-sm pointer-events-none"
+      className="fixed top-0 left-0 z-50 w-full h-screen bg-black bg-opacity-0 backdrop-blur-sm pc:hidden tablet:hidden"
       onClick={handleClose}
     >
       <div

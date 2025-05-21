@@ -39,13 +39,11 @@ const AddPhotoContainer = ({
       existingFilenames.has(filename)
     );
 
-    // 중복된 파일 토스트
     if (duplicates.length > 0) {
       toast.error(`동일한 파일이 있습니다: ${duplicates.join(", ")}`);
       return;
     }
 
-    // 이미지 최대 5장 토스트
     if (images.length + selectedFiles.length > 5) {
       toast.error("이미지는 최대 5장까지만 업로드 가능합니다.");
       return;
@@ -67,7 +65,7 @@ const AddPhotoContainer = ({
     <div
       className={cn(
         "w-full h-[720px] flex flex-col items-center gap-2",
-        "mobile:h-[500px]"
+        "mobile:h-fit"
       )}
     >
       <div className="relative w-full aspect-[4/3] bg-black overflow-hidden rounded-md">
@@ -83,15 +81,22 @@ const AddPhotoContainer = ({
           className="object-contain p-5"
         />
       </div>
-      <div className="w-full h-[120px] bg-black rounded-[5px] p-3 flex items-center justify-start gap-3 overflow-x-auto">
+      <div
+        className={cn(
+          "w-full h-[120px] bg-black rounded-[5px] p-3 flex items-center justify-start gap-3 overflow-x-auto",
+          "mobile:h-[80px]"
+        )}
+      >
         {images.map((image, index) => (
           <div
             key={index}
-            className={`relative w-[75px] h-[75px] rounded-md overflow-hidden cursor-pointer ${
+            className={cn(
+              "relative w-[75px] h-[75px] rounded-md overflow-hidden cursor-pointer",
               activeImageIndex === index
                 ? "border-2 border-yellow-400"
-                : "border border-white"
-            }`}
+                : "border border-white",
+              "mobile:w-[50px] mobile:h-[50px]"
+            )}
             onClick={() => {
               setActiveImageIndex(index);
             }}
@@ -113,7 +118,10 @@ const AddPhotoContainer = ({
         {images.length < 5 && (
           <label
             htmlFor="image-upload"
-            className="w-[75px] h-[75px] rounded-md border border-white flex-center text-xl text-white font-light border-custom-dotted pointer select-none"
+            className={cn(
+              "w-[75px] h-[75px] rounded-md border border-white flex-center text-xl text-white font-light border-custom-dotted pointer select-none",
+              "mobile:w-[50px] mobile:h-[50px]"
+            )}
           >
             <p>+</p>
           </label>

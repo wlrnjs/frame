@@ -37,7 +37,7 @@ const LinkContainer = () => {
     <div
       className={cn(
         "w-full h-[700px] flex-center gap-10 custom-margin layout-container",
-        "mobile:gap-1"
+        "mobile:h-[500px] mobile:gap-1"
       )}
     >
       {items.map((item) => (

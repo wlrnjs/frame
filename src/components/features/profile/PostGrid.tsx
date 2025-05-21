@@ -5,7 +5,7 @@ const TestArray = ["/BlackPhoto.JPG", "/IMG_7115.JPG", "/BlackPhoto.JPG"];
 
 const PostGrid = () => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+    <div className="grid grid-cols-3 gap-4">
       {TestArray.map((src, index) => (
         <PostGridItem key={index} src={src} alt={`Image ${index + 1}`} />
       ))}

@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Question from "@/icon/Question";
+import { cn } from "@/utils";
 
 const ACTIVITY_SCORE_TOOLTIP = [
   { label: "글쓰기", value: "+30" },
@@ -25,13 +26,22 @@ const UserProfileHeader = ({ isMyPage = false }: UserProfileHeaderProps) => {
         alt="Profile"
         width={128}
         height={128}
-        className="w-[128px] h-[128px] rounded-full object-cover border-2 border-neutral-700"
+        className={cn(
+          "w-[128px] h-[128px] rounded-full object-cover border-2 border-neutral-700",
+          "mobile:w-[100px] mobile:h-[100px]"
+        )}
       />
       <div className="flex-1 text-left">
-        <h1 className="text-2xl font-bold text-white">wlrnjs</h1>
-        <p className="text-neutral-400">tjwlrnjs7336@naver.com</p>
-        <p className="text-sm text-neutral-500">가입일: 2025.05.04</p>
-        <div className="mt-2 flex flex-wrap gap-2 justify-start">
+        <h1 className={cn("text-2xl font-bold text-white", "mobile:text-xl")}>
+          wlrnjs
+        </h1>
+        <p className={cn("text-neutral-400", "mobile:text-sm")}>
+          tjwlrnjs7336@naver.com
+        </p>
+        <p className={cn("text-sm text-neutral-500", "mobile:text-xs")}>
+          가입일: 2025.05.04
+        </p>
+        <div className={cn("mt-2 flex flex-wrap gap-2", "mobile:gap-1")}>
           <span className={categoryStyle}>도시</span>
           <span className={categoryStyle}>풍경</span>
           <span className={categoryStyle}>흑백</span>
@@ -39,7 +49,12 @@ const UserProfileHeader = ({ isMyPage = false }: UserProfileHeaderProps) => {
       </div>
       <div className="text-right">
         <div className="flex gap-1 items-center">
-          <div className="text-lg font-semibold text-white text-nowrap flex items-center gap-2">
+          <div
+            className={cn(
+              "text-lg font-semibold text-white text-nowrap flex items-center gap-2",
+              "mobile:text-sm"
+            )}
+          >
             <p>활동 점수</p>
             {isMyPage && (
               <div className="relative group">
@@ -48,9 +63,11 @@ const UserProfileHeader = ({ isMyPage = false }: UserProfileHeaderProps) => {
                   {ACTIVITY_SCORE_TOOLTIP.map(({ label, value, isBold }) => (
                     <p
                       key={label}
-                      className={`text-sm leading-normal py-0.5 ${
-                        isBold ? "font-semibold" : ""
-                      }`}
+                      className={cn(
+                        "text-sm leading-normal py-0.5",
+                        isBold && "font-semibold",
+                        "mobile:text-xs"
+                      )}
                     >
                       {label} {value}
                     </p>
@@ -60,7 +77,9 @@ const UserProfileHeader = ({ isMyPage = false }: UserProfileHeaderProps) => {
             )}
           </div>
         </div>
-        <p className="text-2xl leading-5 text-white">800</p>
+        <p className={cn("text-2xl leading-5 text-white", "mobile:text-xl")}>
+          800
+        </p>
       </div>
     </div>
   );
