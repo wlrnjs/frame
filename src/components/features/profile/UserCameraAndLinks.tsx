@@ -8,7 +8,7 @@ const UserCameraAndLinks = () => {
 
   return (
     <div className={cn("mt-6 grid grid-cols-2 gap-4", "mobile:mt-4")}>
-      <div>
+      <div className="text-nowrap">
         <h3
           className={cn("text-lg font-semibold text-white", "mobile:text-base")}
         >

@@ -16,11 +16,13 @@ interface UserProfileHeaderProps {
 }
 
 const UserProfileHeader = ({ isMyPage = false }: UserProfileHeaderProps) => {
-  const categoryStyle =
-    "inline-block bg-neutral-800 text-white text-xs px-2 py-1 rounded-full";
+  const categoryStyle = cn(
+    "inline-block bg-neutral-800 text-white text-xs px-2 py-1 rounded-full",
+    "mobile:text-[10px]"
+  );
 
   return (
-    <div className="flex-center gap-6">
+    <div className={cn("flex-center gap-6", "mobile:gap-2")}>
       <Image
         src={"/avatar.png"}
         alt="Profile"

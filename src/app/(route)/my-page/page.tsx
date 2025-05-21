@@ -77,7 +77,7 @@ const MyPage = () => {
           <UserTabs activeTab={activeTab} setActiveTab={setActiveTab} />
 
           {/* 탭 콘텐츠 */}
-          <div className={cn("p-6 mb-10", "mobile:p-4 mobile:mb-2")}>
+          <div className={cn("p-6", "mobile:p-1")}>
             {activeTab === "posts" && (
               <div className="flex flex-col gap-[20px]">
                 <PostGrid />
