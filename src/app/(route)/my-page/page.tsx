@@ -9,19 +9,15 @@ import ProfileEditModal from "@/components/ui/modal/ProfileEditModal";
 import Edit from "@/icon/Edit";
 import { useToast } from "@/hooks/useToast";
 import { cn } from "@/utils";
+import useGetUser from "@/hooks/api/my-page/useGetUser";
 
 const MyPage = () => {
-  const initialProfileData = {
-    profileImage: "",
-    nickname: "",
-    favoriteCategory: "",
-    camera: "",
-    lens: "",
-    urls: [],
-  };
   const [activeTab, setActiveTab] = useState("posts");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const toast = useToast();
+
+  const { data: user } = useGetUser();
+  const userData = user?.[0];
 
   const btnStyle = cn(
     "absolute right-6 top-3 h-[40px] bg-gray-920 border border-gray-870 rounded-[5px] px-4 py-2 text-sm text-white hover:bg-black transition-all duration-300 ease-out flex items-center gap-2",
@@ -61,7 +57,7 @@ const MyPage = () => {
         >
           <div className="flex justify-between items-start">
             <div className="flex-1">
-              <UserProfileHeader isMyPage />
+              <UserProfileHeader isMyPage userData={userData} />
               <UserCameraAndLinks />
             </div>
 
@@ -97,7 +93,7 @@ const MyPage = () => {
         isOpen={isModalOpen}
         onClose={handleClose}
         onSave={handleSave}
-        currentData={initialProfileData}
+        data={userData}
       />
     </div>
   );

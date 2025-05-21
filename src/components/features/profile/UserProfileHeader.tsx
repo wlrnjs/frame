@@ -2,6 +2,8 @@ import React from "react";
 import Image from "next/image";
 import Question from "@/icon/Question";
 import { cn } from "@/utils";
+import { formatDate } from "@/utils/date/dateUtils";
+import { User } from "@/types/UserType";
 
 const ACTIVITY_SCORE_TOOLTIP = [
   { label: "글쓰기", value: "+30" },
@@ -13,9 +15,13 @@ const ACTIVITY_SCORE_TOOLTIP = [
 
 interface UserProfileHeaderProps {
   isMyPage?: boolean;
+  userData?: User;
 }
 
-const UserProfileHeader = ({ isMyPage = false }: UserProfileHeaderProps) => {
+const UserProfileHeader = ({
+  isMyPage = false,
+  userData,
+}: UserProfileHeaderProps) => {
   const categoryStyle = cn(
     "inline-block bg-neutral-800 text-white text-xs px-2 py-1 rounded-full",
     "mobile:text-[10px]"
@@ -35,13 +41,13 @@ const UserProfileHeader = ({ isMyPage = false }: UserProfileHeaderProps) => {
       />
       <div className="flex-1 text-left">
         <h1 className={cn("text-2xl font-bold text-white", "mobile:text-xl")}>
-          wlrnjs
+          {userData?.nickname}
         </h1>
         <p className={cn("text-neutral-400", "mobile:text-sm")}>
-          tjwlrnjs7336@naver.com
+          {userData?.email || "이메일 미등록"}
         </p>
         <p className={cn("text-sm text-neutral-500", "mobile:text-xs")}>
-          가입일: 2025.05.04
+          가입일: {formatDate(userData?.created_at || "알수없음")}
         </p>
         <div className={cn("mt-2 flex flex-wrap gap-2", "mobile:gap-1")}>
           <span className={categoryStyle}>도시</span>
@@ -80,7 +86,7 @@ const UserProfileHeader = ({ isMyPage = false }: UserProfileHeaderProps) => {
           </div>
         </div>
         <p className={cn("text-2xl leading-5 text-white", "mobile:text-xl")}>
-          800
+          {userData?.activity_score || "0"}점
         </p>
       </div>
     </div>

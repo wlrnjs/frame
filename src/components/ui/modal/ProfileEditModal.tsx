@@ -3,11 +3,12 @@
 import React, { useEffect, useState } from "react";
 import Question from "@/icon/Question";
 import { createPortal } from "react-dom";
-import { ProfileData } from "@/types/ProfileData";
 import { cn } from "@/utils";
 import EditInput from "@/components/features/my-page/EditInput";
 import UrlInput from "@/components/features/my-page/UrlInput";
 import ProfileImageInput from "@/components/features/my-page/ProfileImageInput";
+import { User } from "@/types/UserType";
+import { formatDate } from "@/utils/date/dateUtils";
 
 const buttonStyles = {
   base: "rounded text-white px-4 py-2 font-semibold transition-colors",
@@ -26,20 +27,25 @@ interface ProfileEditModalProps {
     lens: string;
     urls: { name: string; url: string }[];
   }) => void;
-  currentData: ProfileData;
+  data: User;
 }
 
 const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
   isOpen,
   onClose,
   // onSave,
-  // currentData,
+  data,
 }) => {
   const [urlInputs, setUrlInputs] = useState([
     { name: "Instagram", url: "https://instagram.com/user" },
     { name: "Github", url: "https://github.com/user" },
     { name: "", url: "" },
   ]);
+
+  const [nickname, setNickname] = useState(data?.nickname);
+  const [category, setCategory] = useState(data?.category || "카테고리 미설정");
+  const [camera, setCamera] = useState(data?.camera || "카메라 미설정");
+  const [lens, setLens] = useState(data?.lens || "렌즈 미설정");
 
   useEffect(() => {
     if (isOpen) {
@@ -94,29 +100,43 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
         {/* 프로필 이미지 */}
         <ProfileImageInput
           label="프로필 이미지"
-          imageUrl="/avatar.png"
+          imageUrl={data?.profile_image || "/avatar.png"}
           onChange={() => {}}
         />
 
         {/* 닉네임 */}
-        <EditInput label="닉네임" value="wlrnjs" />
+        <EditInput label="닉네임" value={nickname} onChange={setNickname} />
 
         {/* 이메일 (읽기 전용) */}
-        <EditInput label="이메일" value="twlrnjs7336@naver.com" isDisabled />
+        <EditInput
+          label="이메일"
+          value={data?.email || "이메일 미설정"}
+          isDisabled
+        />
 
         {/* 가입일 (읽기 전용) */}
-        <EditInput label="가입일" value="2025.05.04" isDisabled />
+        <EditInput
+          label="가입일"
+          value={formatDate(data?.created_at || "")}
+          isDisabled
+        />
 
         {/* 좋아하는 카테고리 */}
-        <EditInput label="좋아하는 카테고리" value="Photography" />
+        <EditInput
+          label="좋아하는 카테고리"
+          value={category}
+          onChange={setCategory}
+        />
 
         {/* 주력 카메라 세팅 */}
         <EditInput
           label="주력 카메라 세팅"
-          value="FUJIFILM X100V"
-          value2="23mm f/2"
+          value={camera}
+          value2={lens}
           placeholder2="Lens"
           isCamera
+          onChange={setCamera}
+          onChange2={setLens}
         />
 
         {/* URL 연결 */}

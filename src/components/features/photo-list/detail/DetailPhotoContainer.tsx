@@ -72,7 +72,7 @@ const DetailPhotoContainer = ({
     <div
       className={cn(
         "w-full h-[720px] flex flex-col items-center gap-2",
-        "mobile:max-h-[500px] mobile:h-auto"
+        "mobile:h-fit"
       )}
     >
       {hasMultiplePhotos ? (

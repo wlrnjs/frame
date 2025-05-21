@@ -19,6 +19,8 @@ interface EditInputProps {
   placeholder?: string;
   placeholder2?: string;
   isCamera?: boolean;
+  onChange?: (value: string) => void;
+  onChange2?: (value: string) => void;
 }
 
 const EditInput = ({
@@ -29,6 +31,8 @@ const EditInput = ({
   placeholder,
   placeholder2,
   isCamera,
+  onChange,
+  onChange2,
 }: EditInputProps) => {
   return (
     <div className={cn(isCamera && "space-y-2", "mb-4")}>
@@ -40,11 +44,11 @@ const EditInput = ({
         id={label}
         value={value}
         disabled={isDisabled}
-        readOnly
         placeholder={placeholder}
         className={
           isDisabled ? styles.inputDisabledClass : styles.inputBaseClass
         }
+        onChange={(e) => onChange?.(e.target.value)}
       />
       {isCamera && (
         <input
@@ -52,6 +56,7 @@ const EditInput = ({
           value={value2}
           placeholder={placeholder2}
           className={styles.inputBaseClass}
+          onChange={(e) => onChange2?.(e.target.value)}
         />
       )}
     </div>
