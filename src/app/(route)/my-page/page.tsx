@@ -7,14 +7,12 @@ import UserTabs from "@/components/features/profile/UserTabs";
 import PostGrid from "@/components/features/profile/PostGrid";
 import ProfileEditModal from "@/components/ui/modal/ProfileEditModal";
 import Edit from "@/icon/Edit";
-import { useToast } from "@/hooks/useToast";
 import { cn } from "@/utils";
 import useGetUser from "@/hooks/api/my-page/useGetUser";
 
 const MyPage = () => {
   const [activeTab, setActiveTab] = useState("posts");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const toast = useToast();
 
   const { data: user } = useGetUser();
   const userData = user?.[0];
@@ -26,19 +24,6 @@ const MyPage = () => {
 
   const handleProfileEdit = () => {
     setIsModalOpen(true);
-  };
-
-  const handleSave = (data: {
-    profileImage: string;
-    nickname: string;
-    favoriteCategory: string;
-    camera: string;
-    lens: string;
-    urls: { name: string; url: string }[];
-  }) => {
-    console.log("저장된 데이터:", data);
-    toast.success("프로필이 저장되었습니다.");
-    setIsModalOpen(false);
   };
 
   const handleClose = () => {
@@ -92,7 +77,6 @@ const MyPage = () => {
       <ProfileEditModal
         isOpen={isModalOpen}
         onClose={handleClose}
-        onSave={handleSave}
         data={userData}
       />
     </div>

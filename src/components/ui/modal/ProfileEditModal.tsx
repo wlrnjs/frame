@@ -9,6 +9,7 @@ import UrlInput from "@/components/features/my-page/UrlInput";
 import ProfileImageInput from "@/components/features/my-page/ProfileImageInput";
 import { User } from "@/types/UserType";
 import { formatDate } from "@/utils/date/dateUtils";
+import usePostEditMyData from "@/hooks/api/my-page/usePostEditMyData";
 
 const buttonStyles = {
   base: "rounded text-white px-4 py-2 font-semibold transition-colors",
@@ -19,14 +20,6 @@ const buttonStyles = {
 interface ProfileEditModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (data: {
-    profileImage: string;
-    nickname: string;
-    favoriteCategory: string;
-    camera: string;
-    lens: string;
-    urls: { name: string; url: string }[];
-  }) => void;
   data: User;
 }
 
@@ -42,10 +35,13 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
     { name: "", url: "" },
   ]);
 
-  const [nickname, setNickname] = useState(data?.nickname);
+  const { mutate: editProfile } = usePostEditMyData();
+
+  const [nickname, setNickname] = useState(data?.nickname || "");
   const [category, setCategory] = useState(data?.category || "카테고리 미설정");
   const [camera, setCamera] = useState(data?.camera || "카메라 미설정");
   const [lens, setLens] = useState(data?.lens || "렌즈 미설정");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
@@ -70,6 +66,31 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
   const handleBackgroundClick = (event: React.MouseEvent<HTMLDivElement>) => {
     if (event.target === event.currentTarget) {
       onClose();
+    }
+  };
+
+  const handleSave = async () => {
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+
+    try {
+      const updatedData = {
+        profile_image: data?.profile_image || "",
+        nickname,
+        email: data?.email || "",
+        category,
+        camera,
+        lens,
+        links: urlInputs.filter((input) => input.name && input.url),
+      };
+
+      await editProfile(updatedData);
+      onClose();
+    } catch (error) {
+      console.error("프로필 저장 중 오류 발생:", error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -156,11 +177,25 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
 
         {/* 버튼 */}
         <div className="flex justify-between">
-          <button className={cn(buttonStyles.base, buttonStyles.cancel)}>
+          <button
+            onClick={onClose}
+            disabled={isSubmitting}
+            className={cn(buttonStyles.base, buttonStyles.cancel, {
+              "opacity-50 cursor-not-allowed": isSubmitting,
+              "hover:bg-red-500": !isSubmitting,
+            })}
+          >
             취소
           </button>
-          <button className={cn(buttonStyles.base, buttonStyles.save)}>
-            저장
+          <button
+            onClick={handleSave}
+            disabled={isSubmitting}
+            className={cn(buttonStyles.base, buttonStyles.save, {
+              "opacity-50 cursor-not-allowed": isSubmitting,
+              "hover:bg-neutral-500": !isSubmitting,
+            })}
+          >
+            {isSubmitting ? "저장 중..." : "저장"}
           </button>
         </div>
       </div>
