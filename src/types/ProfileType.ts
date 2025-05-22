@@ -1,4 +1,4 @@
-export interface User {
+export interface UserDataType {
   camera: string;
   category: string;
   created_at: string;
@@ -12,3 +12,5 @@ export interface User {
   email: string;
   activity_score: string;
 }
+
+export type TabType = "posts" | "liked";

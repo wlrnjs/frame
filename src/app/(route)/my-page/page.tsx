@@ -1,82 +1,35 @@
 "use client";
 
-import React, { useState } from "react";
-import UserProfileHeader from "@/components/features/profile/UserProfileHeader";
-import UserCameraAndLinks from "@/components/features/profile/UserCameraAndLinks";
-import UserTabs from "@/components/features/profile/UserTabs";
-import PostGrid from "@/components/features/profile/PostGrid";
+import React from "react";
 import ProfileEditModal from "@/components/ui/modal/ProfileEditModal";
-import Edit from "@/icon/Edit";
-import { cn } from "@/utils";
 import useGetUser from "@/hooks/api/my-page/useGetUser";
-
+import useProfileTabs from "@/components/features/my-page/useProfileTabs";
+import useProfileEditModal from "@/components/features/my-page/useProfileEditModal";
+import ProfileSection from "@/components/features/my-page/ProfileSection";
+import TabSection from "@/components/features/my-page/TabSection";
+// 메인 MyPage 컴포넌트
 const MyPage = () => {
-  const [activeTab, setActiveTab] = useState("posts");
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
+  // const { data: user, isLoading, error } = useGetUser();
   const { data: user } = useGetUser();
+  const { activeTab, setActiveTab } = useProfileTabs();
+  const { isModalOpen, openModal, closeModal } = useProfileEditModal();
+
   const userData = user?.[0];
-
-  const btnStyle = cn(
-    "absolute right-6 top-3 h-[40px] bg-gray-920 border border-gray-870 rounded-[5px] px-4 py-2 text-sm text-white hover:bg-black transition-all duration-300 ease-out flex items-center gap-2",
-    "mobile:right-4 mobile:top-2 mobile:h-[30px] mobile:text-xs mobile:px-2 mobile:py-1"
-  );
-
-  const handleProfileEdit = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleClose = () => {
-    setIsModalOpen(false);
-  };
 
   return (
     <div className="w-full min-h-fit custom-margin layout-container">
       <div className="w-full">
         {/* 프로필 섹션 */}
-        <div
-          className={cn(
-            "relative bg-black rounded-lg shadow-lg p-6 mb-6",
-            "mobile:p-4"
-          )}
-        >
-          <div className="flex justify-between items-start">
-            <div className="flex-1">
-              <UserProfileHeader isMyPage userData={userData} />
-              <UserCameraAndLinks />
-            </div>
-
-            <button className={btnStyle} onClick={handleProfileEdit}>
-              <Edit size="16" />
-              프로필 편집
-            </button>
-          </div>
-        </div>
+        <ProfileSection userData={userData} onEditClick={openModal} />
 
         {/* 탭 섹션 */}
-        <div className="bg-black rounded-lg shadow-lg">
-          <UserTabs activeTab={activeTab} setActiveTab={setActiveTab} />
-
-          {/* 탭 콘텐츠 */}
-          <div className={cn("p-6", "mobile:p-1")}>
-            {activeTab === "posts" && (
-              <div className="flex flex-col gap-[20px]">
-                <PostGrid />
-                <PostGrid />
-              </div>
-            )}
-            {activeTab === "liked" && (
-              <div className="flex flex-col gap-[20px]">
-                <PostGrid />
-                <PostGrid />
-              </div>
-            )}
-          </div>
-        </div>
+        <TabSection activeTab={activeTab} setActiveTab={setActiveTab} />
       </div>
+
+      {/* 프로필 편집 모달 */}
       <ProfileEditModal
         isOpen={isModalOpen}
-        onClose={handleClose}
+        onClose={closeModal}
         data={userData}
       />
     </div>

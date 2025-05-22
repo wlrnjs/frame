@@ -1,10 +1,10 @@
 import { cn } from "@/utils";
 import { formatDate, formatTime, getEventStatus } from "@/utils/date/dateUtils";
 import React from "react";
-import { Event } from "@/types/Event";
+import { EventItemType } from "@/types/EventItemType";
 
 interface EventMetaProps {
-  event: Event;
+  event: EventItemType;
 }
 
 const EventMeta = ({ event }: EventMetaProps) => (

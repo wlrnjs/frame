@@ -7,7 +7,7 @@ import { cn } from "@/utils";
 import EditInput from "@/components/features/my-page/EditInput";
 import UrlInput from "@/components/features/my-page/UrlInput";
 import ProfileImageInput from "@/components/features/my-page/ProfileImageInput";
-import { User } from "@/types/UserType";
+import { UserDataType } from "@/types/ProfileType";
 import { formatDate } from "@/utils/date/dateUtils";
 import usePostEditMyData from "@/hooks/api/my-page/usePostEditMyData";
 
@@ -20,7 +20,7 @@ const buttonStyles = {
 interface ProfileEditModalProps {
   isOpen: boolean;
   onClose: () => void;
-  data: User;
+  data: UserDataType;
 }
 
 const ProfileEditModal = ({

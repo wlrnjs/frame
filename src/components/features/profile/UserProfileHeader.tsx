@@ -3,7 +3,7 @@ import Image from "next/image";
 import Question from "@/icon/Question";
 import { cn } from "@/utils";
 import { formatDate } from "@/utils/date/dateUtils";
-import { User } from "@/types/UserType";
+import { UserDataType } from "@/types/ProfileType";
 
 const ACTIVITY_SCORE_TOOLTIP = [
   { label: "글쓰기", value: "+30" },
@@ -15,7 +15,7 @@ const ACTIVITY_SCORE_TOOLTIP = [
 
 interface UserProfileHeaderProps {
   isMyPage?: boolean;
-  userData?: User;
+  userData?: UserDataType;
 }
 
 const UserProfileHeader = ({

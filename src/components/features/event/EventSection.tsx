@@ -1,7 +1,7 @@
 import { cn } from "@/utils";
 import React from "react";
 import EventListCard from "./EventListCard";
-import { Event } from "@/types/Event";
+import { EventItemType } from "@/types/EventItemType";
 
 // 이벤트 섹션 컴포넌트
 const EventSection = ({
@@ -10,7 +10,7 @@ const EventSection = ({
   isExpired = false,
 }: {
   title: string;
-  events: Event[];
+  events: EventItemType[];
   isExpired?: boolean;
 }) => {
   if (!events || events.length === 0) return null;
@@ -24,7 +24,7 @@ const EventSection = ({
           "mobile:grid-cols-1 mobile:gap-1"
         )}
       >
-        {events.map((event: Event, index: number) => (
+        {events.map((event: EventItemType, index: number) => (
           <EventListCard
             key={`${event.event_id}-${index}`}
             event={event}

@@ -2,14 +2,14 @@ import Link from "next/link";
 import React from "react";
 import Image from "next/image";
 import { cn } from "@/utils";
-import { Event } from "@/types/Event";
+import { EventItemType } from "@/types/EventItemType";
 
 // 이벤트 카드 컴포넌트
 const EventListCard = ({
   event,
   isExpired = false,
 }: {
-  event: Event;
+  event: EventItemType;
   isExpired?: boolean;
 }) => (
   <Link

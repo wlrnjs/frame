@@ -2,10 +2,10 @@ import { cn } from "@/utils";
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
-import { Event } from "@/types/Event";
+import { EventItemType } from "@/types/EventItemType";
 
 // 메인 이벤트 컴포넌트
-const MainEventCard = ({ event }: { event: Event }) => (
+const MainEventCard = ({ event }: { event: EventItemType }) => (
   <Link
     href={`/event/detail?id=${event.event_id}`}
     className={cn(
