@@ -9,7 +9,7 @@ import Delete from "@/icon/Delete";
 import React from "react";
 import usePostLikeToggle from "@/hooks/api/photo-list/detail/usePostLikeToggle";
 import useUserId from "@/hooks/useUserId";
-import { useToast } from "@/hooks/useToast";
+import { useToast } from "@/hooks/ui/useToast";
 import { DetailImgData } from "./DetailContainer";
 import useGetLikeToggle from "@/hooks/api/photo-list/detail/useGetLikeToggle";
 import useDeleteLikeToggle from "@/hooks/api/photo-list/detail/useDeleteLikeToggle";

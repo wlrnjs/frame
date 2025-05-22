@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Close from "@/icon/Close";
-import { useToast } from "@/hooks/useToast";
+import { useToast } from "@/hooks/ui/useToast";
 import { cn } from "@/utils";
 
 const AddPhotoContainer = ({

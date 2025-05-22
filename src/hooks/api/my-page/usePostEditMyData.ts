@@ -1,4 +1,4 @@
-import { useToast } from "@/hooks/useToast";
+import { useToast } from "@/hooks/ui/useToast";
 import postEditMyData, { postEditMyDataProps } from "@/service/my-page/postEditMyData";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 

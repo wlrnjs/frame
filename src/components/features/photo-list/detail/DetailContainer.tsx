@@ -4,7 +4,7 @@ import ShareModal from "@/components/ui/modal/ShareModal";
 import DeleteModal from "@/components/ui/modal/DeleteModal";
 import ReportModal from "@/components/ui/modal/ReportModal";
 import ActionButtons from "./ActionButtons";
-import { useModal } from "@/hooks/useModal";
+import { useModal } from "@/hooks/ui/useModal";
 import Link from "next/link";
 import React from "react";
 import { formatDate } from "@/utils/date/dateUtils";

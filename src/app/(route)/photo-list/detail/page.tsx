@@ -8,7 +8,7 @@ import RecommendContainer from "@/components/features/photo-list/detail/Recommen
 import { useSearchParams } from "next/navigation";
 import useGetImg from "@/hooks/api/photo-list/detail/useGetImg";
 import { useRouter } from "next/navigation";
-import { useToast } from "@/hooks/useToast";
+import { useToast } from "@/hooks/ui/useToast";
 import useGetImgDetail from "@/hooks/api/photo-list/detail/useGetImgDetail";
 import { cn } from "@/utils";
 

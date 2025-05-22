@@ -8,10 +8,15 @@ import ProfileEditButton from "./ProfileEditButton";
 interface ProfileSectionProps {
   userData: UserDataType;
   onEditClick: () => void;
+  isMyPage?: boolean;
 }
 
 // 프로필 섹션 컴포넌트
-const ProfileSection = ({ userData, onEditClick }: ProfileSectionProps) => (
+const ProfileSection = ({
+  userData,
+  onEditClick,
+  isMyPage,
+}: ProfileSectionProps) => (
   <div
     className={cn(
       "relative bg-black rounded-lg shadow-lg p-6 mb-6",
@@ -23,7 +28,7 @@ const ProfileSection = ({ userData, onEditClick }: ProfileSectionProps) => (
         <UserProfileHeader isMyPage userData={userData} />
         <UserCameraAndLinks />
       </div>
-      <ProfileEditButton onClick={onEditClick} />
+      {isMyPage && <ProfileEditButton onClick={onEditClick} />}
     </div>
   </div>
 );

@@ -2,7 +2,7 @@
 
 import React from "react";
 import ImageCard from "./ImageCard";
-import useFadeUpAnimation from "@/hooks/useFadeUpAnimation";
+import useFadeUpAnimation from "@/hooks/ui/useFadeUpAnimation";
 import { cn } from "@/utils";
 
 const PopularContainer = () => {

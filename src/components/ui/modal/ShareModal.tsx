@@ -3,7 +3,7 @@
 import Close from "@/icon/Close";
 import React from "react";
 import { createPortal } from "react-dom";
-import { useToast } from "@/hooks/useToast";
+import { useToast } from "@/hooks/ui/useToast";
 
 interface ShareModalProps {
   isOpen: boolean;

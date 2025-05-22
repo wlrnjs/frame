@@ -7,7 +7,7 @@ import LOGO from "@/icon/LOGO";
 import Link from "next/link";
 import { supabase } from "@/service/lib/supabaseClient";
 import { useRouter } from "next/navigation";
-import { useToast } from "@/hooks/useToast";
+import { useToast } from "@/hooks/ui/useToast";
 
 const Page = () => {
   const [email, setEmail] = useState("");

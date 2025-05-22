@@ -3,7 +3,7 @@
 import { supabase } from "@/service/lib/supabaseClient";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useToast } from "@/hooks/useToast";
+import { useToast } from "@/hooks/ui/useToast";
 
 interface DropDownItem {
   type: "link" | "button";

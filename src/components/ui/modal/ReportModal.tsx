@@ -1,6 +1,6 @@
 "use client";
 
-import { useToast } from "@/hooks/useToast";
+import { useToast } from "@/hooks/ui/useToast";
 import Close from "@/icon/Close";
 import Dropdown from "@/icon/Dropdown";
 import React, { useEffect, useState, useRef } from "react";

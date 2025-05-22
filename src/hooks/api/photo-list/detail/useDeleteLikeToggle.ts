@@ -1,4 +1,4 @@
-import { useToast } from "@/hooks/useToast";
+import { useToast } from "@/hooks/ui/useToast";
 import deleteLikeToggle from "@/service/photo-list/detail/deleteLikeToggle";
 import { useMutation } from "@tanstack/react-query";
 

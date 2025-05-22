@@ -1,5 +1,5 @@
 import { revalidatePhotoList } from "@/app/actions";
-import { useToast } from "@/hooks/useToast";
+import { useToast } from "@/hooks/ui/useToast";
 import postWrite, { postPostsProps } from "@/service/write/postWrite";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";

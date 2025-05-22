@@ -2,7 +2,7 @@
 
 import React from "react";
 import LinkItem from "./LinkItem";
-import useFadeUpAnimation from "@/hooks/useFadeUpAnimation";
+import useFadeUpAnimation from "@/hooks/ui/useFadeUpAnimation";
 import { cn } from "@/utils";
 
 const LinkContainer = () => {

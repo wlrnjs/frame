@@ -1,7 +1,7 @@
 import useDeleteEventJoin from "./useDeleteEventJoin";
 import useGetEventJoin from "./useGetEventJoin";
 import usePostEventJoin from "./usePostEventJoin";
-import { useToast } from "@/hooks/useToast";
+import { useToast } from "@/hooks/ui/useToast";
 
 export const useEventJoinLogic = (eventId: string, userId: string) => {
   const { error: toastError } = useToast();

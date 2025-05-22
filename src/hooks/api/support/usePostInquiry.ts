@@ -1,4 +1,4 @@
-import { useToast } from "@/hooks/useToast";
+import { useToast } from "@/hooks/ui/useToast";
 import postInquiry, { postInquiryProps } from "@/service/support/inquiry/postInquiry";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 

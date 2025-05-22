@@ -8,7 +8,7 @@ import usePostWrite from "@/hooks/api/write/usePostWrite";
 import usePostImg from "@/hooks/api/write/usePostImg";
 import { postPostsProps } from "@/service/write/postWrite";
 import useUserId from "@/hooks/useUserId";
-import { useToast } from "@/hooks/useToast";
+import { useToast } from "@/hooks/ui/useToast";
 import { supabase } from "@/service/lib/supabaseClient";
 
 interface FormSectionProps {

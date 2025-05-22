@@ -8,7 +8,7 @@ import LOGO from "@/icon/LOGO";
 import { supabase } from "@/service/lib/supabaseClient";
 import { useRouter } from "next/navigation";
 import { generateRandomNickname } from "@/utils/text/generateRandomNickname";
-import { useToast } from "@/hooks/useToast";
+import { useToast } from "@/hooks/ui/useToast";
 
 const Page = () => {
   const [email, setEmail] = useState("");
