@@ -2,21 +2,14 @@
 
 import useGetNoticeList from "@/hooks/api/support/useGetNoticeList";
 import { cn } from "@/utils";
-import { formatDate } from "@/utils/date/dateUtils";
 import React, { useState } from "react";
-
-type Notice = {
-  id: number;
-  title: string;
-  content: string;
-  created_at: string;
-};
+import { SupportItemType } from "@/types/Support";
+import SupportItem from "@/components/features/support/SupportItem";
 
 const NoticeListPage = () => {
   const [openId, setOpenId] = useState<number | null>(null);
 
   const { data: noticeList } = useGetNoticeList();
-  console.log(noticeList);
 
   const toggleOpen = (id: number) => {
     setOpenId((prevId) => (prevId === id ? null : id));
@@ -35,27 +28,13 @@ const NoticeListPage = () => {
         </h1>
 
         <ul className="space-y-4">
-          {noticeList?.map((notice: Notice) => (
-            <li key={notice.id}>
-              <button
-                onClick={() => toggleOpen(notice.id)}
-                className="w-full text-left border rounded-xl p-4 hover:bg-gray-50 transition"
-              >
-                <div className="flex justify-between items-center">
-                  <span className="font-medium">{notice.title}</span>
-                  <span className="text-sm text-gray-500">
-                    {formatDate(notice.created_at)}
-                  </span>
-                </div>
-
-                {/* 본문 드롭다운 */}
-                {openId === notice.id && (
-                  <div className="mt-4 text-sm whitespace-pre-wrap text-gray-700">
-                    {notice.content}
-                  </div>
-                )}
-              </button>
-            </li>
+          {noticeList?.map((data: SupportItemType) => (
+            <SupportItem
+              key={data.id}
+              data={data}
+              toggleOpen={toggleOpen}
+              openId={openId}
+            />
           ))}
         </ul>
       </div>

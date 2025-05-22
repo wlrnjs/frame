@@ -1,17 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { formatDate } from "@/utils/date/dateUtils";
 import useGetFeedbackList from "@/hooks/api/support/useGetFeedbackList";
 import FeedbackModal from "@/components/ui/modal/FeedbackModal";
 import { cn } from "@/utils";
-
-type Feedback = {
-  id: number;
-  title: string;
-  content: string;
-  created_at: string;
-};
+import { SupportItemType } from "@/types/Support";
+import SupportItem from "@/components/features/support/SupportItem";
 
 const FeedbackListPage = () => {
   const [openId, setOpenId] = useState<number | null>(null);
@@ -39,27 +33,13 @@ const FeedbackListPage = () => {
         </div>
 
         <ul className="space-y-4">
-          {feedbackList?.map((feedback: Feedback) => (
-            <li key={feedback.id}>
-              <button
-                onClick={() => toggleOpen(feedback.id)}
-                className="w-full text-left border rounded-xl p-4 hover:bg-gray-50 transition"
-              >
-                <div className="flex justify-between items-center">
-                  <span className="font-medium">{feedback.title}</span>
-                  <span className="text-sm text-gray-500">
-                    {formatDate(feedback.created_at)}
-                  </span>
-                </div>
-
-                {/* 본문 드롭다운 */}
-                {openId === feedback.id && (
-                  <div className="mt-4 text-sm whitespace-pre-wrap text-gray-700">
-                    {feedback.content}
-                  </div>
-                )}
-              </button>
-            </li>
+          {feedbackList?.map((data: SupportItemType) => (
+            <SupportItem
+              key={data.id}
+              data={data}
+              toggleOpen={toggleOpen}
+              openId={openId}
+            />
           ))}
         </ul>
       </div>
