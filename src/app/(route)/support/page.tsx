@@ -10,7 +10,7 @@ import { SUPPORT_ITEMS } from "@/constants/SUPPORT_ITEMS";
 
 type ModalType = "terms" | "privacy" | null;
 
-const CustomerSupportPage: React.FC = () => {
+const CustomerSupportPage = () => {
   const [activeModal, setActiveModal] = useState<ModalType>(null);
   const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);
 

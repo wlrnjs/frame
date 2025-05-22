@@ -23,12 +23,12 @@ interface ProfileEditModalProps {
   data: User;
 }
 
-const ProfileEditModal: React.FC<ProfileEditModalProps> = ({
+const ProfileEditModal = ({
   isOpen,
   onClose,
   // onSave,
   data,
-}) => {
+}: ProfileEditModalProps) => {
   const [urlInputs, setUrlInputs] = useState([
     { name: "Instagram", url: "https://instagram.com/user" },
     { name: "Github", url: "https://github.com/user" },

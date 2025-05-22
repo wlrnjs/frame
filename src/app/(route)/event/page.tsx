@@ -5,18 +5,7 @@ import { cn } from "@/utils";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-
-interface Event {
-  created_at: string;
-  description: string;
-  event_id: number;
-  expires_at: string;
-  id: string;
-  image_url: string;
-  title: string;
-  updated_at: string;
-  join_count: string;
-}
+import { Event } from "@/types/Event";
 
 const EventPage = () => {
   const { data: events } = useGetEvents();
