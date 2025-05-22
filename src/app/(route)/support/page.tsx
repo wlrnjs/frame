@@ -1,24 +1,31 @@
 "use client";
 
 import React, { useState } from "react";
-import Link from "next/link";
 import TermsModal from "@/components/ui/modal/TermsModal";
 import InquiryModal from "@/components/ui/modal/InquiryModal";
 import { cn } from "@/utils";
+import { SupportItem } from "@/types/Support";
+import SupportItemCard from "@/components/features/support/SupportItemCard";
+import { SUPPORT_ITEMS } from "@/constants/SUPPORT_ITEMS";
 
-const supportItems = [
-  { title: "공지사항", href: "/support/notices" },
-  { title: "개선 요청", href: "/support/feedback" },
-  { title: "이용약관", href: "#" },
-  { title: "개인정보처리방침", href: "#" },
-  { title: "1:1 문의하기", href: "#" },
-];
+type ModalType = "terms" | "privacy" | null;
 
-const CustomerSupportPage = () => {
-  const [activeModal, setActiveModal] = useState<null | "terms" | "privacy">(
-    null
-  );
+const CustomerSupportPage: React.FC = () => {
+  const [activeModal, setActiveModal] = useState<ModalType>(null);
   const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);
+
+  const handleModalOpen = (modalKey: SupportItem["modalKey"]) => {
+    if (modalKey === "inquiry") {
+      setIsInquiryModalOpen(true);
+    } else if (modalKey === "terms" || modalKey === "privacy") {
+      setActiveModal(modalKey);
+    }
+  };
+
+  const handleModalClose = () => {
+    setActiveModal(null);
+    setIsInquiryModalOpen(false);
+  };
 
   return (
     <div className="w-full min-h-screen bg-white text-black layout-container custom-margin">
@@ -33,55 +40,25 @@ const CustomerSupportPage = () => {
         </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {supportItems.map((item) => {
-            const isModal = [
-              "이용약관",
-              "개인정보처리방침",
-              "1:1 문의하기",
-            ].includes(item.title);
-            const modalKey =
-              item.title === "이용약관"
-                ? "terms"
-                : item.title === "개인정보처리방침"
-                ? "privacy"
-                : null;
-
-            return isModal ? (
-              <button
-                key={item.title}
-                onClick={() => {
-                  if (item.title === "1:1 문의하기") {
-                    setIsInquiryModalOpen(true);
-                  } else {
-                    setActiveModal(modalKey);
-                  }
-                }}
-                className="w-full text-left border rounded-xl px-5 py-6 hover:bg-gray-50 transition"
-              >
-                <p className="text-lg font-semibold">{item.title}</p>
-              </button>
-            ) : (
-              <Link
-                key={item.title}
-                href={item.href}
-                aria-label={item.title}
-                className="border rounded-xl px-5 py-6 hover:bg-gray-50 duration-300 ease-out transition pointer"
-              >
-                <p className="text-lg font-semibold">{item.title}</p>
-              </Link>
-            );
-          })}
+          {SUPPORT_ITEMS.map((item) => (
+            <SupportItemCard
+              key={item.title}
+              item={item}
+              onModalOpen={handleModalOpen}
+            />
+          ))}
         </div>
       </div>
 
+      {/* 모달 */}
       {activeModal && (
-        <TermsModal activeModal={activeModal} setActiveModal={setActiveModal} />
+        <TermsModal
+          activeModal={activeModal}
+          setActiveModal={handleModalClose}
+        />
       )}
 
-      <InquiryModal
-        onOpen={isInquiryModalOpen}
-        onClose={() => setIsInquiryModalOpen(false)}
-      />
+      <InquiryModal onOpen={isInquiryModalOpen} onClose={handleModalClose} />
     </div>
   );
 };
