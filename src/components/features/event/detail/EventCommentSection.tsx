@@ -1,6 +1,6 @@
 import { cn } from "@/utils";
 import React from "react";
-import CommentContainer from "../photo-list/detail/CommentContainer";
+import CommentContainer from "../../photo-list/detail/CommentContainer";
 
 const EventCommentSection = () => (
   <div

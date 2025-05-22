@@ -2,104 +2,63 @@
 
 import useGetEvents from "@/hooks/api/event/useGetEvents";
 import { cn } from "@/utils";
-import Image from "next/image";
-import Link from "next/link";
 import React from "react";
-import { Event } from "@/types/Event";
+// import { Event } from "@/types/Event";
+import EventListEmpty from "@/components/features/event/EventListEmpty";
+import MainEventCard from "@/components/features/event/MainEventCard";
+import EventSection from "@/components/features/event/EventSection";
+
+// 로딩 상태 컴포넌트
+const LoadingState = () => (
+  <div className="w-full min-h-screen flex items-center justify-center">
+    <div className="text-lg text-gray-600">이벤트를 불러오는 중...</div>
+  </div>
+);
+
+// 에러 상태 컴포넌트
+const ErrorState = ({ message }: { message?: string }) => (
+  <div className="w-full min-h-screen flex items-center justify-center">
+    <div className="text-lg text-red-600">
+      {message || "이벤트를 불러오는데 실패했습니다."}
+    </div>
+  </div>
+);
 
 const EventPage = () => {
-  const { data: events } = useGetEvents();
+  const { data: events, isLoading, error } = useGetEvents();
 
-  console.log(events);
+  // const activeEvents = events?.filter((event: Event) => true) || [];
+
+  // const upcomingEvents = events?.slice(1) || [];
+  // const expiredEvents = events || [];
+
+  if (isLoading) {
+    return <LoadingState />;
+  }
+
+  if (error) {
+    return <ErrorState message="이벤트 데이터를 불러올 수 없습니다." />;
+  }
+  if (!events || events.length === 0) {
+    return <EventListEmpty />;
+  }
 
   return (
     <div className="w-full min-h-screen text-black custom-margin layout-container">
       <main className="w-full flex flex-col items-center">
         {/* 이벤트 타이틀 */}
-        <h2 className={cn("font-semibold text-3xl mb-8", "mobile:text-2xl")}>
+        <h1 className={cn("font-semibold text-3xl mb-8", "mobile:text-2xl")}>
           진행중인 이벤트
-        </h2>
+        </h1>
 
-        {/* 메인 이벤트 이미지 */}
-        {events?.[0] && (
-          <Link
-            href={`/event/detail?id=${events[0].event_id}`}
-            className={cn(
-              "relative w-1/2 h-96 bg-gray-800 mb-12 overflow-hidden",
-              "mobile:w-full mobile:h-64"
-            )}
-          >
-            <Image
-              src={events[0].image_url}
-              alt={events[0].title}
-              fill
-              className="object-cover hover:scale-105 transition-all duration-300 ease-out"
-            />
-          </Link>
-        )}
+        {/* 메인 이벤트 */}
+        {events[0] && <MainEventCard event={events[0]} />}
 
-        {/* 이벤트 갤러리 섹션 */}
-        <section className="w-full py-5">
-          <h3 className={cn("text-xl mb-4", "mobile:text-lg")}>
-            다가오는 이벤트
-          </h3>
-          <div
-            className={cn(
-              "grid grid-cols-3 gap-4",
-              "mobile:grid-cols-1 mobile:gap-1"
-            )}
-          >
-            {events?.map((event: Event, index: number) => (
-              <Link
-                href={`/event/detail?id=${event.event_id}`}
-                key={index}
-                className="relative w-full h-56 bg-gray-800 overflow-hidden"
-              >
-                {event.image_url && (
-                  <Image
-                    src={event.image_url}
-                    alt={event.title}
-                    fill
-                    className="object-cover hover:scale-105 transition-all duration-300 ease-out"
-                  />
-                )}
-              </Link>
-            ))}
-          </div>
-        </section>
+        {/* 다가오는 이벤트 섹션 */}
+        <EventSection title="다가오는 이벤트" events={events} />
+
         {/* 종료된 이벤트 섹션 */}
-        <section className="w-full py-5">
-          <h3 className={cn("text-xl mb-4", "mobile:text-lg")}>
-            종료된 이벤트
-          </h3>
-          <div
-            className={cn(
-              "grid grid-cols-3 gap-4",
-              "mobile:grid-cols-1 mobile:gap-1"
-            )}
-          >
-            {events?.map((event: Event, index: number) => (
-              <Link
-                href={`/event/detail?id=${event.event_id}`}
-                key={index}
-                className="relative w-full h-56 overflow-hidden"
-              >
-                {event.image_url && (
-                  <Image
-                    src={event.image_url}
-                    alt={event.title}
-                    fill
-                    className="object-cover hover:scale-105 transition-all duration-300 ease-out grayscale"
-                  />
-                )}
-                <div className="absolute inset-0 bg-black/50" />
-                <div className="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded">
-                  종료됨
-                </div>
-              </Link>
-            ))}
-          </div>
-        </section>
+        <EventSection title="종료된 이벤트" events={events} isExpired />
       </main>
     </div>
   );

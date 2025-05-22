@@ -1,7 +1,7 @@
 "use client";
 
 import React, { Suspense } from "react";
-import EventDetailPage from "@/components/features/event/EventDetailPage";
+import EventDetailPage from "@/components/features/event/detail/EventDetailPage";
 
 // 로딩 컴포넌트 (임시)
 const LoadingSpinner = () => (
