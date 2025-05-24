@@ -18,7 +18,7 @@ const PhotoListClient = ({
   error = false,
 }: PhotoListClientProps) => {
   return (
-    <div className="w-full min-h-screen custom-margin layout-container">
+    <div className="w-full min-h-full custom-margin layout-container">
       <div
         className={cn(
           "flex items-start justify-center mt-[10px] gap-10",
