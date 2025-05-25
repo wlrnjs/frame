@@ -7,11 +7,11 @@ import React from "react";
 
 interface CommentContainerProps {
   isEvent?: boolean;
-  id: string;
+  id?: string; // 이벤트 댓글 수정 후 삭제
 }
 
 const CommentContainer = ({ isEvent = false, id }: CommentContainerProps) => {
-  const { data: comments } = useGetComments(id);
+  const { data: comments } = useGetComments(id!);
   console.log(comments);
 
   return (
@@ -29,7 +29,7 @@ const CommentContainer = ({ isEvent = false, id }: CommentContainerProps) => {
           comments?.map((comment: CommentType) => (
             <CommentItem
               key={comment.id}
-              name={comment.user_id}
+              name={comment.users.nickname}
               created_at={comment.created_at}
               comment={comment.content}
               comment_like={comment.comment_like}

@@ -1,3 +1,4 @@
+import { formatDate } from "@/utils/date/dateUtils";
 import React from "react";
 
 interface CommentItemProps {
@@ -18,7 +19,7 @@ const CommentItem = ({
       {/* 유저 정보 */}
       <div className="flex items-center gap-2 text-sm text-gray-300">
         <span className="font-semibold text-white">{name}</span>
-        <span className="text-gray-500 text-xs">{created_at}</span>
+        <span className="text-gray-500 text-xs">{formatDate(created_at)}</span>
       </div>
 
       {/* 댓글 본문 */}
