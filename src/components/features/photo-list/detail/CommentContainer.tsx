@@ -2,7 +2,7 @@
 
 import CommentItem from "@/components/common/CommentItem";
 import EmptyComment from "@/components/common/EmptyComment";
-import useGetComments from "@/hooks/api/comments/useGetComments";
+import useGetComment from "@/hooks/api/comments/useGetComment";
 import usePostComment from "@/hooks/api/comments/usePostComment";
 import { CommentType } from "@/types/CommentType";
 import { cn } from "@/utils";
@@ -18,7 +18,7 @@ const CommentContainer = ({ isEvent = false, id }: CommentContainerProps) => {
   const userId = useUserId();
   const [comment, setComment] = useState<string>("");
 
-  const { data: comments } = useGetComments(id!);
+  const { data: comments } = useGetComment(id!);
   const { mutate: postComment, isPending } = usePostComment();
 
   const onSubmit = () => {
@@ -46,6 +46,9 @@ const CommentContainer = ({ isEvent = false, id }: CommentContainerProps) => {
               created_at={comment.created_at}
               comment={comment.content}
               comment_like={comment.comment_like}
+              isMine={comment.user_id === userId}
+              comment_id={String(comment.id)}
+              user_id={comment.user_id}
             />
           ))
         )}

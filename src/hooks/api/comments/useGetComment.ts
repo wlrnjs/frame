@@ -1,7 +1,7 @@
 import getComment from "@/service/comments/getComment";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
-const useGetComments = (id: string) => {
+const useGetComment = (id: string) => {
   return useQuery({
     queryKey: ["comment", id],
     queryFn: () => getComment(id),
@@ -12,4 +12,4 @@ const useGetComments = (id: string) => {
   });
 };
 
-export default useGetComments;
+export default useGetComment;

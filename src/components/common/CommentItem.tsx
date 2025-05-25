@@ -1,3 +1,4 @@
+import useDeleteComment from "@/hooks/api/comments/useDeleteComment";
 import { formatDate } from "@/utils/date/dateUtils";
 import React from "react";
 
@@ -6,6 +7,9 @@ interface CommentItemProps {
   created_at: string;
   comment: string;
   comment_like: number;
+  isMine?: boolean;
+  comment_id: string;
+  user_id: string;
 }
 
 const CommentItem = ({
@@ -13,7 +17,16 @@ const CommentItem = ({
   created_at,
   comment,
   comment_like,
+  isMine,
+  comment_id,
+  user_id,
 }: CommentItemProps) => {
+  const { mutate } = useDeleteComment();
+
+  const onDelete = () => {
+    mutate({ id: comment_id, userId: user_id });
+  };
+
   return (
     <div className="border-b border-gray-700 pb-4 px-2 sm:px-4 flex flex-col gap-1">
       {/* 유저 정보 */}
@@ -29,24 +42,33 @@ const CommentItem = ({
       <div className="flex items-center justify-between">
         <p className="text-xs text-gray-500 flex items-center gap-2">
           좋아요{" "}
-          <span className="text-gray-500 font-medium">{comment_like}</span>
+          <span className="text-gray-500 font-medium">{comment_like || 0}</span>
         </p>
-        <button className="flex items-center gap-1 px-3 py-1 rounded-full bg-gray-800 hover:bg-gray-700 text-xs text-white transition-colors">
-          <svg
-            className="w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
+        {!isMine ? (
+          <button className="flex items-center gap-1 px-3 py-1 rounded-full bg-gray-800 hover:bg-gray-700 text-xs text-white transition-colors">
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+              />
+            </svg>
+            좋아요
+          </button>
+        ) : (
+          <button
+            onClick={onDelete}
+            className="flex items-center gap-1 px-3 py-1 rounded-full bg-gray-800 hover:bg-gray-700 text-xs text-white transition-colors"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-            />
-          </svg>
-          좋아요
-        </button>
+            삭제
+          </button>
+        )}
       </div>
     </div>
   );
