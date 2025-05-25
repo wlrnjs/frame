@@ -11,29 +11,38 @@ import useUserId from "@/hooks/useUserId";
 
 interface CommentContainerProps {
   isEvent?: boolean;
-  id?: string; // 이벤트 댓글 수정 후 삭제
+  id: string;
+  type: "post" | "event";
 }
 
-const CommentContainer = ({ isEvent = false, id }: CommentContainerProps) => {
+const CommentContainer = ({
+  isEvent = false,
+  id,
+  type,
+}: CommentContainerProps) => {
   const userId = useUserId();
   const [comment, setComment] = useState<string>("");
 
-  const { data: comments } = useGetComment(id!);
+  const { data: comments } = useGetComment(id, type);
   const { mutate: postComment, isPending } = usePostComment();
 
   const onSubmit = () => {
     if (!comment || !userId) return;
-    postComment({ id: id!, userId: userId!, content: comment });
+    postComment({ id: id!, userId: userId!, content: comment, type });
     setComment("");
   };
 
   return (
     <div
       className={cn(
-        "w-full h-[650px] bg-black rounded-lg shadow-md p-6 flex flex-col justify-between",
-        isEvent ? "p-0" : "p-6"
+        "w-full h-[650px] bg-black shadow-md p-6 flex flex-col justify-between",
+        isEvent ? "rounded-0" : "rounded-lg"
       )}
     >
+      <div className="flex gap-2 items-center p-6 justify-start">
+        <h2 className={cn("text-2xl text-white", "mobile:text-xl")}>댓글</h2>
+        <span className="text-gray-500">총 {comments?.length}개</span>
+      </div>
       {/* 댓글 리스트 */}
       <div className="overflow-y-auto flex-1 space-y-4 pr-2">
         {comments?.length === 0 ? (
@@ -49,6 +58,8 @@ const CommentContainer = ({ isEvent = false, id }: CommentContainerProps) => {
               isMine={comment.user_id === userId}
               comment_id={String(comment.id)}
               user_id={comment.user_id}
+              type={type}
+              postId={id}
             />
           ))
         )}

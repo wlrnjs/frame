@@ -1,6 +1,7 @@
 import useDeleteComment from "@/hooks/api/comments/useDeleteComment";
 import { formatDate } from "@/utils/date/dateUtils";
 import React from "react";
+import { CommentItemType } from "@/types/CommentType";
 
 interface CommentItemProps {
   name: string;
@@ -10,6 +11,8 @@ interface CommentItemProps {
   isMine?: boolean;
   comment_id: string;
   user_id: string;
+  type: CommentItemType;
+  postId: string;
 }
 
 const CommentItem = ({
@@ -20,11 +23,13 @@ const CommentItem = ({
   isMine,
   comment_id,
   user_id,
+  type,
+  postId,
 }: CommentItemProps) => {
   const { mutate } = useDeleteComment();
 
   const onDelete = () => {
-    mutate({ id: comment_id, userId: user_id });
+    mutate({ id: comment_id, postId, userId: user_id, type });
   };
 
   return (

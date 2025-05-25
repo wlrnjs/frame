@@ -10,7 +10,7 @@ import { useEventJoinLogic } from "@/hooks/api/event/useEventJoinLogic";
 import EventMeta from "./EventMeta";
 import EventContent from "./EventContent";
 import EventJoinButton from "./EventJoinButton";
-import EventCommentSection from "./EventCommentSection";
+import CommentContainer from "../../photo-list/detail/CommentContainer";
 
 // 로딩 스피너 컴포넌트 (임시)
 const LoadingSpinner = () => (
@@ -74,7 +74,7 @@ const EventDetailPage = () => {
         />
       </div>
 
-      <EventCommentSection />
+      <CommentContainer isEvent id={id} type="event" />
     </article>
   );
 };

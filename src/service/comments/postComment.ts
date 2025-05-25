@@ -1,9 +1,17 @@
+import { CommentItemType } from "@/types/CommentType";
 import axios from "axios";
 
-const postComment = async ({ id, userId, content }: { id: string; userId: string; content: string }) => {
+interface PostCommentProps {
+  id: string;
+  userId: string;
+  content: string;
+  type: CommentItemType;
+}
+
+const postComment = async ({ id, userId, content, type }: PostCommentProps) => {
   const response = await axios.post(
     `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/comments`,
-    { post_id: id, user_id: userId, content },
+    { target_id: id, target_type: type, user_id: userId, content },
     {
       headers: {
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,

@@ -1,8 +1,15 @@
 import axios from "axios";
+import { CommentItemType } from "@/types/CommentType";
 
-const deleteComment = async ({ id, userId }: { id: string; userId: string }) => {
+interface DeleteCommentProps {
+  id: string;
+  userId: string;
+  type: CommentItemType;
+}
+
+const deleteComment = async ({ id, userId, type }: DeleteCommentProps) => {
   const response = await axios.delete(
-    `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/comments?id=eq.${id}&user_id=eq.${userId}`,
+    `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/comments?id=eq.${id}&user_id=eq.${userId}&target_type=eq.${type}`,
     {
       headers: {
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,

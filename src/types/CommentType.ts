@@ -11,3 +11,5 @@ export interface CommentType {
   user_id: string;
   users: User;
 }
+
+export type CommentItemType = "post" | "event";
