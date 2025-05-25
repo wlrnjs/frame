@@ -1,12 +1,19 @@
 import CommentItem from "@/components/common/CommentItem";
+import EmptyComment from "@/components/common/EmptyComment";
+import useGetComments from "@/hooks/api/comments/useGetComments";
+import { CommentType } from "@/types/CommentType";
 import { cn } from "@/utils";
 import React from "react";
 
 interface CommentContainerProps {
   isEvent?: boolean;
+  id: string;
 }
 
-const CommentContainer = ({ isEvent = false }: CommentContainerProps) => {
+const CommentContainer = ({ isEvent = false, id }: CommentContainerProps) => {
+  const { data: comments } = useGetComments(id);
+  console.log(comments);
+
   return (
     <div
       className={cn(
@@ -16,12 +23,19 @@ const CommentContainer = ({ isEvent = false }: CommentContainerProps) => {
     >
       {/* 댓글 리스트 */}
       <div className="overflow-y-auto flex-1 space-y-4 pr-2">
-        <CommentItem
-          name="이영희"
-          created_at="방금 전"
-          comment="좋아요 눌렀어요"
-          comment_like={42}
-        />
+        {comments?.length === 0 ? (
+          <EmptyComment />
+        ) : (
+          comments?.map((comment: CommentType) => (
+            <CommentItem
+              key={comment.id}
+              name={comment.user_id}
+              created_at={comment.created_at}
+              comment={comment.content}
+              comment_like={comment.comment_like}
+            />
+          ))
+        )}
       </div>
 
       {/* 댓글 입력 필드 */}

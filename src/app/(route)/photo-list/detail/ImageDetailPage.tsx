@@ -54,7 +54,7 @@ const ImageDetailPage = () => {
           <div className={cn("hidden", "mobile:block")}>
             <DetailContainer data={data} imgData={imgDetail?.data} />
           </div>
-          <CommentContainer />
+          <CommentContainer id={id!} />
         </div>
 
         <div className={cn("block", "mobile:hidden")}>
