@@ -1,3 +1,4 @@
+import CommentItem from "@/components/common/CommentItem";
 import { cn } from "@/utils";
 import React from "react";
 
@@ -15,20 +16,12 @@ const CommentContainer = ({ isEvent = false }: CommentContainerProps) => {
     >
       {/* 댓글 리스트 */}
       <div className="overflow-y-auto flex-1 space-y-4 pr-2">
-        {/* 댓글 아이템들 */}
-        <div className="border-b pb-4">
-          <div className="text-sm text-white">홍길동 · 2시간 전</div>
-          <div className="mt-1 text-gray-300">이 사진 정말 멋지네요!</div>
-        </div>
-        <div className="border-b pb-4">
-          <div className="text-sm text-white">김철수 · 1시간 전</div>
-          <div className="mt-1 text-gray-300">구도가 인상적이에요.</div>
-        </div>
-        <div className="border-b pb-4">
-          <div className="text-sm text-white">이영희 · 방금</div>
-          <div className="mt-1 text-gray-300">좋아요 눌렀어요 :)</div>
-        </div>
-        {/* ...더 많은 댓글 */}
+        <CommentItem
+          name="이영희"
+          created_at="방금 전"
+          comment="좋아요 눌렀어요"
+          comment_like={42}
+        />
       </div>
 
       {/* 댓글 입력 필드 */}
