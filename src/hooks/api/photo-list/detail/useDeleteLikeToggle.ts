@@ -1,9 +1,11 @@
+"use client";
+
 import { useToast } from "@/hooks/ui/useToast";
 import deleteLikeToggle from "@/service/photo-list/detail/deleteLikeToggle";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface DeleteLikeToggleProps {
-  id: number;
+  post_id: string;
 }
 
 const useDeleteLikeToggle = () => {
@@ -11,10 +13,11 @@ const useDeleteLikeToggle = () => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
-    mutationFn: ({ id }: DeleteLikeToggleProps) => 
-      deleteLikeToggle({ id }),
+    mutationFn: ({ post_id }: DeleteLikeToggleProps) => 
+      deleteLikeToggle({ post_id }),
     retry: 1,
-    onSuccess: (_, {id}: DeleteLikeToggleProps) => {
+    onSuccess: (_, { post_id }: DeleteLikeToggleProps) => {
+      const id = String(post_id);
       success("추천이 취소되었습니다.");
       queryClient.invalidateQueries({
         queryKey: ["likeToggle", [id]],

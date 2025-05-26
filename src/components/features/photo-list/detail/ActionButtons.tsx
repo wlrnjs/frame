@@ -47,9 +47,10 @@ const ActionButtons = ({
   imgData,
 }: ActionButtonsProps) => {
   const userId = useUserId();
+  console.log("userId: ", userId);
   const { error: toastError } = useToast();
 
-  const { data: likeToggle } = useGetLikeToggle(id.toString());
+  const { data: likeToggle } = useGetLikeToggle([id.toString()]);
   const { mutate: postLikeToggle, isPending } = usePostLikeToggle();
   const { mutate: deleteLikeToggle, isPending: deleteLikeTogglePending } =
     useDeleteLikeToggle();
@@ -58,15 +59,19 @@ const ActionButtons = ({
     (like: LikeToggle) => like.user_id === userId
   );
 
+  console.log("likeToggle", likeToggle);
+  console.log("id", id);
+  console.log("id.toString()", id.toString());
+
   const handleLikeClick = () => {
     if (!userId) {
       toastError("로그인 후 사용 가능합니다.");
       return;
     }
     if (myLike) {
-      deleteLikeToggle({ id });
+      deleteLikeToggle({ post_id: id.toString() });
     } else {
-      postLikeToggle({ id });
+      postLikeToggle({ id, post_id: id.toString() });
     }
   };
 
@@ -95,7 +100,7 @@ const ActionButtons = ({
 
   const actionButtons: ActionButtonProps[] = [
     {
-      icon: myLike ? <HeartFilled /> : <HeartOutline />,
+      icon: myLike ? <HeartOutline /> : <HeartFilled />,
       label: "좋아요",
       aria: "좋아요",
       onClick: handleLikeClick,

@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface PostLikeToggleProps {
   id: number;
+  post_id: string;
 }
 
 const usePostLikeToggle = () => {
@@ -11,9 +12,10 @@ const usePostLikeToggle = () => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
-    mutationFn: ({id}: PostLikeToggleProps) => postLikeToggle({id}),
+    mutationFn: ({id, post_id}: PostLikeToggleProps) => postLikeToggle({id, post_id}),
     retry: 1,
-    onSuccess: (_, {id}) => {
+    onSuccess: (_, {post_id}: PostLikeToggleProps) => {
+      const id = String(post_id);
       success("추천 성공");
       queryClient.invalidateQueries({
         queryKey: ["likeToggle", [id]],
