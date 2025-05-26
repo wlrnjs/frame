@@ -7,7 +7,6 @@ import { useQueryClient } from "@tanstack/react-query";
 
 interface DeleteCommentProps {
   id: string;
-  userId: string;
 }
 
 const useDeleteLikeComment = () => {
@@ -15,7 +14,7 @@ const useDeleteLikeComment = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ id, userId }: DeleteCommentProps) => deleteLikeComment({ id, userId }),
+    mutationFn: ({ id }: DeleteCommentProps) => deleteLikeComment({ id }),
     retry: 1,
     onSuccess: (_, { id }: DeleteCommentProps) => {
       success("좋아요가 삭제되었습니다.");

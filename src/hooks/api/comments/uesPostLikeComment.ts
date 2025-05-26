@@ -7,7 +7,6 @@ import { useQueryClient } from "@tanstack/react-query";
 
 interface PostLikeCommentProps {
   id: string;
-  userId: string;
 }
 
 const usePostLikeComment = () => {
@@ -15,7 +14,7 @@ const usePostLikeComment = () => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
-    mutationFn: ({ id, userId }: PostLikeCommentProps) => postLikeComment({ id, userId }),
+    mutationFn: ({ id }: PostLikeCommentProps) => postLikeComment({ id }),
     retry: 1,
     onSuccess: (_, { id }: PostLikeCommentProps) => {
       success("추천 성공");

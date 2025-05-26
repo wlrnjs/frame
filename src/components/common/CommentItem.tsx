@@ -5,6 +5,15 @@ import { CommentItemType } from "@/types/CommentType";
 import usePostLikeComment from "@/hooks/api/comments/uesPostLikeComment";
 import useGetLikeComment from "@/hooks/api/comments/useGetLikeComments";
 import useDeleteLikeComment from "@/hooks/api/comments/useDeleteLikeComment";
+import useUserId from "@/hooks/useUserId";
+
+interface LikeComment {
+  id: number;
+  comment_id: number;
+  user_id: string;
+  created_at: string;
+  users: string | null;
+}
 
 interface CommentItemProps {
   name: string;
@@ -27,26 +36,29 @@ const CommentItem = ({
   type,
   postId,
 }: CommentItemProps) => {
+  const userId = useUserId();
   const { data: likeComments } = useGetLikeComment([comment_id]); // 좋아요 조회
+  const myLike = likeComments?.some(
+    (like: LikeComment) => like.user_id === userId
+  );
+
   const { mutate: postLikeComment } = usePostLikeComment(); // 좋아요 추가
   const { mutate: deleteLikeComment } = useDeleteLikeComment(); // 좋아요 삭제
 
-  const { mutate } = useDeleteComment(); // 댓글 삭제
-
-  console.log(likeComments);
+  const { mutate: deleteComment } = useDeleteComment(); // 댓글 삭제
 
   const onHandleComment = () => {
     // 좋아요 추가/삭제
-    if (likeComments?.length > 0) {
-      deleteLikeComment({ id: comment_id, userId: user_id });
+    if (myLike) {
+      deleteLikeComment({ id: comment_id });
     } else {
-      postLikeComment({ id: comment_id, userId: user_id });
+      postLikeComment({ id: comment_id });
     }
   };
 
   const onDelete = () => {
     // 댓글 삭제
-    mutate({ id: comment_id, postId, userId: user_id, type });
+    deleteComment({ id: comment_id, postId, userId: user_id, type });
   };
 
   return (
@@ -75,8 +87,8 @@ const CommentItem = ({
           >
             <svg
               className="w-4 h-4"
-              fill={likeComments?.length > 0 ? "#FF0000" : "none"}
-              stroke="currentColor"
+              fill={myLike ? "#FF0000" : "none"}
+              stroke={myLike ? "#FF0000" : "currentColor"}
               strokeWidth="2"
               viewBox="0 0 24 24"
             >
