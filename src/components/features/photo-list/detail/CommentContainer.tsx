@@ -54,7 +54,6 @@ const CommentContainer = ({
               name={comment.users.nickname}
               created_at={comment.created_at}
               comment={comment.content}
-              comment_like={comment.comment_like}
               isMine={comment.user_id === userId}
               comment_id={String(comment.id)}
               user_id={comment.user_id}

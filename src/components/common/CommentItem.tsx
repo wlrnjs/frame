@@ -2,12 +2,14 @@ import useDeleteComment from "@/hooks/api/comments/useDeleteComment";
 import { formatDate } from "@/utils/date/dateUtils";
 import React from "react";
 import { CommentItemType } from "@/types/CommentType";
+import usePostLikeComment from "@/hooks/api/comments/uesPostLikeComment";
+import useGetLikeComment from "@/hooks/api/comments/useGetLikeComments";
+import useDeleteLikeComment from "@/hooks/api/comments/useDeleteLikeComment";
 
 interface CommentItemProps {
   name: string;
   created_at: string;
   comment: string;
-  comment_like: number;
   isMine?: boolean;
   comment_id: string;
   user_id: string;
@@ -19,21 +21,36 @@ const CommentItem = ({
   name,
   created_at,
   comment,
-  comment_like,
   isMine,
   comment_id,
   user_id,
   type,
   postId,
 }: CommentItemProps) => {
-  const { mutate } = useDeleteComment();
+  const { data: likeComments } = useGetLikeComment([comment_id]); // 좋아요 조회
+  const { mutate: postLikeComment } = usePostLikeComment(); // 좋아요 추가
+  const { mutate: deleteLikeComment } = useDeleteLikeComment(); // 좋아요 삭제
+
+  const { mutate } = useDeleteComment(); // 댓글 삭제
+
+  console.log(likeComments);
+
+  const onHandleComment = () => {
+    // 좋아요 추가/삭제
+    if (likeComments?.length > 0) {
+      deleteLikeComment({ id: comment_id, userId: user_id });
+    } else {
+      postLikeComment({ id: comment_id, userId: user_id });
+    }
+  };
 
   const onDelete = () => {
+    // 댓글 삭제
     mutate({ id: comment_id, postId, userId: user_id, type });
   };
 
   return (
-    <div className="border-b border-gray-700 pb-4 px-2 sm:px-4 flex flex-col gap-1">
+    <div className="border-b border-gray-700 pb-1 px-2 flex flex-col gap-1">
       {/* 유저 정보 */}
       <div className="flex items-center gap-2 text-sm text-gray-300">
         <span className="font-semibold text-white">{name}</span>
@@ -41,19 +58,24 @@ const CommentItem = ({
       </div>
 
       {/* 댓글 본문 */}
-      <p className="text-gray-200 text-sm leading-relaxed">{comment}</p>
+      <p className="text-gray-200 text-sm leading-relaxed pl-1">{comment}</p>
 
       {/* 하단 정보 */}
       <div className="flex items-center justify-between">
-        <p className="text-xs text-gray-500 flex items-center gap-2">
+        <p className="text-xs text-gray-500 flex items-center gap-1">
           좋아요{" "}
-          <span className="text-gray-500 font-medium">{comment_like || 0}</span>
+          <span className="text-gray-500 font-medium">
+            {likeComments?.length}
+          </span>
         </p>
         {!isMine ? (
-          <button className="flex items-center gap-1 px-3 py-1 rounded-full bg-gray-800 hover:bg-gray-700 text-xs text-white transition-colors">
+          <button
+            onClick={onHandleComment}
+            className="flex items-center gap-1 px-3 py-1 rounded-full bg-gray-800 hover:bg-gray-700 text-xs text-white transition-colors"
+          >
             <svg
               className="w-4 h-4"
-              fill="none"
+              fill={likeComments?.length > 0 ? "#FF0000" : "none"}
               stroke="currentColor"
               strokeWidth="2"
               viewBox="0 0 24 24"
