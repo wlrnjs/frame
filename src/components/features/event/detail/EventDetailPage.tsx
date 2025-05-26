@@ -74,7 +74,7 @@ const EventDetailPage = () => {
         />
       </div>
 
-      <CommentContainer isEvent id={id} type="event" />
+      <CommentContainer id={id} type="event" />
     </article>
   );
 };

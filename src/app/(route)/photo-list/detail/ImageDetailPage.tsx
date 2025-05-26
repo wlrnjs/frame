@@ -27,7 +27,7 @@ const ImageDetailPage = () => {
     router.push("/404");
   }
 
-  console.log("imgDetail?.data: ", imgDetail?.data);
+  // console.log("imgDetail?.data: ", imgDetail?.data);
 
   return (
     <div

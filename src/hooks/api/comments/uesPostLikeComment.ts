@@ -24,7 +24,7 @@ const usePostLikeComment = () => {
       });
     },
     onError: () => {
-      toastError("추천 실패");
+      toastError("로그인이 필요한 서비스입니다.");
     },
   });
 

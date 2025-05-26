@@ -10,38 +10,39 @@ import React, { useState } from "react";
 import useUserId from "@/hooks/useUserId";
 
 interface CommentContainerProps {
-  isEvent?: boolean;
   id: string;
   type: "post" | "event";
 }
 
-const CommentContainer = ({
-  isEvent = false,
-  id,
-  type,
-}: CommentContainerProps) => {
+const CommentContainer = ({ id, type }: CommentContainerProps) => {
   const userId = useUserId();
   const [comment, setComment] = useState<string>("");
 
-  const { data: comments } = useGetComment(id, type);
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 5;
+
+  const { data: commentsData } = useGetComment(id, type, currentPage, pageSize);
+  const comments = commentsData?.comments || [];
   const { mutate: postComment, isPending } = usePostComment();
 
   const onSubmit = () => {
     if (!comment || !userId) return;
-    postComment({ id: id!, userId: userId!, content: comment, type });
+    postComment({ id, userId, content: comment, type });
     setComment("");
   };
 
   return (
     <div
       className={cn(
-        "w-full h-[650px] bg-black shadow-md p-6 flex flex-col justify-between",
-        isEvent ? "rounded-0" : "rounded-lg"
+        "w-full h-fit bg-black shadow-md p-6 flex flex-col justify-between",
+        type === "event" ? "rounded-0" : "rounded-lg"
       )}
     >
       <div className="flex gap-2 items-center p-6 justify-start">
         <h2 className={cn("text-2xl text-white", "mobile:text-xl")}>댓글</h2>
-        <span className="text-gray-500">총 {comments?.length}개</span>
+        <span className="text-gray-500">
+          총 {commentsData?.totalCount || 0}개
+        </span>
       </div>
       {/* 댓글 리스트 */}
       <div className="overflow-y-auto flex-1 space-y-4 pr-2">
@@ -59,6 +60,9 @@ const CommentContainer = ({
               user_id={comment.user_id}
               type={type}
               postId={id}
+              onDeleteSuccess={() => {
+                setCurrentPage(1);
+              }}
             />
           ))
         )}
@@ -82,7 +86,6 @@ const CommentContainer = ({
         <button
           type="submit"
           disabled={isPending}
-          onClick={() => console.log("클릭됨")}
           className={cn(
             "px-4 py-2 bg-black text-white rounded-lg text-nowrap border border-white",
             isPending && "cursor-not-allowed"
@@ -94,23 +97,90 @@ const CommentContainer = ({
 
       {/* 페이지네이션 */}
       <div className="mt-4 flex-center gap-2">
-        <button className="px-3 py-1 text-sm text-gray-500 hover:text-white">
+        <button
+          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+          disabled={currentPage === 1}
+          className="px-3 py-1 text-sm text-white hover:text-gray-500 disabled:opacity-30 transition-colors"
+        >
           이전
         </button>
-        <button className="w-8 h-8 rounded bg-white text-black text-sm">
-          1
-        </button>
-        <button className="w-8 h-8 rounded text-gray-300 hover:bg-gray-700 text-sm">
-          2
-        </button>
-        <button className="w-8 h-8 rounded text-gray-300 hover:bg-gray-700 text-sm">
-          3
-        </button>
-        <span className="text-gray-500">...</span>
-        <button className="w-8 h-8 rounded text-gray-300 hover:bg-gray-700 text-sm">
-          10
-        </button>
-        <button className="px-3 py-1 text-sm text-gray-500 hover:text-white">
+
+        {/* 페이지 번호들 */}
+        {(() => {
+          const totalPages = commentsData?.totalPages || 1;
+          const pageNumbers = [];
+
+          const startPage = Math.max(1, currentPage - 1);
+          const endPage = Math.min(totalPages, currentPage + 1);
+
+          for (let i = startPage; i <= endPage; i++) {
+            pageNumbers.push(i);
+          }
+
+          return (
+            <>
+              {startPage > 1 && (
+                <>
+                  <button
+                    onClick={() => setCurrentPage(1)}
+                    className={`w-8 h-8 rounded text-sm ${
+                      currentPage === 1
+                        ? "bg-white text-black"
+                        : "text-gray-300 hover:bg-gray-700"
+                    }`}
+                  >
+                    1
+                  </button>
+                  {startPage > 2 && <span className="text-gray-500">...</span>}
+                </>
+              )}
+
+              {pageNumbers.map((pageNum) => (
+                <button
+                  key={pageNum}
+                  onClick={() => setCurrentPage(pageNum)}
+                  className={`w-8 h-8 rounded text-sm ${
+                    pageNum === currentPage
+                      ? "bg-white text-black"
+                      : "text-gray-300 hover:bg-gray-700"
+                  }`}
+                >
+                  {pageNum}
+                </button>
+              ))}
+
+              {endPage < totalPages && (
+                <>
+                  {endPage < totalPages - 1 && (
+                    <span className="text-gray-500">...</span>
+                  )}
+                  <button
+                    onClick={() => setCurrentPage(totalPages)}
+                    className={`w-8 h-8 rounded text-sm ${
+                      currentPage === totalPages
+                        ? "bg-white text-black"
+                        : "text-gray-300 hover:bg-gray-700"
+                    }`}
+                  >
+                    {totalPages}
+                  </button>
+                </>
+              )}
+            </>
+          );
+        })()}
+
+        <button
+          onClick={() =>
+            setCurrentPage((prev) =>
+              Math.min(prev + 1, commentsData?.totalPages || 1)
+            )
+          }
+          disabled={
+            !commentsData?.totalPages || currentPage >= commentsData.totalPages
+          }
+          className="px-3 py-1 text-sm text-white hover:text-gray-500 disabled:opacity-30 transition-colors"
+        >
           다음
         </button>
       </div>

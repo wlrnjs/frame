@@ -62,11 +62,11 @@ const ReportModal = ({
   const handleSubmit = () => {
     if (!commentId) return;
     if (!reason) {
-      toast.error("신고 사유를 선택해주세요.");
+      toast.error("신고 주제를 선택해주세요.");
       return;
     }
     if (!description) {
-      toast.error("신고 사유는 필수입니다.");
+      toast.error("신고 내용은 필수입니다.");
       return;
     }
 
@@ -113,7 +113,7 @@ const ReportModal = ({
                 className="w-full p-2 bg-black border border-white/30 rounded-[5px] text-white appearance-none focus:outline-none focus:border-white/50 transition-colors"
               >
                 <option value="" disabled>
-                  신고 사유 선택
+                  신고 주제 선택
                 </option>
                 <option value="inappropriate_content">부적절한 콘텐츠</option>
                 <option value="spam">스팸, 광고</option>
@@ -126,7 +126,7 @@ const ReportModal = ({
             </div>
             <textarea
               ref={textareaRef}
-              placeholder="신고 사유(최대100자)"
+              placeholder="신고 내용(최대100자, 허위 사실이 포함되면 제재를 받을 수 있습니다.)"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows={4}
