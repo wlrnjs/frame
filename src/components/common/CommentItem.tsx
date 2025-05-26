@@ -1,7 +1,7 @@
 "use client";
 
 import useDeleteComment from "@/hooks/api/comments/useDeleteComment";
-import { formatDate } from "@/utils/date/dateUtils";
+import { commentDate } from "@/utils/date/dateUtils";
 import React, { useState } from "react";
 import { CommentItemType } from "@/types/CommentType";
 import usePostLikeComment from "@/hooks/api/comments/uesPostLikeComment";
@@ -72,14 +72,14 @@ const CommentItem = ({
       {/* 유저 정보 */}
       <div className="flex items-center gap-2 text-sm text-gray-300">
         <span className="font-semibold text-white">{name}</span>
-        <span className="text-gray-500 text-xs">{formatDate(created_at)}</span>
+        <span className="text-gray-500 text-xs">{commentDate(created_at)}</span>
       </div>
 
       {/* 댓글 본문 */}
       <p className="text-gray-200 text-sm leading-relaxed pl-1">{comment}</p>
 
       {/* 하단 정보 */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center gap-2 mb-2">
         {!isMine ? (
           <button
             onClick={onHandleComment}
@@ -98,7 +98,7 @@ const CommentItem = ({
                 d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
               />
             </svg>
-            좋아요 {likeComments?.length}
+            {likeComments?.length}
           </button>
         ) : (
           <button
@@ -108,15 +108,14 @@ const CommentItem = ({
             삭제
           </button>
         )}
+        <button
+          onClick={() => setIsOpen(true)}
+          className="text-xs text-gray-500 pointer"
+        >
+          신고하기
+        </button>
       </div>
 
-      <button
-        onClick={() => setIsOpen(true)}
-        className="text-xs text-gray-500 pointer"
-      >
-        신고하기
-      </button>
-      {/* 신고하기 모달 */}
       <ReportModal
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
