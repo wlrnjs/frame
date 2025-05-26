@@ -1,11 +1,14 @@
+"use client";
+
 import useDeleteComment from "@/hooks/api/comments/useDeleteComment";
 import { formatDate } from "@/utils/date/dateUtils";
-import React from "react";
+import React, { useState } from "react";
 import { CommentItemType } from "@/types/CommentType";
 import usePostLikeComment from "@/hooks/api/comments/uesPostLikeComment";
 import useGetLikeComment from "@/hooks/api/comments/useGetLikeComments";
 import useDeleteLikeComment from "@/hooks/api/comments/useDeleteLikeComment";
 import useUserId from "@/hooks/useUserId";
+import ReportModal from "../ui/modal/ReportModal";
 
 interface LikeComment {
   id: number;
@@ -37,10 +40,13 @@ const CommentItem = ({
   postId,
 }: CommentItemProps) => {
   const userId = useUserId();
+  const [isOpen, setIsOpen] = useState(false);
   const { data: likeComments } = useGetLikeComment([comment_id]); // 좋아요 조회
   const myLike = likeComments?.some(
     (like: LikeComment) => like.user_id === userId
   );
+
+  console.log(typeof comment_id);
 
   const { mutate: postLikeComment } = usePostLikeComment(); // 좋아요 추가
   const { mutate: deleteLikeComment } = useDeleteLikeComment(); // 좋아요 삭제
@@ -74,12 +80,6 @@ const CommentItem = ({
 
       {/* 하단 정보 */}
       <div className="flex items-center justify-between">
-        <p className="text-xs text-gray-500 flex items-center gap-1">
-          좋아요{" "}
-          <span className="text-gray-500 font-medium">
-            {likeComments?.length}
-          </span>
-        </p>
         {!isMine ? (
           <button
             onClick={onHandleComment}
@@ -98,7 +98,7 @@ const CommentItem = ({
                 d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
               />
             </svg>
-            좋아요
+            좋아요 {likeComments?.length}
           </button>
         ) : (
           <button
@@ -109,6 +109,20 @@ const CommentItem = ({
           </button>
         )}
       </div>
+
+      <button
+        onClick={() => setIsOpen(true)}
+        className="text-xs text-gray-500 pointer"
+      >
+        신고하기
+      </button>
+      {/* 신고하기 모달 */}
+      <ReportModal
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        commentId={comment_id}
+        type="comments"
+      />
     </div>
   );
 };

@@ -1,5 +1,6 @@
 "use client";
 
+import usePostReport from "@/hooks/api/report/usePostReport";
 import { useToast } from "@/hooks/ui/useToast";
 import Close from "@/icon/Close";
 import Dropdown from "@/icon/Dropdown";
@@ -9,14 +10,22 @@ import { createPortal } from "react-dom";
 interface ReportModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (reason: string, description: string) => void;
+  commentId?: string;
+  type: "comments" | "posts";
 }
 
-const ReportModal = ({ isOpen, onClose, onSubmit }: ReportModalProps) => {
+const ReportModal = ({
+  isOpen,
+  onClose,
+  commentId,
+  type,
+}: ReportModalProps) => {
+  const toast = useToast();
   const [reason, setReason] = useState("");
   const [description, setDescription] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const toast = useToast();
+
+  const { mutate: postReport } = usePostReport();
 
   useEffect(() => {
     if (isOpen) {
@@ -51,14 +60,26 @@ const ReportModal = ({ isOpen, onClose, onSubmit }: ReportModalProps) => {
   };
 
   const handleSubmit = () => {
+    if (!commentId) return;
+    if (!reason) {
+      toast.error("신고 사유를 선택해주세요.");
+      return;
+    }
+    if (!description) {
+      toast.error("신고 사유는 필수입니다.");
+      return;
+    }
+
     if (reason.trim() && description.trim()) {
-      onSubmit(reason, description);
+      postReport({
+        reason,
+        description,
+        report_id: commentId,
+        report_type: type,
+      });
       setReason("");
       setDescription("");
-      toast.success("신고가 접수되었습니다.");
       onClose();
-    } else {
-      toast.error("신고 사유와 설명을 입력해주세요.");
     }
   };
 
@@ -95,8 +116,8 @@ const ReportModal = ({ isOpen, onClose, onSubmit }: ReportModalProps) => {
                   신고 사유 선택
                 </option>
                 <option value="inappropriate_content">부적절한 콘텐츠</option>
-                <option value="spam">스팸</option>
-                <option value="harassment">괴롭힘</option>
+                <option value="spam">스팸, 광고</option>
+                <option value="harassment">욕설, 비속어</option>
                 <option value="other">기타</option>
               </select>
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-white">
@@ -105,11 +126,11 @@ const ReportModal = ({ isOpen, onClose, onSubmit }: ReportModalProps) => {
             </div>
             <textarea
               ref={textareaRef}
-              placeholder="신고 설명"
+              placeholder="신고 사유(최대100자)"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows={4}
-              maxLength={200}
+              maxLength={100}
               className="w-full p-2 bg-black border border-white/30 rounded-[5px] text-white placeholder-white/50 focus:outline-none focus:border-white/50 transition-colors resize-none"
             />
           </div>

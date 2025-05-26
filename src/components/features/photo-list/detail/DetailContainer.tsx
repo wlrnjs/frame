@@ -164,10 +164,8 @@ const DetailContainer = ({ data, imgData }: DetailContainerProps) => {
       <ReportModal
         isOpen={isReportModalOpen}
         onClose={closeReportModal}
-        onSubmit={(reason, description) => {
-          console.log("Report submitted:", { reason, description });
-          closeReportModal();
-        }}
+        commentId={post_id.toString()}
+        type="posts"
       />
     </div>
   );

@@ -82,6 +82,7 @@ const CommentContainer = ({
         <button
           type="submit"
           disabled={isPending}
+          onClick={() => console.log("클릭됨")}
           className={cn(
             "px-4 py-2 bg-black text-white rounded-lg text-nowrap border border-white",
             isPending && "cursor-not-allowed"
