@@ -47,7 +47,6 @@ const ActionButtons = ({
   imgData,
 }: ActionButtonsProps) => {
   const userId = useUserId();
-  console.log("userId: ", userId);
   const { error: toastError } = useToast();
 
   const { data: likeToggle } = useGetLikeToggle([id.toString()]);
@@ -59,10 +58,6 @@ const ActionButtons = ({
     (like: LikeToggle) => like.user_id === userId
   );
 
-  console.log("likeToggle", likeToggle);
-  console.log("id", id);
-  console.log("id.toString()", id.toString());
-
   const handleLikeClick = () => {
     if (!userId) {
       toastError("로그인 후 사용 가능합니다.");
@@ -71,7 +66,7 @@ const ActionButtons = ({
     if (myLike) {
       deleteLikeToggle({ post_id: id.toString() });
     } else {
-      postLikeToggle({ id, post_id: id.toString() });
+      postLikeToggle({ post_id: id.toString() });
     }
   };
 
@@ -146,6 +141,7 @@ const ActionButtons = ({
         </button>
         <div className={labelStyle}>삭제하기</div>
       </div>
+      <p>좋아요(임시): {likeToggle?.length}</p>
     </div>
   );
 };
