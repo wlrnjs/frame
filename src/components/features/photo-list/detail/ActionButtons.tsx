@@ -1,6 +1,6 @@
 "use client";
 
-import { HeartOutline } from "@/icon/Heart";
+import { HeartFilled, HeartOutline } from "@/icon/Heart";
 import Download from "@/icon/Download";
 import Share from "@/icon/Share";
 import Edit from "@/icon/Edit";
@@ -17,6 +17,13 @@ import useDeleteLikeToggle from "@/hooks/api/photo-list/detail/useDeleteLikeTogg
 const labelStyle =
   "absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-xs text-white bg-black rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap pointer";
 
+interface LikeToggle {
+  created_at: string;
+  id: string;
+  post_id: string;
+  user_id: string;
+}
+
 interface ActionButtonProps {
   icon: React.ReactNode;
   label: string;
@@ -28,7 +35,7 @@ interface ActionButtonsProps {
   onShareClick: () => void;
   onDeleteClick: () => void;
   onReportClick: () => void;
-  post_id: number;
+  id: number;
   imgData: DetailImgData[];
 }
 
@@ -36,35 +43,31 @@ const ActionButtons = ({
   onShareClick,
   onDeleteClick,
   onReportClick,
-  post_id,
+  id,
   imgData,
 }: ActionButtonsProps) => {
   const userId = useUserId();
   const { error: toastError } = useToast();
 
-  const { data: likeToggle } = useGetLikeToggle(post_id.toString());
+  const { data: likeToggle } = useGetLikeToggle(id.toString());
   const { mutate: postLikeToggle, isPending } = usePostLikeToggle();
   const { mutate: deleteLikeToggle, isPending: deleteLikeTogglePending } =
     useDeleteLikeToggle();
+
+  const myLike = likeToggle?.some(
+    (like: LikeToggle) => like.user_id === userId
+  );
 
   const handleLikeClick = () => {
     if (!userId) {
       toastError("로그인 후 사용 가능합니다.");
       return;
     }
-    if (likeToggle.length > 0) {
-      handleDeleteLikeClick();
+    if (myLike) {
+      deleteLikeToggle({ id });
     } else {
-      postLikeToggle({ post_id, user_id: userId! });
+      postLikeToggle({ id });
     }
-  };
-
-  const handleDeleteLikeClick = () => {
-    if (!userId) {
-      toastError("로그인 후 사용 가능합니다.");
-      return;
-    }
-    deleteLikeToggle({ id: likeToggle[0].id, userId });
   };
 
   // 다운로드 로직
@@ -92,7 +95,7 @@ const ActionButtons = ({
 
   const actionButtons: ActionButtonProps[] = [
     {
-      icon: <HeartOutline />,
+      icon: myLike ? <HeartFilled /> : <HeartOutline />,
       label: "좋아요",
       aria: "좋아요",
       onClick: handleLikeClick,

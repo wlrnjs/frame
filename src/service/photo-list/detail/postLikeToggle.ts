@@ -1,15 +1,22 @@
 import axios from "axios";
 
-const postLikeToggle = async ({post_id, user_id}: {post_id: number, user_id: string}) => {
+interface PostLikeToggleProps {
+  id: number;
+}
+
+const postLikeToggle = async ({id}: PostLikeToggleProps) => {
+  const token = JSON.parse(localStorage.getItem("sb-whvyyrwjdjzfcpcwvlvq-auth-token") || "{}")?.access_token;
+  const userId = JSON.parse(localStorage.getItem("sb-whvyyrwjdjzfcpcwvlvq-auth-token") || "{}")?.user?.id;
+
   const response = await axios.post(
     `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/posts_like`, 
     {
-      post_id,
-      user_id,
+      id,
+      user_id: userId,
     },
     {
       headers: {
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
+        Authorization: `Bearer ${token}`,
         apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
         Prefer: "return=representation",
       },

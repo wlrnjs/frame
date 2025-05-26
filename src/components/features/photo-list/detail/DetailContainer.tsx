@@ -93,7 +93,7 @@ const DetailContainer = ({ data, imgData }: DetailContainerProps) => {
           onShareClick={handleShareClick}
           onDeleteClick={handleDeleteClick}
           onReportClick={handleReportClick}
-          post_id={post_id}
+          id={post_id}
           imgData={imgData}
         />
 
