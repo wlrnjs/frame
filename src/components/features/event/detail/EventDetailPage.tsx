@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import useUserId from "@/hooks/useUserId";
 import { cn } from "@/utils";
 import useGetEventDetail from "@/hooks/api/event/useGetEventDetail";
-import EventImage from "./EventImage";
+import Image from "next/image";
 import { useEventJoinLogic } from "@/hooks/api/event/useEventJoinLogic";
 import EventMeta from "./EventMeta";
 import EventContent from "./EventContent";
@@ -51,12 +51,25 @@ const EventDetailPage = () => {
 
   return (
     <article className="w-full min-h-screen custom-margin layout-container">
-      {event.image_url && <EventImage imageUrl={event.image_url} />}
+      <div
+        className={cn(
+          "relative mx-28 h-[500px]",
+          "mobile:h-[240px] mobile:mx-0"
+        )}
+      >
+        <Image
+          src={event.image_url}
+          alt="Event Detail"
+          fill
+          priority
+          className="object-cover"
+        />
+      </div>
 
       <div
         className={cn(
-          "flex flex-col gap-4 bg-black text-white p-20",
-          "mobile:p-4 mobile:gap-2"
+          "flex flex-col gap-4 bg-black text-white p-20 mx-28",
+          "mobile:p-4 mobile:gap-2 mobile:mx-0"
         )}
       >
         <h1 className={cn("text-3xl", "mobile:text-xl")}>{event.title}</h1>
