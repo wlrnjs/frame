@@ -76,7 +76,7 @@ const DetailPhotoContainer = ({
       )}
     >
       {hasMultiplePhotos ? (
-        <div className="relative w-full aspect-[4/3] bg-black overflow-hidden rounded-md">
+        <div className="relative w-full aspect-[4/3] overflow-hidden rounded-md">
           <Swiper
             modules={[Navigation, Pagination]}
             spaceBetween={0}
@@ -126,7 +126,7 @@ const DetailPhotoContainer = ({
         </div>
       ) : (
         <div
-          className="relative w-full aspect-[4/3] bg-black overflow-hidden rounded-md"
+          className="relative w-full aspect-[4/3] overflow-hidden rounded-md"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >

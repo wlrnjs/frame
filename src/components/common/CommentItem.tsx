@@ -80,15 +80,15 @@ const CommentItem = ({
     "flex items-center gap-1 px-3 py-1 rounded-full bg-gray-800 hover:bg-gray-700 text-xs text-white transition-colors";
 
   return (
-    <div className="border-b border-gray-700 pb-1 px-2 flex flex-col gap-1">
+    <div className="border-b border-gray-700 pb-1 flex flex-col gap-1">
       {/* 유저 정보 */}
       <div className="flex items-center gap-2 text-sm text-gray-300">
-        <span className="font-semibold text-white">{name}</span>
+        <span className="font-semibold text-black">{name}</span>
         <span className="text-gray-500 text-xs">{commentDate(created_at)}</span>
       </div>
 
       {/* 댓글 본문 */}
-      <p className="text-gray-200 text-sm leading-relaxed pl-1">{comment}</p>
+      <p className="text-gray-700 text-sm leading-relaxed pl-1">{comment}</p>
 
       {/* 하단 정보 */}
       <div className="flex items-center gap-2 mb-2">

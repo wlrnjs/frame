@@ -83,20 +83,12 @@ const DetailContainer = ({ data, imgData }: DetailContainerProps) => {
   return (
     <div
       className={cn(
-        "max-w-full min-w-[380px] h-[720px] bg-black text-white p-8 rounded-[5px] shadow-lg flex flex-col gap-8 sticky top-[110px]",
-        "mobile:w-full mobile:top-0 mobile:h-auto mobile:sticky mobile:gap-2"
+        "max-w-full min-w-[380px] h-fit p-8 rounded-[5px] flex flex-col gap-8 mx-28",
+        "mobile:w-full mobile:gap-2 mobile:mx-0"
       )}
     >
       {/* 이미지 및 액션 */}
       <div className="flex flex-col gap-3 justify-between items-start">
-        <ActionButtons
-          onShareClick={handleShareClick}
-          onDeleteClick={handleDeleteClick}
-          onReportClick={handleReportClick}
-          id={post_id}
-          imgData={imgData}
-        />
-
         {/* 제목 및 설명 */}
         <div className={cn("flex flex-col gap-2", "mobile:gap-1")}>
           <h1 className={cn("text-3xl font-bold", "mobile:text-2xl")}>
@@ -105,52 +97,45 @@ const DetailContainer = ({ data, imgData }: DetailContainerProps) => {
           <p className="text-sm text-gray-400">{description}</p>
         </div>
       </div>
-      <hr className="border-gray-700" />
-      <div
-        className={cn(
-          "flex flex-col gap-4",
-          "mobile:flex-row mobile:items-center mobile:justify-start mobile:gap-5"
-        )}
-      >
+      <hr className="border-gray-400" />
+      <div className="flex flex-col gap-4">
         {/* 작성자 정보 */}
-        <div className="flex flex-col gap-2 items-start justify-between pt-4 text-sm">
+        <div className="flex flex-col gap-2 items-start justify-between pt-4 text-sm font-semibold">
           <p className="flex items-center gap-1">
             작성자:
             <Link href={"/user-profile"}>
-              <span className="text-gray-300 hover:underline decoration-offset-4 pointer">
+              <span className="hover:underline decoration-offset-4 pointer">
                 wlrnjs (임시)
               </span>
             </Link>
           </p>
           <p className="flex items-center gap-1">
             업로드:
-            <span className="text-gray-300">{formatDate(created_at)}</span>
+            <span>{formatDate(created_at)}</span>
           </p>
           <p className="flex items-center gap-1">
-            장소:<span className="text-gray-300">{location}</span>
-          </p>
-        </div>
-
-        {/* 추가 정보 */}
-        <div
-          className={cn(
-            "flex flex-col gap-2 text-sm text-gray-300",
-            "mobile:pt-4"
-          )}
-        >
-          <p className="flex items-center gap-1">
-            <span className="font-semibold text-white">카테고리:</span>{" "}
-            {category}
+            장소:<span>{location}</span>
           </p>
           <p className="flex items-center gap-1">
-            <span className="font-semibold text-white">조회수:</span>{" "}
+            <span className="font-semibold">카테고리:</span> {category}
+          </p>
+          <p className="flex items-center gap-1">
+            <span className="font-semibold">조회수:</span>{" "}
             {view_count > 0 ? view_count : "0"}
           </p>
           <p className="flex items-center gap-1">
-            <span className="font-semibold text-white">카메라 정보:</span>
+            <span className="font-semibold">카메라 정보:</span>
             {camera_info}
           </p>
         </div>
+
+        <ActionButtons
+          onShareClick={handleShareClick}
+          onDeleteClick={handleDeleteClick}
+          onReportClick={handleReportClick}
+          id={post_id}
+          imgData={imgData}
+        />
       </div>
 
       <ShareModal isOpen={isShareModalOpen} onClose={closeShareModal} />

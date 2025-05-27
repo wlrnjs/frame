@@ -13,7 +13,7 @@ const Square = () => {
         y1="0.5"
         x2={0.5 + cornerLength}
         y2="0.5"
-        stroke="white"
+        stroke="black"
         strokeWidth={strokeWidth}
       />
       <line
@@ -21,7 +21,7 @@ const Square = () => {
         y1="0.5"
         x2="0.5"
         y2={0.5 + cornerLength}
-        stroke="white"
+        stroke="black"
         strokeWidth={strokeWidth}
       />
 
@@ -31,7 +31,7 @@ const Square = () => {
         y1="0.5"
         x2={size - 0.5}
         y2="0.5"
-        stroke="white"
+        stroke="black"
         strokeWidth={strokeWidth}
       />
       <line
@@ -39,7 +39,7 @@ const Square = () => {
         y1="0.5"
         x2={size - 0.5}
         y2={0.5 + cornerLength}
-        stroke="white"
+        stroke="black"
         strokeWidth={strokeWidth}
       />
 
@@ -49,7 +49,7 @@ const Square = () => {
         y1={size - 0.5 - cornerLength}
         x2="0.5"
         y2={size - 0.5}
-        stroke="white"
+        stroke="black"
         strokeWidth={strokeWidth}
       />
       <line
@@ -57,7 +57,7 @@ const Square = () => {
         y1={size - 0.5}
         x2={0.5 + cornerLength}
         y2={size - 0.5}
-        stroke="white"
+        stroke="black"
         strokeWidth={strokeWidth}
       />
 
@@ -67,7 +67,7 @@ const Square = () => {
         y1={size - 0.5}
         x2={size - 0.5}
         y2={size - 0.5}
-        stroke="white"
+        stroke="black"
         strokeWidth={strokeWidth}
       />
       <line
@@ -75,7 +75,7 @@ const Square = () => {
         y1={size - 0.5 - cornerLength}
         x2={size - 0.5}
         y2={size - 0.5}
-        stroke="white"
+        stroke="black"
         strokeWidth={strokeWidth}
       />
     </svg>

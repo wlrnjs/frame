@@ -32,7 +32,7 @@ const ImageDetailPage = () => {
   return (
     <div
       className={cn(
-        "w-full min-h-screen flex-col-center gap-20 custom-margin layout-container",
+        "w-full h-fit flex-col-center gap-20 custom-margin layout-container",
         "mobile:gap-10"
       )}
     >
@@ -51,14 +51,8 @@ const ImageDetailPage = () => {
             }
             isLoading={imgDetailLoading}
           />
-          <div className={cn("hidden", "mobile:block")}>
-            <DetailContainer data={data} imgData={imgDetail?.data} />
-          </div>
-          <CommentContainer id={id!} type="post" />
-        </div>
-
-        <div className={cn("block", "mobile:hidden")}>
           <DetailContainer data={data} imgData={imgDetail?.data} />
+          <CommentContainer id={id!} type="post" />
         </div>
       </div>
       <RecommendContainer />

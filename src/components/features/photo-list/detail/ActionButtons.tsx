@@ -116,9 +116,9 @@ const ActionButtons = ({
   ];
 
   return (
-    <div className="flex space-x-4">
+    <div className="flex space-x-4 bg-black/90 w-[400px] h-[50px] items-center justify-center rounded-[15px] mt-5">
       {actionButtons.map((action, index) => (
-        <div key={index} className="relative group">
+        <div key={index} className="relative group flex items-center">
           <button
             aria-label={action.aria}
             onClick={action.onClick}
@@ -130,7 +130,7 @@ const ActionButtons = ({
           <div className={labelStyle}>{action.label}</div>
         </div>
       ))}
-      <div className="relative group">
+      <div className="relative group flex items-center">
         <button
           aria-label="삭제"
           onClick={onDeleteClick}
@@ -140,7 +140,7 @@ const ActionButtons = ({
         </button>
         <div className={labelStyle}>삭제하기</div>
       </div>
-      <p>좋아요(임시): {likeToggle?.length || 0}</p>
+      <p className="text-white">좋아요(임시): {likeToggle?.length || 0}</p>
     </div>
   );
 };

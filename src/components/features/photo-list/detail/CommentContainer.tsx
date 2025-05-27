@@ -34,18 +34,18 @@ const CommentContainer = ({ id, type }: CommentContainerProps) => {
   return (
     <div
       className={cn(
-        "w-full h-fit bg-black shadow-md p-6 flex flex-col justify-between",
+        "w-full h-fit p-6 flex flex-col justify-between",
         type === "event" ? "rounded-0" : "rounded-lg"
       )}
     >
-      <div className="flex gap-2 items-center p-6 justify-start">
-        <h2 className={cn("text-2xl text-white", "mobile:text-xl")}>댓글</h2>
-        <span className="text-gray-500">
+      <div className="flex gap-2 items-center py-6 justify-start mx-28 mobile:mx-0">
+        <h2 className={cn("text-2xl text-black", "mobile:text-xl")}>댓글</h2>
+        <span className="text-black/70">
           총 {commentsData?.totalCount || 0}개
         </span>
       </div>
       {/* 댓글 리스트 */}
-      <div className="overflow-y-auto flex-1 space-y-4 pr-2">
+      <div className="overflow-y-auto flex-1 space-y-4 pr-2 mx-28 mobile:mx-0">
         {comments?.length === 0 ? (
           <EmptyComment />
         ) : (
@@ -74,7 +74,7 @@ const CommentContainer = ({ id, type }: CommentContainerProps) => {
           e.preventDefault();
           onSubmit();
         }}
-        className="mt-4 flex items-center space-x-2"
+        className="mt-4 flex items-center space-x-2 mx-28 mobile:mx-0"
       >
         <input
           type="text"
@@ -96,11 +96,11 @@ const CommentContainer = ({ id, type }: CommentContainerProps) => {
       </form>
 
       {/* 페이지네이션 */}
-      <div className="mt-4 flex-center gap-2">
+      <div className="mt-4 flex-center gap-2 mx-28 mobile:mx-0">
         <button
           onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
           disabled={currentPage === 1}
-          className="px-3 py-1 text-sm text-white hover:text-gray-500 disabled:opacity-30 transition-colors"
+          className="px-3 py-1 text-sm text-black hover:text-gray-500 disabled:opacity-30 transition-colors"
         >
           이전
         </button>
@@ -125,7 +125,7 @@ const CommentContainer = ({ id, type }: CommentContainerProps) => {
                     onClick={() => setCurrentPage(1)}
                     className={`w-8 h-8 rounded text-sm ${
                       currentPage === 1
-                        ? "bg-white text-black"
+                        ? "bg-black text-white"
                         : "text-gray-300 hover:bg-gray-700"
                     }`}
                   >
@@ -141,7 +141,7 @@ const CommentContainer = ({ id, type }: CommentContainerProps) => {
                   onClick={() => setCurrentPage(pageNum)}
                   className={`w-8 h-8 rounded text-sm ${
                     pageNum === currentPage
-                      ? "bg-white text-black"
+                      ? "bg-black text-white"
                       : "text-gray-300 hover:bg-gray-700"
                   }`}
                 >
@@ -158,7 +158,7 @@ const CommentContainer = ({ id, type }: CommentContainerProps) => {
                     onClick={() => setCurrentPage(totalPages)}
                     className={`w-8 h-8 rounded text-sm ${
                       currentPage === totalPages
-                        ? "bg-white text-black"
+                        ? "bg-black text-white"
                         : "text-gray-300 hover:bg-gray-700"
                     }`}
                   >
@@ -179,7 +179,7 @@ const CommentContainer = ({ id, type }: CommentContainerProps) => {
           disabled={
             !commentsData?.totalPages || currentPage >= commentsData.totalPages
           }
-          className="px-3 py-1 text-sm text-white hover:text-gray-500 disabled:opacity-30 transition-colors"
+          className="px-3 py-1 text-sm text-black hover:text-gray-500 disabled:opacity-30 transition-colors"
         >
           다음
         </button>
