@@ -141,7 +141,6 @@ const DetailContainer = ({ data, imgData, isMine }: DetailContainerProps) => {
       <DeleteModal
         isOpen={isDeleteModalOpen}
         onClose={closeDeleteModal}
-        title="게시글"
         id={post_id}
         type="posts"
       />

@@ -8,17 +8,17 @@ import { createPortal } from "react-dom";
 interface DeleteModalProps {
   isOpen: boolean;
   onClose: () => void;
-  title: string;
   id: number;
   type: "posts" | "comments";
+  commentDelete?: () => void;
 }
 
 const DeleteModal = ({
   isOpen,
   onClose,
-  title,
   id,
   type,
+  commentDelete,
 }: DeleteModalProps) => {
   const { mutate } = useDeletePost();
   const handleBackgroundClick = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -32,6 +32,8 @@ const DeleteModal = ({
 
     if (type === "posts") {
       mutate({ post_id: id });
+    } else {
+      commentDelete?.(); // 임시
     }
     onClose();
   };
@@ -56,7 +58,7 @@ const DeleteModal = ({
         {/* 모달 콘텐츠 */}
         <div className="flex flex-col gap-4">
           <h2 className="text-xl font-bold text-white text-center">
-            정말로 {title}을 삭제하시겠습니까?
+            정말로 {type === "posts" ? "게시글" : "댓글"}을 삭제하시겠습니까?
           </h2>
           <span className="text-white/70 text-center">
             삭제 후 복구할 수 없습니다.

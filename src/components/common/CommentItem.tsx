@@ -65,7 +65,7 @@ const CommentItem = ({
   };
 
   const onDelete = () => {
-    // 댓글 삭제
+    // 댓글 삭제, DeleteModal에서 댓글 삭제 처리 필요
     deleteComment(
       { id: comment_id, postId, userId: user_id, type },
       {
@@ -132,8 +132,9 @@ const CommentItem = ({
       <DeleteModal
         isOpen={deleteModalOpen}
         onClose={() => setDeleteModalOpen(false)}
-        onConfirm={onDelete}
-        title="댓글"
+        id={Number(comment_id)}
+        type="comments"
+        commentDelete={onDelete}
       />
     </div>
   );
