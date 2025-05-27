@@ -57,11 +57,6 @@ const ActionButtons = ({
     (like: LikeToggle) => like.user_id === userId
   );
 
-  console.log("id", id);
-  console.log("likeToggle", likeToggle);
-  console.log("myLike", myLike);
-  // TODO: 게시글 좋아요 구현
-
   const handleLikeClick = () => {
     if (!userId) {
       toastError("로그인 후 사용 가능합니다.");

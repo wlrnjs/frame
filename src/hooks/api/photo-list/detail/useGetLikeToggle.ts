@@ -8,13 +8,8 @@ interface GetLikeToggleProps {
 }
 
 const getLikeToggle = async ({ post_id }: GetLikeToggleProps) => {
-  try {
-    console.log('Getting like toggle for post_id:', post_id);
-    
     const tokenData = JSON.parse(localStorage.getItem("sb-whvyyrwjdjzfcpcwvlvq-auth-token") || "{}");
     const token = tokenData?.access_token;
-    
-    console.log('Token exists:', !!token);
 
     if (!token) throw new Error("인증 정보가 없습니다.");
 
@@ -22,8 +17,6 @@ const getLikeToggle = async ({ post_id }: GetLikeToggleProps) => {
     if (!supabaseUrl) {
       throw new Error('NEXT_PUBLIC_SUPABASE_URL is not defined');
     }
-
-    console.log('Requesting URL:', `${supabaseUrl}/rest/v1/posts_like?select=*,user(nickname)&post_id=eq.${post_id}`);
     
     const response = await axios.get(
       `${supabaseUrl}/rest/v1/posts_like`,
@@ -34,19 +27,13 @@ const getLikeToggle = async ({ post_id }: GetLikeToggleProps) => {
         },
         headers: {
           Authorization: `Bearer ${token}`,
-          apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '',
+          apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
           'Content-Type': 'application/json',
           'Prefer': 'return=representation',
         },
       }
     );
-
-    console.log('API Response:', response.data);
-    return response.data || [];
-  } catch (error) {
-    console.error('Error in getLikeToggle:', error);
-    throw error;
-  }
+    return response.data;
 };
 
 const useGetLikeToggle = (post_id: number) => {
