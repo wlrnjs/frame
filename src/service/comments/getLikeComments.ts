@@ -18,7 +18,7 @@ const getLikeComment = async ({ ids }: GetCommentProps) => {
         comment_id: `in.(${idList})`,
       },
       headers: {
-        Authorization: `Bearer ${token}`, // 인증 토큰 추가
+        Authorization: `Bearer ${token}`,
         apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
       },
     }

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 interface DeleteLikeToggleProps {
-  post_id: string;
+  post_id: number;
 }
 
 const deleteLikeToggle = async ({ post_id }: DeleteLikeToggleProps) => {

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 interface PostLikeToggleProps {
-  post_id: string;
+  post_id: number;
 }
 
 const postLikeToggle = async ({post_id}: PostLikeToggleProps) => {

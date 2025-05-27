@@ -5,7 +5,7 @@ import deleteLikeToggle from "@/service/photo-list/detail/deleteLikeToggle";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface DeleteLikeToggleProps {
-  post_id: string;
+  post_id: number;
 }
 
 const useDeleteLikeToggle = () => {
@@ -17,10 +17,9 @@ const useDeleteLikeToggle = () => {
       deleteLikeToggle({ post_id }),
     retry: 1,
     onSuccess: (_, { post_id }: DeleteLikeToggleProps) => {
-      const id = String(post_id);
       success("추천이 취소되었습니다.");
       queryClient.invalidateQueries({
-        queryKey: ["likeToggle", [id]],
+        queryKey: ["likeToggle", post_id],
         refetchType: 'all'
       });
     },

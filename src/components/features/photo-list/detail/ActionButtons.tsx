@@ -49,14 +49,18 @@ const ActionButtons = ({
   const userId = useUserId();
   const { error: toastError } = useToast();
 
-  const { data: likeToggle } = useGetLikeToggle([id.toString()]);
+  const { data: likeToggle } = useGetLikeToggle(id);
   const { mutate: postLikeToggle, isPending } = usePostLikeToggle();
   const { mutate: deleteLikeToggle, isPending: deleteLikeTogglePending } =
     useDeleteLikeToggle();
-
   const myLike = likeToggle?.some(
     (like: LikeToggle) => like.user_id === userId
   );
+
+  console.log("id", id);
+  console.log("likeToggle", likeToggle);
+  console.log("myLike", myLike);
+  // TODO: 게시글 좋아요 구현
 
   const handleLikeClick = () => {
     if (!userId) {
@@ -64,9 +68,9 @@ const ActionButtons = ({
       return;
     }
     if (myLike) {
-      deleteLikeToggle({ post_id: id.toString() });
+      deleteLikeToggle({ post_id: id });
     } else {
-      postLikeToggle({ post_id: id.toString() });
+      postLikeToggle({ post_id: id });
     }
   };
 
@@ -141,7 +145,7 @@ const ActionButtons = ({
         </button>
         <div className={labelStyle}>삭제하기</div>
       </div>
-      <p>좋아요(임시): {likeToggle?.length}</p>
+      <p>좋아요(임시): {likeToggle?.length || 0}</p>
     </div>
   );
 };

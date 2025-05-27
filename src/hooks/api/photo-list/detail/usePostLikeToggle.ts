@@ -3,7 +3,7 @@ import postLikeToggle from "@/service/photo-list/detail/postLikeToggle";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface PostLikeToggleProps {
-  post_id: string;
+  post_id: number;
 }
 
 const usePostLikeToggle = () => {
@@ -14,10 +14,9 @@ const usePostLikeToggle = () => {
     mutationFn: ({post_id}: PostLikeToggleProps) => postLikeToggle({post_id}),
     retry: 1,
     onSuccess: (_, {post_id}: PostLikeToggleProps) => {
-      const id = String(post_id);
       success("추천 성공");
       queryClient.invalidateQueries({
-        queryKey: ["likeToggle", [id]],
+        queryKey: ["likeToggle", post_id],
         refetchType: 'all'
       });
     },
