@@ -1,5 +1,6 @@
 "use client";
 
+import useDeletePost from "@/hooks/api/photo-list/detail/useDeletePost";
 import Close from "@/icon/Close";
 import React from "react";
 import { createPortal } from "react-dom";
@@ -7,14 +8,32 @@ import { createPortal } from "react-dom";
 interface DeleteModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onConfirm: () => void;
+  title: string;
+  id: number;
+  type: "posts" | "comments";
 }
 
-const DeleteModal = ({ isOpen, onClose, onConfirm }: DeleteModalProps) => {
+const DeleteModal = ({
+  isOpen,
+  onClose,
+  title,
+  id,
+  type,
+}: DeleteModalProps) => {
+  const { mutate } = useDeletePost();
   const handleBackgroundClick = (event: React.MouseEvent<HTMLDivElement>) => {
     if (event.target === event.currentTarget) {
       onClose();
     }
+  };
+
+  const handleConfirmDelete = () => {
+    if (!id) return;
+
+    if (type === "posts") {
+      mutate({ post_id: id });
+    }
+    onClose();
   };
 
   if (!isOpen) return null;
@@ -37,16 +56,18 @@ const DeleteModal = ({ isOpen, onClose, onConfirm }: DeleteModalProps) => {
         {/* 모달 콘텐츠 */}
         <div className="flex flex-col gap-4">
           <h2 className="text-xl font-bold text-white text-center">
-            정말로 삭제하시겠습니까?
+            정말로 {title}을 삭제하시겠습니까?
           </h2>
-
+          <span className="text-white/70 text-center">
+            삭제 후 복구할 수 없습니다.
+          </span>
           {/* 버튼 그룹 */}
           <div className="flex justify-center gap-4 mt-4">
             <button
-              onClick={onConfirm}
+              onClick={handleConfirmDelete}
               className="w-1/2 py-2.5 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
             >
-              확인
+              삭제하기
             </button>
             <button
               onClick={onClose}

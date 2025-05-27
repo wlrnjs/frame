@@ -8,6 +8,7 @@ import CommentContainer from "@/components/features/photo-list/detail/CommentCon
 import RecommendContainer from "@/components/features/photo-list/detail/RecommendContainer";
 import useGetImgDetail from "@/hooks/api/photo-list/detail/useGetImgDetail";
 import useGetImg from "@/hooks/api/photo-list/detail/useGetImg";
+import useUserId from "@/hooks/useUserId";
 
 const ImageDetailPage = () => {
   const params = useSearchParams();
@@ -51,7 +52,11 @@ const ImageDetailPage = () => {
             }
             isLoading={imgDetailLoading}
           />
-          <DetailContainer data={data} imgData={imgDetail?.data} />
+          <DetailContainer
+            data={data}
+            imgData={imgDetail?.data}
+            isMine={data?.user_id === useUserId()}
+          />
           <CommentContainer id={id!} type="post" />
         </div>
       </div>

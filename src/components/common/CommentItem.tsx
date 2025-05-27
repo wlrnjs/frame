@@ -9,6 +9,7 @@ import useGetLikeComment from "@/hooks/api/comments/useGetLikeComments";
 import useDeleteLikeComment from "@/hooks/api/comments/useDeleteLikeComment";
 import useUserId from "@/hooks/useUserId";
 import ReportModal from "../ui/modal/ReportModal";
+import DeleteModal from "../ui/modal/DeleteModal";
 
 interface LikeComment {
   id: number;
@@ -43,6 +44,7 @@ const CommentItem = ({
 }: CommentItemProps) => {
   const userId = useUserId();
   const [isOpen, setIsOpen] = useState(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const { data: likeComments } = useGetLikeComment([comment_id]); // 좋아요 조회
   const myLike = likeComments?.some(
     (like: LikeComment) => like.user_id === userId
@@ -106,7 +108,7 @@ const CommentItem = ({
               d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
             />
           </svg>
-          {likeComments?.length}
+          {likeComments?.length ?? 0}
         </button>
         {!isMine ? (
           <div className="flex items-center gap-2">
@@ -115,7 +117,7 @@ const CommentItem = ({
             </button>
           </div>
         ) : (
-          <button onClick={onDelete} className={btnStyle}>
+          <button onClick={() => setDeleteModalOpen(true)} className={btnStyle}>
             삭제
           </button>
         )}
@@ -126,6 +128,12 @@ const CommentItem = ({
         onClose={() => setIsOpen(false)}
         commentId={comment_id}
         type="comments"
+      />
+      <DeleteModal
+        isOpen={deleteModalOpen}
+        onClose={() => setDeleteModalOpen(false)}
+        onConfirm={onDelete}
+        title="댓글"
       />
     </div>
   );

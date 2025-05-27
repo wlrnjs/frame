@@ -37,6 +37,7 @@ interface ActionButtonsProps {
   onReportClick: () => void;
   id: number;
   imgData: DetailImgData[];
+  isMine: boolean;
 }
 
 const ActionButtons = ({
@@ -45,6 +46,7 @@ const ActionButtons = ({
   onReportClick,
   id,
   imgData,
+  isMine,
 }: ActionButtonsProps) => {
   const userId = useUserId();
   const { error: toastError } = useToast();
@@ -106,17 +108,17 @@ const ActionButtons = ({
       onClick: handleDownloadClick,
     },
     { icon: <Share />, label: "공유하기", aria: "공유", onClick: onShareClick },
-    { icon: <Edit />, label: "수정하기", aria: "수정" },
     {
       icon: <Report />,
       label: "신고하기",
       aria: "신고",
       onClick: onReportClick,
     },
+    ...(isMine ? [{ icon: <Edit />, label: "수정하기", aria: "수정" }] : []),
   ];
 
   return (
-    <div className="flex space-x-4 bg-black/90 w-[400px] h-[50px] items-center justify-center rounded-[15px] mt-5">
+    <div className="flex space-x-4 bg-black/90 p-5 w-fit h-[50px] items-center justify-center rounded-[15px] mt-5">
       {actionButtons.map((action, index) => (
         <div key={index} className="relative group flex items-center">
           <button
@@ -130,16 +132,18 @@ const ActionButtons = ({
           <div className={labelStyle}>{action.label}</div>
         </div>
       ))}
-      <div className="relative group flex items-center">
-        <button
-          aria-label="삭제"
-          onClick={onDeleteClick}
-          className="focus:outline-none"
-        >
-          <Delete />
-        </button>
-        <div className={labelStyle}>삭제하기</div>
-      </div>
+      {isMine && (
+        <div className="relative group flex items-center">
+          <button
+            aria-label="삭제"
+            onClick={onDeleteClick}
+            className="focus:outline-none"
+          >
+            <Delete />
+          </button>
+          <div className={labelStyle}>삭제하기</div>
+        </div>
+      )}
       <p className="text-white">좋아요(임시): {likeToggle?.length || 0}</p>
     </div>
   );

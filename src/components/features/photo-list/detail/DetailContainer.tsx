@@ -31,9 +31,10 @@ export interface DetailImgData {
 interface DetailContainerProps {
   data: DetailData;
   imgData: DetailImgData[];
+  isMine: boolean;
 }
 
-const DetailContainer = ({ data, imgData }: DetailContainerProps) => {
+const DetailContainer = ({ data, imgData, isMine }: DetailContainerProps) => {
   const {
     isOpen: isShareModalOpen,
     openModal: openShareModal,
@@ -75,10 +76,6 @@ const DetailContainer = ({ data, imgData }: DetailContainerProps) => {
   const handleShareClick = openShareModal;
   const handleDeleteClick = openDeleteModal;
   const handleReportClick = openReportModal;
-
-  const handleConfirmDelete = () => {
-    closeDeleteModal();
-  };
 
   return (
     <div
@@ -135,6 +132,7 @@ const DetailContainer = ({ data, imgData }: DetailContainerProps) => {
           onReportClick={handleReportClick}
           id={post_id}
           imgData={imgData}
+          isMine={isMine}
         />
       </div>
 
@@ -143,7 +141,9 @@ const DetailContainer = ({ data, imgData }: DetailContainerProps) => {
       <DeleteModal
         isOpen={isDeleteModalOpen}
         onClose={closeDeleteModal}
-        onConfirm={handleConfirmDelete}
+        title="게시글"
+        id={post_id}
+        type="posts"
       />
 
       <ReportModal
