@@ -5,6 +5,9 @@ interface DeletePostProps {
   post_id: number;
 }
 
+// TODO: 게시글 삭제 버그 수정 및 댓글 삭제 로직 수정
+// supabase 정책 문제임 게시글 삭제됨
+
 const deletePost = async ({ post_id }: DeletePostProps) => {
   const token = JSON.parse(localStorage.getItem("sb-whvyyrwjdjzfcpcwvlvq-auth-token") || "{}")?.access_token;
   const {

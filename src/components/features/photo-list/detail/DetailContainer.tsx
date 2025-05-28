@@ -9,6 +9,7 @@ import Link from "next/link";
 import React from "react";
 import { formatDate } from "@/utils/date/dateUtils";
 import { cn } from "@/utils";
+import useUserId from "@/hooks/useUserId";
 
 interface DetailData {
   title: string;
@@ -20,6 +21,7 @@ interface DetailData {
   view_count: number;
   camera_info: string;
   post_id: number;
+  user_id: string;
 }
 
 export interface DetailImgData {
@@ -31,10 +33,15 @@ export interface DetailImgData {
 interface DetailContainerProps {
   data: DetailData;
   imgData: DetailImgData[];
-  isMine: boolean;
 }
 
-const DetailContainer = ({ data, imgData, isMine }: DetailContainerProps) => {
+const DetailContainer = ({ data, imgData }: DetailContainerProps) => {
+  console.log("data: ", data);
+  console.log("data?.user_id: ", data?.user_id);
+  const user = useUserId();
+  console.log("user: ", user);
+  const isMine = data?.user_id === user;
+
   const {
     isOpen: isShareModalOpen,
     openModal: openShareModal,

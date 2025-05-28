@@ -24,6 +24,7 @@ const DropDown = () => {
   const handleLogout = async () => {
     try {
       await supabase.auth.signOut();
+      sessionStorage.removeItem("userId");
       toast.success("로그아웃이 완료되었습니다.");
       router.push("/");
     } catch (error) {
