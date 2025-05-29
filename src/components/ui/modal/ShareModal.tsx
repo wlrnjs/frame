@@ -6,6 +6,10 @@ import { createPortal } from "react-dom";
 import { useToast } from "@/hooks/ui/useToast";
 import Image from "next/image";
 import { DetailImgData } from "@/components/features/photo-list/detail/DetailContainer";
+import Link from "@/icon/Link";
+import Kakao from "@/icon/Kakao";
+import Instagram from "@/icon/Instagram";
+import { cn } from "@/utils";
 
 interface ShareModalProps {
   isOpen: boolean;
@@ -26,6 +30,24 @@ const ShareModal = ({ isOpen, onClose, imgData }: ShareModalProps) => {
     navigator.clipboard.writeText(window.location.href);
     toast.success("링크가 복사되었습니다!");
   };
+
+  const ShareIcon = [
+    {
+      name: "카카오톡",
+      icon: <Kakao />,
+      onClick: handleCopyLink,
+    },
+    {
+      name: "링크 복사",
+      icon: <Link />,
+      onClick: handleCopyLink,
+    },
+    {
+      name: "인스타그램",
+      icon: <Instagram />,
+      onClick: handleCopyLink,
+    },
+  ];
 
   if (!isOpen) return null;
 
@@ -70,29 +92,19 @@ const ShareModal = ({ isOpen, onClose, imgData }: ShareModalProps) => {
           )}
 
           {/* 공유 옵션: 링크 복사 버튼 */}
-          <div className="flex justify-center">
-            <button
-              onClick={handleCopyLink}
-              className="flex flex-col items-center gap-2 text-white hover:text-gray-300 transition-colors"
-            >
-              <div className="w-14 h-14 bg-white/10 rounded-full flex items-center justify-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
-                  />
-                </svg>
-              </div>
-              <span className="text-sm font-medium">링크 복사</span>
-            </button>
+          <div className={cn("flex-center gap-5", "mobile:gap-5")}>
+            {ShareIcon.map((icon, index) => (
+              <button
+                key={index}
+                onClick={icon.onClick}
+                className="flex flex-col items-center gap-2 text-white hover:text-gray-300 transition-colors"
+              >
+                <div className="w-14 h-14 bg-white/10 rounded-full flex items-center justify-center">
+                  {icon.icon}
+                </div>
+                <span className="text-sm font-medium">{icon.name}</span>
+              </button>
+            ))}
           </div>
         </div>
       </div>
