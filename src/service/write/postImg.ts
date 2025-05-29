@@ -1,14 +1,17 @@
 import axios from "axios";
 
 export interface postImgProps {
-  posts_id: string;
+  posts_id: number;
   image_url: string;
 }
 
-const postImg = async (data: postImgProps) => {
+const postImg = async ({posts_id, image_url}: postImgProps) => {
   const response = await axios.post(
     `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/posts_photos`, 
-    data,
+    {
+      posts_id,
+      image_url,
+    },
     {
       headers: {
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,

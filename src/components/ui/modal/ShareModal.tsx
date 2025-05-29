@@ -4,13 +4,16 @@ import Close from "@/icon/Close";
 import React from "react";
 import { createPortal } from "react-dom";
 import { useToast } from "@/hooks/ui/useToast";
+import Image from "next/image";
+import { DetailImgData } from "@/components/features/photo-list/detail/DetailContainer";
 
 interface ShareModalProps {
   isOpen: boolean;
   onClose: () => void;
+  imgData: DetailImgData[];
 }
 
-const ShareModal = ({ isOpen, onClose }: ShareModalProps) => {
+const ShareModal = ({ isOpen, onClose, imgData }: ShareModalProps) => {
   const toast = useToast();
 
   const handleBackgroundClick = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -46,9 +49,25 @@ const ShareModal = ({ isOpen, onClose }: ShareModalProps) => {
           <h2 className="text-2xl font-bold text-white">공유하기</h2>
 
           {/* 공유 콘텐츠 미리보기 */}
-          <div className="w-full h-40 bg-black border border-white/30 rounded-lg flex items-center justify-center">
-            <span className="text-white/70">콘텐츠 미리보기</span>
-          </div>
+          {imgData.length > 0 ? (
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 w-full">
+              {imgData.map((img, index) => (
+                <div
+                  key={index}
+                  className="relative w-full aspect-square overflow-hidden rounded-lg border border-white/20"
+                >
+                  <Image
+                    src={img.image_url}
+                    alt={`image-${index}`}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-center text-white">이미지를 찾을 수 없습니다.</p>
+          )}
 
           {/* 공유 옵션: 링크 복사 버튼 */}
           <div className="flex justify-center">

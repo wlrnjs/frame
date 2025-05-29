@@ -1,4 +1,3 @@
-import { supabase } from "@/service/lib/supabaseClient";
 import axios from "axios";
 
 interface DeletePostProps {
@@ -9,23 +8,21 @@ interface DeletePostProps {
 // supabase 정책 문제임 게시글 삭제됨
 
 const deletePost = async ({ post_id }: DeletePostProps) => {
+  console.log(typeof post_id);
   const token = JSON.parse(localStorage.getItem("sb-whvyyrwjdjzfcpcwvlvq-auth-token") || "{}")?.access_token;
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
 
   const response = await axios.delete(
     `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/posts?post_id=eq.${post_id}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
-        "user_id": user?.id,
         apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
         "Content-Type": "application/json",
         Prefer: "return=representation",
       },
     }
   );
+  console.log(response);
   return response;
 };
 

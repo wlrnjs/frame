@@ -6,7 +6,7 @@ import { ToastType } from "@/types/Toast";
 
 interface UploadImageProps {
   images: File[];
-  postId: string;
+  postId: number;
   postImgMutation: UseMutationResult<AxiosResponse, Error, postImgProps>;
   toast: ToastType;
 }

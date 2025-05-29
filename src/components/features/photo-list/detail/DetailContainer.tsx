@@ -36,10 +36,7 @@ interface DetailContainerProps {
 }
 
 const DetailContainer = ({ data, imgData }: DetailContainerProps) => {
-  console.log("data: ", data);
-  console.log("data?.user_id: ", data?.user_id);
   const user = useUserId();
-  console.log("user: ", user);
   const isMine = data?.user_id === user;
 
   const {
@@ -143,7 +140,11 @@ const DetailContainer = ({ data, imgData }: DetailContainerProps) => {
         />
       </div>
 
-      <ShareModal isOpen={isShareModalOpen} onClose={closeShareModal} />
+      <ShareModal
+        isOpen={isShareModalOpen}
+        onClose={closeShareModal}
+        imgData={imgData}
+      />
 
       <DeleteModal
         isOpen={isDeleteModalOpen}
