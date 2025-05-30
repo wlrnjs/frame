@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/ui/useToast";
@@ -5,9 +6,16 @@ import { cn } from "@/utils";
 import DetailContainer from "@/components/features/photo-list/detail/DetailContainer";
 import DetailPhotoContainer from "@/components/features/photo-list/detail/DetailPhotoContainer";
 import CommentContainer from "@/components/features/photo-list/detail/CommentContainer";
-import RecommendContainer from "@/components/features/photo-list/detail/RecommendContainer";
 import useGetImgDetail from "@/hooks/api/photo-list/detail/useGetImgDetail";
 import useGetImg from "@/hooks/api/photo-list/detail/useGetImg";
+
+const RecommendContainer = dynamic(
+  () => import("@/components/features/photo-list/detail/RecommendContainer"),
+  {
+    loading: () => <div>추천 게시글을 불러오는 중입니다...</div>,
+    ssr: false,
+  }
+);
 
 const ImageDetailPage = () => {
   const params = useSearchParams();
@@ -54,7 +62,9 @@ const ImageDetailPage = () => {
           <CommentContainer id={id!} type="post" />
         </div>
       </div>
-      <RecommendContainer id={id!} category={data?.category} />
+      {data && !isError && (
+        <RecommendContainer id={id!} category={data?.category} />
+      )}
     </div>
   );
 };
