@@ -119,11 +119,7 @@ const PhotoInfoContainer = ({ images }: PhotoInfoContainerProps = {}) => {
                 image_url: publicUrlData.publicUrl,
               });
             }
-            toast.success("게시글과 이미지가 성공적으로 업로드되었습니다.");
           }
-        },
-        onError: () => {
-          toast.error("게시글 업로드에 실패했습니다.");
         },
       }
     );

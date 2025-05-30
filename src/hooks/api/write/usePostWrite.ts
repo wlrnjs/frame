@@ -14,7 +14,9 @@ const usePostWrite = () => {
     onSuccess: async (data) => {
       success("게시글이 등록되었습니다.");
       await revalidatePhotoList();
-      router.replace(`/photo-list/detail?id=${data}`);
+      setTimeout(() => {
+        router.replace(`/photo-list/detail?id=${data}`);
+      }, 1500); // 수정필요 (임시)
     },
     onError: () => {
       toastError("게시글 등록 실패");

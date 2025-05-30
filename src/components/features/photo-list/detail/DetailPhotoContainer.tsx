@@ -71,7 +71,7 @@ const DetailPhotoContainer = ({
   return (
     <div
       className={cn(
-        "w-full h-[720px] flex flex-col items-center gap-2",
+        "w-full h-[720px] flex flex-col items-center gap-2 select-none",
         "mobile:h-fit"
       )}
     >
