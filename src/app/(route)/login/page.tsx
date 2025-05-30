@@ -48,7 +48,7 @@ const Page = () => {
 
   return (
     <div className="w-full h-[calc(100vh-100px)] custom-login flex-col-center gap-5">
-      <LOGO className="ml-12" />
+      <LOGO className="text-black mr-2" isLogin />
       <div className="w-[400px] px-5 flex flex-col gap-2">
         <form onSubmit={handleSubmit} className="flex flex-col gap-[10px]">
           <Input

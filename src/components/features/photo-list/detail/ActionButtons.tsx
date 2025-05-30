@@ -153,7 +153,6 @@ const ActionButtons = ({
           <div className={labelStyle}>삭제하기</div>
         </div>
       )}
-      <p className="text-white">좋아요(임시): {likeToggle?.length || 0}</p>
     </div>
   );
 };

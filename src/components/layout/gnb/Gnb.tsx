@@ -49,15 +49,10 @@ const Gnb = () => {
       >
         <Link
           href="/"
-          className="flex items-center overflow-hidden"
+          className="flex items-center overflow-hidden pointer"
           aria-label="홈으로 이동"
         >
-          <LOGO
-            className={cn(
-              "w-[120px] h-auto text-white bg-white",
-              "mobile:w-[100px] mobile:h-[40px]"
-            )}
-          />
+          <LOGO className="w-[160px] h-fit mt-2" />
         </Link>
         <nav
           className="mobile-menu pointer select-none block pc:hidden"
