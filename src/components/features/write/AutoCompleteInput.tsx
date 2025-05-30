@@ -52,7 +52,10 @@ const AutoCompleteInput = ({
 
   return (
     <label className="w-full flex flex-col gap-2 relative">
-      <span className="text-base font-medium text-white">{label}</span>
+      <span className="text-base font-medium text-white">
+        {label}
+        <span className="text-red-500">*</span>
+      </span>
       <div className="flex gap-2 flex-wrap items-center">
         {selectedTags.map((tag) => (
           <p

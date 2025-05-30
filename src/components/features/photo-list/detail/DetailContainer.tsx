@@ -124,10 +124,10 @@ const DetailContainer = ({ data, imgData }: DetailContainerProps) => {
               "mobile:text-2xl"
             )}
           >
-            {title}
+            {title || "제목 없음"}
           </h1>
           <p className="text-[#111418] text-base font-normal leading-normal">
-            {description}
+            {description || "설명 없음"}
           </p>
         </div>
       </div>

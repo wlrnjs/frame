@@ -72,6 +72,18 @@ const PhotoInfoContainer = ({ images }: PhotoInfoContainerProps = {}) => {
       return;
     }
 
+    // 필수 입력 항목 검사
+    if (
+      !formData.title ||
+      formData.title.trim() === "" ||
+      !formData.description ||
+      formData.description.trim() === "" ||
+      !selectedTags.length
+    ) {
+      toast.error("제목, 설명, 카테고리는 필수 입력 항목입니다.");
+      return;
+    }
+
     // 이미지가 업로드되지 않은 경우 경고 메시지 표시
     if (!images || images.length === 0) {
       toast.error("이미지를 업로드해주세요.");
@@ -137,6 +149,7 @@ const PhotoInfoContainer = ({ images }: PhotoInfoContainerProps = {}) => {
             placeholder="제목을 입력해주세요. (최대 50자)"
             value={formData.title}
             onChange={handleInputChange("title")}
+            required
           />
           <InputField
             label="내용"
@@ -144,6 +157,7 @@ const PhotoInfoContainer = ({ images }: PhotoInfoContainerProps = {}) => {
             isTextarea
             value={formData.description}
             onChange={handleInputChange("description")}
+            required
           />
           <AutoCompleteInput
             label="카테고리"

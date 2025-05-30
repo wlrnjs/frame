@@ -9,6 +9,7 @@ interface InputFieldProps {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
   isTextarea?: boolean;
+  required?: boolean;
 }
 
 const InputField = ({
@@ -18,9 +19,13 @@ const InputField = ({
   value,
   onChange,
   isTextarea = false,
+  required = false,
 }: InputFieldProps) => (
   <label className="w-full h-full flex flex-col gap-1">
-    <span className="text-base font-medium text-white">{label}</span>
+    <span className="text-base font-medium text-white">
+      {label}
+      {required && <span className="text-red-500 ml-[5px]">*</span>}
+    </span>
     {isTextarea ? (
       <textarea
         maxLength={400}
