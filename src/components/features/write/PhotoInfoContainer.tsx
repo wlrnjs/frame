@@ -3,37 +3,15 @@
 import React, { useState } from "react";
 import InputField from "./InputField";
 import AutoCompleteInput from "./AutoCompleteInput";
-import { cn } from "@/utils";
 import { postPostsProps } from "@/service/write/postWrite";
 import { supabase } from "@/service/lib/supabaseClient";
 import usePostWrite from "@/hooks/api/write/usePostWrite";
 import usePostImg from "@/hooks/api/write/usePostImg";
 import useUserId from "@/hooks/useUserId";
 import { useToast } from "@/hooks/ui/useToast";
+import FormSection from "./FormSection";
 
 // 임시, 리펙토링 필요
-
-interface FormSectionProps {
-  title: string;
-  children: React.ReactNode;
-  showDivider?: boolean;
-}
-
-const FormSection = ({
-  title,
-  children,
-  showDivider = false,
-}: FormSectionProps) => (
-  <div
-    className={cn(
-      "flex flex-col gap-4",
-      showDivider ? "border-t border-gray-870 pt-6" : ""
-    )}
-  >
-    <h2 className="text-base font-semibold text-white">{title}</h2>
-    {children}
-  </div>
-);
 
 interface PhotoInfoContainerProps {
   images?: File[];
@@ -58,6 +36,7 @@ const PhotoInfoContainer = ({ images }: PhotoInfoContainerProps = {}) => {
   });
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
+  // 자동완성 입력
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -71,18 +50,21 @@ const PhotoInfoContainer = ({ images }: PhotoInfoContainerProps = {}) => {
     }
   };
 
+  // 태그 선택
   const handleSelect = (tag: string) => {
-    setInput(tag);
-    setSuggestions([]);
     setSelectedTags((prev) => [...prev, tag]);
+    setInput("");
+    setSuggestions([]);
   };
 
+  // 폼 입력
   const handleInputChange =
     (field: keyof typeof formData) =>
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       setFormData((prev) => ({ ...prev, [field]: e.target.value }));
     };
 
+  // 폼 제출
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!userId) {
@@ -135,9 +117,14 @@ const PhotoInfoContainer = ({ images }: PhotoInfoContainerProps = {}) => {
     );
   };
 
+  // 태그 삭제
+  const handleRemove = (tag: string) => {
+    setSelectedTags((prev) => prev.filter((t) => t !== tag));
+  };
+
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-8">
-      <div className="max-w-full min-w-[380px] min-h-[720px] bg-black text-white p-8 rounded-[5px] shadow-lg flex flex-col gap-8 sticky top-[120px]">
+    <form onSubmit={handleSubmit} className="w-full flex flex-col gap-8">
+      <div className="w-full h-fit bg-black text-white p-8 rounded-[5px] shadow-lg flex flex-col gap-8 sticky top-[120px]">
         {/* 업로드된 이미지 수 표시 */}
         <div className="text-sm text-gray-400">
           {images && images.length > 0
@@ -147,13 +134,13 @@ const PhotoInfoContainer = ({ images }: PhotoInfoContainerProps = {}) => {
         <FormSection title="기본 정보">
           <InputField
             label="제목"
-            placeholder="제목을 입력해주세요. (최대 30자)"
+            placeholder="제목을 입력해주세요. (최대 50자)"
             value={formData.title}
             onChange={handleInputChange("title")}
           />
           <InputField
             label="내용"
-            placeholder="간단한 설명을 추가해주세요. (최대 100자)"
+            placeholder="간단한 설명을 추가해주세요. (최대 400자)"
             isTextarea
             value={formData.description}
             onChange={handleInputChange("description")}
@@ -164,6 +151,8 @@ const PhotoInfoContainer = ({ images }: PhotoInfoContainerProps = {}) => {
             onChange={handleChange}
             suggestions={suggestions}
             onSelect={handleSelect}
+            selectedTags={selectedTags}
+            onRemove={handleRemove}
           />
         </FormSection>
         <FormSection title="사진 정보" showDivider>
@@ -184,7 +173,7 @@ const PhotoInfoContainer = ({ images }: PhotoInfoContainerProps = {}) => {
           type="submit"
           className="w-full h-[40px] bg-gray-920 border border-gray-870 rounded-[5px] hover:bg-black transition-all duration-300 ease-out"
         >
-          올리기
+          업로드
         </button>
       </div>
     </form>

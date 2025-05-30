@@ -83,7 +83,7 @@ const AddPhotoContainer = ({
       </div>
       <div
         className={cn(
-          "w-full h-[120px] bg-black rounded-[5px] p-3 flex items-center justify-start gap-3 overflow-x-auto",
+          "w-full h-[180px] bg-black rounded-[5px] p-3 flex items-center justify-start gap-3 overflow-x-auto",
           "mobile:h-[80px]"
         )}
       >

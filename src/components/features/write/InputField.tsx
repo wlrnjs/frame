@@ -19,19 +19,19 @@ const InputField = ({
   onChange,
   isTextarea = false,
 }: InputFieldProps) => (
-  <label className="flex flex-col gap-1">
-    <span className="text-xs font-medium text-white">{label}</span>
+  <label className="w-full h-full flex flex-col gap-1">
+    <span className="text-base font-medium text-white">{label}</span>
     {isTextarea ? (
       <textarea
-        maxLength={100}
+        maxLength={400}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        className="w-full h-24 rounded-md px-4 py-3 bg-gray-920 text-sm text-white border border-gray-870 focus:outline-none transition-colors resize-none placeholder:text-sm placeholder:text-white/50"
+        className="w-full min-h-[96px] rounded-md px-4 py-3 bg-gray-920 text-sm text-white border border-gray-870 focus:outline-none transition-colors resize-none placeholder:text-sm placeholder:text-white/50"
       />
     ) : (
       <input
-        maxLength={30}
+        maxLength={50}
         type={type}
         placeholder={placeholder}
         value={value}
@@ -43,4 +43,4 @@ const InputField = ({
   </label>
 );
 
-export default InputField;
+export default React.memo(InputField);

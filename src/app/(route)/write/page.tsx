@@ -12,8 +12,8 @@ const Page = () => {
     <div className="w-full min-h-screen custom-margin layout-container">
       <div
         className={cn(
-          "w-full h-full flex gap-10 justify-center items-start",
-          "mobile:flex-col mobile:gap-3"
+          "w-full h-full flex flex-col gap-10 justify-center items-start",
+          "mobile:gap-3"
         )}
       >
         <AddPhotoContainer images={images} setImages={setImages} />
