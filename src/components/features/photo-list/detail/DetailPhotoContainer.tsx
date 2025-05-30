@@ -11,6 +11,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "./swiper-custom.css";
 import { cn } from "@/utils";
+import Spinner from "@/icon/Spinner";
 
 interface PhotoItem {
   id: string;
@@ -64,7 +65,9 @@ const DetailPhotoContainer = ({
   // 로딩 (변경 필요)
   if (isLoading) {
     return (
-      <div className="w-full h-[720px] bg-black text-white">Loading...</div>
+      <div className="w-full h-[720px] flex items-center justify-center">
+        <Spinner />
+      </div>
     );
   }
 

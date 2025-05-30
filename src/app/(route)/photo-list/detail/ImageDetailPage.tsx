@@ -16,6 +16,7 @@ const ImageDetailPage = () => {
   const toast = useToast();
 
   const { data, isError } = useGetImgDetail(id!);
+
   const {
     data: imgDetail,
     isError: imgDetailError,
@@ -26,8 +27,6 @@ const ImageDetailPage = () => {
     toast.error("게시글을 찾을 수 없습니다.");
     router.push("/404");
   }
-
-  console.log("imgDetail?.data: ", imgDetail?.data);
 
   return (
     <div
@@ -55,7 +54,7 @@ const ImageDetailPage = () => {
           <CommentContainer id={id!} type="post" />
         </div>
       </div>
-      <RecommendContainer />
+      <RecommendContainer category={data?.category} />
     </div>
   );
 };
