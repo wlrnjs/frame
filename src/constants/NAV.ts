@@ -6,6 +6,7 @@ export const NAV_LINKS = [
     { title: "고객센터", href: "/support" },
     { title: "이벤트", href: "/event" },
     // 테스트
+  { title: "SHORTS", href: "/shorts" },
   { title: "WRITE", href: "/write" },
   { title: "LIST", href: "/photo-list" },
   { title: "LOGIN", href: "/login" },

@@ -5,53 +5,67 @@ import {
 } from "@/hooks/api/photo-list/detail/useGetRecommendList";
 import Masonry from "react-masonry-css";
 import { MASONRY_BREAKPOINTS } from "@/constants/MASONRY";
-import Image from "next/image";
-// import ListItem from "../ListItem";
+import ListItem from "../ListItem";
+import { cn } from "@/utils";
 
 interface RecommendContainerProps {
   category: string;
+  id: string;
 }
 
-const RecommendContainer = ({ category }: RecommendContainerProps) => {
+// TODO: 무한 스크롤 도입 필요
+const RecommendContainer = ({ category, id }: RecommendContainerProps) => {
   const { data, isLoading } = useGetRecommendList({
     category,
     offset: 0,
     limit: 10,
   });
 
-  // 이미지 호출 id 수정 필요, 현재는 1개만 호출 및 무한스크롤 추가 필요
+  const postIds = data?.map((post) => post.post_id);
+
   const { data: imgList } = useGetRecommendPhotoList({
-    id: data?.[0]?.post_id,
+    id: postIds,
     offset: 0,
     limit: 10,
   });
 
-  console.log("카테고리 데이터", data);
-  console.log("이미지 데이터", imgList);
-  if (isLoading) return <div>로딩중</div>;
+  if (isLoading) return <div>로딩중...</div>;
 
-  // const renderedItems = imgList?.map((img) => {
-  //   return <ListItem key={img.id} data={img} imgData={imgList} />;
-  // });
+  const renderedItems = data?.map((post) => {
+    const matchedImages = imgList?.filter(
+      (img) => img.posts_id === post.post_id
+    );
+    return (
+      <ListItem id={id} key={post.id} data={post} imgData={matchedImages!} />
+    );
+  });
 
   return (
-    <div className="w-full h-[700px] bg-black flex items-start justify-start rounded-[5px]">
-      <div className="w-full h-full flex-center text-white">
+    <div
+      className={cn(
+        "w-full h-auto flex items-start justify-start rounded-[5px] px-28",
+        "mobile:px-0"
+      )}
+    >
+      <div className="w-full h-full flex flex-col items-start justify-center gap-5">
+        <h1 className="text-[20px] font-bold pl-4">추천 사진</h1>
         {/* 추천 사진 보여주기 (무한스크롤, masonry 스타일) */}
-        <Masonry
-          breakpointCols={MASONRY_BREAKPOINTS}
-          className="flex w-auto -ml-4"
-          columnClassName="pl-4 bg-clip-padding"
-        >
-          <div className="w-[200px] h-[300px] relative">
-            <Image
-              src={imgList?.[0]?.image_url}
-              alt="test_img"
-              fill
-              className="object-cover"
-            />
+        {renderedItems && renderedItems.length > 0 ? (
+          <Masonry
+            breakpointCols={MASONRY_BREAKPOINTS}
+            className="w-full flex"
+            columnClassName="pl-4 bg-clip-padding"
+          >
+            {renderedItems}
+          </Masonry>
+        ) : (
+          <div className="w-full h-full flex-center bg-black text-white">
+            <h1 className="text-[20px] font-bold">
+              해당 카테고리로 추천된 사진이 없습니다.
+            </h1>
+            <p>이미지를 추가해보세요!</p>
           </div>
-        </Masonry>
+        )}
       </div>
     </div>
   );

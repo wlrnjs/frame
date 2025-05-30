@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ImgListType, ListItemType } from "@/types/ListType";
+import { cn } from "@/utils";
 
 interface ListItemProps {
   data: ListItemType;
   imgData: ImgListType[];
+  id?: string;
 }
 
-const ListItem = ({ data, imgData }: ListItemProps) => {
+const ListItem = ({ data, imgData, id }: ListItemProps) => {
   const [imageRatio, setImageRatio] = useState<number>(0.75); // 기본 비율 3:4
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
@@ -37,7 +39,10 @@ const ListItem = ({ data, imgData }: ListItemProps) => {
   return (
     <Link
       href={`/photo-list/detail?id=${data?.post_id}`}
-      className="block w-full relative group overflow-hidden rounded-md pointer mb-4"
+      className={cn(
+        "block w-full relative group overflow-hidden rounded-md pointer mb-4",
+        data?.post_id?.toString() === id && "ring-4 ring-blue-400"
+      )}
     >
       <div
         className="w-full relative"
@@ -55,11 +60,11 @@ const ListItem = ({ data, imgData }: ListItemProps) => {
           onLoad={() => setIsLoaded(true)}
         />
         <div className="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 text-white">
-          <h3 className="text-lg font-semibold">{data?.title}</h3>
-          <p className="text-sm mt-1">{data?.description}</p>
+          <h3 className="text-lg font-semibold line-clamp-1">{data?.title}</h3>
+          <p className="text-sm mt-1 line-clamp-1">{data?.description}</p>
           <div className="text-xs mt-2 opacity-80 flex justify-between">
             <span>카테고리: {data?.category}</span>
-            <span>닉네임: {data?.nickname}</span>
+            <span>닉네임: {data?.nickname || "없음"}</span>
           </div>
         </div>
       </div>

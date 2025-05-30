@@ -25,7 +25,7 @@ const ImageDetailPage = () => {
 
   if (isError || imgDetailError) {
     toast.error("게시글을 찾을 수 없습니다.");
-    router.push("/404");
+    router.replace("/404");
   }
 
   return (
@@ -54,7 +54,7 @@ const ImageDetailPage = () => {
           <CommentContainer id={id!} type="post" />
         </div>
       </div>
-      <RecommendContainer category={data?.category} />
+      <RecommendContainer id={id!} category={data?.category} />
     </div>
   );
 };
