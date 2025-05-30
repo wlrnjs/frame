@@ -5,7 +5,7 @@ export const HeartOutline = () => (
     width="20"
     height="20"
     viewBox="0 0 24 24"
-    fill="white"
+    fill="black"
     strokeWidth="2"
     xmlns="http://www.w3.org/2000/svg"
   >
@@ -24,8 +24,8 @@ export const HeartFilled = () => (
     width="20"
     height="20"
     viewBox="0 0 24 24"
-    fill="black"
-    stroke="white"
+    fill="white"
+    stroke="black"
     strokeWidth="2"
     xmlns="http://www.w3.org/2000/svg"
   >

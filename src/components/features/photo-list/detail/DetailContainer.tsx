@@ -5,7 +5,6 @@ import DeleteModal from "@/components/ui/modal/DeleteModal";
 import ReportModal from "@/components/ui/modal/ReportModal";
 import ActionButtons from "./ActionButtons";
 import { useModal } from "@/hooks/ui/useModal";
-import Link from "next/link";
 import React from "react";
 import { formatDate } from "@/utils/date/dateUtils";
 import { cn } from "@/utils";
@@ -81,6 +80,33 @@ const DetailContainer = ({ data, imgData }: DetailContainerProps) => {
   const handleDeleteClick = openDeleteModal;
   const handleReportClick = openReportModal;
 
+  const metaTag = [
+    {
+      name: "작성자",
+      content: "wlrnjs (임시)",
+    },
+    {
+      name: "업로드",
+      content: formatDate(created_at),
+    },
+    {
+      name: "장소",
+      content: location || "없음",
+    },
+    {
+      name: "카테고리",
+      content: category || "없음",
+    },
+    {
+      name: "조회수",
+      content: view_count || "0",
+    },
+    {
+      name: "카메라 정보",
+      content: camera_info || "없음",
+    },
+  ];
+
   return (
     <div
       className={cn(
@@ -92,42 +118,38 @@ const DetailContainer = ({ data, imgData }: DetailContainerProps) => {
       <div className="flex flex-col gap-3 justify-between items-start">
         {/* 제목 및 설명 */}
         <div className={cn("flex flex-col gap-2", "mobile:gap-1")}>
-          <h1 className={cn("text-3xl font-bold", "mobile:text-2xl")}>
+          <h1
+            className={cn(
+              "text-[#111418] text-[22px] font-bold leading-tight tracking-[-0.015em] text-left",
+              "mobile:text-2xl"
+            )}
+          >
             {title}
           </h1>
-          <p className="text-sm text-gray-400">{description}</p>
+          <p className="text-[#111418] text-base font-normal leading-normal">
+            {description}
+          </p>
         </div>
       </div>
-      <hr className="border-gray-400" />
       <div className="flex flex-col gap-4">
         {/* 작성자 정보 */}
-        <div className="flex flex-col gap-2 items-start justify-between pt-4 text-sm font-semibold">
-          <p className="flex items-center gap-1">
-            작성자:
-            <Link href={"/user-profile"}>
-              <span className="hover:underline decoration-offset-4 pointer">
-                wlrnjs (임시)
-              </span>
-            </Link>
-          </p>
-          <p className="flex items-center gap-1">
-            업로드:
-            <span>{formatDate(created_at)}</span>
-          </p>
-          <p className="flex items-center gap-1">
-            장소:<span>{location}</span>
-          </p>
-          <p className="flex items-center gap-1">
-            <span className="font-semibold">카테고리:</span> {category}
-          </p>
-          <p className="flex items-center gap-1">
-            <span className="font-semibold">조회수:</span>{" "}
-            {view_count > 0 ? view_count : "0"}
-          </p>
-          <p className="flex items-center gap-1">
-            <span className="font-semibold">카메라 정보:</span>
-            {camera_info}
-          </p>
+        <div className="w-full flex flex-col items-start justify-between text-sm font-semibold">
+          {metaTag.map((tag, idx) => (
+            <div
+              key={idx}
+              className={cn(
+                "w-full grid grid-cols-6 border-t border-gray-300 py-4",
+                "mobile:grid-cols-2 mobile:py-2"
+              )}
+            >
+              <p className="col-span-1 text-[#60758a] text-sm font-normal leading-normal">
+                {tag.name}
+              </p>
+              <p className="col-span-5 text-[#111418] text-sm font-normal leading-normal">
+                {tag.content}
+              </p>
+            </div>
+          ))}
         </div>
 
         <ActionButtons

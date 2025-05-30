@@ -31,6 +31,8 @@ const ShareModal = ({ isOpen, onClose, imgData }: ShareModalProps) => {
     toast.success("링크가 복사되었습니다!");
   };
 
+  // TODO: 각 공유 함수 구현
+
   const ShareIcon = [
     {
       name: "카카오톡",

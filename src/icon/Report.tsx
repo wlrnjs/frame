@@ -7,7 +7,7 @@ const Report = () => {
       height="20"
       viewBox="0 0 24 24"
       fill="none"
-      stroke="white"
+      stroke="black"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -15,7 +15,7 @@ const Report = () => {
     >
       <circle cx="12" cy="12" r="10" />
       <line x1="12" y1="8" x2="12" y2="12" />
-      <circle cx="12" cy="16" r="1" fill="white" />
+      <circle cx="12" cy="16" r="1" fill="black" />
     </svg>
   );
 };

@@ -13,6 +13,7 @@ import { useToast } from "@/hooks/ui/useToast";
 import { DetailImgData } from "./DetailContainer";
 import useGetLikeToggle from "@/hooks/api/photo-list/detail/useGetLikeToggle";
 import useDeleteLikeToggle from "@/hooks/api/photo-list/detail/useDeleteLikeToggle";
+import { cn } from "@/utils";
 
 const labelStyle =
   "absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-xs text-white bg-black rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap pointer";
@@ -118,16 +119,24 @@ const ActionButtons = ({
   ];
 
   return (
-    <div className="flex space-x-4 bg-black/90 p-5 w-fit h-[50px] items-center justify-center rounded-[15px] mt-5">
+    <div
+      className={cn(
+        "flex gap-5 py-5 w-fit h-[50px] items-center justify-center rounded-[15px] mt-5",
+        "mobile:gap-4"
+      )}
+    >
       {actionButtons.map((action, index) => (
         <div key={index} className="relative group flex items-center">
           <button
             aria-label={action.aria}
             onClick={action.onClick}
             disabled={isPending || deleteLikeTogglePending}
-            className="focus:outline-none"
+            className="focus:outline-none flex items-center gap-2"
           >
             {action.icon}
+            {action.label === "좋아요" && (
+              <p className="text-black">{likeToggle?.length || 0}</p>
+            )}
           </button>
           <div className={labelStyle}>{action.label}</div>
         </div>
