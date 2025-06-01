@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import {
   useGetRecommendList,
@@ -7,6 +9,9 @@ import Masonry from "react-masonry-css";
 import { MASONRY_BREAKPOINTS } from "@/constants/MASONRY";
 import ListItem from "../ListItem";
 import { cn } from "@/utils";
+import LOGO from "@/icon/LOGO";
+import Link from "next/link";
+import Spinner from "@/icon/Spinner";
 
 interface RecommendContainerProps {
   category: string;
@@ -29,7 +34,7 @@ const RecommendContainer = ({ category, id }: RecommendContainerProps) => {
     limit: 10,
   });
 
-  if (isLoading) return <div>로딩중...</div>;
+  if (isLoading) return <Spinner />;
 
   const renderedItems = data?.map((post) => {
     const matchedImages = imgList?.filter(
@@ -59,11 +64,28 @@ const RecommendContainer = ({ category, id }: RecommendContainerProps) => {
             {renderedItems}
           </Masonry>
         ) : (
-          <div className="w-full h-full flex-center bg-black text-white">
+          <div className="w-full h-[300px] flex-col-center gap-2 bg-black text-white">
+            <LOGO />
+            <div className="flex flex-col gap-2 items-center">
+              <h1 className="text-[20px] font-bold">
+                해당 카테고리로 추천된 사진이 없습니다.
+              </h1>
+              <Link href="/write" className="underline">
+                글쓰러 가기
+              </Link>
+              <p>가장 먼저 이미지를 추가해보세요!</p>
+            </div>
+          </div>
+        )}
+        {(data?.length === 0 || imgList?.length === 0) && (
+          <div className="w-full h-[300px] flex-col-center bg-black text-white">
             <h1 className="text-[20px] font-bold">
-              해당 카테고리로 추천된 사진이 없습니다.
+              {`이 ${category} 카테고리로 추천된 사진이 없습니다.`}
             </h1>
-            <p>이미지를 추가해보세요!</p>
+            <p>다른 카테고리로 이동해보세요!</p>
+            <button className="text-white">#도시</button>
+            <button className="text-white">#풍경</button>
+            <button className="text-white">#흑백</button>
           </div>
         )}
       </div>
