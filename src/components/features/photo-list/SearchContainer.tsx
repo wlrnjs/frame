@@ -1,5 +1,6 @@
 import React from "react";
 import { cn } from "@/utils";
+import { PHOTO_CATEGORIES } from "@/constants/CATEGORY";
 
 const SearchContainer = () => {
   return (
@@ -52,14 +53,14 @@ const SearchContainer = () => {
             "mobile:grid mobile:grid-cols-3 mobile:gap-x-2 mobile:gap-y-1"
           )}
         >
-          {["풍경", "감성", "여행", "도시", "자연", "인물", "예술", "흑백"].map(
-            (label) => (
+          <div className="grid grid-cols-3 gap-x-4 gap-y-2">
+            {PHOTO_CATEGORIES.map((label) => (
               <label key={label} className="flex items-center gap-2">
                 <input type="checkbox" className="accent-white" />
                 {label}
               </label>
-            )
-          )}
+            ))}
+          </div>
         </div>
       </div>
     </div>

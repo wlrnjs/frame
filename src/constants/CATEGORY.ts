@@ -10,8 +10,8 @@ export const PHOTO_CATEGORIES = [
   "#필름",
   "#빈티지",
   "#감성",
-  "#몽환적인",
   "#일상",
   "#자연",
   "#계절",
+  "#몽환적인",
 ] as const;
