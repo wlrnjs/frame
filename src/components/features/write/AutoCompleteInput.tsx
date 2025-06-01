@@ -77,7 +77,7 @@ const AutoCompleteInput = ({
         className="w-full h-12 rounded-md px-4 bg-gray-920 text-sm text-white border border-gray-870 focus:outline-none transition-colors placeholder:text-sm placeholder:text-white/50"
       />
       {suggestions.length > 0 && (
-        <ul className="absolute top-[6rem] left-0 w-full bg-gray-920 rounded-md shadow-lg mt-2 z-10 border border-gray-870">
+        <ul className="absolute top-[6rem] left-0 w-full h-[200px] overflow-y-scroll bg-gray-920 rounded-md shadow-lg mt-2 z-10 border border-gray-870">
           {suggestions.map((tag, index) => (
             <li
               key={tag}

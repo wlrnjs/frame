@@ -10,6 +10,8 @@ import usePostImg from "@/hooks/api/write/usePostImg";
 import useUserId from "@/hooks/useUserId";
 import { useToast } from "@/hooks/ui/useToast";
 import FormSection from "./FormSection";
+import { PHOTO_CATEGORIES } from "@/constants/CATEGORY";
+import { cn } from "@/utils";
 
 // 임시, 리펙토링 필요
 
@@ -18,7 +20,6 @@ interface PhotoInfoContainerProps {
 }
 
 const PhotoInfoContainer = ({ images }: PhotoInfoContainerProps = {}) => {
-  const TAGS = ["#풍경", "#인물", "#감성", "#여행", "#도시", "#자연"];
   const postWriteMutation = usePostWrite();
   const postImgMutation = usePostImg();
   const userId = useUserId();
@@ -46,7 +47,7 @@ const PhotoInfoContainer = ({ images }: PhotoInfoContainerProps = {}) => {
     if (value.trim() === "") {
       setSuggestions([]);
     } else {
-      setSuggestions(TAGS.filter((tag) => tag.includes(value)));
+      setSuggestions(PHOTO_CATEGORIES.filter((tag) => tag.includes(value)));
     }
   };
 
@@ -132,7 +133,12 @@ const PhotoInfoContainer = ({ images }: PhotoInfoContainerProps = {}) => {
 
   return (
     <form onSubmit={handleSubmit} className="w-full flex flex-col gap-8">
-      <div className="w-full h-fit bg-black text-white p-8 rounded-[5px] shadow-lg flex flex-col gap-8 sticky top-[120px]">
+      <div
+        className={cn(
+          "w-full h-fit bg-black text-white p-8 rounded-[5px] shadow-lg flex flex-col gap-8 sticky top-[120px]",
+          "mobile:gap-4"
+        )}
+      >
         {/* 업로드된 이미지 수 표시 */}
         <div className="text-sm text-gray-400">
           {images && images.length > 0
