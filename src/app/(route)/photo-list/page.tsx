@@ -1,17 +1,11 @@
 import PhotoListClient from "./PhotoListClient";
-import { fetchPosts, fetchImages } from "@/service/photo-list/serverApi";
+import { fetchPosts } from "@/service/photo-list/serverApi";
 
 async function Page() {
-  const [posts, images] = await Promise.all([fetchPosts(), fetchImages()]);
-  const hasError = !posts || !images;
+  const posts = await fetchPosts();
+  const hasError = !posts;
 
-  return (
-    <PhotoListClient
-      initialPosts={posts}
-      initialImages={images}
-      error={hasError}
-    />
-  );
+  return <PhotoListClient initialPosts={posts} error={hasError} />;
 }
 
 export default Page;

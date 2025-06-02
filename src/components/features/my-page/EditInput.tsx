@@ -11,15 +11,18 @@ const styles = {
   sectionLabelClass: "block text-sm mb-1",
 };
 
+type StringOrArray = string | string[];
+type OnChangeHandler = ((value: string) => void) | ((value: string[]) => void);
+
 interface EditInputProps {
   label: string;
-  value: string;
+  value: StringOrArray;
   value2?: string;
   isDisabled?: boolean;
   placeholder?: string;
   placeholder2?: string;
   isCamera?: boolean;
-  onChange?: (value: string) => void;
+  onChange?: OnChangeHandler;
   onChange2?: (value: string) => void;
 }
 
@@ -48,7 +51,26 @@ const EditInput = ({
         className={
           isDisabled ? styles.inputDisabledClass : styles.inputBaseClass
         }
-        onChange={(e) => onChange?.(e.target.value)}
+        onChange={(e) => {
+          if (!onChange) return;
+          // 임시 (변경 필요)
+          const newValue = e.target.value;
+
+          // Type guard to check if the handler expects a string[]
+          if (Array.isArray(value)) {
+            if (typeof onChange === "function") {
+              // Create a new array with the updated value
+              const updatedArray = [...value];
+              updatedArray[0] = newValue;
+              (onChange as (value: string[]) => void)(updatedArray);
+            }
+          } else {
+            // Handle string case
+            if (typeof onChange === "function") {
+              (onChange as (value: string) => void)(newValue);
+            }
+          }
+        }}
       />
       {isCamera && (
         <input

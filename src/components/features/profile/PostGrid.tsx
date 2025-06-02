@@ -11,11 +11,7 @@ const PostGrid = ({ data }: PostGridProps) => {
   return (
     <div className="grid grid-cols-3 gap-4">
       {data.map((item, index) => (
-        <PostGridItem
-          key={index}
-          src={item.img_urls.length > 0 ? item.img_urls[0] : "/BlackPhoto.JP"}
-          alt={`Image ${index + 1}`}
-        />
+        <PostGridItem key={index} data={item} />
       ))}
     </div>
   );

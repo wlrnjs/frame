@@ -13,6 +13,7 @@ const usePhotoForm = (userId: string | null) => {
     location: "",
     camera_info: "",
     user_id: userId || "",
+    img_urls: [],
   });
 
   const handleAutoCompleteChange = (value: string) => {

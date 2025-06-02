@@ -5,7 +5,7 @@ export interface postEditMyDataProps {
   profile_image: string;
   nickname: string;
   email: string;
-  category: string;
+  category: string[];
   camera: string;
   lens: string;
   links: { name: string; url: string }[];

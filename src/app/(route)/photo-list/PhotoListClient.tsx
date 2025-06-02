@@ -2,19 +2,17 @@
 
 import React from "react";
 import SearchContainer from "@/components/features/photo-list/SearchContainer";
-import { ImgListType, ListItemType } from "@/types/ListType";
+import { ListItemType } from "@/types/ListType";
 import { cn } from "@/utils";
 import PhotoListContent from "@/components/features/photo-list/PhotoListContent";
 
 interface PhotoListClientProps {
   initialPosts: ListItemType[] | null;
-  initialImages: ImgListType[] | null;
   error?: boolean;
 }
 
 const PhotoListClient = ({
   initialPosts,
-  initialImages,
   error = false,
 }: PhotoListClientProps) => {
   return (
@@ -26,11 +24,7 @@ const PhotoListClient = ({
         )}
       >
         <div className="w-full bg-black rounded-[5px] p-5">
-          <PhotoListContent
-            posts={initialPosts}
-            images={initialImages}
-            error={error}
-          />
+          <PhotoListContent posts={initialPosts} error={error} />
         </div>
         <div className="mobile:w-full">
           <SearchContainer />

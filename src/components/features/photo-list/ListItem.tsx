@@ -1,24 +1,23 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ImgListType, ListItemType } from "@/types/ListType";
+import { ListItemType } from "@/types/ListType";
 import { cn } from "@/utils";
 
 interface ListItemProps {
   data: ListItemType;
-  imgData: ImgListType[];
   id?: string;
 }
 
-const ListItem = ({ data, imgData, id }: ListItemProps) => {
+const ListItem = ({ data, id }: ListItemProps) => {
   const [imageRatio, setImageRatio] = useState<number>(0.75); // 기본 비율 3:4
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   // 이미지 비율 계산을 위한 함수
   useEffect(() => {
-    if (imgData?.[0]?.image_url) {
+    if (data?.img_urls?.[0]) {
       const img = new window.Image();
-      img.src = imgData[0].image_url;
+      img.src = data?.img_urls[0];
 
       img.onload = () => {
         // 이미지 원래 비율 계산 (높이/너비)
@@ -34,7 +33,7 @@ const ListItem = ({ data, imgData, id }: ListItemProps) => {
     } else {
       setIsLoaded(true);
     }
-  }, [imgData]);
+  }, [data]);
 
   return (
     <Link
@@ -49,7 +48,7 @@ const ListItem = ({ data, imgData, id }: ListItemProps) => {
         style={{ paddingTop: `${imageRatio * 100}%` }}
       >
         <Image
-          src={imgData?.[0]?.image_url || "/BlackPhoto.JPG"}
+          src={data?.img_urls[0] || "/BlackPhoto.JPG"}
           alt="test_img"
           fill
           priority={true}

@@ -1,10 +1,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import {
-  useGetRecommendList,
-  useGetRecommendPhotoList,
-} from "@/hooks/api/photo-list/detail/useGetRecommendList";
+import { useGetRecommendList } from "@/hooks/api/photo-list/detail/useGetRecommendList";
 import Masonry from "react-masonry-css";
 import { MASONRY_BREAKPOINTS } from "@/constants/MASONRY";
 import ListItem from "../ListItem";
@@ -80,23 +77,10 @@ const RecommendContainer = ({ category, id }: RecommendContainerProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, offset]);
 
-  const postIds = items.map((post) => post.post_id.toString());
-
-  const { data: imgList } = useGetRecommendPhotoList({
-    id: postIds,
-    offset: 0,
-    limit: 999,
-  });
-
   if (isLoading) return <Spinner />;
 
   const renderedItems = items.map((post) => {
-    const matchedImages = imgList?.filter(
-      (img) => img.posts_id === post.post_id
-    );
-    return (
-      <ListItem id={id} key={post.id} data={post} imgData={matchedImages!} />
-    );
+    return <ListItem id={id} key={post.id} data={post} />;
   });
 
   return (

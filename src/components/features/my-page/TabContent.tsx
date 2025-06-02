@@ -12,9 +12,9 @@ interface TabContentProps {
 // TODO: PostGridItem, PostGrid 삭제
 const TabContent = ({ activeTab, data }: TabContentProps) => {
   const renderPostGrids = (data: ListItemType[]) =>
-    data.length > 0 ? (
+    data?.length > 0 ? (
       <div className="flex flex-col gap-[20px]">
-        {data.map((item, index) => (
+        {data?.map((item, index) => (
           <PostGridItem key={index} data={item} />
         ))}
       </div>

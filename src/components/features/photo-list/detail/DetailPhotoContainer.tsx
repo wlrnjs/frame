@@ -13,12 +13,6 @@ import "./swiper-custom.css";
 import { cn } from "@/utils";
 import Spinner from "@/icon/Spinner";
 
-interface PhotoItem {
-  id: string;
-  image_url: string;
-  posts_id: number;
-}
-
 interface DetailPhotoContainerProps {
   img_url: string | string[];
   isLoading?: boolean;
@@ -96,15 +90,15 @@ const DetailPhotoContainer = ({
           >
             {Array.isArray(img_url) &&
               img_url.map((photo) => (
-                <SwiperSlide key={photo.id}>
+                <SwiperSlide key={photo}>
                   <div
                     className="relative w-full h-full"
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
                   >
-                    {photo?.img_urls && (
+                    {photo && (
                       <Image
-                        src={photo?.img_urls}
+                        src={photo}
                         alt="carousel-img"
                         fill
                         className="object-contain p-5"

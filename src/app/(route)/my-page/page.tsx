@@ -21,7 +21,11 @@ const MyPage = () => {
       <div className="w-full">
         <ProfileSection userData={userData} onEditClick={openModal} isMyPage />
 
-        <TabSection activeTab={activeTab} setActiveTab={setActiveTab} />
+        <TabSection
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          user_id={userData?.user_id}
+        />
       </div>
 
       <ProfileEditModal
