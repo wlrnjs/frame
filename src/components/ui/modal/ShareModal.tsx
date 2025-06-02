@@ -9,6 +9,7 @@ import { DetailImgData } from "@/components/features/photo-list/detail/DetailCon
 import Link from "@/icon/Link";
 import Kakao from "@/icon/Kakao";
 import Instagram from "@/icon/Instagram";
+import ShareModalIcon from "@/icon/ShareModalIcon";
 import { cn } from "@/utils";
 
 interface ShareModalProps {
@@ -31,6 +32,21 @@ const ShareModal = ({ isOpen, onClose, imgData }: ShareModalProps) => {
     toast.success("링크가 복사되었습니다!");
   };
 
+  const handleShareLink = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: "Frame", url: window.location.href });
+      } catch (error) {
+        if ((error as DOMException).name !== "AbortError") {
+          toast.error("공유 중 문제가 발생했습니다.");
+          console.error("공유 오류:", error);
+        }
+      }
+    } else {
+      toast.error("공유 기능을 지원하지 않습니다.");
+    }
+  };
+
   // TODO: 각 공유 함수 구현
 
   const ShareIcon = [
@@ -43,6 +59,11 @@ const ShareModal = ({ isOpen, onClose, imgData }: ShareModalProps) => {
       name: "링크 복사",
       icon: <Link />,
       onClick: handleCopyLink,
+    },
+    {
+      name: "공유하기",
+      icon: <ShareModalIcon />,
+      onClick: handleShareLink,
     },
     {
       name: "인스타그램",

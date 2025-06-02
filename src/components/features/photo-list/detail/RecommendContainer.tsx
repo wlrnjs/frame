@@ -15,6 +15,8 @@ import Spinner from "@/icon/Spinner";
 import { ListItemType } from "@/types/ListType";
 import { PHOTO_CATEGORIES } from "@/constants/CATEGORY";
 
+// TODO: 추천 사진 로직 리펙토링 및 하단 버튼 클릭시 해당 카테고리 연결 작업 추가필요
+
 interface RecommendContainerProps {
   category: string;
   id: string;
