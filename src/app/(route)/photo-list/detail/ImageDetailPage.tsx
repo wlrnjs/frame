@@ -24,6 +24,7 @@ const ImageDetailPage = () => {
   const toast = useToast();
 
   const { data, isError } = useGetImgDetail(id!);
+  console.log("data: ", data?.img_urls);
 
   const {
     data: imgDetail,
@@ -51,11 +52,7 @@ const ImageDetailPage = () => {
       >
         <div className={cn("w-full flex flex-col gap-10", "mobile:gap-3")}>
           <DetailPhotoContainer
-            img_url={
-              Array.isArray(imgDetail?.data)
-                ? imgDetail?.data
-                : imgDetail?.data?.image_url
-            }
+            img_url={data?.img_urls}
             isLoading={imgDetailLoading}
           />
           <DetailContainer data={data} imgData={imgDetail?.data} />

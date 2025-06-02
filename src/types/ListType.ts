@@ -4,7 +4,7 @@ export interface ListItemType {
   created_at: string;
   description: string;
   id: number;
-  img_url: string;
+  img_urls: string[];
   location: string;
   post_id: number;
   title: string;

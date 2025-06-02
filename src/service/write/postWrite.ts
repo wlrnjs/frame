@@ -7,6 +7,7 @@ export interface postPostsProps {
   location: string;
   camera_info: string;
   user_id: string;
+  img_urls: string[];
 }
 
 const postWrite = async (data: postPostsProps) => {

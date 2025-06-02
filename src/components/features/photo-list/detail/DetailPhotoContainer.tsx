@@ -20,7 +20,7 @@ interface PhotoItem {
 }
 
 interface DetailPhotoContainerProps {
-  img_url: string | PhotoItem[];
+  img_url: string | string[];
   isLoading?: boolean;
 }
 
@@ -37,7 +37,7 @@ const DetailPhotoContainer = ({
   useEffect(() => {
     if (Array.isArray(img_url)) {
       if (img_url.length > 0) {
-        setCurrentImageUrl(img_url[0]?.image_url);
+        setCurrentImageUrl(img_url[0]);
       }
     } else if (typeof img_url === "string") {
       setCurrentImageUrl(img_url);
@@ -88,7 +88,7 @@ const DetailPhotoContainer = ({
             pagination={{ clickable: true }}
             onSlideChange={(swiper) => {
               if (Array.isArray(img_url)) {
-                setCurrentImageUrl(img_url[swiper.activeIndex].image_url);
+                setCurrentImageUrl(img_url[swiper.activeIndex]);
               }
             }}
             className="w-full h-full"
@@ -102,9 +102,9 @@ const DetailPhotoContainer = ({
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
                   >
-                    {photo?.image_url && (
+                    {photo?.img_urls && (
                       <Image
-                        src={photo?.image_url}
+                        src={photo?.img_urls}
                         alt="carousel-img"
                         fill
                         className="object-contain p-5"
@@ -142,7 +142,7 @@ const DetailPhotoContainer = ({
             />
           ) : img_url.length === 1 ? (
             <Image
-              src={img_url[0].image_url}
+              src={img_url[0]}
               alt="info-img"
               fill
               className="object-contain p-5"

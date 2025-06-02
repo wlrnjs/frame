@@ -6,7 +6,6 @@ import AutoCompleteInput from "./AutoCompleteInput";
 import { postPostsProps } from "@/service/write/postWrite";
 import { supabase } from "@/service/lib/supabaseClient";
 import usePostWrite from "@/hooks/api/write/usePostWrite";
-import usePostImg from "@/hooks/api/write/usePostImg";
 import useUserId from "@/hooks/useUserId";
 import { useToast } from "@/hooks/ui/useToast";
 import FormSection from "./FormSection";
@@ -21,7 +20,6 @@ interface PhotoInfoContainerProps {
 
 const PhotoInfoContainer = ({ images }: PhotoInfoContainerProps = {}) => {
   const postWriteMutation = usePostWrite();
-  const postImgMutation = usePostImg();
   const userId = useUserId();
   const toast = useToast();
 
@@ -34,6 +32,7 @@ const PhotoInfoContainer = ({ images }: PhotoInfoContainerProps = {}) => {
     location: "",
     camera_info: "",
     user_id: userId || "",
+    img_urls: [],
   });
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
@@ -98,9 +97,10 @@ const PhotoInfoContainer = ({ images }: PhotoInfoContainerProps = {}) => {
         user_id: userId,
       },
       {
-        onSuccess: async (postId) => {
-          // 게시글 작성 성공 후 이미지 업로드
+        onSuccess: async () => {
           if (images && images.length > 0) {
+            const imgUrls: string[] = [];
+
             for (const image of images) {
               const { data, error } = await supabase.storage
                 .from("users-upload-photos")
@@ -115,11 +115,15 @@ const PhotoInfoContainer = ({ images }: PhotoInfoContainerProps = {}) => {
                 .from("users-upload-photos")
                 .getPublicUrl(data.path);
 
-              postImgMutation.mutate({
-                posts_id: postId,
-                image_url: publicUrlData.publicUrl,
-              });
+              imgUrls.push(publicUrlData.publicUrl);
             }
+
+            postWriteMutation.mutate({
+              ...formData,
+              category: selectedTags[0] || "",
+              user_id: userId,
+              img_urls: imgUrls,
+            });
           }
         },
       }
