@@ -1,6 +1,6 @@
 export interface UserDataType {
   camera: string;
-  category: string;
+  category: string[];
   created_at: string;
   id: string;
   is_admin: boolean;

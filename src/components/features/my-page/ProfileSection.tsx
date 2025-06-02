@@ -16,21 +16,23 @@ const ProfileSection = ({
   userData,
   onEditClick,
   isMyPage,
-}: ProfileSectionProps) => (
-  <div
-    className={cn(
-      "relative bg-black rounded-lg shadow-lg p-6 mb-6",
-      "mobile:p-4"
-    )}
-  >
-    <div className="flex justify-between items-start">
-      <div className="flex-1">
-        <UserProfileHeader isMyPage userData={userData} />
-        <UserCameraAndLinks />
+}: ProfileSectionProps) => {
+  return (
+    <div
+      className={cn(
+        "relative bg-black rounded-lg shadow-lg p-6 mb-6",
+        "mobile:p-4"
+      )}
+    >
+      <div className="flex justify-between items-start">
+        <div className="flex-1">
+          <UserProfileHeader isMyPage userData={userData} />
+          <UserCameraAndLinks userData={userData} />
+        </div>
+        {isMyPage && <ProfileEditButton onClick={onEditClick} />}
       </div>
-      {isMyPage && <ProfileEditButton onClick={onEditClick} />}
     </div>
-  </div>
-);
+  );
+};
 
 export default ProfileSection;

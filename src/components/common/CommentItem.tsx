@@ -10,6 +10,7 @@ import useDeleteLikeComment from "@/hooks/api/comments/useDeleteLikeComment";
 import useUserId from "@/hooks/useUserId";
 import ReportModal from "../ui/modal/ReportModal";
 import DeleteModal from "../ui/modal/DeleteModal";
+import Link from "next/link";
 
 interface LikeComment {
   id: number;
@@ -85,7 +86,9 @@ const CommentItem = ({
     <div className="border-b border-gray-700 pb-1 flex flex-col gap-1">
       {/* 유저 정보 */}
       <div className="flex items-center gap-2 text-sm text-gray-300">
-        <span className="font-semibold text-black">{name}</span>
+        <Link href={`/user/${name}`} className="font-semibold text-black">
+          {name}
+        </Link>
         <span className="text-gray-500 text-xs">{commentDate(created_at)}</span>
       </div>
 

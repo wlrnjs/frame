@@ -4,7 +4,7 @@
 export async function fetchPosts() {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/posts`,
+      `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/posts?select=*&order=created_at.desc`,
       {
         next: { revalidate: 3600 },
         headers: {

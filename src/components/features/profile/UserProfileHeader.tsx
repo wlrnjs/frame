@@ -50,9 +50,15 @@ const UserProfileHeader = ({
           가입일: {formatDate(userData?.created_at || "알수없음")}
         </p>
         <div className={cn("mt-2 flex flex-wrap gap-2", "mobile:gap-1")}>
-          <span className={categoryStyle}>도시</span>
-          <span className={categoryStyle}>풍경</span>
-          <span className={categoryStyle}>흑백</span>
+          {userData?.category ? (
+            userData?.category?.map((category: string) => (
+              <span key={category} className={categoryStyle}>
+                {category}
+              </span>
+            ))
+          ) : (
+            <p className={categoryStyle}>카테고리 미등록</p>
+          )}
         </div>
       </div>
       <div className="text-right">

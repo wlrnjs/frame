@@ -1,8 +1,13 @@
 import { cn } from "@/utils";
 import Link from "next/link";
 import React from "react";
+import { UserDataType } from "@/types/ProfileType";
 
-const UserCameraAndLinks = () => {
+interface UserCameraAndLinksProps {
+  userData: UserDataType;
+}
+
+const UserCameraAndLinks = ({ userData }: UserCameraAndLinksProps) => {
   const LinkStyle =
     "text-neutral-400 hover:text-white hover:underline hover:decoration-offset-2 transition-all duration-300 ease-out";
 
@@ -15,10 +20,10 @@ const UserCameraAndLinks = () => {
           Camera Gear
         </h3>
         <p className={cn("text-neutral-400", "mobile:text-sm")}>
-          Camera: FUJIFILM X100V
+          Camera: {userData?.camera || "미등록"}
         </p>
         <p className={cn("text-neutral-400", "mobile:text-sm")}>
-          Lens: 23mm f/2
+          Lens: {userData?.lens || "미등록"}
         </p>
       </div>
       <div>
