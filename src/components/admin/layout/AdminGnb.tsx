@@ -42,21 +42,28 @@ const AdminGnb = () => {
   const activeItem = AdminGnbItem.find((item) => item.href === pathname);
 
   return (
-    <nav className="w-[200px] h-full flex flex-col justify-start items-center gap-5 bg-gray-800 text-white p-4">
-      <AdminLogo className="w-full" />
-      <div className="flex flex-col items-start justify-center gap-5">
-        {AdminGnbItem.map((item, index) => (
-          <Link
-            key={index}
-            href={item.href}
-            className={cn(
-              "hover:text-yellow-300 transition-colors duration-200",
-              activeItem?.href === item.href && "text-yellow-300"
-            )}
-          >
-            {item.text}
-          </Link>
-        ))}
+    <nav className="w-[250px] h-full flex flex-col justify-between items-center gap-5 bg-gray-800 text-white p-4">
+      <div className="flex flex-col gap-5">
+        <Link href="/admin">
+          <AdminLogo className="w-full" />
+        </Link>
+        <div className="flex flex-col items-center justify-center gap-5">
+          {AdminGnbItem.map((item, index) => (
+            <Link
+              key={index}
+              href={item.href}
+              className={cn(
+                "hover:text-yellow-300 transition-colors duration-200",
+                activeItem?.href === item.href && "text-yellow-300"
+              )}
+            >
+              {item.text}
+            </Link>
+          ))}
+        </div>
+      </div>
+      <div>
+        <Link href={"/"}>FRAME USER</Link>
       </div>
     </nav>
   );

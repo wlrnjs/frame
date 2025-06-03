@@ -1,5 +1,3 @@
-// src/app/admin/layout.tsx
-
 import AdminGnb from "@/components/admin/layout/AdminGnb";
 
 export default function AdminLayout({
