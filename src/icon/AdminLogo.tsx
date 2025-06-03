@@ -4,14 +4,9 @@ import { cn } from "@/utils";
 interface LensLogoProps {
   width?: string;
   className?: string;
-  isLogin?: boolean;
 }
 
-const LOGO = ({
-  width = "200",
-  className = "",
-  isLogin = false,
-}: LensLogoProps) => {
+const AdminLogo = ({ width = "200", className = "" }: LensLogoProps) => {
   return (
     <svg
       width={width}
@@ -31,12 +26,21 @@ const LOGO = ({
         fill="currentColor"
         textAnchor="middle"
       >
-        #FRAME
+        FRAME
       </text>
-      {/* Small camera lens detail */}
-      {!isLogin && <circle cx="180" cy="20" r="5" fill="currentColor" />}
+      <text
+        x="100"
+        y="65"
+        fontFamily="Arial, sans-serif"
+        fontSize="22"
+        fontWeight="bold"
+        fill="currentColor"
+        textAnchor="middle"
+      >
+        ADMIN
+      </text>
     </svg>
   );
 };
 
-export default LOGO;
+export default AdminLogo;
