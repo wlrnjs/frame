@@ -1,9 +1,9 @@
 "use client";
 
-import React, { Suspense } from "react";
+import React from "react";
 import Link from "next/link";
 import AdminLogo from "@/icon/AdminLogo";
-import { useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { cn } from "@/utils";
 
 const AdminGnbItem = [
@@ -38,18 +38,8 @@ const AdminGnbItem = [
 ];
 
 const AdminGnb = () => {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <AdminGnbDom />
-    </Suspense>
-  );
-};
-
-const AdminGnbDom = () => {
-  const params = useSearchParams();
-  const activeItem = AdminGnbItem.find(
-    (item) => item.href === params.get("page")
-  );
+  const pathname = usePathname();
+  const activeItem = AdminGnbItem.find((item) => item.href === pathname);
 
   return (
     <nav className="w-[200px] h-full flex flex-col justify-start items-center gap-5 bg-gray-800 text-white p-4">
