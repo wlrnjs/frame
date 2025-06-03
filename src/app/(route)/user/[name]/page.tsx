@@ -9,7 +9,6 @@ import useGetUserData from "@/hooks/api/user-profile/useGetUserData";
 import Spinner from "@/icon/Spinner";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/ui/useToast";
-import useGetUserPostData from "@/hooks/api/user-profile/useGetUserPostData";
 
 const UserProfilePage = () => {
   const { activeTab, setActiveTab } = useProfileTabs();
@@ -26,14 +25,7 @@ const UserProfilePage = () => {
     isError,
   } = useGetUserData({ nickname: decoded });
 
-  const {
-    data: userPostData,
-    isLoading: userPostLoading,
-    isError: userPostError,
-  } = useGetUserPostData({ user_id: userData?.[0].user_id });
-  console.log("userPostData: ", userPostData);
-
-  if (isLoading || userPostLoading) {
+  if (isLoading) {
     return (
       <div className="w-full min-h-screen custom-margin layout-container">
         <Spinner />
@@ -41,7 +33,7 @@ const UserProfilePage = () => {
     );
   }
 
-  if (isError || userPostError) {
+  if (isError) {
     toast.error("유저를 찾을 수 없습니다.");
     router.push("/404");
   }

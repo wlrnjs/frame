@@ -1,19 +1,19 @@
 import axios from "axios";
 
-export interface getUserLikeDataProps {
-  user_id: string;
+export interface getUserLikePostProps {
+  post_id: string[];
 }
 
-const getUserLikeData = async ({ user_id }: getUserLikeDataProps) => {
+const getUserLikePost = async ({ post_id }: getUserLikePostProps) => {
   const response = await axios.get(
-    `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/posts_like`,
+    `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/posts`,
     {
       headers: {
         apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
       },
       params: {
-        user_id: `eq.${user_id}`,
+        post_id: `in.(${post_id.join(",")})`,
         select: "*"
       },
     }
@@ -22,4 +22,4 @@ const getUserLikeData = async ({ user_id }: getUserLikeDataProps) => {
   return response.data;
 };
 
-export default getUserLikeData;
+export default getUserLikePost;

@@ -8,6 +8,8 @@ const useGetUserPostData = ({user_id}: getUserPostProps) => {
     queryKey: ["user-posts", user_id],
     queryFn: () => getUserPost({user_id}),
     retry: 1,
+    staleTime: 30 * 60 * 1000,
+    gcTime: 60 * 60 * 1000,
   });
 };
 
