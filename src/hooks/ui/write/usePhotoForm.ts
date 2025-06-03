@@ -9,7 +9,7 @@ const usePhotoForm = (userId: string | null) => {
   const [formData, setFormData] = useState<postPostsProps>({
     title: "",
     description: "",
-    category: "",
+    category: [],
     location: "",
     camera_info: "",
     user_id: userId || "",
