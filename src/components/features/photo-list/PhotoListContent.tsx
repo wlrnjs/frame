@@ -17,11 +17,7 @@ const PhotoListContent = ({
   if (error) return <ErrorBox />;
   if (!posts) return <LoadingBox />;
 
-  const renderedItems = posts.map((item) => {
-    return <ListItem key={item.id} data={item} />;
-  });
-
-  if (renderedItems.length === 0) return <EmptyBox />;
+  if (posts.length === 0) return <EmptyBox />;
 
   return (
     <Masonry
@@ -29,7 +25,9 @@ const PhotoListContent = ({
       className="flex w-auto -ml-4"
       columnClassName="pl-4 bg-clip-padding"
     >
-      {renderedItems}
+      {posts.map((item) => (
+        <ListItem key={item.id} data={item} />
+      ))}
     </Masonry>
   );
 };

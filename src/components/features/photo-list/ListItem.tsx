@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ListItemType } from "@/types/ListType";
 import { cn } from "@/utils";
+import { formatCategory } from "@/utils/text/formatCategory";
 
 interface ListItemProps {
   data: ListItemType;
@@ -62,8 +63,7 @@ const ListItem = ({ data, id }: ListItemProps) => {
           <h3 className="text-lg font-semibold line-clamp-1">{data?.title}</h3>
           <p className="text-sm mt-1 line-clamp-1">{data?.description}</p>
           <div className="text-xs mt-2 opacity-80 flex justify-between">
-            <span>카테고리: {data?.category}</span>
-            <span>닉네임: {data?.nickname || "없음"}</span>
+            <span>카테고리: {formatCategory(data?.category)}</span>
           </div>
         </div>
       </div>
