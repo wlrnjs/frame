@@ -24,7 +24,6 @@ const ImageDetailPage = () => {
   const toast = useToast();
 
   const { data, isError } = useGetImgDetail(id!);
-  console.log("data: ", data?.img_urls);
 
   const {
     data: imgDetail,

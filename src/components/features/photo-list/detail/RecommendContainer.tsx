@@ -14,13 +14,13 @@ import { PHOTO_CATEGORIES } from "@/constants/CATEGORY";
 import { formatCategory } from "@/utils/text/formatCategory";
 
 // TODO: 추천 사진 로직 리펙토링 및 하단 버튼 클릭시 해당 카테고리 연결 작업 추가필요
-// TODO: 카테고리 두 개 들어가도 조회 가능하게 연결 필요
 
 interface RecommendContainerProps {
   category: string;
   id: string;
 }
 
+// test: 카테고리 두 개 들어가도 조회 가능하게 연결 필요
 export const formatCategoryForQuery = (rawCategory: string): string => {
   try {
     const parsed = JSON.parse(rawCategory);
@@ -39,7 +39,6 @@ const RecommendContainer = ({ category, id }: RecommendContainerProps) => {
   const [hasMore, setHasMore] = useState(true);
   const [items, setItems] = useState<ListItemType[]>([]);
   const observer = useRef<IntersectionObserver | null>(null);
-  console.log("category: ", formatCategoryForQuery(category));
 
   const { data, isLoading } = useGetRecommendList({
     category,

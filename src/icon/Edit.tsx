@@ -10,7 +10,7 @@ const Edit = ({ size = "20" }: EditProps) => (
     height="20"
     viewBox="0 0 24 24"
     fill="none"
-    stroke="black"
+    stroke="white"
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"

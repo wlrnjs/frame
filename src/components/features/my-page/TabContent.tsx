@@ -1,7 +1,9 @@
 import React from "react";
 import { TabType } from "@/types/ProfileType";
 import { ListItemType } from "@/types/ListType";
-import PostGridItem from "../profile/PostGridItem";
+import Masonry from "react-masonry-css";
+import { MASONRY_BREAKPOINTS } from "@/constants/MASONRY";
+import ListItem from "../photo-list/ListItem";
 
 interface TabContentProps {
   activeTab: TabType;
@@ -9,15 +11,18 @@ interface TabContentProps {
 }
 
 // 탭 콘텐츠 컴포넌트
-// TODO: PostGridItem, PostGrid 삭제
 const TabContent = ({ activeTab, data }: TabContentProps) => {
   const renderPostGrids = (data: ListItemType[]) =>
     data?.length > 0 ? (
-      <div className="flex flex-col gap-[20px]">
-        {data?.map((item, index) => (
-          <PostGridItem key={index} data={item} />
+      <Masonry
+        breakpointCols={MASONRY_BREAKPOINTS}
+        className="flex w-auto -ml-4"
+        columnClassName="pl-4 bg-clip-padding"
+      >
+        {data.map((item) => (
+          <ListItem key={item.id} data={item} />
         ))}
-      </div>
+      </Masonry>
     ) : (
       <div className="text-white">작성한 게시글이 없습니다.</div>
     );
