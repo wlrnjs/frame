@@ -13,7 +13,6 @@ const getRecommendList = async ({ category, offset, limit }: getRecommendListPro
     .from('posts')
     .select('*')
     .eq('category', category)
-
     .range(offset, offset + limit - 1); // 예: 0~9, 10~19
 
   if (error) throw error;

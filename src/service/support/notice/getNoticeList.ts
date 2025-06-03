@@ -8,6 +8,10 @@ const getNoticeList = async () => {
         apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
       },
+      params: {
+        order: "created_at.desc",
+        select: "*",
+      },
     }
   );
 

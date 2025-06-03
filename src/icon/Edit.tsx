@@ -2,15 +2,16 @@ import React from "react";
 
 interface EditProps {
   size?: string;
+  color?: string;
 }
 
-const Edit = ({ size = "20" }: EditProps) => (
+const Edit = ({ size = "20", color = "black" }: EditProps) => (
   <svg
     width={size}
     height="20"
     viewBox="0 0 24 24"
     fill="none"
-    stroke="white"
+    stroke={color}
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"

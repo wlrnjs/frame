@@ -17,7 +17,7 @@ const ProfileEditButton = ({ onClick, className }: ProfileEditButtonProps) => (
     )}
     onClick={onClick}
   >
-    <Edit size="16" />
+    <Edit size="16" color="white" />
     프로필 편집
   </button>
 );
