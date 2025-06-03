@@ -14,7 +14,8 @@ const getUserPost = async ({ user_id }: getUserPostProps) => {
       },
       params: {
         user_id: `eq.${user_id}`,
-        select: "*"
+        select: "*",
+        order: "created_at.desc",
       },
     }
   );

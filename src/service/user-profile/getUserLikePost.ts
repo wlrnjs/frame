@@ -14,7 +14,8 @@ const getUserLikePost = async ({ post_id }: getUserLikePostProps) => {
       },
       params: {
         post_id: `in.(${post_id.join(",")})`,
-        select: "*"
+        select: "*",
+        order: "created_at.desc",
       },
     }
   );
