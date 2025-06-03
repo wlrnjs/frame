@@ -3,7 +3,7 @@ import axios from "axios";
 export interface postPostsProps {
   title: string;
   description: string;
-  category: string;
+  category: string[];
   location: string;
   camera_info: string;
   user_id: string;

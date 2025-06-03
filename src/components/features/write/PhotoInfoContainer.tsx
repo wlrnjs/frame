@@ -28,7 +28,7 @@ const PhotoInfoContainer = ({ images }: PhotoInfoContainerProps = {}) => {
   const [formData, setFormData] = useState<postPostsProps>({
     title: "",
     description: "",
-    category: "",
+    category: [],
     location: "",
     camera_info: "",
     user_id: userId || "",
@@ -65,14 +65,14 @@ const PhotoInfoContainer = ({ images }: PhotoInfoContainerProps = {}) => {
     };
 
   // 폼 제출
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     if (!userId) {
       toast.error("로그인 후 사용 가능합니다.");
       return;
     }
 
-    // 필수 입력 항목 검사
     if (
       !formData.title ||
       formData.title.trim() === "" ||
@@ -84,50 +84,36 @@ const PhotoInfoContainer = ({ images }: PhotoInfoContainerProps = {}) => {
       return;
     }
 
-    // 이미지가 업로드되지 않은 경우 경고 메시지 표시
     if (!images || images.length === 0) {
       toast.error("이미지를 업로드해주세요.");
       return;
     }
 
-    postWriteMutation.mutate(
-      {
-        ...formData,
-        category: selectedTags[0] || "",
-        user_id: userId,
-      },
-      {
-        onSuccess: async () => {
-          if (images && images.length > 0) {
-            const imgUrls: string[] = [];
+    const imgUrls: string[] = [];
 
-            for (const image of images) {
-              const { data, error } = await supabase.storage
-                .from("users-upload-photos")
-                .upload(`images/${Date.now()}_${image.name}`, image);
+    for (const image of images) {
+      const { data, error } = await supabase.storage
+        .from("users-upload-photos")
+        .upload(`images/${Date.now()}_${image.name}`, image);
 
-              if (error) {
-                toast.error("이미지 업로드에 실패했습니다.");
-                continue;
-              }
-
-              const { data: publicUrlData } = supabase.storage
-                .from("users-upload-photos")
-                .getPublicUrl(data.path);
-
-              imgUrls.push(publicUrlData.publicUrl);
-            }
-
-            postWriteMutation.mutate({
-              ...formData,
-              category: selectedTags[0] || "",
-              user_id: userId,
-              img_urls: imgUrls,
-            });
-          }
-        },
+      if (error) {
+        toast.error("이미지 업로드에 실패했습니다.");
+        return; // 실패 시 중단
       }
-    );
+
+      const { data: publicUrlData } = supabase.storage
+        .from("users-upload-photos")
+        .getPublicUrl(data.path);
+
+      imgUrls.push(publicUrlData.publicUrl);
+    }
+
+    postWriteMutation.mutate({
+      ...formData,
+      category: selectedTags,
+      user_id: userId,
+      img_urls: imgUrls,
+    });
   };
 
   // 태그 삭제
