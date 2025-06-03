@@ -8,7 +8,7 @@ export interface getRecommendListProps {
 }
 
 // 예시: 클라이언트에서 호출 (category, limit, offset 전달)
-export const getRecommendList = async ({ category, offset, limit }: getRecommendListProps) => {
+const getRecommendList = async ({ category, offset, limit }: getRecommendListProps) => {
   const { data, error } = await supabase
     .from('posts')
     .select('*')
@@ -20,13 +20,4 @@ export const getRecommendList = async ({ category, offset, limit }: getRecommend
   return data;
 };
 
-export const getRecommendPhotoList = async ({ id, offset, limit }: getRecommendListProps) => {
-  const { data, error } = await supabase
-    .from('posts_photos')
-    .select('*')
-    .in('posts_id', id!)
-    .range(offset, offset + limit - 1); // 예: 0~9, 10~19
-
-  if (error) throw error;
-  return data;
-};
+export default getRecommendList;

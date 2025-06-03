@@ -9,6 +9,7 @@ import React from "react";
 import { formatDate } from "@/utils/date/dateUtils";
 import { cn } from "@/utils";
 import useUserId from "@/hooks/useUserId";
+import { formatCategory } from "@/utils/text/formatCategory";
 
 interface DetailData {
   title: string;
@@ -91,15 +92,15 @@ const DetailContainer = ({ data, imgData }: DetailContainerProps) => {
     },
     {
       name: "장소",
-      content: location || "없음",
+      content: location,
     },
     {
       name: "카테고리",
-      content: category || "없음",
+      content: formatCategory(category),
     },
     {
       name: "조회수",
-      content: view_count || "0",
+      content: view_count || 0,
     },
     {
       name: "카메라 정보",
@@ -124,10 +125,10 @@ const DetailContainer = ({ data, imgData }: DetailContainerProps) => {
               "mobile:text-2xl"
             )}
           >
-            {title || "제목 없음"}
+            {title}
           </h1>
           <p className="text-[#111418] text-base font-normal leading-normal">
-            {description || "설명 없음"}
+            {description}
           </p>
         </div>
       </div>

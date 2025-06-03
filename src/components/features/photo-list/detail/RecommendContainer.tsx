@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useGetRecommendList } from "@/hooks/api/photo-list/detail/useGetRecommendList";
+import useGetRecommendList from "@/hooks/api/photo-list/detail/useGetRecommendList";
 import Masonry from "react-masonry-css";
 import { MASONRY_BREAKPOINTS } from "@/constants/MASONRY";
 import ListItem from "../ListItem";
@@ -11,19 +11,35 @@ import Link from "next/link";
 import Spinner from "@/icon/Spinner";
 import { ListItemType } from "@/types/ListType";
 import { PHOTO_CATEGORIES } from "@/constants/CATEGORY";
+import { formatCategory } from "@/utils/text/formatCategory";
 
 // TODO: 추천 사진 로직 리펙토링 및 하단 버튼 클릭시 해당 카테고리 연결 작업 추가필요
+// TODO: 카테고리 두 개 들어가도 조회 가능하게 연결 필요
 
 interface RecommendContainerProps {
   category: string;
   id: string;
 }
 
+export const formatCategoryForQuery = (rawCategory: string): string => {
+  try {
+    const parsed = JSON.parse(rawCategory);
+    if (Array.isArray(parsed)) {
+      return parsed.map((c: string) => c.replace(/^#/, "")).join(",");
+    }
+    return rawCategory.replace(/^#/, "");
+  } catch {
+    // rawCategory가 JSON 파싱 불가능한 일반 문자열이라면
+    return rawCategory.replace(/^#/, "");
+  }
+};
+
 const RecommendContainer = ({ category, id }: RecommendContainerProps) => {
   const [offset, setOffset] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   const [items, setItems] = useState<ListItemType[]>([]);
   const observer = useRef<IntersectionObserver | null>(null);
+  console.log("category: ", formatCategoryForQuery(category));
 
   const { data, isLoading } = useGetRecommendList({
     category,
@@ -79,10 +95,6 @@ const RecommendContainer = ({ category, id }: RecommendContainerProps) => {
 
   if (isLoading) return <Spinner />;
 
-  const renderedItems = items.map((post) => {
-    return <ListItem id={id} key={post.id} data={post} />;
-  });
-
   return (
     <div
       className={cn(
@@ -113,7 +125,9 @@ const RecommendContainer = ({ category, id }: RecommendContainerProps) => {
               className="w-full flex"
               columnClassName="pl-4 bg-clip-padding"
             >
-              {renderedItems}
+              {items.map((post) => {
+                return <ListItem id={id} key={post.id} data={post} />;
+              })}
             </Masonry>
             {/* 무한 스크롤 감지용 엘리먼트 */}
             {hasMore && <div ref={lastItemRef} style={{ height: "20px" }} />}
@@ -122,7 +136,9 @@ const RecommendContainer = ({ category, id }: RecommendContainerProps) => {
             {!hasMore && data && data.length > 0 && (
               <div className="w-full h-fit flex-col-center">
                 <h1 className="text-[20px] font-bold">
-                  {`${category} 으로 등록된 사진이 더 없습니다.`}
+                  {`${formatCategory(
+                    category
+                  )} 으로 등록된 사진이 더 없습니다.`}
                 </h1>
                 <p>다른 카테고리로 이동해보세요!</p>
                 <div className="flex gap-2">
