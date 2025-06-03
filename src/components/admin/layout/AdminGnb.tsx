@@ -1,6 +1,10 @@
-import React from "react";
+"use client";
+
+import React, { Suspense } from "react";
 import Link from "next/link";
 import AdminLogo from "@/icon/AdminLogo";
+import { useSearchParams } from "next/navigation";
+import { cn } from "@/utils";
 
 const AdminGnbItem = [
   {
@@ -35,6 +39,19 @@ const AdminGnbItem = [
 
 const AdminGnb = () => {
   return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <AdminGnbDom />
+    </Suspense>
+  );
+};
+
+const AdminGnbDom = () => {
+  const params = useSearchParams();
+  const activeItem = AdminGnbItem.find(
+    (item) => item.href === params.get("page")
+  );
+
+  return (
     <nav className="w-[200px] h-full flex flex-col justify-start items-center gap-5 bg-gray-800 text-white p-4">
       <AdminLogo className="w-full" />
       <div className="flex flex-col items-start justify-center gap-5">
@@ -42,7 +59,10 @@ const AdminGnb = () => {
           <Link
             key={index}
             href={item.href}
-            className="hover:text-yellow-300 transition-colors duration-200"
+            className={cn(
+              "hover:text-yellow-300 transition-colors duration-200",
+              activeItem?.href === item.href && "text-yellow-300"
+            )}
           >
             {item.text}
           </Link>
