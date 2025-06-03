@@ -27,6 +27,8 @@ const ErrorState = ({ message }: { message?: string }) => (
 const EventPage = () => {
   const { data: events, isLoading, error } = useGetEvents();
 
+  console.log(events);
+
   // const activeEvents = events?.filter((event: Event) => true) || [];
 
   // const upcomingEvents = events?.slice(1) || [];
