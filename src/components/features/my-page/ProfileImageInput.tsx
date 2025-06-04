@@ -23,7 +23,7 @@ const ProfileImageInput = ({
           alt="Profile"
           width={64}
           height={64}
-          className="w-16 h-16 rounded-full object-cover"
+          className="w-16 h-16 rounded-full object-contain"
         />
         <input
           type="file"

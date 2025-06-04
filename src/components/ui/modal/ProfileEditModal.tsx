@@ -10,6 +10,7 @@ import ProfileImageInput from "@/components/features/my-page/ProfileImageInput";
 import { UserDataType } from "@/types/ProfileType";
 import { formatDate } from "@/utils/date/dateUtils";
 import usePostEditMyData from "@/hooks/api/my-page/usePostEditMyData";
+import { supabase } from "@/service/lib/supabaseClient";
 
 const buttonStyles = {
   base: "rounded text-white px-4 py-2 font-semibold transition-colors",
@@ -36,6 +37,7 @@ const ProfileEditModal = ({
 
   const { mutate: editProfile } = usePostEditMyData();
 
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [nickname, setNickname] = useState(data?.nickname || "");
   const [category, setCategory] = useState(data?.category || "카테고리 미설정");
   const [camera, setCamera] = useState(data?.camera || "카메라 미설정");
@@ -45,6 +47,14 @@ const ProfileEditModal = ({
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
+
+      if (Array.isArray(data?.links)) {
+        const filledLinks = [...data.links];
+        while (filledLinks.length < 2) {
+          filledLinks.push({ name: "", url: "" });
+        }
+        setUrlInputs(filledLinks.slice(0, 2));
+      }
 
       const handleEscape = (event: KeyboardEvent) => {
         if (event.key === "Escape") {
@@ -74,8 +84,28 @@ const ProfileEditModal = ({
     setIsSubmitting(true);
 
     try {
+      let uploadedImageUrl = data?.profile_image || "";
+
+      if (selectedImage) {
+        const { data: uploadData, error: uploadError } = await supabase.storage
+          .from("users-upload-photos")
+          .upload(
+            `profile-images/${Date.now()}_${selectedImage.name}`,
+            selectedImage
+          );
+
+        if (uploadError) {
+          console.error("이미지 업로드 실패:", uploadError);
+        } else {
+          const { data: urlData } = supabase.storage
+            .from("users-upload-photos")
+            .getPublicUrl(uploadData.path);
+          uploadedImageUrl = urlData.publicUrl;
+        }
+      }
+
       const updatedData = {
-        profile_image: data?.profile_image || "",
+        profile_image: uploadedImageUrl,
         nickname,
         email: data?.email || "",
         category,
@@ -120,8 +150,8 @@ const ProfileEditModal = ({
         {/* 프로필 이미지 */}
         <ProfileImageInput
           label="프로필 이미지"
-          imageUrl={data?.profile_image || "/avatar.png"}
-          onChange={() => {}}
+          imageUrl={data?.profile_image || "/Logo.png"}
+          onChange={(file) => setSelectedImage(file)}
         />
 
         {/* 닉네임 */}

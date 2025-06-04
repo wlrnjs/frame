@@ -32,7 +32,7 @@ const UserProfileHeader = ({
     <div className={cn("flex-center gap-6", "mobile:gap-2")}>
       <div
         className={cn(
-          "relative w-[128px] h-[128px] rounded-full object-cover border-2 border-neutral-700 flex-center",
+          "relative w-[128px] h-[128px] rounded-full object-cover border-2 border-neutral-700 flex-center overflow-hidden",
           "mobile:w-[80px] mobile:h-[80px]"
         )}
       >
