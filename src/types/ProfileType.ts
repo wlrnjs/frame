@@ -5,7 +5,7 @@ export interface UserDataType {
   id: string;
   is_admin: boolean;
   lens: string;
-  links: string;
+  links: { name: string; url: string }[];
   nickname: string;
   user_id: string;
   profile_image: string;

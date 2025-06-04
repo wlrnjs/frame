@@ -30,8 +30,7 @@ const ProfileEditModal = ({
   data,
 }: ProfileEditModalProps) => {
   const [urlInputs, setUrlInputs] = useState([
-    { name: "Instagram", url: "https://instagram.com/user" },
-    { name: "Github", url: "https://github.com/user" },
+    { name: "", url: "" },
     { name: "", url: "" },
   ]);
 
@@ -162,7 +161,7 @@ const ProfileEditModal = ({
 
         {/* URL 연결 */}
         <div className="mb-4">
-          <label className="block text-sm mb-1">URL 연결 (최대 3개)</label>
+          <label className="block text-sm mb-1">URL 연결 (최대 2개)</label>
           <div className="space-y-2">
             {urlInputs.map((input, index) => (
               <UrlInput

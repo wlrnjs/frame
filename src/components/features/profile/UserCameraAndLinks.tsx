@@ -32,24 +32,22 @@ const UserCameraAndLinks = ({ userData }: UserCameraAndLinksProps) => {
         >
           Connect
         </h3>
-        <Link
-          href="https://www.instagram.com/_zuqil/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={cn(LinkStyle, "mobile:text-sm")}
-          aria-label="Instagram"
-        >
-          Instagram
-        </Link>
-        <Link
-          href="https://github.com/wlrnjs"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={cn("block", LinkStyle, "mobile:text-sm")}
-          aria-label="Github"
-        >
-          Github
-        </Link>
+        {userData?.links?.length > 0 ? (
+          userData?.links?.map((link) => (
+            <Link
+              key={link.name}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn("block", LinkStyle, "mobile:text-sm")}
+              aria-label={link.name}
+            >
+              {link.name}
+            </Link>
+          ))
+        ) : (
+          <div className="text-neutral-400">연결된 정보가 없습니다.</div>
+        )}
       </div>
     </div>
   );
