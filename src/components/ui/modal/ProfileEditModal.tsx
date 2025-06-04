@@ -173,7 +173,7 @@ const ProfileEditModal = ({
 
         {/* 좋아하는 카테고리 */}
         <EditInput
-          label="좋아하는 카테고리"
+          label="관심 카테고리"
           value={category}
           onChange={setCategory}
         />
