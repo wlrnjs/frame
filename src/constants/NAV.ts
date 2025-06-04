@@ -1,5 +1,6 @@
 export const NAV_LINKS = [
     // 테스트
+    { title: "ADMIN", href: "/admin" },
     { title: "SHORTS", href: "/shorts" },
     { title: "유저프로필", href: "/user/감성적인필름234" },
     { title: "404", href: "/404" },

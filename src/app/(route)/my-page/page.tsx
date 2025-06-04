@@ -11,6 +11,7 @@ import TabSection from "@/components/features/my-page/TabSection";
 const MyPage = () => {
   // const { data: user, isLoading, error } = useGetUser();
   const { data: user } = useGetUser();
+  console.log(user);
   const { activeTab, setActiveTab } = useProfileTabs();
   const { isModalOpen, openModal, closeModal } = useProfileEditModal();
 

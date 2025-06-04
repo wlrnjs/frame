@@ -22,8 +22,6 @@ const postEvent = async (data: postEventProps) => {
     }
   );
 
-  console.log(response.data);
-
   const createdPost = response.data[0];
   return createdPost.event_id;
 };

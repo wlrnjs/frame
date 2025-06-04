@@ -7,7 +7,7 @@ interface EventAddModalProps {
   onClose: () => void;
 }
 
-// TODO: 임시 이미지 업로드 구현, 수정 필요
+// TODO: 임시 이벤트 업로드 구현, 수정 필요
 
 const EventAddModal = ({ onClose }: EventAddModalProps) => {
   const postEvent = usePostEvent();
