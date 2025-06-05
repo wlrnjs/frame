@@ -6,6 +6,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { createPortal } from "react-dom";
 import { useToast } from "@/hooks/ui/useToast";
 import usePostFeedback from "@/hooks/api/support/usePostFeedback";
+import useUserId from "@/hooks/useUserId";
 
 interface FeedbackModalProps {
   onOpen: boolean;
@@ -18,6 +19,7 @@ const buttonStyle = cn(
 );
 
 const FeedbackModal = ({ onOpen, onClose }: FeedbackModalProps) => {
+  const user = useUserId();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -57,6 +59,12 @@ const FeedbackModal = ({ onOpen, onClose }: FeedbackModalProps) => {
   };
 
   const handleSubmit = () => {
+    if (!user) {
+      toast.error("로그인이 필요한 서비스입니다.");
+      onClose();
+      return;
+    }
+
     if (title.trim() && content.trim()) {
       mutate({ title, content });
       setTitle("");
