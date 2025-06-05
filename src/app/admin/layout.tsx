@@ -1,4 +1,4 @@
-import AdminGnb from "@/components/admin/layout/AdminGnb";
+import AdminGnb from "@/admin/components/layout/AdminGnb";
 
 export default function AdminLayout({
   children,

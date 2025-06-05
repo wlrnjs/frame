@@ -10,11 +10,16 @@ import { formatDate } from "@/utils/date/dateUtils";
 import { cn } from "@/utils";
 import useUserId from "@/hooks/useUserId";
 import { formatCategory } from "@/utils/text/formatCategory";
+import Link from "next/link";
+
+interface user {
+  nickname: string;
+}
 
 interface DetailData {
   title: string;
   description: string;
-  nickname: string;
+  users: user;
   created_at: string;
   location: string;
   category: string;
@@ -32,8 +37,6 @@ interface DetailContainerProps {
 const DetailContainer = ({ data }: DetailContainerProps) => {
   const user = useUserId();
   const isMine = data?.user_id === user;
-
-  console.log(data?.views);
 
   const {
     isOpen: isShareModalOpen,
@@ -64,7 +67,7 @@ const DetailContainer = ({ data }: DetailContainerProps) => {
   const {
     title,
     description,
-    // nickname,
+    users,
     created_at,
     location,
     category,
@@ -78,10 +81,6 @@ const DetailContainer = ({ data }: DetailContainerProps) => {
   const handleReportClick = openReportModal;
 
   const metaTag = [
-    {
-      name: "작성자",
-      content: "wlrnjs (임시)",
-    },
     {
       name: "업로드",
       content: formatDate(created_at),
@@ -131,6 +130,17 @@ const DetailContainer = ({ data }: DetailContainerProps) => {
       <div className="flex flex-col gap-4">
         {/* 작성자 정보 */}
         <div className="w-full flex flex-col items-start justify-between text-sm font-semibold">
+          <div className="w-full grid grid-cols-6 border-t border-gray-300 py-4">
+            <p className="col-span-1 text-[#60758a] text-sm font-normal leading-normal">
+              작성자
+            </p>
+            <Link
+              href={`/user/${users.nickname}`}
+              className="col-span-5 text-[#111418] text-sm font-normal leading-normal"
+            >
+              {users.nickname}
+            </Link>
+          </div>
           {metaTag.map((tag, idx) => (
             <div
               key={idx}
