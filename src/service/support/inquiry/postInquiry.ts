@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export interface postInquiryProps {
+  email?: string;
   title: string;
   content: string;
 }
