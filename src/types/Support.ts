@@ -11,3 +11,9 @@ export type SupportItemType = {
   content: string;
   created_at: string;
 };
+
+export type SupportData = {
+  data: SupportItemType[];
+  count: number;
+};
+

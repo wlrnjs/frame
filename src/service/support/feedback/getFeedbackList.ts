@@ -15,7 +15,8 @@ const getFeedbackList = async ({ page = 1, limit = 10 }: getFeedbackListProps) =
       headers: {
         apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
-        Range: `${from}-${to}`
+        Range: `${from}-${to}`,
+        Prefer: "count=exact", // 페이지네이션 총 아이템 수 확인
       },
       params: {
         order: "created_at.desc",
@@ -24,7 +25,10 @@ const getFeedbackList = async ({ page = 1, limit = 10 }: getFeedbackListProps) =
     }
   );
 
-  return response.data;
+  return {
+    data: response.data,
+    count: response.headers["content-range"].split("/")[1]
+  };
 };
 
 export default getFeedbackList;
