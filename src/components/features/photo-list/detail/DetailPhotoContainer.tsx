@@ -39,7 +39,7 @@ const DetailPhotoContainer = ({
   }, [img_url]);
 
   // detail page에 사진이 여러장 있는지 확인 (Swiper 사용)
-  const hasMultiplePhotos = Array.isArray(img_url) && img_url.length >= 2;
+  const hasMultiplePhotos = Array.isArray(img_url) && img_url.length > 1;
 
   // Swiper 추가 CSS 스타일 정의
   const swiperContainerStyle = {
@@ -72,88 +72,51 @@ const DetailPhotoContainer = ({
         "mobile:h-fit"
       )}
     >
-      {hasMultiplePhotos ? (
-        <div className="relative w-full aspect-[4/3] overflow-hidden rounded-md">
-          <Swiper
-            modules={[Navigation, Pagination]}
-            spaceBetween={0}
-            slidesPerView={1}
-            navigation
-            pagination={{ clickable: true }}
-            onSlideChange={(swiper) => {
-              if (Array.isArray(img_url)) {
-                setCurrentImageUrl(img_url[swiper.activeIndex]);
-              }
-            }}
-            className="w-full h-full"
-            style={swiperWrapperStyle}
-          >
-            {Array.isArray(img_url) &&
-              img_url.map((photo) => (
-                <SwiperSlide key={photo}>
-                  <div
-                    className="relative w-full h-full"
-                    onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => setIsHovered(false)}
-                  >
-                    {photo && (
-                      <Image
-                        src={photo}
-                        alt="carousel-img"
-                        fill
-                        className="object-contain p-5"
-                      />
-                    )}
-                    <div
-                      className={`absolute top-5 right-5 transition-all duration-300 ease-in-out pointer ${
-                        isHovered
-                          ? "opacity-100 translate-x-0"
-                          : "opacity-0 translate-x-4 pointer-events-none"
-                      }`}
-                      onClick={() => {
-                        setIsModalOpen(true);
-                      }}
-                    >
-                      <Square />
-                    </div>
-                  </div>
-                </SwiperSlide>
-              ))}
-          </Swiper>
-        </div>
-      ) : (
-        <div
-          className="relative w-full aspect-[4/3] overflow-hidden rounded-md"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
+      <div
+        className="relative w-full aspect-[4/3] overflow-hidden rounded-md"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <Swiper
+          modules={[Navigation, Pagination]}
+          spaceBetween={0}
+          slidesPerView={1}
+          navigation={hasMultiplePhotos}
+          pagination={hasMultiplePhotos ? { clickable: true } : false}
+          onSlideChange={(swiper) => {
+            if (Array.isArray(img_url)) {
+              setCurrentImageUrl(img_url[swiper.activeIndex]);
+            }
+          }}
+          className="w-full h-full"
+          style={swiperWrapperStyle}
         >
-          {!Array.isArray(img_url) ? (
-            <Image
-              src={img_url}
-              alt="info-img"
-              fill
-              className="object-contain p-5"
-            />
-          ) : img_url.length === 1 ? (
-            <Image
-              src={img_url[0]}
-              alt="info-img"
-              fill
-              className="object-contain p-5"
-            />
-          ) : null}
-          <div
-            className={`absolute top-5 right-5 transition-all duration-300 ease-in-out pointer ${
-              isHovered
-                ? "opacity-100 translate-x-0"
-                : "opacity-0 translate-x-4 pointer-events-none"
-            }`}
-            onClick={() => setIsModalOpen(true)}
-          >
-            <Square />
-          </div>
-        </div>
-      )}
+          {(Array.isArray(img_url) ? img_url : [img_url]).map((photo) => (
+            <SwiperSlide key={photo}>
+              <div className="relative w-full h-full">
+                {photo && (
+                  <Image
+                    src={photo}
+                    alt="carousel-img"
+                    fill
+                    className="object-contain p-5"
+                  />
+                )}
+                <div
+                  className={`absolute top-5 right-5 transition-all duration-300 ease-in-out pointer ${
+                    isHovered
+                      ? "opacity-100 translate-x-0"
+                      : "opacity-0 translate-x-4 pointer-events-none"
+                  }`}
+                  onClick={() => setIsModalOpen(true)}
+                >
+                  <Square />
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
       <DetailImageModal
         onOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}

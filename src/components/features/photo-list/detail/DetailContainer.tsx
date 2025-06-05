@@ -22,20 +22,14 @@ interface DetailData {
   camera_info: string;
   post_id: number;
   user_id: string;
-}
-
-export interface DetailImgData {
-  id: string;
-  image_url: string;
-  posts_id: number;
+  img_urls: string[];
 }
 
 interface DetailContainerProps {
   data: DetailData;
-  imgData: DetailImgData[];
 }
 
-const DetailContainer = ({ data, imgData }: DetailContainerProps) => {
+const DetailContainer = ({ data }: DetailContainerProps) => {
   const user = useUserId();
   const isMine = data?.user_id === user;
 
@@ -158,7 +152,7 @@ const DetailContainer = ({ data, imgData }: DetailContainerProps) => {
           onDeleteClick={handleDeleteClick}
           onReportClick={handleReportClick}
           id={post_id}
-          imgData={imgData}
+          imgData={data?.img_urls}
           isMine={isMine}
         />
       </div>
@@ -166,7 +160,7 @@ const DetailContainer = ({ data, imgData }: DetailContainerProps) => {
       <ShareModal
         isOpen={isShareModalOpen}
         onClose={closeShareModal}
-        imgData={imgData}
+        imgData={data?.img_urls}
       />
 
       <DeleteModal

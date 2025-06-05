@@ -7,7 +7,6 @@ import DetailContainer from "@/components/features/photo-list/detail/DetailConta
 import DetailPhotoContainer from "@/components/features/photo-list/detail/DetailPhotoContainer";
 import CommentContainer from "@/components/features/photo-list/detail/CommentContainer";
 import useGetImgDetail from "@/hooks/api/photo-list/detail/useGetImgDetail";
-import useGetImg from "@/hooks/api/photo-list/detail/useGetImg";
 
 const RecommendContainer = dynamic(
   () => import("@/components/features/photo-list/detail/RecommendContainer"),
@@ -25,13 +24,7 @@ const ImageDetailPage = () => {
 
   const { data, isError } = useGetImgDetail(id!);
 
-  const {
-    data: imgDetail,
-    isError: imgDetailError,
-    isLoading: imgDetailLoading,
-  } = useGetImg(id!);
-
-  if (isError || imgDetailError) {
+  if (isError) {
     toast.error("게시글을 찾을 수 없습니다.");
     router.replace("/404");
   }
@@ -50,11 +43,8 @@ const ImageDetailPage = () => {
         )}
       >
         <div className={cn("w-full flex flex-col gap-10", "mobile:gap-3")}>
-          <DetailPhotoContainer
-            img_url={data?.img_urls}
-            isLoading={imgDetailLoading}
-          />
-          <DetailContainer data={data} imgData={imgDetail?.data} />
+          <DetailPhotoContainer img_url={data?.img_urls} isLoading={false} />
+          <DetailContainer data={data} />
           <CommentContainer id={id!} type="post" />
         </div>
       </div>

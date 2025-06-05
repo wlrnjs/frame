@@ -10,7 +10,6 @@ import React from "react";
 import usePostLikeToggle from "@/hooks/api/photo-list/detail/usePostLikeToggle";
 import useUserId from "@/hooks/useUserId";
 import { useToast } from "@/hooks/ui/useToast";
-import { DetailImgData } from "./DetailContainer";
 import useGetLikeToggle from "@/hooks/api/photo-list/detail/useGetLikeToggle";
 import useDeleteLikeToggle from "@/hooks/api/photo-list/detail/useDeleteLikeToggle";
 import { cn } from "@/utils";
@@ -37,7 +36,7 @@ interface ActionButtonsProps {
   onDeleteClick: () => void;
   onReportClick: () => void;
   id: number;
-  imgData: DetailImgData[];
+  imgData: string[];
   isMine: boolean;
 }
 
@@ -76,7 +75,7 @@ const ActionButtons = ({
   const handleDownloadClick = async () => {
     try {
       for (let i = 0; i < imgData.length; i++) {
-        const imageUrl = imgData[i].image_url;
+        const imageUrl = imgData[i];
         const response = await fetch(imageUrl, { mode: "cors" });
         const blob = await response.blob();
         const blobUrl = window.URL.createObjectURL(blob);

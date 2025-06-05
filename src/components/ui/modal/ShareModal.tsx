@@ -5,7 +5,6 @@ import React from "react";
 import { createPortal } from "react-dom";
 import { useToast } from "@/hooks/ui/useToast";
 import Image from "next/image";
-import { DetailImgData } from "@/components/features/photo-list/detail/DetailContainer";
 import Link from "@/icon/Link";
 import Kakao from "@/icon/Kakao";
 import Instagram from "@/icon/Instagram";
@@ -15,7 +14,7 @@ import { cn } from "@/utils";
 interface ShareModalProps {
   isOpen: boolean;
   onClose: () => void;
-  imgData: DetailImgData[];
+  imgData: string[];
 }
 
 const ShareModal = ({ isOpen, onClose, imgData }: ShareModalProps) => {
@@ -102,7 +101,7 @@ const ShareModal = ({ isOpen, onClose, imgData }: ShareModalProps) => {
                   className="relative w-full aspect-square overflow-hidden rounded-lg border border-white/20"
                 >
                   <Image
-                    src={img.image_url}
+                    src={img}
                     alt={`image-${index}`}
                     fill
                     className="object-cover"
