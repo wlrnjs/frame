@@ -35,15 +35,28 @@ const Footer = () => {
         </div>
         <div className="flex-center gap-4">
           {[
-            { icon: <Github />, link: "https://github.com/wlrnjs" },
-            { icon: <Instagram />, link: "https://www.instagram.com/_zuqil/" },
-            { icon: <Email />, link: "mailto:wlrnjs5824@google.com" },
+            {
+              icon: <Github />,
+              link: "https://github.com/wlrnjs",
+              ariaLabel: "Github 이동",
+            },
+            {
+              icon: <Instagram />,
+              link: "https://www.instagram.com/_zuqil/",
+              ariaLabel: "Instagram 이동",
+            },
+            {
+              icon: <Email />,
+              link: "mailto:wlrnjs5824@google.com",
+              ariaLabel: "이메일로 문의하기",
+            },
           ].map((social, index) => (
             <Link
               key={index}
               href={social.link}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={social.ariaLabel}
               className="hover:scale-105 transition-transform duration-200"
             >
               {social.icon}
