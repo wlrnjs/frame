@@ -1,11 +1,11 @@
-import getNoticeList from "@/service/support/notice/getNoticeList";
+import getNoticeList, { getNoticeListProps } from "@/service/support/notice/getNoticeList";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 
-const useGetNoticeList = () => {
+const useGetNoticeList = ({ page, limit }: getNoticeListProps) => {
   return useQuery({
-    queryKey: ["notice"],
-    queryFn: () => getNoticeList(),
+    queryKey: ["notice", page, limit],
+    queryFn: () => getNoticeList({ page, limit }),
     placeholderData: keepPreviousData,
     staleTime: 30 * 60 * 1000,
     gcTime: 60 * 60 * 1000,
