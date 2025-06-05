@@ -7,6 +7,8 @@ import DetailContainer from "@/components/features/photo-list/detail/DetailConta
 import DetailPhotoContainer from "@/components/features/photo-list/detail/DetailPhotoContainer";
 import CommentContainer from "@/components/features/photo-list/detail/CommentContainer";
 import useGetImgDetail from "@/hooks/api/photo-list/detail/useGetImgDetail";
+import { useEffect } from "react";
+import { supabase } from "@/service/lib/supabaseClient";
 
 const RecommendContainer = dynamic(
   () => import("@/components/features/photo-list/detail/RecommendContainer"),
@@ -21,6 +23,39 @@ const ImageDetailPage = () => {
   const id = params.get("id");
   const router = useRouter();
   const toast = useToast();
+
+  useEffect(() => {
+    if (!id) return;
+
+    const visitKey = "visited_posts";
+
+    // 저장된 방문 기록 배열 불러오기
+    const visitedPostsRaw = sessionStorage.getItem(visitKey);
+    const visitedPosts: string[] = visitedPostsRaw
+      ? JSON.parse(visitedPostsRaw)
+      : [];
+
+    if (!visitedPosts.includes(id)) {
+      const increaseViews = async () => {
+        const { error } = await supabase.rpc("increment_post_views", {
+          post_id_input: Number(id),
+        });
+        if (error) {
+          console.error("조회수 증가 실패:", error.message);
+        } else {
+          console.log("조회수 증가 성공");
+
+          // 방문 기록에 현재 id 추가
+          visitedPosts.push(id);
+          sessionStorage.setItem(visitKey, JSON.stringify(visitedPosts));
+        }
+      };
+
+      increaseViews();
+    } else {
+      console.log("조회수 증가 생략");
+    }
+  }, [id]);
 
   const { data, isError } = useGetImgDetail(id!);
 

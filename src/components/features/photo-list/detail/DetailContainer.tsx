@@ -18,7 +18,7 @@ interface DetailData {
   created_at: string;
   location: string;
   category: string;
-  view_count: number;
+  views: number;
   camera_info: string;
   post_id: number;
   user_id: string;
@@ -32,6 +32,8 @@ interface DetailContainerProps {
 const DetailContainer = ({ data }: DetailContainerProps) => {
   const user = useUserId();
   const isMine = data?.user_id === user;
+
+  console.log(data?.views);
 
   const {
     isOpen: isShareModalOpen,
@@ -66,7 +68,7 @@ const DetailContainer = ({ data }: DetailContainerProps) => {
     created_at,
     location,
     category,
-    view_count,
+    views,
     camera_info,
     post_id,
   } = data;
@@ -86,7 +88,7 @@ const DetailContainer = ({ data }: DetailContainerProps) => {
     },
     {
       name: "장소",
-      content: location,
+      content: location || "장소 정보 없음",
     },
     {
       name: "카테고리",
@@ -94,11 +96,11 @@ const DetailContainer = ({ data }: DetailContainerProps) => {
     },
     {
       name: "조회수",
-      content: view_count || 0,
+      content: views || 0,
     },
     {
       name: "카메라 정보",
-      content: camera_info || "없음",
+      content: camera_info || "카메라 정보 없음",
     },
   ];
 
