@@ -11,7 +11,7 @@ const FeedbackListPage = () => {
   const [openId, setOpenId] = useState<number | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [page, setPage] = useState(1);
-  const limit = 1;
+  const limit = 5;
 
   const { data: feedbackList } = useGetFeedbackList({ page, limit });
 
