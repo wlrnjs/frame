@@ -1,12 +1,30 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ImageCard from "./ImageCard";
 import useFadeUpAnimation from "@/hooks/ui/useFadeUpAnimation";
 import { cn } from "@/utils";
+import { supabase } from "@/service/lib/supabaseClient";
+import { ListItemType } from "@/types/ListType";
 
 const PopularContainer = () => {
   const animationClass = useFadeUpAnimation({ targetClass: "fade-up-popular" });
+  const [posts, setPosts] = useState<ListItemType[]>([]);
+
+  useEffect(() => {
+    const fetchPopularPosts = async () => {
+      const { data, error } = await supabase.rpc(
+        "get_top_30_viewed_posts_last_month"
+      );
+      if (error) {
+        console.error("Error fetching top 30 posts:", error);
+      } else {
+        setPosts(data ?? []);
+      }
+    };
+
+    fetchPopularPosts();
+  }, []);
 
   return (
     <div
@@ -41,8 +59,8 @@ const PopularContainer = () => {
           "mobile:grid-cols-2"
         )}
       >
-        {[...Array(6)].map((_, i) => (
-          <ImageCard key={i} className={animationClass} />
+        {Array.from({ length: 6 }).map((_, i) => (
+          <ImageCard key={i} className={animationClass} data={posts[i]} />
         ))}
       </div>
     </div>

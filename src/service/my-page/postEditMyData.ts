@@ -14,7 +14,6 @@ export interface postEditMyDataProps {
 const postEditMyData = async (data: postEditMyDataProps) => {
   const userId = (await supabase.auth.getUser()).data.user?.id;
   if (!userId) throw new Error("사용자 인증이 필요합니다.");
-  console.log("postEditMyData userId: ", userId);
 
   const session = await supabase.auth.getSession();
   const accessToken = session.data.session?.access_token

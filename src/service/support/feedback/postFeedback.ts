@@ -8,7 +8,6 @@ export interface postFeedbackProps {
 const postFeedback = async (data: postFeedbackProps) => {
   const token = JSON.parse(localStorage.getItem("sb-whvyyrwjdjzfcpcwvlvq-auth-token") || "{}")?.access_token;
   const userId = JSON.parse(localStorage.getItem("sb-whvyyrwjdjzfcpcwvlvq-auth-token") || "{}")?.user?.id;
-  console.log(token);
 
   const response = await axios.post(
     `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/feedbacks`, 
