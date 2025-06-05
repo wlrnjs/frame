@@ -6,6 +6,8 @@ import React, { useState } from "react";
 import { SupportItemType } from "@/types/Support";
 import SupportItem from "@/components/features/support/SupportItem";
 import Pagination from "@/components/common/Pagination";
+import ArrowLeft from "@/icon/ArrowLeft";
+import Link from "next/link";
 
 const NoticeListPage = () => {
   const [openId, setOpenId] = useState<number | null>(null);
@@ -27,14 +29,16 @@ const NoticeListPage = () => {
   return (
     <div className="w-full min-h-screen bg-white text-black layout-container custom-margin py-12">
       <div className="max-w-4xl mx-auto">
-        <h1
-          className={cn(
-            "text-3xl font-bold mb-8 border-b pb-4",
-            "mobile:text-2xl"
-          )}
-        >
-          공지사항
-        </h1>
+        <div className="mb-8 border-b pb-4">
+          <div className="flex items-center gap-1">
+            <Link href="/support" aria-label="고객센터 이동">
+              <ArrowLeft />
+            </Link>
+            <h1 className={cn("text-3xl font-bold", "mobile:text-2xl")}>
+              공지사항
+            </h1>
+          </div>
+        </div>
 
         <ul className="space-y-4">
           {noticeList?.data?.map((data: SupportItemType) => (
