@@ -11,12 +11,14 @@ export interface postPostsProps {
 }
 
 const postWrite = async (data: postPostsProps) => {
+  const token = JSON.parse(localStorage.getItem("sb-whvyyrwjdjzfcpcwvlvq-auth-token") || "{}")?.access_token;
+
   const response = await axios.post(
     `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/posts`, 
     data,
     {
       headers: {
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
+        Authorization: `Bearer ${token}`,
         apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
         Prefer: "return=representation",
       },

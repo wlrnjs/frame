@@ -8,7 +8,7 @@ export interface postReportProps {
 }
 
 const postReport = async (data: postReportProps) => {
-  const accessToken = JSON.parse(localStorage.getItem("sb-whvyyrwjdjzfcpcwvlvq-auth-token") || "{}")?.access_token;
+  const token = JSON.parse(localStorage.getItem("sb-whvyyrwjdjzfcpcwvlvq-auth-token") || "{}")?.access_token;
   const user_id = JSON.parse(localStorage.getItem("sb-whvyyrwjdjzfcpcwvlvq-auth-token") || "{}")?.user?.id;
   
     const response = await axios.post(
@@ -19,7 +19,7 @@ const postReport = async (data: postReportProps) => {
       },
       {
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${token}`,
           apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
           "Content-Type": "application/json",
           "Prefer": "return=representation",
