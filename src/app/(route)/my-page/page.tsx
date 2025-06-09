@@ -9,7 +9,6 @@ import ProfileSection from "@/components/features/my-page/ProfileSection";
 import TabSection from "@/components/features/my-page/TabSection";
 
 const MyPage = () => {
-  // const { data: user, isLoading, error } = useGetUser();
   const { data: user } = useGetUser();
   const { activeTab, setActiveTab } = useProfileTabs();
   const { isModalOpen, openModal, closeModal } = useProfileEditModal();
@@ -17,16 +16,14 @@ const MyPage = () => {
   const userData = user?.[0];
 
   return (
-    <div className="w-full min-h-fit custom-margin layout-container">
-      <div className="w-full">
-        <ProfileSection userData={userData} onEditClick={openModal} isMyPage />
+    <div className="w-full min-h-fit">
+      <ProfileSection userData={userData} onEditClick={openModal} isMyPage />
 
-        <TabSection
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-          user_id={userData?.user_id}
-        />
-      </div>
+      <TabSection
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        user_id={userData?.user_id}
+      />
 
       <ProfileEditModal
         isOpen={isModalOpen}

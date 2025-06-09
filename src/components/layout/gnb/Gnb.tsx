@@ -4,12 +4,12 @@ import { NAV_LINKS } from "@/constants/NAV";
 import LOGO from "@/icon/LOGO";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { useAuthCheck } from "@/hooks/useAuthCheck";
 import DropDown from "./DropDown";
 import { usePathname } from "next/navigation";
 import { cn } from "@/utils";
 import GnbIcon from "@/icon/Gnb";
 import MobileGnb from "./MobileGnb";
+import useGetUser from "@/hooks/api/my-page/useGetUser";
 
 const LinkStyle = "hover:text-gray-300 transition-colors duration-200 pointer";
 
@@ -17,7 +17,10 @@ const Gnb = () => {
   const pathname = usePathname();
   const [showMobileGnb, setShowMobileGnb] = useState(false);
   const [showGnb, setShowGnb] = useState(pathname !== "/");
-  const { isLoggedIn } = useAuthCheck();
+
+  const { data: nickname } = useGetUser();
+
+  const nicknameValue = nickname?.[0]?.nickname;
 
   useEffect(() => {
     if (pathname !== "/") {
@@ -62,7 +65,7 @@ const Gnb = () => {
         </nav>
         <nav
           className={cn(
-            "flex gap-8 text-lg font-medium tracking-tight",
+            "flex gap-8 text-lg font-medium tracking-tight items-center",
             "mobile:hidden"
           )}
         >
@@ -73,11 +76,16 @@ const Gnb = () => {
               </Link>
             )
           )}
-          {isLoggedIn ? (
+          {nickname ? (
             <div className="relative group">
-              <Link href="/my-page" className={LinkStyle}>
-                마이페이지
-              </Link>
+              <div
+                className={cn(
+                  LinkStyle,
+                  "bg-gray-800 px-8 py-2 rounded-full flex items-center justify-center shadow-lg"
+                )}
+              >
+                {nicknameValue}
+              </div>
               <DropDown />
             </div>
           ) : (

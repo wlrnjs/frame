@@ -24,7 +24,6 @@ const postEditMyData = async (data: postEditMyDataProps) => {
     {
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        // Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
         apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
         "Content-Type": "application/json",
         "Prefer": "return=representation",

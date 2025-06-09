@@ -26,7 +26,7 @@ const ProfileSection = ({
     >
       <div className="flex justify-between items-start">
         <div className="flex-1">
-          <UserProfileHeader isMyPage userData={userData} />
+          <UserProfileHeader userData={userData} />
           <UserCameraAndLinks userData={userData} />
         </div>
         {isMyPage && <ProfileEditButton onClick={onEditClick} />}
