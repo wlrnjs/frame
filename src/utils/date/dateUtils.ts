@@ -1,9 +1,11 @@
 export const koreanTimeOffset = 9 * 60 * 60 * 1000; // 9시간
 
+// 한국 시간으로 변환
 export function getKoreanDate(date: Date): Date {
   return new Date(date.getTime() + koreanTimeOffset);
 }
 
+// 게시글 날짜 변환
 export function formatDate(isoString: string): string {
   if (!isoString) return "";
 
@@ -14,6 +16,7 @@ export function formatDate(isoString: string): string {
   return `${kstDate.getFullYear()}.${month}.${day}`;
 }
 
+// 게시글 시간 계산
 export function formatTime(timestamp: string): string {
   const now = new Date();
   const time = new Date(timestamp);
@@ -24,7 +27,7 @@ export function formatTime(timestamp: string): string {
   const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
 
   if (diffMs < 0) {
-    return `종료 ${diffDays}일`;
+    return `종료까지 D${diffDays}일`;
   }
 
   if (diffHours < 1) {
@@ -36,13 +39,14 @@ export function formatTime(timestamp: string): string {
   }
 }
 
+// 이벤트 상태
 export function getEventStatus(utcDate: string): string {
   const now = new Date();
   const eventDate = new Date(utcDate);
   const kstEventDate = getKoreanDate(eventDate);
 
   if (kstEventDate < now) {
-    return '종료';
+    return '이벤트 종료';
   }
 
   const diffMs = kstEventDate.getTime() - now.getTime();
@@ -55,6 +59,7 @@ export function getEventStatus(utcDate: string): string {
   return '진행중';
 }
 
+// 댓글 시간 계산
 export function commentDate(timestamp: string): string {
   const now = getKoreanDate(new Date());
   const time = new Date(timestamp);

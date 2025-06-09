@@ -8,7 +8,6 @@ import useGetEventDetail from "@/hooks/api/event/useGetEventDetail";
 import Image from "next/image";
 import { useEventJoinLogic } from "@/hooks/api/event/useEventJoinLogic";
 import EventMeta from "./EventMeta";
-import EventContent from "./EventContent";
 import EventJoinButton from "./EventJoinButton";
 import CommentContainer from "../../photo-list/detail/CommentContainer";
 
@@ -78,7 +77,14 @@ const EventDetailPage = () => {
 
         <hr className="border-gray-600" />
 
-        <EventContent event={event} />
+        <section
+          className={cn(
+            "text-lg tracking-[-0.02em] min-h-[200px]",
+            "mobile:text-sm mobile:min-h-fit"
+          )}
+        >
+          <p className="whitespace-pre-wrap">{event?.description}</p>
+        </section>
 
         <EventJoinButton
           hasJoined={hasJoined}

@@ -4,14 +4,13 @@ import Image from "next/image";
 import { cn } from "@/utils";
 import { EventItemType } from "@/types/EventItemType";
 
-// 이벤트 카드 컴포넌트
-const EventListCard = ({
-  event,
-  isExpired = false,
-}: {
+interface EventListCardProps {
   event: EventItemType;
   isExpired?: boolean;
-}) => (
+}
+
+// 이벤트 카드 컴포넌트
+const EventListCard = ({ event, isExpired = false }: EventListCardProps) => (
   <Link
     href={`/event/detail?id=${event.event_id}`}
     className="relative w-full h-56 bg-gray-800 overflow-hidden rounded-lg"
@@ -19,7 +18,7 @@ const EventListCard = ({
     {event.image_url && (
       <Image
         src={event.image_url}
-        alt={event.title}
+        alt="Event Thumbnail"
         fill
         className={cn(
           "object-cover hover:scale-105 transition-all duration-300 ease-out",

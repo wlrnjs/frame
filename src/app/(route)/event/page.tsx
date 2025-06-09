@@ -1,12 +1,11 @@
 "use client";
 
 import useGetEvents from "@/hooks/api/event/useGetEvents";
-import { cn } from "@/utils";
 import React from "react";
-// import { Event } from "@/types/Event";
 import EventListEmpty from "@/components/features/event/EventListEmpty";
 import MainEventCard from "@/components/features/event/MainEventCard";
 import EventSection from "@/components/features/event/EventSection";
+import categorizeEvents from "@/utils/categorizeEvents";
 
 // 로딩 상태 컴포넌트
 const LoadingState = () => (
@@ -26,13 +25,7 @@ const ErrorState = ({ message }: { message?: string }) => (
 
 const EventPage = () => {
   const { data: events, isLoading, error } = useGetEvents();
-
-  console.log(events);
-
-  // const activeEvents = events?.filter((event: Event) => true) || [];
-
-  // const upcomingEvents = events?.slice(1) || [];
-  // const expiredEvents = events || [];
+  const { ongoing, upcoming, ended } = categorizeEvents(events || []); // 이벤트 분류
 
   if (isLoading) {
     return <LoadingState />;
@@ -41,6 +34,7 @@ const EventPage = () => {
   if (error) {
     return <ErrorState message="이벤트 데이터를 불러올 수 없습니다." />;
   }
+
   if (!events || events.length === 0) {
     return <EventListEmpty />;
   }
@@ -48,19 +42,14 @@ const EventPage = () => {
   return (
     <div className="w-full min-h-screen text-black custom-margin layout-container">
       <main className="w-full flex flex-col items-center">
-        {/* 이벤트 타이틀 */}
-        <h1 className={cn("font-semibold text-3xl mb-8", "mobile:text-2xl")}>
-          진행중인 이벤트
-        </h1>
-
         {/* 메인 이벤트 */}
-        {events[0] && <MainEventCard event={events[0]} />}
+        <MainEventCard event={ongoing} />
 
         {/* 다가오는 이벤트 섹션 */}
-        <EventSection title="다가오는 이벤트" events={events} />
+        <EventSection title="다가오는 이벤트" events={upcoming} />
 
         {/* 종료된 이벤트 섹션 */}
-        <EventSection title="종료된 이벤트" events={events} isExpired />
+        <EventSection title="종료된 이벤트" events={ended} isExpired />
       </main>
     </div>
   );

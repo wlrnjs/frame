@@ -3,16 +3,18 @@ import React from "react";
 import EventListCard from "./EventListCard";
 import { EventItemType } from "@/types/EventItemType";
 
+interface EventSectionProps {
+  title: string;
+  events: EventItemType[];
+  isExpired?: boolean;
+}
+
 // 이벤트 섹션 컴포넌트
 const EventSection = ({
   title,
   events,
   isExpired = false,
-}: {
-  title: string;
-  events: EventItemType[];
-  isExpired?: boolean;
-}) => {
+}: EventSectionProps) => {
   if (!events || events.length === 0) return null;
 
   return (
