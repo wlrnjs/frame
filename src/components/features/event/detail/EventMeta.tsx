@@ -10,8 +10,6 @@ interface EventMetaProps {
 const EventMeta = ({ event }: EventMetaProps) => {
   const isEnd = getEventStatus(event?.expires_at);
 
-  console.log(event?.view_count);
-
   return (
     <div
       className={cn(

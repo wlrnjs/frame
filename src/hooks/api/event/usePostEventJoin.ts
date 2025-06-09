@@ -5,16 +5,20 @@ import postEventJoin from "@/service/event/postEventJoin";
 import { useMutation } from "@tanstack/react-query";
 import { useQueryClient } from "@tanstack/react-query";
 
+interface PostEventJoinProps {
+  id: string;
+  userId: string;
+}
+
 const usePostEventJoin = () => {
   const { success, error: toastError } = useToast();
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
-    mutationFn: ({ id, userId }: { id: string; userId: string }) => postEventJoin({ id, userId }),
+    mutationFn: ({ id, userId }: PostEventJoinProps) => postEventJoin({ id, userId }),
     retry: 1,
-    onSuccess: (res) => {
+    onSuccess: (_, { id }: PostEventJoinProps) => {
       success("이벤트 참여가 완료되었습니다.");
-      const id = String(res.data[0].event_id);
       queryClient.invalidateQueries({ queryKey: ["eventJoin", id] });
       queryClient.invalidateQueries({ queryKey: ["eventDetail", id] });
     },
