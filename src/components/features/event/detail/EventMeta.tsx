@@ -10,6 +10,8 @@ interface EventMetaProps {
 const EventMeta = ({ event }: EventMetaProps) => {
   const isEnd = getEventStatus(event?.expires_at);
 
+  console.log(event?.view_count);
+
   return (
     <div
       className={cn(
@@ -27,7 +29,7 @@ const EventMeta = ({ event }: EventMetaProps) => {
             event?.expires_at
           )}`}
         </span>
-        <span>조회수 4</span>
+        <span>조회수 {event?.view_count || 0}</span>
         <span>댓글 0</span>
         <span className="flex gap-1">
           참여자<span>{event?.join_count}</span>

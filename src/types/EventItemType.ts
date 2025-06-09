@@ -8,4 +8,5 @@ export interface EventItemType {
   title: string;
   updated_at: string;
   join_count: string;
+  view_count: string;
 }

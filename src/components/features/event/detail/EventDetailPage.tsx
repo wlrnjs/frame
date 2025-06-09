@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import useUserId from "@/hooks/useUserId";
 import { cn } from "@/utils";
@@ -10,6 +10,7 @@ import { useEventJoinLogic } from "@/hooks/api/event/useEventJoinLogic";
 import EventMeta from "./EventMeta";
 import EventJoinButton from "./EventJoinButton";
 import CommentContainer from "../../photo-list/detail/CommentContainer";
+import { supabase } from "@/service/lib/supabaseClient";
 
 // 로딩 스피너 컴포넌트 (임시)
 const LoadingSpinner = () => (
@@ -32,6 +33,39 @@ const EventDetailPage = () => {
   const params = useSearchParams();
   const id = params.get("id") as string;
   const userId = useUserId() as string;
+
+  useEffect(() => {
+    if (!id) return;
+
+    const visitKey = "visited_events";
+
+    // 저장된 방문 기록 배열 불러오기
+    const visitedEventsRaw = sessionStorage.getItem(visitKey);
+    const visitedEvents: string[] = visitedEventsRaw
+      ? JSON.parse(visitedEventsRaw)
+      : [];
+
+    if (!visitedEvents.includes(id)) {
+      const increaseViews = async () => {
+        const { error } = await supabase.rpc("increment_event_views", {
+          event_id_input: Number(id),
+        });
+        if (error) {
+          console.error("조회수 증가 실패:", error.message);
+        } else {
+          console.log("조회수 증가 성공");
+
+          // 방문 기록에 현재 id 추가
+          visitedEvents.push(id);
+          sessionStorage.setItem(visitKey, JSON.stringify(visitedEvents));
+        }
+      };
+
+      increaseViews();
+    } else {
+      console.log("조회수 증가 생략");
+    }
+  }, [id]);
 
   const { data: event, isLoading, error } = useGetEventDetail(id);
   const {
