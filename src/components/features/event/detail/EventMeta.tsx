@@ -29,7 +29,6 @@ const EventMeta = ({ event, joinTotal }: EventMetaProps) => {
           )}`}
         </span>
         <span>조회수 {event?.view_count || 0}</span>
-        <span>댓글 0</span>
         <span className="flex gap-1">
           참여자<span>{joinTotal}</span>
         </span>

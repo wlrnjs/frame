@@ -16,16 +16,27 @@ const EventListCard = ({ event, isExpired = false }: EventListCardProps) => (
     className="relative w-full h-56 bg-gray-800 overflow-hidden rounded-lg"
   >
     {event.image_url && (
-      <Image
-        src={event.image_url}
-        alt="Event Thumbnail"
-        fill
-        sizes="100vw"
-        className={cn(
-          "object-cover hover:scale-105 transition-all duration-300 ease-out",
-          isExpired && "grayscale"
-        )}
-      />
+      <>
+        <Image
+          src={event.image_url}
+          alt="Event Thumbnail"
+          fill
+          className={cn(
+            "object-cover hover:scale-105 transition-all duration-300 ease-out select-none",
+            isExpired && "grayscale"
+          )}
+        />
+        <div
+          className={cn(
+            "absolute bottom-0 left-0 right-0 p-4 text-white line-clamp-2",
+            "pc:opacity-0 pc:group-hover:opacity-100 pc:transition-opacity pc:duration-300",
+            "mobile:opacity-100"
+          )}
+        >
+          <p>{event.title}</p>
+          <p>{event.description}</p>
+        </div>
+      </>
     )}
     {isExpired && (
       <>
