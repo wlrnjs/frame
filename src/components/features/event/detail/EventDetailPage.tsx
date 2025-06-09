@@ -11,6 +11,7 @@ import EventMeta from "./EventMeta";
 import EventJoinButton from "./EventJoinButton";
 import CommentContainer from "../../photo-list/detail/CommentContainer";
 import { supabase } from "@/service/lib/supabaseClient";
+import useGetEventJoinTotal from "@/hooks/api/event/useGetEventJoinTotal";
 
 // 로딩 스피너 컴포넌트 (임시)
 const LoadingSpinner = () => (
@@ -68,11 +69,14 @@ const EventDetailPage = () => {
   }, [id]);
 
   const { data: event, isLoading, error } = useGetEventDetail(id);
+
   const {
     hasJoined,
     isLoading: joinLoading,
     handleJoinToggle,
   } = useEventJoinLogic(id, userId);
+
+  const { data: joinTotal } = useGetEventJoinTotal(id); // 참여자 수
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -107,7 +111,7 @@ const EventDetailPage = () => {
       >
         <h1 className={cn("text-3xl", "mobile:text-xl")}>{event.title}</h1>
 
-        <EventMeta event={event} />
+        <EventMeta event={event} joinTotal={joinTotal?.length} />
 
         <hr className="border-gray-600" />
 

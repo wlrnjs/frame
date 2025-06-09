@@ -5,9 +5,10 @@ import { EventItemType } from "@/types/EventItemType";
 
 interface EventMetaProps {
   event: EventItemType;
+  joinTotal: number;
 }
 
-const EventMeta = ({ event }: EventMetaProps) => {
+const EventMeta = ({ event, joinTotal }: EventMetaProps) => {
   const isEnd = getEventStatus(event?.expires_at);
 
   return (
@@ -30,7 +31,7 @@ const EventMeta = ({ event }: EventMetaProps) => {
         <span>조회수 {event?.view_count || 0}</span>
         <span>댓글 0</span>
         <span className="flex gap-1">
-          참여자<span>{event?.join_count}</span>
+          참여자<span>{joinTotal}</span>
         </span>
       </div>
     </div>

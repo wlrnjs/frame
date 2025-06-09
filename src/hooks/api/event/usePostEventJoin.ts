@@ -21,6 +21,7 @@ const usePostEventJoin = () => {
       success("이벤트 참여가 완료되었습니다.");
       queryClient.invalidateQueries({ queryKey: ["eventJoin", id] });
       queryClient.invalidateQueries({ queryKey: ["eventDetail", id] });
+      queryClient.invalidateQueries({ queryKey: ["joinTotal", id] });
     },
     onError: () => {
       toastError("이벤트 참여 실패");

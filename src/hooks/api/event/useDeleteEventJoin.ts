@@ -17,6 +17,7 @@ const useDeleteEventJoin = () => {
       const id = String(res.data[0].event_id);
       queryClient.invalidateQueries({ queryKey: ["eventJoin", id] });
       queryClient.invalidateQueries({ queryKey: ["eventDetail", id] });
+      queryClient.invalidateQueries({ queryKey: ["joinTotal", id] });
     },
     onError: () => {
       toastError("이벤트 참여 취소 실패");
