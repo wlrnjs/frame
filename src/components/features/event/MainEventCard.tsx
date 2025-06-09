@@ -27,7 +27,6 @@ const MainEventCard = ({ event }: MainEventCardProps) => {
           spaceBetween={16}
           slidesPerView={3}
           centeredSlides={true}
-          loop={true}
           navigation={true}
           onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
           className="w-full h-fit"
@@ -37,9 +36,7 @@ const MainEventCard = ({ event }: MainEventCardProps) => {
               key={event.event_id}
               className={cn(
                 "transition-transform duration-300 ease-in-out overflow-hidden rounded-lg",
-                index === activeIndex
-                  ? "scale-100 opacity-100"
-                  : "scale-60 opacity-60"
+                index === activeIndex ? "opacity-100" : "opacity-60"
               )}
             >
               <MainEventItem key={`${event.event_id}-${index}`} event={event} />

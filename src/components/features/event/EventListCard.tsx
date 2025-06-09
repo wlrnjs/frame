@@ -20,6 +20,7 @@ const EventListCard = ({ event, isExpired = false }: EventListCardProps) => (
         src={event.image_url}
         alt="Event Thumbnail"
         fill
+        sizes="100vw"
         className={cn(
           "object-cover hover:scale-105 transition-all duration-300 ease-out",
           isExpired && "grayscale"

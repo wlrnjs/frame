@@ -25,7 +25,8 @@ const ErrorState = ({ message }: { message?: string }) => (
 
 const EventPage = () => {
   const { data: events, isLoading, error } = useGetEvents();
-  const { ongoing, upcoming, ended } = categorizeEvents(events || []); // 이벤트 분류
+  // const { ongoing, upcoming, ended } = categorizeEvents(events || []); 이벤트 분류
+  const { ongoing, upcoming } = categorizeEvents(events || []);
 
   if (isLoading) {
     return <LoadingState />;
@@ -48,8 +49,8 @@ const EventPage = () => {
         {/* 다가오는 이벤트 섹션 */}
         <EventSection title="다가오는 이벤트" events={upcoming} />
 
-        {/* 종료된 이벤트 섹션 */}
-        <EventSection title="종료된 이벤트" events={ended} isExpired />
+        {/* 종료된 이벤트 섹션 임시 주석, 추후 구현 */}
+        {/* <EventSection title="종료된 이벤트" events={ended} isExpired /> */}
       </main>
     </div>
   );
