@@ -3,6 +3,11 @@ import useGetEventJoin from "./useGetEventJoin";
 import usePostEventJoin from "./usePostEventJoin";
 import { useToast } from "@/hooks/ui/useToast";
 
+interface JoinType {
+  event_id: string;
+  user_id: string;
+}
+
 export const useEventJoinLogic = (eventId: string, userId: string) => {
   const { error: toastError } = useToast();
 
@@ -12,7 +17,11 @@ export const useEventJoinLogic = (eventId: string, userId: string) => {
   const { mutate: deleteEventJoin, isPending: deleteEventJoinLoading } =
     useDeleteEventJoin();
 
-  const hasJoined = Boolean(eventJoin?.length);
+  const myJoin = eventJoin?.some(
+    (join: JoinType) => join.user_id === userId
+  );
+
+  const hasJoined = Boolean(myJoin);
   const isLoading = postEventJoinLoading || deleteEventJoinLoading;
 
   const handleJoinToggle = () => {
@@ -21,7 +30,7 @@ export const useEventJoinLogic = (eventId: string, userId: string) => {
       return;
     }
     
-    if (hasJoined) {
+    if (myJoin) {
       deleteEventJoin({ id: eventId, userId });
     } else {
       postEventJoin({ id: eventId, userId });
