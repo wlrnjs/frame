@@ -11,15 +11,15 @@ const links = [
     label: "활동 내역",
   },
   {
-    href: "/my-page/",
+    href: "/my-page/notifications",
     label: "내 알림",
   },
   {
-    href: "/my-page/",
+    href: "/my-page/inquiries",
     label: "내 문의 내역",
   },
   {
-    href: "/my-page/edit",
+    href: "/my-page/",
     label: "내 정보 수정",
   },
   {
