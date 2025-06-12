@@ -42,7 +42,7 @@ const UserProfilePage = () => {
     <div className="w-full min-h-fit custom-margin layout-container">
       <div className="w-full">
         {/* 프로필 섹션 */}
-        <ProfileSection userData={userData?.[0]} onEditClick={() => {}} />
+        <ProfileSection userData={userData?.[0]} />
 
         {/* 탭 섹션 */}
         <TabSection
