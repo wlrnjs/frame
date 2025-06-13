@@ -1,11 +1,11 @@
 import React from "react";
 
-export const HeartOutline = () => (
+export const HeartOutline = ({ fill = "black" }: { fill?: string }) => (
   <svg
     width="20"
     height="20"
     viewBox="0 0 24 24"
-    fill="black"
+    fill={fill}
     strokeWidth="2"
     xmlns="http://www.w3.org/2000/svg"
   >
