@@ -37,7 +37,7 @@ const Page = () => {
 
   return (
     <div className="w-full flex flex-col gap-5">
-      <h1 className="">내 활동내역</h1>
+      <h1 className="text-xl font-bold">내 활동내역</h1>
       <div className="w-full h-fit flex flex-col gap-3">
         {/* 게시글 버튼 */}
         <div className="flex items-start">

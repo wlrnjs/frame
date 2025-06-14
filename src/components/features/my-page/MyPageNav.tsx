@@ -17,7 +17,7 @@ const links = [
   },
   {
     href: "/my-page/activities",
-    label: "활동 내역",
+    label: "내 활동 내역",
   },
   {
     href: "/my-page/notifications",

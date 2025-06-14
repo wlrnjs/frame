@@ -6,7 +6,7 @@ const page = () => {
   return (
     <div className="w-full flex flex-col">
       <div className="flex items-center justify-between px-6 py-4">
-        <h1 className="text-2xl font-bold">내 활동내역</h1>
+        <h1 className="text-xl font-bold">내 문의 내역</h1>
         <button className="px-4 py-2 bg-black text-white rounded-[10px]">
           문의사항 작성하기
         </button>
