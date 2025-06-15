@@ -4,14 +4,14 @@ import React from "react";
 
 const page = () => {
   return (
-    <div className="w-full flex flex-col">
-      <div className="flex items-center justify-between px-6 py-4">
+    <div className="w-full flex flex-col gap-5">
+      <div className="flex items-center justify-between">
         <h1 className="text-xl font-bold">내 문의 내역</h1>
         <button className="px-4 py-2 bg-black text-white rounded-[10px]">
           문의사항 작성하기
         </button>
       </div>
-      <div className="flex flex-col gap-3 items-start justify-start flex-nowrap px-6 py-4">
+      <div className="flex flex-col gap-3 items-start justify-start flex-nowrap">
         {/* 문의 아이템 */}
         <Link
           href="/my-page/inquiries/1"
